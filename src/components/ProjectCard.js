@@ -13,8 +13,8 @@ const ProjectCard = ({ coverImage, title, author, dateStarted, dateCompleted, de
         },
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between', // Makes sure content is evenly spaced
-        height: '100%', // Ensure card takes up the full height of the parent
+        justifyContent: 'space-between', 
+        height: '100%', 
       }}
     >
       {coverImage && (
@@ -48,10 +48,10 @@ const ProjectCard = ({ coverImage, title, author, dateStarted, dateCompleted, de
 
         <Box
           sx={{
-            backgroundColor: '#f5f5f5', // Light gray background
-            padding: '1rem', // Padding for some space inside the box
-            borderRadius: '4px', // Optional: to make corners slightly rounded
-            boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)', // Optional: adds a subtle inset shadow
+            backgroundColor: '#f5f5f5',
+            padding: '1rem', 
+            borderRadius: '4px', 
+            boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
           }}
         >
           <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1 }}>
