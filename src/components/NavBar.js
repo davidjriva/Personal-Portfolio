@@ -8,14 +8,17 @@ import PhonelinkIcon from '@mui/icons-material/Phonelink';
 import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
+import { useTheme } from '@mui/material/styles';
 
 import slugify from 'slugify';
 
 const pages = ['About', 'Projects', 'Contact'];
 
 function NavBar() {
+  const theme = useTheme();
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.primary.main }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
@@ -54,4 +57,5 @@ function NavBar() {
     </AppBar>
   );
 }
+
 export default NavBar;
