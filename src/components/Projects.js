@@ -15,13 +15,22 @@ const Projects = () => {
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       }}
     >
-      <Grid container spacing={2}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        gap={2}
+        sx={{
+          justifyContent: 'space-between',
+          alignItems: 'stretch', // Ensures all cards have the same height
+        }}
+      >
         {projectData.map((project) => (
-          <Grid item xs={12} sm={6} md={4} key={project.title}>
+          <Box key={project.title} sx={{ flex: '1 1 calc(33.333% - 16px)' }}>
             <ProjectCard {...project} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };
