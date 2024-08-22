@@ -7,7 +7,6 @@ const About = () => {
 
   return (
     <Box
-      id="about"
       sx={{
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(4),
