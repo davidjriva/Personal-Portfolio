@@ -1,11 +1,11 @@
 [
     {
-        "coverImage": "default.jpeg",
+        "coverImage": "Nature-Nomads-Cover.jpeg",
         "title" : "Nature Nomads",
         "author": "David Riva",
         "dateStarted": "July 2024",
         "dateCompleted": "August 2024",
-        "description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world 🌎 ⛰️🌊🌲",
+        "description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world! 🌎 ⛰️🌊🌲",
         "technologies": [
             {
                 "location": "Front-End",
@@ -23,6 +23,22 @@
                 "location": "DevOps",
                 "tools": ["GitHub Actions"]
             }
-        ]
+        ],
+        "link": "https://github.com/davidjriva/Nature-Nomads"
+    },
+    {
+        "coverImage": "Dijkstras-Shortest-Cover.jpeg",
+        "title" : "Using Dijkstra's Shortest Paths to Route Packets in a Network Overlay",
+        "author": "David Riva",
+        "dateStarted": "January 2024",
+        "dateCompleted": "February 2024",
+        "description": "Designed and implemented a distributed network of N nodes capable of routing packets based on Dijkstra's shortest path algorithm in a simulated network topology.\nImplemented communication between nodes using the TCP/IP model, facilitating packet exchange through a custom marshalling and demarshalling system.\nOptimized performance by introducing multi-threading for parallel message sending and receiving within each node in the system.",
+        "technologies": [
+            {
+                "location": "Distributed Systems",
+                "tools": ["Java"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Distributed-Systems-Projects/tree/main/hw1"
     }
 ]

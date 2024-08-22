@@ -1,13 +1,5 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import PhonelinkIcon from '@mui/icons-material/Phonelink';
-import Link from '@mui/material/Link';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+import { Link, Avatar, IconButton, Container, Typography, Toolbar, Box, AppBar, SvgIcon } from '@mui/material';
 import slugify from 'slugify';
 
 const pages = ['About', 'Projects', 'Contact'];
@@ -19,7 +11,7 @@ function NavBar() {
         <Toolbar disableGutters>
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
             <IconButton href="/about" color="inherit">
-              <PhonelinkIcon />
+              <img src="/images/Portfolio-Icon.svg" alt="Computer Icon" style={{ width: 50, height: 50 }} />
               <Typography variant="h6" sx={{ fontWeight: 700, ml: 1 }}>
                 David Riva
               </Typography>
@@ -43,11 +35,7 @@ function NavBar() {
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton href="/about">
-              <Avatar
-                alt="Photo of David Riva"
-                src="/images/headshot2.jpeg"
-                sx={{ width: 50, height: 50 }}
-              />
+              <Avatar alt="Photo of David Riva" src="/images/headshot.jpeg" sx={{ width: 50, height: 50 }} />
             </IconButton>
           </Box>
         </Toolbar>

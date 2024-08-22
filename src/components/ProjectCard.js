@@ -1,15 +1,7 @@
 import CardContent from '@mui/material/CardContent';
-import { Typography, Box, Card, CardMedia } from '@mui/material';
+import { Typography, Box, Card, CardMedia, Button } from '@mui/material';
 
-const ProjectCard = ({
-  coverImage,
-  title,
-  author,
-  dateStarted,
-  dateCompleted,
-  description,
-  technologies,
-}) => {
+const ProjectCard = ({ coverImage, title, author, dateStarted, dateCompleted, description, technologies, link }) => {
   return (
     <Card
       sx={{
@@ -24,9 +16,14 @@ const ProjectCard = ({
       {coverImage && (
         <CardMedia
           component="img"
-          src={coverImage}
+          src={`/images/${coverImage}`}
           alt={`${title} cover`}
-          sx={{ borderTopLeftRadius: '8px', borderTopRightRadius: '8px' }}
+          sx={{
+            borderTopLeftRadius: '8px',
+            borderTopRightRadius: '8px',
+            height: '200px',
+            objectFit: 'cover',
+          }}
         />
       )}
       <CardContent>
@@ -54,6 +51,16 @@ const ProjectCard = ({
             </Box>
           ))}
         </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{ mt: 2 }}
+        >
+          View Project
+        </Button>
       </CardContent>
     </Card>
   );
