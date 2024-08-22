@@ -1,18 +1,19 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
-  const theme = useTheme();
-
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.text.primary,
-        padding: theme.spacing(2),
+        backgroundColor: '#3c4142',
         textAlign: 'center',
+        height: '3vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+        color: '#ffffff',
       }}
     >
       <Typography variant="body2">&copy; 2024 David Riva. All rights reserved.</Typography>
