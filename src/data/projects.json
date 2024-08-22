@@ -1,0 +1,28 @@
+[
+    {
+        "coverImage": "default.jpeg",
+        "title" : "Nature Nomads",
+        "author": "David Riva",
+        "dateStarted": "July 2024",
+        "dateCompleted": "August 2024",
+        "description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world 🌎 ⛰️🌊🌲",
+        "technologies": [
+            {
+                "location": "Front-End",
+                "tools": ["JavaScript", "HTML", "CSS", "Pug"]
+            },
+            {
+                "location": "Back-End",
+                "tools": ["Node.js", "Express.js", "MongoDB", "Mongoose"]
+            },
+            {
+                "location": "Testing",
+                "tools": ["Jest", "SuperTest"]
+            },
+            {
+                "location": "DevOps",
+                "tools": ["GitHub Actions"]
+            }
+        ]
+    }
+]

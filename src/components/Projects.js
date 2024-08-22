@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import ProjectCard from './ProjectCard';
+import projectData from '../data/projects.json';
 
 const Projects = () => {
   return (
@@ -8,9 +10,9 @@ const Projects = () => {
       sx={{
         borderRadius: '8px',
         minHeight: 'calc(100vh - 250px)',
-        padding: '2rem', 
-        backgroundColor: '#f5f5f5', 
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+        padding: '2rem',
+        backgroundColor: '#f5f5f5',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       }}
     >
       <Typography
@@ -20,33 +22,10 @@ const Projects = () => {
         My Projects
       </Typography>
 
-      <Box
-        className="project"
-        sx={{
-          backgroundColor: '#ffffff', 
-          borderRadius: '8px',
-          padding: '2rem',
-          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-          marginBottom: '1.5rem', 
-        }}
-      >
-        <Typography variant="h3" sx={{ marginBottom: '0.5rem' }}>
-          Nature Nomads
-        </Typography>
-        <Typography variant="body1" sx={{ lineHeight: 1.6, marginBottom: '1rem' }}>
-          An e-commerce platform for booking nature tours. Built with Node.js, Express, MongoDB, and
-          more.
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          component="a"
-          href="https://github.com/davidjriva/nodejs_projects/tree/main/nature-nomads"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Project
-        </Button>
+      <Box display="flex" flexDirection="column" gap={2}>
+        {projectData.map((project) => (
+          <ProjectCard key={project.title} {...project} />
+        ))}
       </Box>
     </Box>
   );
