@@ -11,6 +11,8 @@ const ProjectCard = ({ coverImage, title, author, dateStarted, dateCompleted, de
         '&:hover': {
           boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
         },
+        height: '78vh',
+        width: '30vw'
       }}
     >
       {coverImage && (
@@ -39,28 +41,38 @@ const ProjectCard = ({ coverImage, title, author, dateStarted, dateCompleted, de
         <Typography variant="body2" sx={{ mb: 2 }}>
           {description}
         </Typography>
-        <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1 }}>
-          Technologies:
-        </Typography>
-        <Box>
-          {technologies.map((technology, index) => (
-            <Box key={index} sx={{ mb: 1 }}>
-              <Typography variant="body2">
-                {technology.location}: {technology.tools.join(', ')}
-              </Typography>
-            </Box>
-          ))}
-        </Box>
-        <Button
-          variant="contained"
-          color="primary"
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{ mt: 2 }}
+
+        <Box
+          sx={{
+            backgroundColor: '#f5f5f5', // Light gray background
+            padding: '1rem', // Padding for some space inside the box
+            borderRadius: '4px', // Optional: to make corners slightly rounded
+            boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)', // Optional: adds a subtle inset shadow
+          }}
         >
-          View Project
-        </Button>
+          <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1 }}>
+            Technologies:
+          </Typography>
+          <Box>
+            {technologies.map((technology, index) => (
+              <Box key={index} sx={{ mb: 1 }}>
+                <Typography variant="body2">
+                  {technology.location}: {technology.tools.join(', ')}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+          <Button
+            variant="contained"
+            color="primary"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{ mt: 2 }}
+          >
+            View Project
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import ProjectCard from './ProjectCard';
 import projectData from '../data/projects.json';
 
@@ -15,18 +15,13 @@ const Projects = () => {
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       }}
     >
-      <Typography
-        variant="h3"
-        sx={{ marginBottom: '2rem', textAlign: 'center', textDecoration: 'underline' }}
-      >
-        My Projects
-      </Typography>
-
-      <Box display="flex" flexDirection="column" gap={2}>
+      <Grid container spacing={2}>
         {projectData.map((project) => (
-          <ProjectCard key={project.title} {...project} />
+          <Grid item xs={12} sm={6} md={4} key={project.title}>
+            <ProjectCard {...project} />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </Box>
   );
 };
