@@ -1,32 +1,25 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 const About = () => {
-  const theme = useTheme();
 
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(4),
         borderRadius: '8px',
-        margin: theme.spacing(2),
-        boxShadow: theme.shadows[1],
         minHeight: 'calc(100vh - 250px)',
       }}
     >
       <Typography
         variant="h2"
         sx={{
-          color: theme.palette.text.primary,
-          marginBottom: theme.spacing(2),
+
           textDecoration: 'underline',
         }}
       >
         About Me
       </Typography>
-      <Typography variant="body1" sx={{ color: theme.palette.text.secondary, lineHeight: 1.6 }}>
+      <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
         Driven and accomplished software engineer with a B.S. in Computer Science from Colorado
         State University, graduating summa cum laude, and a minor in Mathematics. Experienced in
         full-stack development, data engineering, and big data visualization. Proficient in data
@@ -35,21 +28,19 @@ const About = () => {
       </Typography>
       <Typography
         variant="body1"
-        sx={{ color: theme.palette.text.secondary, lineHeight: 1.6, marginTop: theme.spacing(2) }}
+        sx={{ lineHeight: 1.6 }}
       >
         Thrives in a collaborative environment that values innovation and rigorous quality.
       </Typography>
       <Typography
         variant="h6"
         sx={{
-          color: theme.palette.text.primary,
-          marginTop: theme.spacing(3),
           textDecoration: 'underline',
         }}
       >
         Qualifications:
       </Typography>
-      <Typography variant="body1" sx={{ color: theme.palette.text.secondary, lineHeight: 1.6 }}>
+      <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
         <strong>Languages:</strong> Java, JavaScript, TypeScript, Python, C/C++, SQL, Bash, HTML,
         CSS
         <br />

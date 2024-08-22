@@ -1,40 +1,45 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 const Projects = () => {
-  const theme = useTheme();
-
   return (
     <Box
       id="projects"
       sx={{
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(4),
         borderRadius: '8px',
-        margin: theme.spacing(2),
-        boxShadow: theme.shadows[1],
         minHeight: 'calc(100vh - 250px)',
+        padding: '2rem', 
+        backgroundColor: '#f5f5f5', 
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
       }}
     >
       <Typography
-        variant="h2"
-        sx={{ color: theme.palette.text.primary, marginBottom: theme.spacing(2) }}
+        variant="h3"
+        sx={{ marginBottom: '2rem', textAlign: 'center', textDecoration: 'underline' }}
       >
         My Projects
       </Typography>
-      <Box className="project" sx={{ marginBottom: theme.spacing(3) }}>
-        <Typography variant="h3" sx={{ color: theme.palette.text.primary }}>
+
+      <Box
+        className="project"
+        sx={{
+          backgroundColor: '#ffffff', 
+          borderRadius: '8px',
+          padding: '2rem',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          marginBottom: '1.5rem', 
+        }}
+      >
+        <Typography variant="h3" sx={{ marginBottom: '0.5rem' }}>
           Nature Nomads
         </Typography>
-        <Typography variant="body1" sx={{ color: theme.palette.text.secondary, lineHeight: 1.6 }}>
+        <Typography variant="body1" sx={{ lineHeight: 1.6, marginBottom: '1rem' }}>
           An e-commerce platform for booking nature tours. Built with Node.js, Express, MongoDB, and
           more.
         </Typography>
         <Button
           variant="contained"
           color="primary"
-          sx={{ marginTop: theme.spacing(2) }}
           component="a"
           href="https://github.com/davidjriva/nodejs_projects/tree/main/nature-nomads"
           target="_blank"
@@ -43,7 +48,6 @@ const Projects = () => {
           View Project
         </Button>
       </Box>
-      {/* Add more projects as needed */}
     </Box>
   );
 };
