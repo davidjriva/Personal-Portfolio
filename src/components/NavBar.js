@@ -9,7 +9,6 @@ import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
-
 import slugify from 'slugify';
 
 const pages = ['About', 'Projects', 'Contact'];
@@ -24,7 +23,10 @@ function NavBar() {
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
             <IconButton href="/about" color="inherit">
               <PhonelinkIcon />
-              <Typography variant="h6" sx={{ fontWeight: 700, ml: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 700, ml: 1, color: theme.palette.text.primary }}
+              >
                 David Riva
               </Typography>
             </IconButton>
@@ -36,7 +38,13 @@ function NavBar() {
                 key={page}
                 href={`/${slugify(page.toLowerCase())}`}
                 color="inherit"
-                sx={{ mx: 2 }}
+                sx={{
+                  mx: 2,
+                  '&:hover': {
+                    textDecoration: 'underline',
+                    color: theme.palette.secondary.main,
+                  },
+                }}
               >
                 {page}
               </Link>
