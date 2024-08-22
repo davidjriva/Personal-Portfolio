@@ -8,25 +8,19 @@ import PhonelinkIcon from '@mui/icons-material/Phonelink';
 import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import { useTheme } from '@mui/material/styles';
 import slugify from 'slugify';
 
 const pages = ['About', 'Projects', 'Contact'];
 
 function NavBar() {
-  const theme = useTheme();
-
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.primary.main }}>
+    <AppBar position="static" sx={{ backgroundColor: '#3c4142' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
             <IconButton href="/about" color="inherit">
               <PhonelinkIcon />
-              <Typography
-                variant="h6"
-                sx={{ fontWeight: 700, ml: 1, color: theme.palette.text.primary }}
-              >
+              <Typography variant="h6" sx={{ fontWeight: 700, ml: 1 }}>
                 David Riva
               </Typography>
             </IconButton>
@@ -35,16 +29,12 @@ function NavBar() {
           <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Link
-                key={page}
                 href={`/${slugify(page.toLowerCase())}`}
                 color="inherit"
                 sx={{
                   mx: 2,
-                  '&:hover': {
-                    textDecoration: 'underline',
-                    color: theme.palette.secondary.main,
-                  },
                 }}
+                key={page}
               >
                 {page}
               </Link>
