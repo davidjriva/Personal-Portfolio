@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box } from '@mui/material'; // Import Box
+import { Box } from '@mui/material';
 
 import About from './components/About';
 import Projects from './components/Projects';
@@ -10,9 +10,16 @@ import Home from './components/Home';
 
 function App() {
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
+    <Box display="flex" minHeight="100vh">
+      {/* Sidebar (NavBar) */}
       <NavBar />
-      <Box component="main" flexGrow={1}>
+      {/* Main content */}
+      <Box 
+        component="main" 
+        flexGrow={1} 
+        ml="200px" // Add left margin equal to the width of NavBar
+        p={2} // Optional: add some padding around your content
+      >
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
