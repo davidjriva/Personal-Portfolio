@@ -5,7 +5,6 @@ import { Box } from '@mui/material'; // Import Box
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 
@@ -23,7 +22,6 @@ function App() {
           </Routes>
         </Router>
       </Box>
-      <Footer />
     </Box>
   );
 }

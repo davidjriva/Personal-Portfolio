@@ -1,46 +1,55 @@
 import * as React from 'react';
-import { Link, Avatar, IconButton, Container, Typography, Toolbar, Box, AppBar, } from '@mui/material';
+import { Link, Avatar, IconButton, Typography, Toolbar, Box, AppBar } from '@mui/material';
 import slugify from 'slugify';
 
-const pages = ['About', 'Projects', 'Contact'];
+const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards', 'Contact'];
 
 function NavBar() {
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#3c4142' }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
-            <IconButton href="/" color="inherit">
-              <img src="/images/Portfolio-Icon.svg" alt="Computer Icon" style={{ width: 50, height: 50 }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, ml: 1 }}>
-                David Riva
-              </Typography>
-            </IconButton>
-          </Box>
+    <AppBar 
+      position="fixed" 
+      sx={{ 
+        backgroundColor: '#3c4142', 
+        height: '100vh', 
+        width: '200px', 
+        left: 0, 
+        top: 0, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        padding: '1rem', 
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', 
+      }}
+    >
+      <Toolbar disableGutters sx={{ flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <Box sx={{ mb: 3, textAlign: 'center' }}>
+          <IconButton href="/about">
+            <Avatar alt="Photo of David Riva" src="/images/headshot.jpeg" sx={{ width: 80, height: 80 }} />
+          </IconButton>
+          <Typography variant="h6" sx={{ fontWeight: 700, mt: 1 }}>
+            David Riva
+          </Typography>
+        </Box>
 
-          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
-            {pages.map((page) => (
-              <Link
-                href={`/${slugify(page.toLowerCase())}`}
-                color="inherit"
-                sx={{
-                  mx: 2,
-                  fontWeight: 700, 
-                }}
-                key={page}
-              >
-                {page}
-              </Link>
-            ))}
-          </Box>
-
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton href="/about">
-              <Avatar alt="Photo of David Riva" src="/images/headshot.jpeg" sx={{ width: 50, height: 50 }} />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </Container>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+          {pages.map((page) => (
+            <Link
+              href={`/${slugify(page.toLowerCase())}`}
+              color="inherit"
+              sx={{
+                my: 1, 
+                fontWeight: 700,
+                width: '100%', 
+                textAlign: 'center',
+              }}
+              key={page}
+            >
+              {page}
+            </Link>
+          ))}
+        </Box>
+      </Toolbar>
     </AppBar>
   );
 }
