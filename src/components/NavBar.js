@@ -10,7 +10,7 @@ function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: 'flex', alignItems: 'center', mr: 2 }}>
-            <IconButton href="/about" color="inherit">
+            <IconButton href="/" color="inherit">
               <img src="/images/Portfolio-Icon.svg" alt="Computer Icon" style={{ width: 50, height: 50 }} />
               <Typography variant="h6" sx={{ fontWeight: 700, ml: 1 }}>
                 David Riva
@@ -25,6 +25,7 @@ function NavBar() {
                 color="inherit"
                 sx={{
                   mx: 2,
+                  fontWeight: 700, 
                 }}
                 key={page}
               >
