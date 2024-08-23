@@ -1,7 +1,11 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 
 const About = () => {
+  const handleResumeClick = () => {
+    window.open('/documents/resume.pdf', '_blank'); // Adjust the path as needed
+  };
+
   return (
     <Box
       sx={{
@@ -29,7 +33,7 @@ const About = () => {
           sx={{
             textAlign: 'left',
             marginTop: -1,
-            marginBottom: 1
+            marginBottom: 1,
           }}
         >
           Technical Trainer
@@ -54,17 +58,26 @@ const About = () => {
       </Box>
 
       <Box sx={{ marginTop: 4 }}>
-        <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left', color: '#757474', }}>
+        <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left', color: '#757474' }}>
           Driven and accomplished software engineer and educator with a B.S. in Computer Science from Colorado State
           University, graduating summa cum laude, and a minor in Mathematics. Experienced in full-stack development,
           data engineering, and big data visualization. Proficient in data structures, algorithms, and mathematical
           applications. Passionate about elegant problem-solving and dedicated to maintaining high standards of
           excellence.
         </Typography>
-        <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left', color: '#757474', marginTop: 2}}>
+        <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left', color: '#757474', marginTop: 2 }}>
           Thrives in a collaborative environment that values innovation and rigorous quality.
         </Typography>
       </Box>
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleResumeClick}
+        sx={{ marginTop: '1rem' }}
+      >
+        View Resume as PDF
+      </Button>
     </Box>
   );
 };
