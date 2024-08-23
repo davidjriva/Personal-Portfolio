@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, IconButton, Icon } from '@mui/material';
+import SocialLinks from './SocialLinks';
 
 const About = () => {
   const handleResumeClick = () => {
@@ -74,10 +75,12 @@ const About = () => {
         variant="contained"
         color="primary"
         onClick={handleResumeClick}
-        sx={{ marginTop: '1rem' }}
+        sx={{ marginTop: '1rem', marginBottom: 2 }}
       >
         View Resume as PDF
       </Button>
+
+      <SocialLinks />
     </Box>
   );
 };
