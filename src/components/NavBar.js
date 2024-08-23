@@ -31,7 +31,7 @@ function NavBar() {
               sx={{
                 width: 150,
                 height: 150,
-                boxShadow: '0 0 20px 5px rgba(211, 211, 211, 0.8)', 
+                boxShadow: '0 0 20px 5px rgba(211, 211, 211, 0.8)',
                 border: '4px light gray',
               }}
             />
@@ -51,6 +51,7 @@ function NavBar() {
                 fontWeight: 700,
                 width: '100%',
                 textAlign: 'center',
+                textDecoration: 'none',
               }}
               key={page}
             >

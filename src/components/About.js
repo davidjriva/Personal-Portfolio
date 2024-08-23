@@ -17,22 +17,24 @@ const About = () => {
         <Typography
           variant="h2"
           sx={{
-            fontFamily: 'Montserrat, sans-serif',
             fontWeight: 'bold',
             textAlign: 'left',
           }}
         >
           David <span style={{ color: '#0a73c9' }}>Riva</span>
         </Typography>
+
         <Typography
           variant="h5"
           sx={{
-            fontFamily: 'Montserrat, sans-serif',
             textAlign: 'left',
+            marginTop: -1,
+            marginBottom: 1
           }}
         >
           Technical Trainer
         </Typography>
+
         <Typography
           sx={{
             color: '#757474',
@@ -51,7 +53,7 @@ const About = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ marginTop: 2 }}>
+      <Box sx={{ marginTop: 4 }}>
         <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left', color: '#757474', }}>
           Driven and accomplished software engineer and educator with a B.S. in Computer Science from Colorado State
           University, graduating summa cum laude, and a minor in Mathematics. Experienced in full-stack development,
