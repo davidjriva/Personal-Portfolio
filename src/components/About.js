@@ -22,7 +22,6 @@ const About = () => {
         <Typography
           variant="h2"
           sx={{
-            fontWeight: 'bold',
             textAlign: 'left',
           }}
         >
