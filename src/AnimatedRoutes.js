@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { About, Projects, NavBar, Experience, Education, Awards, Skills } from './components';
+import { About, Projects, Experience, Education, Awards, Skills } from './components';
 
 /**
  * AnimatedRoute component wraps a given component with animation effects.
