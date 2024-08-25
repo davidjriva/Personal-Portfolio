@@ -1,6 +1,17 @@
 [
     {
-        "title": "Research Assistant -- Full-stack Developer",
+        "title": "Senior Associate Technical Trainer",
+        "company": "C3 AI",
+        "logoImage": "C3_AI.jpeg",
+        "location": "Redwood City, CA",
+        "startDate": "September 2024",
+        "endDate": "Present",
+        "bulletPoints" : [
+            "Excited to get started and learn more about technical education and AI 😎"
+        ]
+    },
+    {
+        "title": "Research Assistant - Full-stack Developer",
         "company": "Colorado State University",
         "logoImage": "CSU_logo.jpeg",
         "location": "Fort Collins, CO",

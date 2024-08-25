@@ -5,6 +5,10 @@ import ExperienceCard from './ExperienceCard';
 import experienceData from '../data/experiences.json';
 
 const Experience = () => {
+  const sortedExperienceData = [...experienceData].sort((a, b) => {
+    return new Date(b.startDate) - new Date(a.startDate);
+  });
+
   return (
     <Box
       sx={{
@@ -24,7 +28,7 @@ const Experience = () => {
         Experience
       </Typography>
 
-      {experienceData.map((experience) => (
+      {sortedExperienceData.map((experience) => (
         <React.Fragment key={experience.title}>
           <ExperienceCard {...experience} />
           <Divider sx={{ marginBottom: 2 }} />
