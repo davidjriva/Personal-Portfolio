@@ -5,6 +5,10 @@ import ProjectCard from './ProjectCard';
 import projectData from '../data/projects.json';
 
 const Projects = () => {
+  const sortedProjectData = [...projectData].sort((a, b) => {
+    return new Date(b.dateStarted) - new Date(a.dateStarted);
+  });
+
   return (
     <Box
       id="projects"
@@ -31,7 +35,7 @@ const Projects = () => {
           justifyContent: 'center',
         }}
       >
-        {projectData.map((project) => (
+        {sortedProjectData.map((project) => (
           <ProjectCard key={project.title} {...project} />
         ))}
       </Box>
