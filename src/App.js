@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { About, Projects, Contact, NavBar, Experience, Education, Awards, Skills } from './components';
+import { About, Projects, NavBar, Experience, Education, Awards, Skills } from './components';
 
 const theme = createTheme({
   typography: {
@@ -34,7 +34,6 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/skills" element={<Skills />} />
               <Route path="/awards" element={<Awards />} />
-              <Route path="/contact" element={<Contact />} />
             </Routes>
           </Router>
         </Box>
