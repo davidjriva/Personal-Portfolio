@@ -36,9 +36,6 @@ function NavBar() {
               }}
             />
           </IconButton>
-          <Typography variant="h6" sx={{ fontWeight: 700, mt: 1 }}>
-            David Riva
-          </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
