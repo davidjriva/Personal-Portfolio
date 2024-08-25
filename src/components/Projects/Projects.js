@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import ProjectCard from './ProjectCard';
-import projectData from '../data/projects.json';
+import projectData from '../../data/projects.json';
 
 const Projects = () => {
   const sortedProjectData = [...projectData].sort((a, b) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import SkillCard from './SkillCard';
-import skillsData from '../data/skills.json';
+import skillsData from '../../data/skills.json';
 
 const Skills = () => {
   return (

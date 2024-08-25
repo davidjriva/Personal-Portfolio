@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import AwardCard from './AwardCard';
-import awardsData from '../data/awards.json';
+import awardsData from '../../data/awards.json';
 
 const Awards = () => {
   return (
