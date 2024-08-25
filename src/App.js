@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { About, Projects, NavBar, Experience, Education, Awards, Skills } from './components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { NavBar } from './components';
+import AnimatedRoutes from './AnimatedRoutes';
 
 const theme = createTheme({
   typography: {
@@ -19,37 +19,6 @@ const theme = createTheme({
   },
 });
 
-const AnimatedRoute = ({ component: Component }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }} // Start with opacity 0
-      animate={{ opacity: 1 }} // Animate to opacity 1
-      exit={{ opacity: 0 }} // Animate out to opacity 0
-      transition={{ duration: 0.5 }} // Set the duration of the transition
-    >
-      <Component />
-    </motion.div>
-  );
-};
-
-const Animated = () => {
-  const location = useLocation();
-
-  return (
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<AnimatedRoute component={About} />} />
-        <Route path="/about" element={<AnimatedRoute component={About} />} />
-        <Route path="/experience" element={<AnimatedRoute component={Experience} />} />
-        <Route path="/education" element={<AnimatedRoute component={Education} />} />
-        <Route path="/projects" element={<AnimatedRoute component={Projects} />} />
-        <Route path="/skills" element={<AnimatedRoute component={Skills} />} />
-        <Route path="/awards" element={<AnimatedRoute component={Awards} />} />
-      </Routes>
-    </AnimatePresence>
-  );
-};
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -57,7 +26,7 @@ function App() {
         <NavBar />
         <Box component="main" flexGrow={1} ml="200px" p={2}>
           <Router>
-            <Animated />
+            <AnimatedRoutes />
           </Router>
         </Box>
       </Box>
