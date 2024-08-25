@@ -1,10 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { NavBar } from './components';
 
-import { About, Projects, NavBar, Experience, Education, Awards, Skills } from './components';
+/* 
+  Import AnimatedRoutes for handling page transitions with animations.
+*/
+import AnimatedRoutes from './AnimatedRoutes';
 
+/*
+  Define the theme to be used across the entire application.
+  This theme customizes typography styles.
+*/
 const theme = createTheme({
   typography: {
     fontFamily: 'Montserrat, sans-serif',
@@ -19,6 +27,11 @@ const theme = createTheme({
   },
 });
 
+/**
+ * Main App component that wraps the application with theme and routing.
+ *
+ * @returns {JSX.Element} The main application component.
+ */
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -26,15 +39,7 @@ function App() {
         <NavBar />
         <Box component="main" flexGrow={1} ml="200px" p={2}>
           <Router>
-            <Routes>
-              <Route path="/" element={<About />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/experience" element={<Experience />} />
-              <Route path="/education" element={<Education />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/skills" element={<Skills />} />
-              <Route path="/awards" element={<Awards />} />
-            </Routes>
+            <AnimatedRoutes />
           </Router>
         </Box>
       </Box>

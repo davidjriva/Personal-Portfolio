@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import ExperienceCard from './ExperienceCard';
-import experienceData from '../data/experiences.json';
+import experienceData from '../../data/experiences.json';
 
 const Experience = () => {
   const sortedExperienceData = [...experienceData].sort((a, b) => {
