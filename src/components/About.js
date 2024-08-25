@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button, IconButton, Icon } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import SocialLinks from './SocialLinks';
 
 const About = () => {

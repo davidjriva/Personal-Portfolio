@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, Avatar, IconButton, Typography, Toolbar, Box, AppBar } from '@mui/material';
+import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import slugify from 'slugify';
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards', 'Contact'];
