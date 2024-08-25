@@ -20,7 +20,7 @@ const Projects = () => {
       }}
     >
       <Helmet>
-        <title> David Riva | Helmet </title>
+        <title> David Riva | Projects </title>
       </Helmet>
 
       <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#333' }}>

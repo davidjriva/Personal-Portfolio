@@ -29,6 +29,7 @@ const AnimatedRoute = ({ component: Component }) => {
  * @returns {JSX.Element} The animated routes.
  */
 const AnimatedRoutes = () => {
+
   const location = useLocation();
 
   return (
