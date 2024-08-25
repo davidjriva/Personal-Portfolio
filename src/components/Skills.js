@@ -1,31 +1,26 @@
-import { Typography } from '@mui/material';
+import React from 'react';
+import { Box, Typography, Divider } from '@mui/material';
+import SkillCard from './SkillCard';
+import skillsData from '../data/skills.json';
 
 const Skills = () => {
   return (
-    <div>
-      <Typography
-        variant="h6"
-        sx={{
-          textDecoration: 'underline',
-          textAlign: 'left',
-        }}
-      >
-        Qualifications:
+    <Box sx={{ padding: '2rem', color: '#757474' }}>
+      <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
+        Skills
       </Typography>
-      <Typography variant="body1" sx={{ lineHeight: 1.6, textAlign: 'left' }}>
-        <strong>Languages:</strong> Java, JavaScript, TypeScript, Python, C/C++, SQL, Bash, HTML, CSS
-        <br />
-        <strong>Frameworks:</strong> React, Node.js, Express.js, Mongoose, Hadoop, Apache Spark, PySpark
-        <br />
-        <strong>Testing:</strong> JUnit, Jacoco, Mockito, Postman
-        <br />
-        <strong>Developer Tools:</strong> MongoDB, Git, TensorFlow, Keras, Databricks, DBeaver, Pip, Cargo, NPM,
-        Redshift, Amazon S3 Buckets, Zenhub, VS Code, PyCharm, IntelliJ
-        <br />
-        <strong>Libraries:</strong> Pandas, NumPy, Scikit-learn, Matplotlib
-      </Typography>
-    </div>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1.6 }}>
+        {skillsData.map((skill, index) => (
+          <React.Fragment key={skill.title}>
+            <SkillCard {...skill} />
+            {index < skillsData.length - 1 && <Divider sx={{ margin: '1rem 0' }} />}
+          </React.Fragment>
+        ))}
+      </Box>
+    </Box>
   );
 };
 
 export default Skills;
+
