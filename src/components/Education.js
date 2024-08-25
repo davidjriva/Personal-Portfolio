@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { Helmet } from 'react-helmet';
 
 const Education = () => {
   return (
@@ -12,6 +13,10 @@ const Education = () => {
         color: '#757474',
       }}
     >
+      <Helmet>
+        <title> David Riva | Education </title>
+      </Helmet>
+
       <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
         Education
       </Typography>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
-import slugify from 'slugify';
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
@@ -24,7 +23,7 @@ function NavBar() {
     >
       <Toolbar disableGutters sx={{ flexDirection: 'column', alignItems: 'center', width: '100%' }}>
         <Box sx={{ mb: 3, textAlign: 'center' }}>
-          <IconButton href="/about">
+          <IconButton href="/">
             <Avatar
               alt="Photo of David Riva"
               src="/images/headshot.jpeg"
@@ -41,7 +40,7 @@ function NavBar() {
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
           {pages.map((page) => (
             <Link
-              href={`/${slugify(page.toLowerCase())}`}
+              href={`/${page.toLowerCase()}`}
               color="inherit"
               sx={{
                 my: 1,

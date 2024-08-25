@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { Helmet } from 'react-helmet';
 import SocialLinks from './SocialLinks';
 
 const About = () => {
@@ -18,6 +19,10 @@ const About = () => {
         padding: '2rem',
       }}
     >
+      <Helmet>
+        <title> David Riva | About </title>
+      </Helmet>
+
       <Box>
         <Typography
           variant="h2"
