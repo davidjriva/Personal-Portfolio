@@ -4,7 +4,7 @@ import SocialLinks from './SocialLinks';
 
 const About = () => {
   const handleResumeClick = () => {
-    window.open('/documents/resume.pdf', '_blank'); // Adjust the path as needed
+    window.open('/documents/resume.pdf', '_blank');
   };
 
   return (
