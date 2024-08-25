@@ -10,12 +10,12 @@ const Experience = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         padding: '2rem',
         color: '#757474',
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 6, color: '#000' }}>
+      <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
         Experience
       </Typography>
 
