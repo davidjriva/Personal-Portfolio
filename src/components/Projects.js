@@ -9,19 +9,21 @@ const Projects = () => {
       id="projects"
       sx={{
         padding: '2rem',
-        borderRadius: '12px',
-        margin: '2rem auto',
         maxWidth: '1200px',
+        margin: '0 auto',
+        textAlign: 'center',
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 4, color: '#333', textAlign: 'center' }}>
+      <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#333' }}>
         Projects
       </Typography>
+
       <Box
         sx={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: '2rem',
+          justifyContent: 'center', 
         }}
       >
         {projectData.map((project) => (
