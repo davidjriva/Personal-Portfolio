@@ -7,8 +7,8 @@ const SkillCard = ({ title, items }) => {
         {title}
       </Typography>
 
-      <Typography variant="body1" sx={{ marginBottom: '0.5rem' }}>
-        {items.join(',')}
+      <Typography variant="body1">
+        {items.join(', ')}
       </Typography>
     </>
   );
