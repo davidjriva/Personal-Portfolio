@@ -1,11 +1,25 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
-import Particles from '@tsparticles/react';
 import options from '../particles/options.json';
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
 function NavBar() {
+  const [init, setInit] = useState(false);
+
+  // this should be run only once per application lifetime
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+    console.log('MOUNT');
+  }, []);
+
   const particlesLoaded = (container) => {
     console.log('Particles successfully loaded! 🧬');
     console.log(container);
