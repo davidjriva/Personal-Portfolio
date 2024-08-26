@@ -1,11 +1,24 @@
 import { useState, useEffect } from 'react';
-import { useFilter } from './useFilter';
+
+const filterByUniqueProjects = ({ projectData }) => {
+  const allTools = projectData.flatMap((project) => project.technologies.flatMap((tech) => tech.tools));
+  const uniqueTools = [...new Set(allTools)];
+
+  return uniqueTools;
+};
+
+const filterBySelectedChips = ({ selectedChips, projectData }) => {
+  return projectData.filter((project) => {
+    if (selectedChips.size === 0) return true; // Show all projects if no chips are selected
+    return Array.from(selectedChips).some(
+      (selectedChip) => project.technologies.flatMap((tech) => tech.tools).includes(selectedChip) // Assuming project.technologies is an array of technology objects containing tools
+    );
+  });
+};
 
 const useProjectFilter = (projectData, setFilteredProjects) => {
   const [searchText, setSearchText] = useState('');
   const [selectedChips, setSelectedChips] = useState(new Set());
-
-  const { filterByUniqueProjects, filterBySelectedChips } = useFilter();
 
   // Extracts the unique tools used across all projects
   const uniqueTools = filterByUniqueProjects({ projectData });
