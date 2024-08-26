@@ -1,4 +1,5 @@
 {
+    "autoPlay": true,
     "fullScreen": {
         "enable": false,
         "zIndex": 0
@@ -16,15 +17,12 @@
         "left": "0"
     },
     "fpsLimit": 120,
+    "detectRetina": true,
     "interactivity": {
         "events": {
             "onClick": {
                 "enable": true,
                 "mode": "push"
-            },
-            "onHover": {
-                "enable": true,
-                "mode": "repulse"
             },
             "resize": true
         },
@@ -57,7 +55,12 @@
             },
             "random": false,
             "speed": 6,
-            "straight": false
+            "straight": false,
+            "parallax": {
+                "enable": true,
+                "smooth": 10,
+                "force": 60
+            }
         },
         "number": {
             "density": {
@@ -78,6 +81,5 @@
                 "max": 5
             }
         }
-    },
-    "detectRetina": true
+    }
 }
