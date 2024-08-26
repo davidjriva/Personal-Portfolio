@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
-import options from '../particles/options.json';
+import options from '../particles-options/default.json';
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
@@ -45,7 +45,7 @@ function NavBar() {
       }}
     >
       <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-        <Particles id="tsparticles" particlesLoaded={particlesLoaded} options={options} />
+        {init && <Particles id="tsparticles" particlesLoaded={particlesLoaded} options={options} />}
       </Box>
 
       <Toolbar disableGutters sx={{ flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2 }}>
