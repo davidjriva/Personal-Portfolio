@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
+import { loadSlim } from '@tsparticles/slim';
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import options from '../particles-options/default.json';
 
@@ -10,7 +10,6 @@ const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards
 function NavBar() {
   const [init, setInit] = useState(false);
 
-  // this should be run only once per application lifetime
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
@@ -38,7 +37,6 @@ function NavBar() {
         justifyContent: 'center',
         padding: '1rem',
         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-        position: 'relative', // Ensure particles are within the navbar
         backgroundColor: 'rgba(60, 65, 66, 0.85)', // Semi-transparent background
         zIndex: 1, // Ensure content is above particles
       }}
