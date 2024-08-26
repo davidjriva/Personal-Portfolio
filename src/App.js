@@ -1,8 +1,7 @@
-import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavBar } from './components';
+import NavBar from './components/NavBar'; // Ensure this is the correct path
 
 /* 
   Import AnimatedRoutes for handling page transitions with animations.
@@ -32,12 +31,20 @@ const theme = createTheme({
  *
  * @returns {JSX.Element} The main application component.
  */
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box display="flex" minHeight="100vh">
         <NavBar />
-        <Box component="main" flexGrow={1} ml="200px" p={2}>
+        <Box
+          component="main"
+          flexGrow={1}
+          p={2}
+          sx={{
+            overflowY: 'auto',
+            ml: '350px',
+          }}
+        >
           <Router>
             <AnimatedRoutes />
           </Router>
