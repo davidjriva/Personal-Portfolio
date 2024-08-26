@@ -14,8 +14,6 @@ const FilteringBox = ({ uniqueTools }) => {
     setSelectedChips(updatedChips);
   };
 
-  console.log(selectedChips);
-  
   return (
     <Box
       sx={{
@@ -33,7 +31,13 @@ const FilteringBox = ({ uniqueTools }) => {
             key={tool}
             label={tool}
             onClick={() => handleChipClick(tool)}
-            color={selectedChips.has(tool) ? 'primary' : 'default'}
+            sx={{
+              backgroundColor: selectedChips.has(tool) ? '#0a73c9' : 'transparent',
+              color: selectedChips.has(tool) ? 'white' : 'inherit',
+              '&:hover': {
+                backgroundColor: selectedChips.has(tool) ? '#0a73c9' : '#e0e0e0',
+              },
+            }}
           />
         ))}
       </Stack>
