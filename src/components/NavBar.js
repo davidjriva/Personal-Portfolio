@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
-import options from '../particles-options/default.json';
+import options from '../particles-options/parallax.json';
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
