@@ -49,7 +49,7 @@
                 "enable": true,
                 "mode": "grab",
                 "parallax": {
-                    "enable": true,
+                    "enable": false,
                     "force": 60,
                     "smooth": 10
                 }
