@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Typography, Divider } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import { Box, Typography } from '@mui/material';
+import AsyncHelmet from '../AsyncHelmet';
 import ProjectCard from './ProjectCard';
 import FilteringBox from './FilteringBox';
 import projectData from '../../data/projects.json';
@@ -25,9 +25,7 @@ const Projects = () => {
         textAlign: 'center',
       }}
     >
-      <Helmet>
-        <title> David Riva | Projects </title>
-      </Helmet>
+      <AsyncHelmet pageName="Projects" />
 
       <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#333' }}>
         Projects

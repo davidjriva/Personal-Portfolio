@@ -1,6 +1,21 @@
 import { Box, Chip, Stack } from '@mui/material';
+import { useState } from 'react';
 
 const FilteringBox = ({ uniqueTools }) => {
+  const [selectedChips, setSelectedChips] = useState(new Set());
+
+  const handleChipClick = (chip) => {
+    const updatedChips = new Set(selectedChips);
+    if (updatedChips.has(chip)) {
+      updatedChips.delete(chip);
+    } else {
+      updatedChips.add(chip);
+    }
+    setSelectedChips(updatedChips);
+  };
+
+  console.log(selectedChips);
+  
   return (
     <Box
       sx={{
@@ -12,16 +27,14 @@ const FilteringBox = ({ uniqueTools }) => {
         justifyContent: 'center',
       }}
     >
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        justifyContent="center"
-        alignItems="center"
-        gap={1} 
-      >
+      <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center" alignItems="center" gap={1}>
         {uniqueTools.map((tool) => (
-          <Chip key={tool} label={tool} />
+          <Chip
+            key={tool}
+            label={tool}
+            onClick={() => handleChipClick(tool)}
+            color={selectedChips.has(tool) ? 'primary' : 'default'}
+          />
         ))}
       </Stack>
     </Box>

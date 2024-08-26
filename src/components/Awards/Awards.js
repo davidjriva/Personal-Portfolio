@@ -1,15 +1,13 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
-import { Helmet } from 'react-helmet';
+import AsyncHelmet from '../AsyncHelmet';
 import AwardCard from './AwardCard';
 import awardsData from '../../data/awards.json';
 
 const Awards = () => {
   return (
     <Box sx={{ padding: '2rem', color: '#757474' }}>
-      <Helmet>
-        <title> David Riva | Awards </title>
-      </Helmet>
+      <AsyncHelmet pageName="Awards" />
 
       <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#000', textAlign: 'center' }}>
         Awards
