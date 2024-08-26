@@ -41,8 +41,8 @@ const App = () => {
           flexGrow={1}
           p={2}
           sx={{
-            overflowY: 'auto', // Enables vertical scrolling
-            ml: '350px', // Leave space for the fixed navbar
+            overflowY: 'auto',
+            ml: '350px',
           }}
         >
           <Router>
