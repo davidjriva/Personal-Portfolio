@@ -61,6 +61,7 @@ const Projects = () => {
       <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
 
       <Divider sx={{ margin: '2rem' }} />
+      
       <Box
         sx={{
           display: 'grid',
