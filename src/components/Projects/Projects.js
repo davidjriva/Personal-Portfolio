@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import AsyncHelmet from '../AsyncHelmet';
 import projectData from '../../data/projects.json';
-import FilteringMenu from './FilteringMenu';
 import ProjectsContainer from './ProjectsContainer';
 
 const Projects = () => {
