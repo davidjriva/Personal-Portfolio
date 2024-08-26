@@ -4,11 +4,25 @@
         "enable": false,
         "zIndex": 0
     },
+    "manualParticles": [],
     "background": {
         "color": {
             "value": "#3c4142"
-        }
+        },
+        "opacity": 1
     },
+    "backgroundMask": {
+        "composite": "desintation-out",
+        "cover": {
+            "color": {
+                "value": "#fff"
+            },
+            "opacity": 1
+        },
+        "enable": false
+    },
+    "duration": 0,
+    "delay": 0,
     "style": {
         "position": "absolute",
         "width": "100%",
