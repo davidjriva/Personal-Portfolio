@@ -51,7 +51,9 @@ const Projects = () => {
 
       <Autocomplete
         options={projectNames}
-        onInputChange={(_, value) => setSearchText(value)}
+        onInputChange={(_, value) => setSearchText(value)} // This captures user input
+        value={searchText ? searchText : null} // Set the value to null if searchText is empty
+        isOptionEqualToValue={(option, value) => option === value} // Customize equality test
         renderInput={(params) => (
           <TextField
             {...params}
