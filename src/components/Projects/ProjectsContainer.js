@@ -1,11 +1,14 @@
-import React from 'react';
+import { useState } from 'react';
 import FilteringMenu from './FilteringMenu';
 import ProjectCards from './ProjectCards';
 import useProjectFilter from './useProjectFilter';
 
 const ProjectsContainer = ({ projectData }) => {
-  const { filteredProjects, searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools } =
-    useProjectFilter(projectData);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const { searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools } = useProjectFilter(
+    projectData,
+    setFilteredProjects
+  );
 
   return (
     <>

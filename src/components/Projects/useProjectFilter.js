@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useFilter } from './useFilter';
 
-const useProjectFilter = (projectData) => {
-  const [filteredProjects, setFilteredProjects] = useState([]);
+const useProjectFilter = (projectData, setFilteredProjects) => {
   const [searchText, setSearchText] = useState('');
   const [selectedChips, setSelectedChips] = useState(new Set());
 
@@ -20,10 +19,9 @@ const useProjectFilter = (projectData) => {
       project.title.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredProjects(searchedProjects);
-  }, [searchText, selectedChips, chipFilteredProjects]);
+  }, [searchText, selectedChips, chipFilteredProjects, setFilteredProjects]);
 
   return {
-    filteredProjects,
     searchText,
     setSearchText,
     selectedChips,
