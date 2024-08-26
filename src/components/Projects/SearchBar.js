@@ -6,7 +6,7 @@ const SearchBar = ({ projectNames, searchText, setSearchText }) => {
       options={projectNames}
       onInputChange={(_, value) => setSearchText(value)} 
       value={searchText || null} 
-      isOptionEqualToValue={(option, value) => option.toLowerCase().startsWith(value.toLowerCase())}
+      isOptionEqualToValue={(option, value) => option.toLowerCase().includes(value.toLowerCase())}
       renderInput={(params) => (
         <TextField
           {...params}
