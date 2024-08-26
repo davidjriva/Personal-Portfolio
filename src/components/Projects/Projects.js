@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import AsyncHelmet from '../AsyncHelmet';
-import ProjectCard from './ProjectCard';
-import FilteringBox from './FilteringBox';
-import SearchBar from './SearchBar';
+import ProjectCards from './ProjectCards';
 import projectData from '../../data/projects.json';
+import FilteringMenu from './FilteringMenu';
 import { useFilter } from './useFilter';
 
 const Projects = () => {
@@ -48,32 +47,16 @@ const Projects = () => {
         Projects
       </Typography>
 
-      <Divider sx={{ margin: '2rem' }} />
+      <FilteringMenu
+        projectNames={projectNames}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        uniqueTools={uniqueTools}
+        selectedChips={selectedChips}
+        setSelectedChips={setSelectedChips}
+      />
 
-      <SearchBar projectNames={projectNames} searchText={searchText} setSearchText={setSearchText} />
-
-      <Divider sx={{ margin: '2rem' }} />
-
-      <Typography variant="h6" sx={{ color: '#333' }}>
-        Filter by technology
-      </Typography>
-
-      <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
-
-      <Divider sx={{ margin: '2rem' }} />
-      
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '2rem',
-          justifyContent: 'center',
-        }}
-      >
-        {searchedProjects.map((project) => (
-          <ProjectCard key={project.title} {...project} />
-        ))}
-      </Box>
+      <ProjectCards searchedProjects={searchedProjects} />
     </Box>
   );
 };

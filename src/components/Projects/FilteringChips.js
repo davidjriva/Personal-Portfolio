@@ -50,7 +50,7 @@ const ClearAllChip = ({ setSelectedChips }) => {
   );
 };
 
-const FilteringBox = ({ uniqueTools, selectedChips, setSelectedChips }) => {
+const FilteringChips = ({ uniqueTools, selectedChips, setSelectedChips }) => {
   const props = { uniqueTools, selectedChips, setSelectedChips };
 
   return (
@@ -74,4 +74,4 @@ const FilteringBox = ({ uniqueTools, selectedChips, setSelectedChips }) => {
   );
 };
 
-export default FilteringBox;
+export default FilteringChips;
