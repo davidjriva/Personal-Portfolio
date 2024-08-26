@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import FilteringMenu from './FilteringMenu';
+import FilteringMenu from './Filtering/FilteringMenu';
 import ProjectCards from './ProjectCards';
-import useProjectFilter from './useProjectFilter';
+import useProjectFilter from './Filtering/useProjectFilter';
 
 const ProjectsContainer = ({ projectData }) => {
   const [filteredProjects, setFilteredProjects] = useState([]);

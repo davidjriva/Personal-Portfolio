@@ -1,5 +1,5 @@
 import { Divider, Typography } from '@mui/material';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
 import FilteringBox from './FilteringChips';
 
 const FilteringMenu = ({ projectData, searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools }) => {
