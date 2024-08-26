@@ -29,7 +29,8 @@ const FormattedLink = ({ page }) => {
       color="inherit"
       sx={{
         my: 1,
-        fontWeight: 700,
+        fontWeight: 700,        
+        fontSize: '1.2rem',
         width: '100%',
         textAlign: 'center',
         textDecoration: 'none',
