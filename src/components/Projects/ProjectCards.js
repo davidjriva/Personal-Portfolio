@@ -1,7 +1,12 @@
 import { Box } from '@mui/material';
 import ProjectCard from './ProjectCard';
 
-const ProjectCards = ({ searchedProjects }) => {
+const ProjectCards = ({ filteredProjects }) => {
+  // Sorts all projects chronologically by start date
+  const sortedProjectData = [...filteredProjects].sort((a, b) => {
+    return new Date(b.dateStarted) - new Date(a.dateStarted);
+  });
+
   return (
     <Box
       sx={{
@@ -11,7 +16,7 @@ const ProjectCards = ({ searchedProjects }) => {
         justifyContent: 'center',
       }}
     >
-      {searchedProjects.map((project) => (
+      {sortedProjectData.map((project) => (
         <ProjectCard key={project.title} {...project} />
       ))}
     </Box>
