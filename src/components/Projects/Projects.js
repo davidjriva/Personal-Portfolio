@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Typography, Divider, Autocomplete, TextField } from '@mui/material';
+import { Box, Typography, Divider } from '@mui/material';
 import AsyncHelmet from '../AsyncHelmet';
 import ProjectCard from './ProjectCard';
 import FilteringBox from './FilteringBox';
+import SearchBar from './SearchBar';
 import projectData from '../../data/projects.json';
 import { useFilter } from './useFilter';
 
@@ -49,24 +50,7 @@ const Projects = () => {
 
       <Divider sx={{ margin: '2rem' }} />
 
-      <Autocomplete
-        options={projectNames}
-        onInputChange={(_, value) => setSearchText(value)} // This captures user input
-        value={searchText ? searchText : null} // Set the value to null if searchText is empty
-        isOptionEqualToValue={(option, value) => option === value} // Customize equality test
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Enter A Project Name..."
-            sx={{
-              borderRadius: '200px', // Adjust this value for more rounded edges
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '200px', // Ensure the input field is also rounded
-              },
-            }}
-          />
-        )}
-      />
+      <SearchBar projectNames={projectNames} searchText={searchText} setSearchText={setSearchText} />
 
       <Divider sx={{ margin: '2rem' }} />
 
