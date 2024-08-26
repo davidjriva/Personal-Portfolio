@@ -139,27 +139,6 @@
                     },
                     "length": 2000
                 }
-            },
-            "absorbers": {
-                "color": {
-                    "value": "#fc0320"
-                },
-                "draggable": false,
-                "opacity": 1,
-                "destroy": false,
-                "orbits": false,
-                "size": {
-                    "value": 100,
-                    "density": 5,
-                    "limit": {
-                        "radius": 100,
-                        "mass": 100
-                    }
-                },
-                "position": {
-                    "x": 10,
-                    "y": 10
-                }
             }
         }
     },
@@ -515,23 +494,23 @@
     "name": "Absorbers",
     "absorbers": {
         "color": {
-            "value": "#fc0320"
+            "value": "#0a73c9"
         },
         "draggable": false,
         "opacity": 1,
         "destroy": false,
         "orbits": false,
         "size": {
-            "value": 100,
+            "value": 81,
             "density": 5,
             "limit": {
-                "radius": 100,
-                "mass": 100
+                "radius": 10,
+                "mass": 10
             }
         },
         "position": {
-            "x": 10,
-            "y": 10
+            "x": 50,
+            "y": 34.5
         }
     },
     "motion": {

@@ -2,8 +2,14 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
+import { loadFull } from 'tsparticles';
 import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import options from '../particles-options/absorber.json';
+
+/*
+  ONLY USE FULL PARTICLES ENGINE FOR BACKGROUNDS THAT REQUIRE THE FULL ENGINE [CONSERVE MEMORY]
+  
+*/
 
 const HeadShotImage = () => {
   return (
@@ -50,7 +56,7 @@ const NavBar = () => {
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
+      await loadFull(engine);
     }).then(() => {
       setInit(true);
     });
