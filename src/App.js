@@ -1,8 +1,15 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavBar } from './components';
+
+/*
+  Load particles related JSON and JS files
+*/
+import options from './particles/options.json';
 
 /* 
   Import AnimatedRoutes for handling page transitions with animations.
@@ -33,6 +40,17 @@ const theme = createTheme({
  * @returns {JSX.Element} The main application component.
  */
 function App() {
+  const [init, setInit] = useState(false);
+
+  // this should be run only once per application lifetime
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Box display="flex" minHeight="100vh">
