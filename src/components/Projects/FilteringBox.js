@@ -1,9 +1,6 @@
 import { Box, Chip, Stack } from '@mui/material';
-import { useState } from 'react';
 
-const FilteringBox = ({ uniqueTools }) => {
-  const [selectedChips, setSelectedChips] = useState(new Set());
-
+const FilteringBox = ({ uniqueTools, selectedChips, setSelectedChips }) => {
   const handleChipClick = (chip) => {
     const updatedChips = new Set(selectedChips);
     if (updatedChips.has(chip)) {
@@ -17,9 +14,8 @@ const FilteringBox = ({ uniqueTools }) => {
   return (
     <Box
       sx={{
-        margin: '2rem',
+        marginBottom: '2rem',
         padding: '1rem',
-        border: '1px solid lightgray',
         borderRadius: '8px',
         display: 'flex',
         justifyContent: 'center',
@@ -34,6 +30,7 @@ const FilteringBox = ({ uniqueTools }) => {
             sx={{
               backgroundColor: selectedChips.has(tool) ? '#0a73c9' : 'transparent',
               color: selectedChips.has(tool) ? 'white' : 'inherit',
+              border: '1px solid lightgray',
               '&:hover': {
                 backgroundColor: selectedChips.has(tool) ? '#0a73c9' : '#e0e0e0',
               },

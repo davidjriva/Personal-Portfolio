@@ -1,19 +1,35 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Divider, Autocomplete, TextField } from '@mui/material';
 import AsyncHelmet from '../AsyncHelmet';
 import ProjectCard from './ProjectCard';
 import FilteringBox from './FilteringBox';
 import projectData from '../../data/projects.json';
+import { useFilter } from './useFilter';
 
 const Projects = () => {
+  const [selectedChips, setSelectedChips] = useState(new Set());
+  const [searchText, setSearchText] = useState('');
+
+  const { filterByUniqueProjects, filterBySelectedChips } = useFilter();
+
   // Sorts all projects chronologically by start date
   const sortedProjectData = [...projectData].sort((a, b) => {
     return new Date(b.dateStarted) - new Date(a.dateStarted);
   });
 
+  // Extract project names
+  const projectNames = projectData.map((project) => project.title);
+
   // Extracts the unique tools used across all projects
-  const allTools = sortedProjectData.flatMap((project) => project.technologies.flatMap((tech) => tech.tools));
-  const uniqueTools = [...new Set(allTools)];
+  const uniqueTools = filterByUniqueProjects({ sortedProjectData });
+
+  // Filter projects based on selected chips
+  const filteredProjects = filterBySelectedChips({ selectedChips, sortedProjectData });
+
+  // Further filter projects based on search text
+  const searchedProjects = filteredProjects.filter((project) =>
+    project.title.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <Box
@@ -31,8 +47,34 @@ const Projects = () => {
         Projects
       </Typography>
 
-      <FilteringBox uniqueTools={uniqueTools} />
+      <Divider sx={{ margin: '2rem' }} />
 
+      <Autocomplete
+        options={projectNames}
+        onInputChange={(_, value) => setSearchText(value)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Enter A Project Name..."
+            sx={{
+              borderRadius: '200px', // Adjust this value for more rounded edges
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '200px', // Ensure the input field is also rounded
+              },
+            }}
+          />
+        )}
+      />
+
+      <Divider sx={{ margin: '2rem' }} />
+
+      <Typography variant="h6" sx={{ color: '#333' }}>
+        Filter by technology
+      </Typography>
+
+      <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
+
+      <Divider sx={{ margin: '2rem' }} />
       <Box
         sx={{
           display: 'grid',
@@ -41,7 +83,7 @@ const Projects = () => {
           justifyContent: 'center',
         }}
       >
-        {sortedProjectData.map((project) => (
+        {searchedProjects.map((project) => (
           <ProjectCard key={project.title} {...project} />
         ))}
       </Box>
