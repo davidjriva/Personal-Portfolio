@@ -68,10 +68,6 @@ const NavBar = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '1rem',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-        backgroundColor: 'rgba(60, 65, 66, 0.85)',
-        zIndex: 1,
       }}
     >
       <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>

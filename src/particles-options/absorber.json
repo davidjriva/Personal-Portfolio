@@ -29,10 +29,6 @@
     "interactivity": {
         "detectsOn": "window",
         "events": {
-            "onClick": {
-                "enable": true,
-                "mode": "push"
-            },
             "onDiv": {
                 "selectors": {},
                 "enable": false,
