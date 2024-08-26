@@ -31,7 +31,7 @@ const theme = createTheme({
  *
  * @returns {JSX.Element} The main application component.
  */
-function App() {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Box display="flex" minHeight="100vh">
@@ -42,7 +42,7 @@ function App() {
           p={2}
           sx={{
             overflowY: 'auto', // Enables vertical scrolling
-            ml: '200px', // Leave space for the fixed navbar
+            ml: '350px', // Leave space for the fixed navbar
           }}
         >
           <Router>
