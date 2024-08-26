@@ -17,7 +17,6 @@ function NavBar() {
     }).then(() => {
       setInit(true);
     });
-    console.log('MOUNT');
   }, []);
 
   const particlesLoaded = (container) => {
