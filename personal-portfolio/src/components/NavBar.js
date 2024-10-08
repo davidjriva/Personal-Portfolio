@@ -1,12 +1,6 @@
-'use client';
-
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadFull } from 'tsparticles';
 import { Link, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import Image from 'next/image';
-import options from '../particles-options/absorber.json';
+import ParticleBar from './ParticleBar';
 
 const HeadShotImage = () => {
   return (
@@ -29,6 +23,7 @@ const HeadShotImage = () => {
           style={{
             objectFit: 'cover',
           }}
+          priority={true}
         />
       </Box>
     </IconButton>
@@ -48,7 +43,7 @@ const FormattedLink = ({ page }) => {
         textAlign: 'center',
         textDecoration: 'none',
         zIndex: 2,
-        fontFamily: 'Montserrat, Arial, sans-serif'
+        fontFamily: 'Montserrat, Arial, sans-serif',
       }}
       key={page}
     >
@@ -60,16 +55,6 @@ const FormattedLink = ({ page }) => {
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
 const NavBar = () => {
-  const [init, setInit] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadFull(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
-
   return (
     <AppBar
       position="fixed"
@@ -85,7 +70,7 @@ const NavBar = () => {
       }}
     >
       <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-        {init && <Particles id="tsparticles" options={options} />}
+        <ParticleBar />
       </Box>
 
       <Toolbar disableGutters sx={{ flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2 }}>
