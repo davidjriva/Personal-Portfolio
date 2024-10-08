@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Primary Programming Languages",
+        "items": ["Java", "JavaScript", "TypeScript", "HTML", "CSS", "Python"]
+    },
+    {
+        "title": "Secondary Programming Languages",
+        "items": ["C/C++", "SQL", "Bash"]
+    },
+    {
+        "title": "CI/CD",
+        "items": ["Github Actions"]
+    },
+    {
+        "title": "Frameworks",
+        "items": ["React.js", "Node.js", "Express.js", "Mongoose"]
+    },
+    {
+        "title": "Testing Frameworks",
+        "items": ["JUnit", "Jacoco", "Jest", "Supertest", "Mockito"]
+    },
+    {
+        "title": "Machine Learning",
+        "items": ["TensorFlow", "Keras", "NumPy"]
+    },
+    {
+        "title": "Data Engineering and Big Data",
+        "items": ["Hadoop", "Apache Spark", "PySpark", "MongoDB", "AWS RedShift", "AWS S3", "Databricks", "DBeaver", "Pandas", "Scikit-Learn", "Matplotlib"]
+    },
+    {   
+        "title": "Tools",
+        "items": ["Git", "GitHub", "Visual Studio Code", "Postman", "Package Managers (Pip & NPM)", "Debuggers", "Zenhub"]
+    }, 
+    {
+        "title": "Concepts",
+        "items": ["RESTful APIs", "Object Oriented Programming", "Design Patterns", "Software Development Methodologies (Agile)", "MVC Architecture"]
+    },
+    {
+        "title": "Soft Skills",
+        "items": ["Leadership", "Teamwork", "Collaboration", "Written and Verbal Communication"]
+    }
+]

@@ -1,0 +1,55 @@
+[
+    {
+        "title": "Senior Associate Technical Trainer",
+        "company": "C3 AI",
+        "logoImage": "C3_AI.jpeg",
+        "location": "Redwood City, CA",
+        "startDate": "September 2024",
+        "endDate": "Present",
+        "bulletPoints" : [
+            "Excited to get started and learn more about technical education and AI 😎"
+        ]
+    },
+    {
+        "title": "Research Assistant - Full-stack Developer",
+        "company": "Colorado State University",
+        "logoImage": "CSU_logo.jpeg",
+        "location": "Fort Collins, CO",
+        "startDate": "December 2022",
+        "endDate": "January 2024",
+        "bulletPoints" : [
+            "Developer on the Urban Sustain Project, creating an accessible interface to datasets consisting of 20TB or greater, catering to social and environmental researchers.",
+            "Built geospatial data visualizations using React, JavaScript, TypeScript, HTML, and CSS for the frontend, complemented by Python, Flask, and MongoDB for backend development.",
+            "Won the Excellence in Data Science Award from CSU's Celebrating Undergraduate Research Competition.",
+            "Managed source control, met deadlines, and attended weekly Scrum meetings in collaboration with a team of 12 individuals.",
+            "Designed visualization components, including interactive charts and a map interface, enabling intuitive data exploration across multiple datasets."
+        ]
+    },
+    {
+        "title": "Data Science Intern",
+        "company": "Hewlett Packard Inc.",
+        "logoImage": "HP_logo.jpeg",
+        "location" : "Vancouver, WA",
+        "startDate": "May 2023",
+        "endDate": "August 2023",
+        "bulletPoints": [
+            "Developed & maintained three ETL data pipelines, extracting data from AWS S3 buckets, transforming it, and loading it into the AWS RedShift cloud data warehouse for long-term storage.",
+            "Developed expertise in data transformation, filtering, and verification using SQL & Python within a relational database.",
+            "Applied machine learning modeling and forecasting techniques with Scikit-Learn & Facebook Prophet, along with data visualization using Matplotlib & Seaborn.",
+            "Developed RESTful APIs & wrappers."
+        ]
+    },
+    {
+        "title": "Teaching Assistant",
+        "company": "Colorado State University",
+        "logoImage": "CSU_logo.jpeg",
+        "location": "Fort Collins, CO",
+        "startDate": "August 2022",
+        "endDate": "December 2022",
+        "bulletPoints" : [
+            "Instructed and supervised lab sessions for CS-165 Data Structures & Algorithms, demonstrating effective leadership and teaching abilities to a group of 30 students.",
+            "Conveyed complex technical concepts in a clear and accessible way.",
+            "Personalized problem-solving during individualized office hours & managed course curriculum."
+        ]
+    }
+]
