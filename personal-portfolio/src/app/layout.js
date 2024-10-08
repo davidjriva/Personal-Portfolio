@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
       <body className={montserrat.variable}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
+            <NavBar />
             <Box display="flex" minHeight="100vh">
-              <NavBar />
               <Box
                 component="main"
                 flexGrow={1}
