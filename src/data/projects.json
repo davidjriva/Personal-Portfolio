@@ -123,5 +123,24 @@
             }
         ],
         "link": "https://github.com/davidjriva/Sorting-Algorithms"
+    },
+    {
+        "coverImage": "Email-Templating-Utility-Cover.jpeg",
+        "title": "Email Templating Utility Tool",
+        "author": "David Riva",
+        "dateStarted": "October 2024",
+        "dateCompleted": "October 2024",
+        "description": "A Next.js application that allows users to complete a form, which automatically generates a pre-written email in Outlook based on their input. The project was later converted into an Electron.js application for easy distribution, enabling users to add it to their favorites for quick access. It leverages inter-process communication to directly launch Outlook on the user's computer and load the email template seamlessly.",
+        "technologies": [
+            {
+                "location": "Front-End",
+                "tools": ["JavaScript", "HTML", "CSS", "Next.js"]
+            },
+            {
+                "location": "Back-End",
+                "tools": ["Node.js", "Electron.js", "AppleScript"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Email-Sender-Util"
     }
 ]
