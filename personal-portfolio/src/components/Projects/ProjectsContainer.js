@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import FilteringMenu from './Filtering/FilteringMenu';
 import ProjectCards from './ProjectCards';
 import useProjectFilter from './Filtering/useProjectFilter';
+import projectData from '../../data/projects.json';
 
-const ProjectsContainer = ({ projectData }) => {
+const ProjectsContainer = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
   const { searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools } = useProjectFilter(
     projectData,
@@ -23,7 +24,7 @@ const ProjectsContainer = ({ projectData }) => {
         uniqueTools={uniqueTools}
       />
 
-      {/* <ProjectCards filteredProjects={filteredProjects} /> */}
+      <ProjectCards filteredProjects={filteredProjects} />
     </>
   );
 };

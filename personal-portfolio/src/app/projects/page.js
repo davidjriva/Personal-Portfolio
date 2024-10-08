@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import projectData from '../../data/projects.json';
 import ProjectsContainer from '../../components/Projects/ProjectsContainer';
 
 const Projects = () => {
@@ -17,7 +16,7 @@ const Projects = () => {
         Projects
       </Typography>
 
-      <ProjectsContainer projectData={projectData} />
+      <ProjectsContainer />
     </Box>
   );
 };
