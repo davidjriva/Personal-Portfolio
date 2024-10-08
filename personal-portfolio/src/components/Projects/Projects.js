@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import AsyncHelmet from '../AsyncHelmet';
 import projectData from '../../data/projects.json';
 import ProjectsContainer from './ProjectsContainer';
 
@@ -14,8 +13,6 @@ const Projects = () => {
         textAlign: 'center',
       }}
     >
-      <AsyncHelmet pageName="Projects" />
-
       <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#333' }}>
         Projects
       </Typography>

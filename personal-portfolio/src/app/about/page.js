@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import AsyncHelmet from '../../components/AsyncHelmet';
 import SocialLinks from '../../components/About/SocialLinks';
 import ResumeButton from '../../components/About/ResumeButton';
 
@@ -19,8 +18,6 @@ const About = () => {
         padding: '2rem',
       }}
     >
-      <AsyncHelmet pageName="About" />
-
       <Box>
         <Typography
           variant="h2"

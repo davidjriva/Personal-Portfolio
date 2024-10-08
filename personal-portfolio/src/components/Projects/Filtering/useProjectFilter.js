@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 
 const filterByUniqueProjects = ({ projectData }) => {
@@ -9,9 +11,9 @@ const filterByUniqueProjects = ({ projectData }) => {
 
 const filterBySelectedChips = ({ selectedChips, projectData }) => {
   return projectData.filter((project) => {
-    if (selectedChips.size === 0) return true; // Show all projects if no chips are selected
+    if (selectedChips.size === 0) return true;
     return Array.from(selectedChips).some(
-      (selectedChip) => project.technologies.flatMap((tech) => tech.tools).includes(selectedChip) // Assuming project.technologies is an array of technology objects containing tools
+      (selectedChip) => project.technologies.flatMap((tech) => tech.tools).includes(selectedChip)
     );
   });
 };

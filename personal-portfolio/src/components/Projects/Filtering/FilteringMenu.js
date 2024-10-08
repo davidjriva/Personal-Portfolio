@@ -7,11 +7,11 @@ const FilteringMenu = ({ projectData, searchText, setSearchText, selectedChips, 
     <>
       <Divider sx={{ margin: '2rem' }} />
 
-      <SearchBar
+      {/* <SearchBar
         projectNames={projectData.map((project) => project.title)}
         searchText={searchText}
         setSearchText={setSearchText}
-      />
+      /> */}
 
       <Divider sx={{ margin: '2rem' }} />
 
@@ -19,7 +19,7 @@ const FilteringMenu = ({ projectData, searchText, setSearchText, selectedChips, 
         Filter by technology
       </Typography>
 
-      <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
+      {/* <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} /> */}
 
       <Divider sx={{ margin: '2rem' }} />
     </>

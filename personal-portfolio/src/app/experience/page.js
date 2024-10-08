@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
-import AsyncHelmet from '../../components/AsyncHelmet';
 import ExperienceCard from '../../components/Experience/ExperienceCard';
 import experienceData from '../../data/experiences.json';
 
@@ -24,8 +23,6 @@ const Experience = () => {
         color: '#757474',
       }}
     >
-      <AsyncHelmet pageName="Experience" />
-
       <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
         Experience
       </Typography>

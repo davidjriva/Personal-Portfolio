@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import AsyncHelmet from '../../components/AsyncHelmet';
 
 const Education = () => {
   return (
@@ -13,8 +12,6 @@ const Education = () => {
         color: '#757474',
       }}
     >
-      <AsyncHelmet pageName="Education" />
-
       <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
         Education
       </Typography>

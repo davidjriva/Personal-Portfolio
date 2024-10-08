@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import FilteringMenu from './Filtering/FilteringMenu';
 import ProjectCards from './ProjectCards';
@@ -21,7 +23,7 @@ const ProjectsContainer = ({ projectData }) => {
         uniqueTools={uniqueTools}
       />
 
-      <ProjectCards filteredProjects={filteredProjects} />
+      {/* <ProjectCards filteredProjects={filteredProjects} /> */}
     </>
   );
 };
