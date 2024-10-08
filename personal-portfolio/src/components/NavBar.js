@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadFull } from 'tsparticles';
-import { Link, Avatar, IconButton, Toolbar, Box, AppBar } from '@mui/material';
+import { Link, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import Image from 'next/image';
 import options from '../particles-options/absorber.json';
 
