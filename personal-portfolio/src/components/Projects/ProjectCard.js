@@ -1,19 +1,26 @@
+import Image from 'next/image';
 import CardContent from '@mui/material/CardContent';
 import { Typography, Box, Card, CardMedia, Button } from '@mui/material';
 
 const ProjectImage = ({ coverImage, title }) => {
   return (
-    <CardMedia
-      component="img"
-      src={`/images/${coverImage}`}
-      alt={`${title} cover`}
+    <Box
       sx={{
+        position: 'relative',
+        height: '200px',
+        overflow: 'hidden',
         borderTopLeftRadius: '8px',
         borderTopRightRadius: '8px',
-        height: '200px',
-        objectFit: 'cover',
       }}
-    />
+    >
+      <Image
+        src={`/images/${coverImage}`}
+        alt={`${title} cover`}
+        style={{ objectFit: 'cover' }}
+        fill
+        sizes="20vw"
+      />
+    </Box>
   );
 };
 
