@@ -7,12 +7,16 @@ const SocialLinks = () => {
   return (
     <Box>
       <Link href="https://github.com/davidjriva" target="_blank" rel="noopener" color="inherit">
-        <IconButton sx={{ color: '#4A4A4A', fontSize: '40px' }}> {/* Dark gray color and larger size */}
+        <IconButton sx={{ color: '#4A4A4A', fontSize: '40px' }}>
+          {' '}
+          {/* Dark gray color and larger size */}
           <GitHubIcon fontSize="inherit" />
         </IconButton>
       </Link>
       <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener" color="inherit">
-        <IconButton sx={{ color: '#4A4A4A', fontSize: '40px' }}> {/* Dark gray color and larger size */}
+        <IconButton sx={{ color: '#4A4A4A', fontSize: '40px' }}>
+          {' '}
+          {/* Dark gray color and larger size */}
           <LinkedInIcon fontSize="inherit" />
         </IconButton>
       </Link>
