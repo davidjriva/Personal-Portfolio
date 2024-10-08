@@ -6,7 +6,7 @@ import theme from '../theme';
 import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({
-  weight: ['400'],
+  weight: ['400', '700'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-montserrat',

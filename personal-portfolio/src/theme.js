@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['--font-montserrat', 'sans-serif'].join(','),
+    fontFamily: '--font-montserrat, Arial, sans-serif',
     h1: { fontWeight: 'bold' },
     h2: { fontWeight: 'bold' },
     h3: { fontWeight: 'bold' },

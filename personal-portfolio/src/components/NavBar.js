@@ -48,6 +48,7 @@ const FormattedLink = ({ page }) => {
         textAlign: 'center',
         textDecoration: 'none',
         zIndex: 2,
+        fontFamily: 'Montserrat, Arial, sans-serif'
       }}
       key={page}
     >
