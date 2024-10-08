@@ -23,7 +23,6 @@ const useProjectFilter = (projectData, setFilteredProjects) => {
 
   const uniqueTools = filterByUniqueProjects({ projectData });
 
-  // Memoize the chip filtered projects
   const chipFilteredProjects = useMemo(
     () => filterBySelectedChips({ selectedChips, projectData }),
     [selectedChips, projectData]
