@@ -1,6 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
+export const metadata = {
+  title: 'David Riva | Education',
+};
+
 const Education = () => {
   return (
     <Box

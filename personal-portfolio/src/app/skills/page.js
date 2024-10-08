@@ -3,6 +3,10 @@ import { Box, Typography, Divider } from '@mui/material';
 import SkillCard from '../../components/Skills/SkillCard';
 import skillsData from '../../data/skills.json';
 
+export const metadata = {
+  title: 'David Riva | Skills',
+};
+
 const Skills = () => {
   return (
     <Box sx={{ padding: '2rem', color: '#757474' }}>

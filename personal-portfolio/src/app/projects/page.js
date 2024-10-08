@@ -1,6 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import ProjectsContainer from '../../components/Projects/ProjectsContainer';
 
+export const metadata = {
+  title: 'David Riva | Projects',
+};
+
 const Projects = () => {
   return (
     <Box

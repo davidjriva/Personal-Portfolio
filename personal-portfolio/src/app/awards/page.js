@@ -3,6 +3,10 @@ import { Box, Typography, Divider } from '@mui/material';
 import AwardCard from '../../components/Awards/AwardCard';
 import awardsData from '../../data/awards.json';
 
+export const metadata = {
+  title: 'David Riva | Awards',
+};
+
 const Awards = () => {
   return (
     <Box sx={{ padding: '2rem', color: '#757474' }}>
