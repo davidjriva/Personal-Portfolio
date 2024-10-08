@@ -3,6 +3,10 @@ import AsyncHelmet from '../../components/AsyncHelmet';
 import ExperienceCard from '../../components/Experience/ExperienceCard';
 import experienceData from '../../data/experiences.json';
 
+export const metadata = {
+  title: 'David Riva | Experience',
+};
+
 const Experience = () => {
   const sortedExperienceData = [...experienceData].sort((a, b) => {
     return new Date(b.startDate) - new Date(a.startDate);
