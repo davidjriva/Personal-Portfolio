@@ -1,12 +1,10 @@
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import Head from 'next/head';
 
 const AsyncHelmet = ({ pageName }) => {
   return (
-    <HelmetProvider>
-      <Helmet>
-        <title> David Riva | {pageName} </title>
-      </Helmet>
-    </HelmetProvider>
+    <Head>
+      <title> David Riva | {pageName} </title>
+    </Head>
   );
 };
 

@@ -1,15 +1,13 @@
-'use client';
-
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import AsyncHelmet from '../../components/AsyncHelmet';
 import SocialLinks from '../../components/About/SocialLinks';
+import ResumeButton from '../../components/About/ResumeButton';
+
+export const metadata = {
+  title: 'David Riva | About',
+};
 
 const About = () => {
-  const handleResumeClick = () => {
-    window.open('/documents/resume.pdf', '_blank');
-  };
-
   return (
     <Box
       sx={{
@@ -75,14 +73,7 @@ const About = () => {
         </Typography>
       </Box>
 
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleResumeClick}
-        sx={{ marginTop: '1rem', marginBottom: 2 }}
-      >
-        View Resume as PDF
-      </Button>
+      <ResumeButton />
 
       <SocialLinks />
     </Box>

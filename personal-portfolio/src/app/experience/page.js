@@ -1,6 +1,3 @@
-'use client';
-
-import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import AsyncHelmet from '../../components/AsyncHelmet';
 import ExperienceCard from '../../components/Experience/ExperienceCard';
@@ -29,10 +26,10 @@ const Experience = () => {
       </Typography>
 
       {sortedExperienceData.map((experience) => (
-        <React.Fragment key={experience.title}>
+        <div key={experience.title}>
           <ExperienceCard {...experience} />
           <Divider sx={{ marginBottom: 2 }} />
-        </React.Fragment>
+        </div>
       ))}
     </Box>
   );
