@@ -17,17 +17,21 @@ const MainPage = () => {
       sx={{
         backgroundColor: '#282829',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <ParticleBackground />
       <Box sx={{ position: 'relative' }}>
+        <ParticleBackground />
         <Greeting />
+      </Box>
+
+      <Box sx={{ position: 'relative' }}>
         <NewAbout />
-        <Experience />
+        {/* <Experience />
         <Education />
         <Projects />
         <Skills />
-        <Awards />
+        <Awards /> */}
       </Box>
     </Box>
   );
