@@ -16,27 +16,12 @@ const MainPage = () => {
     <Box
       sx={{
         backgroundColor: '#282829',
-        overflow: 'hidden',
+        position: 'relative',
       }}
     >
-      <Box
-        sx={{
-          width: '100vw',
-          height: '100vh',
-          position: 'relative',
-        }}
-      >
-        <ParticleBackground />
+      <ParticleBackground />
+      <Box sx={{ position: 'relative' }}>
         <Greeting />
-      </Box>
-
-      <Box
-        sx={{
-          width: '100vw',
-          height: '100vh',
-          position: 'relative',
-        }}
-      >
         <NewAbout />
         <Experience />
         <Education />
@@ -47,5 +32,4 @@ const MainPage = () => {
     </Box>
   );
 };
-
 export default MainPage;
