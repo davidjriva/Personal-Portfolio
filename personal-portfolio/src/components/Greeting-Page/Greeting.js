@@ -12,6 +12,7 @@ const Greeting = () => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        position: 'relative'
       }}
     >
       <Typography variant="h1">

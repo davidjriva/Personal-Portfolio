@@ -16,12 +16,21 @@ const MainPage = () => {
     <Box
       sx={{
         backgroundColor: '#282829',
-        position: 'relative'
+        overflow: 'hidden',
       }}
     >
-      <ParticleBackground />
-      <Box sx={{ position: 'relative' }}>
+      <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+        }}
+      >
+        <ParticleBackground />
         <Greeting />
+      </Box>
+
+      <Box>
         <NewAbout />
         <Experience />
         <Education />
