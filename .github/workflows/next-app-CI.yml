@@ -1,16 +1,16 @@
-name: react-app-CI
+name: next-app-CI
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'react-app/**'
+      - 'personal-portfolio/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'react-app/**'
+      - 'personal-portfolio/**'
 
 jobs:
   build:
@@ -26,15 +26,15 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        working-directory: ./react-app
+        working-directory: ./personal-portfolio
         run: npm ci
 
       - name: Build the app
-        working-directory: ./react-app
+        working-directory: ./personal-portfolio
         run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: ./react-app/build/
+          path: ./personal-portfolio/.next
