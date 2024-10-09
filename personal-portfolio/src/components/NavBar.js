@@ -1,6 +1,6 @@
 import { Link, IconButton, Toolbar, Box, AppBar } from '@mui/material';
 import Image from 'next/image';
-import ParticleBar from './ParticleBar';
+import ParticleBar from './ParticleBackground';
 
 const HeadShotImage = () => {
   return (
