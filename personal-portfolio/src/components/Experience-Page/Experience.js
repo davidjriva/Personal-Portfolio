@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
-import ExperienceCard from '../../components/Experience/ExperienceCard';
+import ExperienceCard from './ExperienceCard';
 import experienceData from '../../data/experiences.json';
 
 export const metadata = {

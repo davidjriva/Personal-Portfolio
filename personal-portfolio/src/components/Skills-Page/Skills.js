@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
-import SkillCard from '../../components/Skills/SkillCard';
+import SkillCard from './SkillCard';
 import skillsData from '../../data/skills.json';
 
 export const metadata = {
