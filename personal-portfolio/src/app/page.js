@@ -1,6 +1,7 @@
 /*
     The single page that will structure and hold all child pages for the portfolio
 */
+import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
 import Experience from '@/components/Experience-Page/Experience';
@@ -11,7 +12,11 @@ import Awards from '@/components/Awards-Page/Awards';
 
 const MainPage = () => {
   return (
-    <>
+    <Box
+      sx={{
+        backgroundColor: '#282829',
+      }}
+    >
       <Greeting />
       <About />
       <Experience />
@@ -19,7 +24,7 @@ const MainPage = () => {
       <Projects />
       <Skills />
       <Awards />
-    </>
+    </Box>
   );
 };
 
