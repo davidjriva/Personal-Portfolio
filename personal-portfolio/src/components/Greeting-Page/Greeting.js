@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import ParticleBar from '@/components/ParticleBar';
+import ViewWorkButton from '@/components/Greeting-Page/ViewWorkButton';
 
 const Greeting = () => {
   return (
@@ -16,13 +17,15 @@ const Greeting = () => {
         position: 'relative',
       }}
     >
+      <ParticleBar />
       <Typography variant="h1" sx={{ zIndex: 1, position: 'relative' }}>
-        Hello, I'm David.
+        Hello, I'm <span style={{ color: '#0a73c9' }}>David</span>.
       </Typography>
       <Typography variant="h1" sx={{ zIndex: 1, position: 'relative' }}>
         I'm a full-stack developer
       </Typography>
-      <ParticleBar />
+
+      <ViewWorkButton />
     </Box>
   );
 };

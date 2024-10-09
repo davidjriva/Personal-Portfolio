@@ -14,12 +14,11 @@ const MainPage = () => {
     <>
       <Greeting />
       <About />
-      {/* <About />
       <Experience />
       <Education />
       <Projects />
       <Skills />
-      <Awards /> */}
+      <Awards />
     </>
   );
 };
