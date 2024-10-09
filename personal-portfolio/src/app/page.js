@@ -3,7 +3,7 @@
 */
 import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
-import About from '@/components/About-Page/About';
+import NewAbout from '@/components/About-Page/NewAbout';
 import Experience from '@/components/Experience-Page/Experience';
 import Education from '@/components/Education-Page/Education';
 import Projects from '@/components/Projects-Page/Projects';
@@ -18,7 +18,7 @@ const MainPage = () => {
       }}
     >
       <Greeting />
-      <About />
+      <NewAbout />
       <Experience />
       <Education />
       <Projects />

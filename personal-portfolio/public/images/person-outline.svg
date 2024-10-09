@@ -1,0 +1,16 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="171px" height="171px" viewBox="-2.4 -2.4 28.80 28.80" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="personIconTitle" fill="none" color="#000000">
+  <defs>
+    <linearGradient id="blueToWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#38c0f2; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff; stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)"/>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.096"/>
+  <g id="SVGRepo_iconCarrier">
+    <title id="personIconTitle">Person</title>
+    <path d="M4,20 C4,17 8,17 10,15 C11,14 8,14 8,9 C8,5.667 9.333,4 12,4 C14.667,4 16,5.667 16,9 C16,14 13,14 14,15 C16,17 20,17 20,20" stroke="url(#blueToWhite)" stroke-width="0.5" fill="none"/>
+  </g>
+</svg>
