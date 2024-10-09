@@ -13,7 +13,7 @@ const NewAbout = () => {
         width: '100vw',
         alignItems: 'center',
         flexDirection: 'column',
-        backgroundColor: '#282829', // Optional: set a background color for the section
+        position: 'relative',
       }}
     >
       <Typography

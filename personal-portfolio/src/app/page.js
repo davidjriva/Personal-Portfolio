@@ -9,21 +9,26 @@ import Education from '@/components/Education-Page/Education';
 import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
+import ParticleBackground from '@/components/ParticleBackground';
 
 const MainPage = () => {
   return (
     <Box
       sx={{
         backgroundColor: '#282829',
+        position: 'relative'
       }}
     >
-      <Greeting />
-      <NewAbout />
-      <Experience />
-      <Education />
-      <Projects />
-      <Skills />
-      <Awards />
+      <ParticleBackground />
+      <Box sx={{ position: 'relative' }}>
+        <Greeting />
+        <NewAbout />
+        <Experience />
+        <Education />
+        <Projects />
+        <Skills />
+        <Awards />
+      </Box>
     </Box>
   );
 };
