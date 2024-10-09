@@ -4,20 +4,6 @@ import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import Biography from './Biography';
 
-const PersonOutlineIcon = () => {
-  return (
-    <img
-      src="/images/person-outline.svg"
-      alt="Person"
-      style={{
-        width: '25vw',
-        height: 'auto',
-        marginRight: '20px', // Add space between image and text
-      }}
-    />
-  );
-};
-
 const NewAbout = () => {
   return (
     <Box
