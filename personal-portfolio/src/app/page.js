@@ -30,7 +30,13 @@ const MainPage = () => {
         <Greeting />
       </Box>
 
-      <Box>
+      <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+        }}
+      >
         <NewAbout />
         <Experience />
         <Education />
