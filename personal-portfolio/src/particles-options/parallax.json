@@ -7,7 +7,7 @@
     "manualParticles": [],
     "background": {
         "color": {
-            "value": "#3c4142"
+            "value": "#282829"
         },
         "opacity": 1
     },
@@ -246,7 +246,7 @@
                 "acceleration": 9.81,
                 "enable": false,
                 "inverse": false,
-                "maxSpeed": 50
+                "maxSpeed": 5
             },
             "path": {
                 "clamp": true,
