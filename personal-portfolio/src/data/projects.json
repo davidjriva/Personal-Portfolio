@@ -1,0 +1,146 @@
+[
+    {
+        "coverImage": "Nature-Nomads-Cover.jpeg",
+        "title" : "Nature Nomads",
+        "author": "David Riva",
+        "dateStarted": "July 2024",
+        "dateCompleted": "August 2024",
+        "description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world! 🌎 ⛰️🌊🌲",
+        "technologies": [
+            {
+                "location": "Front-End",
+                "tools": ["JavaScript", "HTML", "CSS", "Pug"]
+            },
+            {
+                "location": "Back-End",
+                "tools": ["Node.js", "Express.js", "MongoDB", "Mongoose"]
+            },
+            {
+                "location": "Testing",
+                "tools": ["Jest", "SuperTest"]
+            },
+            {
+                "location": "DevOps",
+                "tools": ["GitHub Actions"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Nature-Nomads"
+    },
+    {
+        "coverImage": "Dijkstras-Shortest-Cover.jpeg",
+        "title" : "Using Dijkstra's Shortest Paths to Route Packets in a Network Overlay",
+        "author": "David Riva",
+        "dateStarted": "January 2024",
+        "dateCompleted": "February 2024",
+        "description": "Designed and implemented a distributed network of N nodes capable of routing packets based on Dijkstra's shortest path algorithm in a simulated network topology.\nImplemented communication between nodes using the TCP/IP model, facilitating packet exchange through a custom marshalling and demarshalling system.\nOptimized performance by introducing multi-threading for parallel message sending and receiving within each node in the system.",
+        "technologies": [
+            {
+                "location": "Distributed Systems",
+                "tools": ["Java"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Distributed-Systems-Projects/tree/main/hw1"
+    },
+    {
+        "coverImage": "Trip-Planner-Cover.jpeg",
+        "title": "Trip Planning Application",
+        "author": "David Riva & CS314 [Software Development] Teammates",
+        "dateStarted": "August 2023",
+        "dateCompleted": "December 2023",
+        "description": "Designed and implemented a comprehensive trip planning and optimization application as a full-stack developer.\nIntegrated and utilized multiple RESTful APIs across the application's stack to enhance its functionalities.\nDemonstrated proficiency in Agile methodologies by following Scrum practices, leading meetings with a team of 4 other students.\nEnsured deployment and documentation of the product through bi-monthly releases, ensuring clear and accessible information for users & stakeholders.",
+        "technologies": [
+            {
+                "location": "Front-End",
+                "tools": ["React.js", "JavaScript", "HTML", "CSS"]
+            },
+            {
+                "location": "Back-End",
+                "tools": ["Java", "SQL", "MariaDB"]
+            },
+            {
+                "location": "Testing",
+                "tools": ["Java", "JUnit", "Jest"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Trip-Planner"
+    },
+    {
+        "coverImage": "Plant-Disease-Cover.jpeg",
+        "title": "Plant Disease Classifier",
+        "author": "David Riva",
+        "dateStarted": "November 2023",
+        "dateCompleted": "December 2023",
+        "description": "pre-trained CNN on ImageNet used to classify plant diseases.",
+        "technologies": [
+            {
+                "location": "Deep Learning",
+                "tools": ["Python", "PySpark", "TensorFlow", "Keras"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Plant-Disease-Classifier"
+    },
+    {
+        "coverImage": "Card-Classifier-Cover.jpeg",
+        "title" : "Playing Card Classifier",
+        "author": "David Riva",
+        "dateStarted": "Dec 2023",
+        "dateCompleted": "Dec 2023",
+        "description": "Custom CNN model for playing card classification.",
+        "technologies": [
+            {
+                "location": "Deep Learning",
+                "tools": ["Python", "TensorFlow", "Keras"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Playing-Card-Classifier"
+    },
+    {
+        "coverImage": "Pong-Cover.jpeg",
+        "title": "Pong",
+        "author": "David Riva",
+        "dateStarted": "November 2019",
+        "dateCompleted": "December 2019",
+        "description": "A simple game of Pong between two players or one-player and a CPU.",
+        "technologies": [
+            {
+                "location": "Application",
+                "tools": ["Java"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Pong"
+    },
+    {
+        "coverImage": "Sorting-Visualization-Cover.jpeg",
+        "title": "Sorting Algorithms Visualization",
+        "author": "David Riva",
+        "dateStarted": "August 2019",
+        "dateCompleted": "September 2019",
+        "description": "An application that visualizes different sorting algorithms in real-time across random data points. Allows the user to add data points, randomize all data points, select the algorithm to use, step through the sorting algorithm in real-time, and sort all the data points automatically.",
+        "technologies": [
+            {
+                "location": "Application",
+                "tools": ["Java"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Sorting-Algorithms"
+    },
+    {
+        "coverImage": "Email-Templating-Utility-Cover.jpeg",
+        "title": "Email Templating Utility Tool",
+        "author": "David Riva",
+        "dateStarted": "October 2024",
+        "dateCompleted": "October 2024",
+        "description": "A Next.js application that allows users to complete a form, which automatically generates a pre-written email in Outlook based on their input. The project was later converted into an Electron.js application for easy distribution, enabling users to add it to their favorites for quick access. It leverages inter-process communication to directly launch Outlook on the user's computer and load the email template seamlessly.",
+        "technologies": [
+            {
+                "location": "Front-End",
+                "tools": ["JavaScript", "HTML", "CSS", "Next.js"]
+            },
+            {
+                "location": "Back-End",
+                "tools": ["Node.js", "Electron.js", "AppleScript"]
+            }
+        ],
+        "link": "https://github.com/davidjriva/Email-Sender-Util"
+    }
+]

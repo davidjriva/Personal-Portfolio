@@ -1,0 +1,23 @@
+{
+  "name": "personal-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.2",
+    "@mui/material": "^6.1.2",
+    "@tsparticles/react": "^3.0.0",
+    "next": "14.2.14",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-helmet-async": "^2.0.5",
+    "tsparticles": "^3.5.0"
+  }
+}
