@@ -29,7 +29,7 @@ const AnimatedTypingTypography = () => {
 
   // Typing and deleting effect logic
   useEffect(() => {
-    const currentRole = `${roles[roleIndex]}.`; // Current role (full-stack developer, data scientist, or educator)
+    const currentRole = `${roles[roleIndex]}.`;
     let timer;
 
     if (!deleting && index < currentRole.length) {
@@ -46,7 +46,7 @@ const AnimatedTypingTypography = () => {
     } else if (deleting && index > 0) {
       // Deleting logic
       timer = setTimeout(() => {
-        setText((prev) => prev.slice(0, -1)); // Remove one character
+        setText((prev) => prev.slice(0, -1));
         setIndex((prev) => prev - 1);
       }, getRandomSpeed(baseDeletingSpeed)); // Deleting with slight speed randomness
     } else if (deleting && index === 0) {
@@ -64,7 +64,7 @@ const AnimatedTypingTypography = () => {
   useEffect(() => {
     const blinkCursor = setInterval(() => {
       setCursorVisible((prev) => !prev);
-    }, 300); // Faster blinking cursor for a more dynamic feel
+    }, 300);
     return () => clearInterval(blinkCursor);
   }, []);
 
