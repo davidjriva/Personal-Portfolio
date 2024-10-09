@@ -11,7 +11,7 @@ const theme = createTheme({
     h4: { fontWeight: 'bold' },
     h5: { fontWeight: 'bold' },
     h6: { fontWeight: 'bold' },
-    body1: { fontWeight: 400 },
+    body1: { fontWeight: 400, color: 'white', lineHeight: 1.6 },
     body2: { fontWeight: 400 },
   },
 });
