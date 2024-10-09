@@ -19,7 +19,7 @@ const Greeting = () => {
     >
       <ParticleBar />
       <Typography variant="h1" sx={{ zIndex: 1, position: 'relative' }}>
-        Hello, I'm <span style={{ color: '#0a73c9' }}>David</span>.
+        Hello, I'm <span style={{ color: '#38c0f2' }}>David</span>.
       </Typography>
       <Typography variant="h1" sx={{ zIndex: 1, position: 'relative' }}>
         I'm a full-stack developer
