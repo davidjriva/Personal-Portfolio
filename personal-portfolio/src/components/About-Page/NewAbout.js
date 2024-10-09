@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import HeadShotImage from './HeadshotImage';
 import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import Biography from './Biography';
@@ -34,7 +35,7 @@ const NewAbout = () => {
         bgcolor: '#282829',
       }}
     >
-      <PersonOutlineIcon />
+      <HeadShotImage width={400} height={400} />
 
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
         <AboutHeader />
