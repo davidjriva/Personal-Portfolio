@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <NavBar />
-            <Box display="flex" minHeight="100vh">
+            <Box display="flex">
               <Box
                 component="main"
                 flexGrow={1}

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
-import SocialLinks from '../../components/About/SocialLinks';
-import ResumeButton from '../../components/About/ResumeButton';
+import SocialLinks from './SocialLinks';
+import ResumeButton from './ResumeButton';
 
 export const metadata = {
   title: 'David Riva | About',

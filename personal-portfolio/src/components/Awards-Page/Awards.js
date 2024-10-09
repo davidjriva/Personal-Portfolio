@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
-import AwardCard from '../../components/Awards/AwardCard';
+import AwardCard from './AwardCard';
 import awardsData from '../../data/awards.json';
 
 export const metadata = {

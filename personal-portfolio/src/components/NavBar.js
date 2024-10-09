@@ -7,8 +7,8 @@ const HeadShotImage = () => {
     <IconButton href="/">
       <Box
         sx={{
-          width: 150,
-          height: 150,
+          width: 50,
+          height: 50,
           overflow: 'hidden',
           borderRadius: '50%',
           boxShadow: '0 0 20px 5px rgba(211, 211, 211, 0.8)',
@@ -18,8 +18,8 @@ const HeadShotImage = () => {
         <Image
           alt="Photo of David Riva"
           src="/images/headshot.jpeg"
-          width={150}
-          height={150}
+          width={50}
+          height={50}
           style={{
             objectFit: 'cover',
           }}
@@ -36,11 +36,9 @@ const FormattedLink = ({ page }) => {
       href={`/${page.toLowerCase()}`}
       color="inherit"
       sx={{
-        my: 1,
+        mx: 2,
         fontWeight: 700,
         fontSize: '1.2rem',
-        width: '100%',
-        textAlign: 'center',
         textDecoration: 'none',
         zIndex: 2,
         fontFamily: 'Montserrat, Arial, sans-serif',
@@ -59,26 +57,27 @@ const NavBar = () => {
     <AppBar
       position="fixed"
       sx={{
-        height: '100vh',
-        width: '350px',
-        left: 0,
+        height: '7vh',
+        width: '100%',
         top: 0,
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        px: 2, // Add padding to the left and right
+        backgroundColor: '#333', // Customize the background color
       }}
     >
       <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
         <ParticleBar />
       </Box>
 
-      <Toolbar disableGutters sx={{ flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2 }}>
-        <Box sx={{ mb: 3, textAlign: 'center' }}>
+      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', zIndex: 2 }}>
+        <Box sx={{ mr: 2 }}>
           <HeadShotImage />
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {pages.map((page) => (
             <FormattedLink key={page} page={page} />
           ))}
