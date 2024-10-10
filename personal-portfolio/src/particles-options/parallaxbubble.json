@@ -101,7 +101,7 @@
                 "links": {
                     "blink": false,
                     "consent": false,
-                    "opacity": 1
+                    "opacity": 0
                 }
             },
             "push": {
@@ -293,12 +293,12 @@
         "opacity": {
             "value": {
                 "min": 0.01,
-                "max": 0.10
+                "max": 0.03
             },
             "animation": {
                 "count": 0,
                 "enable": true,
-                "speed": 3,
+                "speed": 0.01,
                 "decay": 0,
                 "delay": 0,
                 "sync": false,
