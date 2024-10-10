@@ -47,7 +47,7 @@
             },
             "onHover": {
                 "enable": true,
-                "mode": "grab",
+                "mode": "bubble",
                 "parallax": {
                     "enable": false,
                     "force": 60,
@@ -81,7 +81,7 @@
                 "duration": 2,
                 "mix": false,
                 "opacity": 0.8,
-                "size": 40,
+                "size": 10,
                 "divs": {
                     "distance": 200,
                     "duration": 0.4,
@@ -92,7 +92,7 @@
             "connect": {
                 "distance": 80,
                 "links": {
-                    "opacity": 0.5
+                    "opacity": 0.1
                 },
                 "radius": 60
             },
@@ -101,7 +101,7 @@
                 "links": {
                     "blink": false,
                     "consent": false,
-                    "opacity": 1
+                    "opacity": 0
                 }
             },
             "push": {
@@ -265,7 +265,7 @@
             },
             "random": false,
             "size": false,
-            "speed": 2,
+            "speed": 1.25,
             "spin": {
                 "acceleration": 0,
                 "enable": false
@@ -292,13 +292,13 @@
         },
         "opacity": {
             "value": {
-                "min": 0.1,
-                "max": 0.5
+                "min": 0.01,
+                "max": 0.03
             },
             "animation": {
                 "count": 0,
                 "enable": true,
-                "speed": 3,
+                "speed": 0.01,
                 "decay": 0,
                 "delay": 0,
                 "sync": false,
@@ -460,7 +460,7 @@
             "distance": 150,
             "enable": true,
             "frequency": 1,
-            "opacity": 0.4,
+            "opacity": 0.1,
             "shadow": {
                 "blur": 5,
                 "color": {
@@ -472,7 +472,7 @@
                 "enable": false,
                 "frequency": 1
             },
-            "width": 1,
+            "width": 2,
             "warp": false
         },
         "repulse": {

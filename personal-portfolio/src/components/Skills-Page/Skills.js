@@ -9,7 +9,7 @@ export const metadata = {
 
 const Skills = () => {
   return (
-    <Box sx={{ padding: '2rem', color: '#757474' }}>
+    <Box sx={{ padding: '2rem', color: '#757474', height: '100vh' }}>
       <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
         Skills
       </Typography>

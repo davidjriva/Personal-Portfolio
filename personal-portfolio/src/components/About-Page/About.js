@@ -9,12 +9,13 @@ export const metadata = {
 const About = () => {
   return (
     <Box
+      id="about-section"
       sx={{
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        minHeight: 'calc(100vh - 250px)',
+        height: '100vh',
         padding: '2rem',
       }}
     >

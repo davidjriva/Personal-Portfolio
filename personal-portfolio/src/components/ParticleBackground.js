@@ -2,9 +2,9 @@
 
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadFull } from 'tsparticles';
-import options from '../particles-options/absorber.json';
+import options from '../particles-options/parallax-bubble.json';
 
-const ParticleBar = () => {
+const ParticleBackground = () => {
   initParticlesEngine(async (engine) => {
     await loadFull(engine);
   });
@@ -12,4 +12,4 @@ const ParticleBar = () => {
   return <Particles id="tsparticles" options={options} />;
 };
 
-export default ParticleBar;
+export default ParticleBackground;
