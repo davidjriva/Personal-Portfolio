@@ -2,7 +2,7 @@
 
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadFull } from 'tsparticles';
-import options from '../particles-options/parallaxbubble.json';
+import options from '../particles-options/parallax-bubble-colored.json';
 
 const ParticleBackground = () => {
   initParticlesEngine(async (engine) => {
