@@ -1,85 +1,62 @@
-import { Link, IconButton, Toolbar, Box, AppBar } from '@mui/material';
-import Image from 'next/image';
-import ParticleBar from './ParticleBackground';
+'use client';
 
-const HeadShotImage = () => {
-  return (
-    <IconButton href="/">
-      <Box
-        sx={{
-          width: 50,
-          height: 50,
-          overflow: 'hidden',
-          borderRadius: '50%',
-          boxShadow: '0 0 20px 5px rgba(211, 211, 211, 0.8)',
-          border: '4px light gray',
-        }}
-      >
-        <Image
-          alt="Photo of David Riva"
-          src="/images/headshot.jpeg"
-          width={50}
-          height={50}
-          style={{
-            objectFit: 'cover',
-          }}
-          priority={true}
-        />
-      </Box>
-    </IconButton>
-  );
+import { Link as ScrollLink } from 'react-scroll';
+import { Toolbar, Box, AppBar } from '@mui/material';
+import { useState } from 'react';
+
+// Inline style for both active and inactive links
+const linkStyles = {
+  margin: '0 16px',
+  fontWeight: 700,
+  fontSize: '1.2rem',
+  textDecoration: 'none',
+  cursor: 'pointer',
+  fontFamily: 'Montserrat, Arial, sans-serif'
 };
 
-const FormattedLink = ({ page }) => {
+const FormattedLink = ({ page, active, setActivePage }) => {
   return (
-    <Link
-      href={`/${page.toLowerCase()}`}
-      color="inherit"
-      sx={{
-        mx: 2,
-        fontWeight: 700,
-        fontSize: '1.2rem',
-        textDecoration: 'none',
-        zIndex: 2,
-        fontFamily: 'Montserrat, Arial, sans-serif',
+    <ScrollLink
+      to={page.toLowerCase()}
+      spy={true}
+      smooth={true}
+      offset={-70}
+      duration={500}
+      onSetActive={() => setActivePage(page)} // Update active page when section is active
+      style={{
+        ...linkStyles,
+        color: active ? 'white' : 'gray', // Color depending on if the link is active
       }}
-      key={page}
     >
       {page}
-    </Link>
+    </ScrollLink>
   );
 };
 
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
 const NavBar = () => {
+  const [activePage, setActivePage] = useState('About'); // Track active page
+
   return (
     <AppBar
-      position="fixed"
+      position="sticky"
       sx={{
-        height: '7vh',
-        width: '100%',
         top: 0,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        px: 2, // Add padding to the left and right
-        backgroundColor: '#333', // Customize the background color
+        zIndex: 999,
+        height: '7vh',
+        backgroundColor: '#333',
       }}
     >
-      <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-        <ParticleBar />
-      </Box>
-
-      <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', zIndex: 2 }}>
-        <Box sx={{ mr: 2 }}>
-          <HeadShotImage />
-        </Box>
-
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
           {pages.map((page) => (
-            <FormattedLink key={page} page={page} />
+            <FormattedLink
+              key={page}
+              page={page}
+              active={activePage === page} // Pass active state to link
+              setActivePage={setActivePage} // Set active page on section change
+            />
           ))}
         </Box>
       </Toolbar>

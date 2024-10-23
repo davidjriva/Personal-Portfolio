@@ -1,6 +1,3 @@
-/*
-    The single page that will structure and hold all child pages for the portfolio
-*/
 import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
 import NewAbout from '@/components/About-Page/NewAbout';
@@ -10,6 +7,7 @@ import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
+import NavBar from '@/components/NavBar';
 
 const MainPage = () => {
   return (
@@ -17,17 +15,25 @@ const MainPage = () => {
       sx={{
         backgroundColor: '#282829',
         position: 'relative',
-        overflow: 'hidden',
       }}
     >
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: 'relative', height: '100vh' }}>
         <ParticleBackground />
         <Greeting />
       </Box>
 
-      <Box sx={{ position: 'relative' }}>
-        <NewAbout />
-        {/* <Experience />
+      <NavBar />
+
+      <Box>
+        <section id="about">
+          <NewAbout />
+        </section>
+
+        <section id="experience">
+          <Experience />
+        </section>
+
+        {/*
         <Education />
         <Projects />
         <Skills />
