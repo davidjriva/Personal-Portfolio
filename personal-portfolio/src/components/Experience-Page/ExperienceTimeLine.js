@@ -37,7 +37,7 @@ const ExperienceTimeLineItem = ({
             alt={`${company} logo`}
             width={24}
             height={24}
-            style={{ alignSelf: 'center' }}
+            style={{ alignSelf: 'center', opacity: shouldShowText ? 1 : 0, transition: 'opacity 0.5s ease' }}
           />
         </TimelineDot>
         <TimelineConnector sx={{ height: '30px' }} />
@@ -81,7 +81,7 @@ const ExperienceTimeLine = () => {
     };
   }, []);
 
-  const scrollPositions = [1200, 1800, 2150, 2450];
+  const scrollPositions = [1400, 1800, 2150, 2350];
 
   return (
     <Timeline>
