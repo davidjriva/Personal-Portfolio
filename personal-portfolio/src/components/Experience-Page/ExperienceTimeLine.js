@@ -14,25 +14,16 @@ import { Typography } from '@mui/material';
 import experienceData from '../../data/experiences.json';
 import Image from 'next/image';
 
-const ExperienceTimeLinePlaceholder = ({ yPaddingAmount }) => {
-  return (
-    <TimelineItem>
-      <TimelineOppositeContent sx={{ m: 'auto 0' }} align="right" variant="body2"></TimelineOppositeContent>
-      <TimelineSeparator>
-        <TimelineConnector sx={{ height: '30px' }} />
-        <TimelineDot sx={{ backgroundColor: 'lightgray' }} />
-        <TimelineConnector sx={{ height: '30px' }} />
-      </TimelineSeparator>
-      <TimelineContent sx={{ py: yPaddingAmount }}>
-        <Typography variant="h6" component="span" sx={{ visibility: 'hidden' }}>
-          Placeholder
-        </Typography>
-      </TimelineContent>
-    </TimelineItem>
-  );
-};
-
-const ExperienceTimeLineItem = ({ title, company, logoImage, location, startDate, endDate, bulletPoints }) => {
+const ExperienceTimeLineItem = ({
+  title,
+  company,
+  logoImage,
+  location,
+  startDate,
+  endDate,
+  bulletPoints,
+  shouldShowText,
+}) => {
   return (
     <TimelineItem>
       <TimelineOppositeContent sx={{ m: 'auto 0' }} align="right" variant="body2">
@@ -51,10 +42,15 @@ const ExperienceTimeLineItem = ({ title, company, logoImage, location, startDate
         </TimelineDot>
         <TimelineConnector sx={{ height: '30px' }} />
       </TimelineSeparator>
-      <TimelineContent sx={{ py: '24px', px: 2 }}>
+      <TimelineContent sx={{ py: '24px', px: 2, transition: 'opacity 0.5s ease', opacity: shouldShowText ? 1 : 0 }}>
         <Typography variant="h6" component="span">
-          {title} | {company} | {location}
+          {title}
         </Typography>
+
+        <Typography variant="body1">
+          {company} | {location}
+        </Typography>
+
         {bulletPoints.map((bulletPt, index) => (
           <Typography key={index} variant="body1">
             • {bulletPt}
@@ -85,18 +81,13 @@ const ExperienceTimeLine = () => {
     };
   }, []);
 
-  const scrollPositions = [1200, 1700, 2100, 2300];
-  const yPaddingAmount = ['0px', '125px', '175px', '75px'];
+  const scrollPositions = [1200, 1800, 2150, 2450];
 
   return (
-    <Timeline position="alternate">
+    <Timeline>
       {sortedExperienceData.map((experience, index) => (
         <React.Fragment key={experience.title}>
-          {scrollPosition >= scrollPositions[index] ? (
-            <ExperienceTimeLineItem {...experience} />
-          ) : (
-            <ExperienceTimeLinePlaceholder yPaddingAmount={yPaddingAmount[index]} />
-          )}
+          {<ExperienceTimeLineItem {...experience} shouldShowText={scrollPosition >= scrollPositions[index]} />}
         </React.Fragment>
       ))}
     </Timeline>
