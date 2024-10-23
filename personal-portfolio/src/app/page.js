@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
 import NewAbout from '@/components/About-Page/NewAbout';
-import Experience from '@/components/Experience-Page/Experience';
 import Education from '@/components/Education-Page/Education';
 import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
+import ExperienceTimeLine from '@/components/Experience-Page/ExperienceTimeLine';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/NavBar';
 
@@ -30,7 +30,11 @@ const MainPage = () => {
         </section>
 
         <section id="experience">
-          <Experience />
+          <ExperienceTimeLine />
+        </section>
+
+        <section id="education">
+          <Education />
         </section>
 
         {/*

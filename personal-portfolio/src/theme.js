@@ -8,11 +8,11 @@ const theme = createTheme({
     h1: { fontWeight: 'bold', fontSize: '2.5rem' },
     h2: { fontWeight: 'bold' },
     h3: { fontWeight: 'bold' },
-    h4: { fontWeight: 'bold' },
-    h5: { fontWeight: 'bold' },
+    h4: { fontWeight: 'bold', color: 'white' },
+    h5: { fontWeight: 'bold', color: 'white' },
     h6: { fontWeight: 'bold' },
     body1: { fontWeight: 400, color: 'white', lineHeight: 1.6 },
-    body2: { fontWeight: 400 },
+    body2: { fontWeight: 400, color: 'white' },
   },
 });
 
