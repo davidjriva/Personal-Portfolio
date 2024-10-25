@@ -17,7 +17,7 @@ const NewAbout = () => {
         position: 'relative',
       }}
     >
-      <SectionHeading sectionName={'About'} />
+      <SectionHeading sectionName="About" />
       <Box
         sx={{
           display: 'flex',

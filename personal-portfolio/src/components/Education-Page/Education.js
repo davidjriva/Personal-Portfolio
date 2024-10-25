@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import SectionHeading from '@/components/SectionHeading';
 
 export const metadata = {
   title: 'David Riva | Education',
@@ -9,24 +10,20 @@ const Education = () => {
   return (
     <Box
       sx={{
+        marginTop: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '2rem',
-        color: '#757474',
-        height: '100vh'
+        justifyContent: 'center',
+        position: 'relative',
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
-        Education
-      </Typography>
+      <SectionHeading sectionName="Education" />
 
       <Box sx={{ alignSelf: 'flex-start', marginBottom: '2rem', width: '100%' }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <Typography variant="h5" sx={{ color: '#000' }}>
-            Bachelor of Science
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#0a73c9', textAlign: 'right' }}>
+          <Typography variant="h5">Bachelor of Science</Typography>
+          <Typography variant="body2" sx={{ textAlign: 'right' }}>
             August 2021 - May 2024
           </Typography>
         </Box>
@@ -35,7 +32,7 @@ const Education = () => {
           <img
             src={'/images/CSU_logo.jpeg'}
             alt={'Colorado State University logo'}
-            style={{ height: '24px', marginRight: '8px', alignSelf: 'center' }}
+            style={{ height: '24px', marginRight: '8px', alignSelf: 'center', backgroundColor: 'white' }}
           />
           <Typography variant="body1">Colorado State University | Fort Collins, CO</Typography>
         </Box>

@@ -15,6 +15,7 @@ const Experience = () => {
       }}
     >
       <SectionHeading sectionName="Experience" />
+
       <Box
         sx={{
           marginTop: 10,
