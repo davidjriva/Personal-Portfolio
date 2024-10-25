@@ -37,6 +37,10 @@ const MainPage = () => {
           <Education />
         </section>
 
+        <section id="projects">
+          <Projects />
+        </section>
+
         {/*
         <Education />
         <Projects />

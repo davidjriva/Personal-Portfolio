@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import SectionHeading from '@/components/SectionHeading';
 import ProjectsContainer from './ProjectsContainer';
 
 export const metadata = {
@@ -8,7 +9,6 @@ export const metadata = {
 const Projects = () => {
   return (
     <Box
-      id="projects"
       sx={{
         padding: '2rem',
         maxWidth: '1200px',
@@ -16,10 +16,8 @@ const Projects = () => {
         textAlign: 'center',
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: '2rem', color: '#333' }}>
-        Projects
-      </Typography>
-
+      <SectionHeading sectionName="projects" />
+      
       <ProjectsContainer />
     </Box>
   );

@@ -17,11 +17,11 @@ const TechnologyChip = ({ tool, selectedChips, setSelectedChips }) => {
       label={tool}
       onClick={() => handleChipClick(tool)}
       sx={{
-        backgroundColor: selectedChips.has(tool) ? '#0a73c9' : 'transparent',
-        color: selectedChips.has(tool) ? 'white' : 'inherit',
-        border: '1px solid lightgray',
+        backgroundColor: selectedChips.has(tool) ? '#38c0f2' : 'lightgray',
+        color: 'black',
+        border: '1px solid black',
         '&:hover': {
-          backgroundColor: selectedChips.has(tool) ? '#0a73c9' : '#e0e0e0',
+          backgroundColor: selectedChips.has(tool) ? '#0a73c9' : 'darkgray',
         },
       }}
     />
