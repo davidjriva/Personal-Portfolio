@@ -5,7 +5,7 @@ import Education from '@/components/Education-Page/Education';
 import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
-import ExperienceTimeLine from '@/components/Experience-Page/ExperienceTimeLine';
+import Experience from '@/components/Experience-Page/Experience';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/NavBar';
 
@@ -30,7 +30,7 @@ const MainPage = () => {
         </section>
 
         <section id="experience">
-          <ExperienceTimeLine />
+          <Experience />
         </section>
 
         <section id="education">

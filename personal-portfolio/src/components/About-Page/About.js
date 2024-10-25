@@ -20,9 +20,9 @@ const NewAbout = () => {
       <SectionHeading sectionName={'About'} />
       <Box
         sx={{
-          marginTop: 10,
           display: 'flex',
           alignItems: 'center',
+          marginTop: 10,
           justifyContent: 'center',
         }}
       >

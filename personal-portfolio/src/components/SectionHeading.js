@@ -9,7 +9,7 @@ const SectionHeading = ({ sectionName }) => {
         textShadow: '3px 3px #011627',
         fontFamily: 'sans-serif',
         color: '#FFF',
-        fontSize: '8rem',
+        fontSize: '5rem',
       }}
     >
       <span
