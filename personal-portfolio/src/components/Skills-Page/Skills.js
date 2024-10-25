@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import SkillCard from './SkillCard';
-import skillsData from '../../data/skills.json';
+import SectionHeading from '@/components/SectionHeading';
+import skillsData from '@/data/skills.json';
 
 export const metadata = {
   title: 'David Riva | Skills',
@@ -9,16 +10,23 @@ export const metadata = {
 
 const Skills = () => {
   return (
-    <Box sx={{ padding: '2rem', color: '#757474', height: '100vh' }}>
-      <Typography variant="h4" sx={{ marginBottom: 6, color: '#000', textAlign: 'center' }}>
-        Skills
-      </Typography>
+    <Box
+      sx={{
+        marginTop: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+      }}
+    >
+      <SectionHeading sectionName="Skills" />
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1.6 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
         {skillsData.map((skill, index) => (
           <React.Fragment key={skill.title}>
             <SkillCard {...skill} />
-            {index < skillsData.length - 1 && <Divider sx={{ margin: '1rem 0' }} />}
+            {index < skillsData.length - 1 && <Divider sx={{ margin: '1rem 0', backgroundColor: 'lightgray' }} />}
           </React.Fragment>
         ))}
       </Box>

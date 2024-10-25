@@ -41,11 +41,13 @@ const MainPage = () => {
           <Projects />
         </section>
 
-        {/*
-        <Education />
-        <Projects />
-        <Skills />
-        <Awards /> */}
+        <section id="skills">
+          <Skills />
+        </section>
+
+        <section id="awards">
+          <Awards />
+        </section>
       </Box>
     </Box>
   );

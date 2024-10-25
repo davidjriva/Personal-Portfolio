@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 const SkillCard = ({ title, items }) => {
   return (
     <>
-      <Typography variant="h6" sx={{ color: '#000' }}>
+      <Typography variant="h6">
         {title}
       </Typography>
 
