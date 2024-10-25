@@ -6,9 +6,15 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 const ViewWorkButton = () => {
   const scrollToSection = () => {
     const section = document.getElementById('about');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+
+    const offset = 70;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -16,15 +22,15 @@ const ViewWorkButton = () => {
       onClick={scrollToSection}
       sx={{
         marginTop: '20px',
-        backgroundColor: 'transparent', // Clear background
-        border: '2px solid #38c0f2', // Optional border color
-        borderRadius: '30px', // Oval shape
-        padding: '10px 20px', // Padding for size
-        color: '#38c0f2', // Text color
-        display: 'flex', // Flex to align icon and text
-        alignItems: 'center', // Center the icon vertically
+        backgroundColor: 'rgba(10, 115, 201, 0.25)',
+        border: '2px solid #38c0f2',
+        borderRadius: '30px',
+        padding: '10px 20px',
+        color: '#38c0f2',
+        display: 'flex',
+        alignItems: 'center',
         '&:hover': {
-          backgroundColor: 'rgba(10, 115, 201, 0.1)', // Light hover effect
+          backgroundColor: 'rgba(10, 115, 201, 0.5)',
         },
       }}
     >
