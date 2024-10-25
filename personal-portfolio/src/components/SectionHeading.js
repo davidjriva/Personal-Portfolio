@@ -1,44 +1,31 @@
-import { Typography, Box } from '@mui/material';
+'use client';
 
 const SectionHeading = ({ sectionName }) => {
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        marginTop: { xs: '6rem', sm: '9rem' },
-        marginBottom: { xs: '10rem', sm: '13rem' },
-        textAlign: 'center',
-        zIndex: 9999, 
+    <h2
+      style={{
+        marginTop: '0px',
+        marginBottom: '8px',
+        textShadow: '3px 3px #011627',
+        fontFamily: 'sans-serif',
+        color: '#FFF',
+        fontSize: '8rem',
       }}
     >
-      <Typography
-        variant="h2"
-        sx={{
-          fontSize: { xs: '3rem', sm: '5.5rem' }, 
-          fontWeight: 700,
-          position: 'relative',
+      <span
+        style={{
+          display: 'inline-block',
+          backgroundSize: '100% 1.2em',
+          backgroundPosition: '0.5em 0px',
+          backgroundRepeat: 'no-repeat space',
+          paddingRight: '.8em',
+          marginRight: '-0.5em',
+          backgroundImage: 'linear-gradient(transparent 55%, #38c0f2  55%, #38c0f2 95%, transparent 95%)',
         }}
       >
         {sectionName}
-      </Typography>
-
-      <Box
-        sx={{
-          position: 'absolute',
-          content: '""',
-          borderBottom: {
-            xs: '14px solid #ff4d5a',
-            sm: '18px solid #ff4d5a',
-          },
-          width: '22.5rem',
-          display: 'block',
-          margin: '0 auto',
-          left: '3.5rem',
-          top: { xs: '4rem', sm: '6.3rem' },
-          zIndex: -1,
-        }}
-      />
-    </Box>
+      </span>
+    </h2>
   );
 };
 
