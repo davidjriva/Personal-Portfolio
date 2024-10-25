@@ -6,7 +6,7 @@ const theme = createTheme({
   typography: {
     fontFamily: '--font-montserrat, Arial, sans-serif',
     h1: { fontWeight: 'bold', fontSize: '2.5rem' },
-    h2: { fontWeight: 'bold' },
+    h2: { fontWeight: 'bold', color: 'white' },
     h3: { fontWeight: 'bold' },
     h4: { fontWeight: 'bold', color: 'white' },
     h5: { fontWeight: 'bold', color: 'white' },

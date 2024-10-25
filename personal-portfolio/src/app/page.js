@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
-import NewAbout from '@/components/About-Page/NewAbout';
+import About from '@/components/About-Page/About';
 import Education from '@/components/Education-Page/Education';
 import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
@@ -26,7 +26,7 @@ const MainPage = () => {
 
       <Box>
         <section id="about">
-          <NewAbout />
+          <About />
         </section>
 
         <section id="experience">
