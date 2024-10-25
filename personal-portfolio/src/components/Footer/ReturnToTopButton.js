@@ -1,5 +1,3 @@
-'use client';
-
 import { IconButton, Box } from '@mui/material';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
