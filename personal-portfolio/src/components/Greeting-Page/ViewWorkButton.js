@@ -5,7 +5,7 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 
 const ViewWorkButton = () => {
   const scrollToSection = () => {
-    const section = document.getElementById('about-section');
+    const section = document.getElementById('about');
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }

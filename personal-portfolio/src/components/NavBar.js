@@ -22,10 +22,10 @@ const FormattedLink = ({ page, active, setActivePage }) => {
       smooth={true}
       offset={-70}
       duration={500}
-      onSetActive={() => setActivePage(page)} // Update active page when section is active
+      onSetActive={() => setActivePage(page)}
       style={{
         ...linkStyles,
-        color: active ? 'white' : 'gray', // Color depending on if the link is active
+        color: active ? 'white' : 'gray',
       }}
     >
       {page}
@@ -36,7 +36,7 @@ const FormattedLink = ({ page, active, setActivePage }) => {
 const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
 
 const NavBar = () => {
-  const [activePage, setActivePage] = useState('About'); // Track active page
+  const [activePage, setActivePage] = useState('About');
 
   return (
     <AppBar

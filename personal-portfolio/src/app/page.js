@@ -8,6 +8,7 @@ import Awards from '@/components/Awards-Page/Awards';
 import Experience from '@/components/Experience-Page/Experience';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer/Footer';
 
 const MainPage = () => {
   return (
@@ -48,6 +49,8 @@ const MainPage = () => {
         <section id="awards">
           <Awards />
         </section>
+
+        <Footer />
       </Box>
     </Box>
   );

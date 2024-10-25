@@ -6,14 +6,14 @@ const AwardCard = ({ title, description, date }) => {
     <Box sx={{ marginTop: '2rem', marginBottom: '2rem' }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <EmojiEventsIcon sx={{ color: '#FFD700', marginRight: '0.5rem' }} /> {/* Gold-yellow color */}
-        <Typography variant="h5" sx={{ color: '#000' }}>
+        <Typography variant="h5">
           {title}
         </Typography>
       </Box>
       <Typography variant="body1" sx={{ marginBottom: '0.5rem' }}>
         {description}
       </Typography>
-      <Typography variant="body2" sx={{ color: '#0a73c9' }}>
+      <Typography variant="body2">
         {date}
       </Typography>
     </Box>
