@@ -2,10 +2,6 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import SectionHeading from '@/components/SectionHeading';
 
-export const metadata = {
-  title: 'David Riva | Education',
-};
-
 const Education = () => {
   return (
     <Box
@@ -16,24 +12,31 @@ const Education = () => {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        marginBottom: 10,
       }}
     >
       <SectionHeading sectionName="Education" />
 
       <Box
         sx={{
-          alignSelf: 'flex-start',
+          width: '40%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
           marginTop: 10,
-          marginLeft: 10,
-          width: '40%', // Ensure full width for spacing
+          padding: 2,
+          border: '1px solid lightgray',
+          borderRadius: '8px',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between', // Align items to the ends
-            alignItems: 'center', // Center align vertically
-            marginBottom: '1rem', // Increased spacing between section title and dates
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            marginBottom: '1rem',
           }}
         >
           <Typography variant="h5">Bachelor of Science</Typography>
