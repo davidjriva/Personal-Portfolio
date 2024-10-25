@@ -13,13 +13,7 @@ const ProjectImage = ({ coverImage, title }) => {
         borderTopRightRadius: '8px',
       }}
     >
-      <Image
-        src={`/images/${coverImage}`}
-        alt={`${title} cover`}
-        style={{ objectFit: 'cover' }}
-        fill
-        sizes="20vw"
-      />
+      <Image src={`/images/${coverImage}`} alt={`${title} cover`} style={{ objectFit: 'cover' }} fill sizes="20vw" />
     </Box>
   );
 };
@@ -27,7 +21,7 @@ const ProjectImage = ({ coverImage, title }) => {
 const ProjectHeader = ({ title, author, dateStarted, dateCompleted, description }) => {
   return (
     <Box sx={{ mb: 2 }}>
-      <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', mb: 1 }}>
+      <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', mb: 1, color: 'text.secondary' }}>
         {title}
       </Typography>
       <Typography sx={{ mb: 1 }} color="text.secondary">
@@ -36,7 +30,7 @@ const ProjectHeader = ({ title, author, dateStarted, dateCompleted, description 
       <Typography sx={{ mb: 1 }} color="text.secondary">
         {dateStarted} - {dateCompleted}
       </Typography>
-      <Typography variant="body2" sx={{ mb: 2 }}>
+      <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
         {description}
       </Typography>
     </Box>
@@ -53,14 +47,14 @@ const ProjectFooter = ({ technologies, link }) => {
         boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
       }}
     >
-      <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1 }}>
+      <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1, color: 'text.secondary' }}>
         Technologies:
       </Typography>
 
       <Box>
         {technologies.map((technology, index) => (
           <Box key={index} sx={{ mb: 1 }}>
-            <Typography variant="body2">
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               {technology.location}: {technology.tools.join(', ')}
             </Typography>
           </Box>

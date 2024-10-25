@@ -26,7 +26,7 @@ const AboutHeader = () => {
 
       <Typography
         sx={{
-          color: '#757474',
+          color: 'darkgray',
           marginBottom: 2,
         }}
       >

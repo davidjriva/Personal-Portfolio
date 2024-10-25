@@ -1,6 +1,6 @@
 import { Divider, Typography } from '@mui/material';
 import SearchBar from '../SearchBar';
-import FilteringBox from './FilteringChips';
+import FilteringChipsContainer from './FilteringChipsContainer';
 
 const FilteringMenu = ({ projectData, searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools }) => {
   return (
@@ -19,7 +19,7 @@ const FilteringMenu = ({ projectData, searchText, setSearchText, selectedChips, 
         Filter by technology
       </Typography>
 
-      <FilteringBox uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
+      <FilteringChipsContainer uniqueTools={uniqueTools} selectedChips={selectedChips} setSelectedChips={setSelectedChips} />
 
       <Divider sx={{ margin: '2rem', backgroundColor: 'lightgray' }} />
     </>
