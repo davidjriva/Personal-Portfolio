@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Typography } from '@mui/material';
 import ReturnToTopButton from './ReturnToTopButton';
 
@@ -17,7 +15,7 @@ const Footer = () => {
         position: 'relative',
         bottom: 0,
         padding: '1rem',
-        marginTop: 10
+        marginTop: 10,
       }}
     >
       <ReturnToTopButton />
@@ -27,7 +25,7 @@ const Footer = () => {
         color="white"
         sx={{
           textAlign: 'center',
-          marginTop: '1rem', // Add top margin for spacing
+          marginTop: '1rem',
           marginBottom: 10,
         }}
       >

@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from '@mui/material';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import React from 'react';
+import './ViewWorkButton.css';
 
 const ViewWorkButton = () => {
   const scrollToSection = () => {
@@ -18,25 +18,9 @@ const ViewWorkButton = () => {
   };
 
   return (
-    <Button
-      onClick={scrollToSection}
-      sx={{
-        marginTop: '20px',
-        backgroundColor: 'rgba(10, 115, 201, 0.25)',
-        border: '2px solid #38c0f2',
-        borderRadius: '30px',
-        padding: '10px 20px',
-        color: '#38c0f2',
-        display: 'flex',
-        alignItems: 'center',
-        '&:hover': {
-          backgroundColor: 'rgba(10, 115, 201, 0.5)',
-        },
-      }}
-    >
+    <button onClick={scrollToSection} className="hvr-ripple-out">
       View my work
-      <KeyboardDoubleArrowDownIcon sx={{ marginLeft: '8px', fontSize: '20px' }} />
-    </Button>
+    </button>
   );
 };
 
