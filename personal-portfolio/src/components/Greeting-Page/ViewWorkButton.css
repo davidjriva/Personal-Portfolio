@@ -24,8 +24,9 @@
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    margin-top: 20px;
     position: relative;
-    background-color: blue; /* Set background color to blue */
+    background-color: rgba(25,118,210,0.75); /* Set background color to blue */
     color: white; /* Text color for contrast */
     border-radius: 5px; /* Optional: add some rounding to the button */
     padding: 10px 20px; /* Add padding for better appearance */
