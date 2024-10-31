@@ -12,6 +12,15 @@
         ]
     },
     {
+        "title": "Graduated from Colorado State University, Summa Cum Laude",
+        "company": "Colorado State University",
+        "companyWebsiteLink": "https://compsci.colostate.edu/",
+        "logoImage": "CSU_logo.jpeg",
+        "location": "Fort Collins, CO",
+        "startDate": "May 2024",
+        "endDate": "May 2024"
+    },
+    {
         "title": "Research Assistant [Full-stack Developer]",
         "company": "Colorado State University",
         "companyWebsiteLink": "https://compsci.colostate.edu/",

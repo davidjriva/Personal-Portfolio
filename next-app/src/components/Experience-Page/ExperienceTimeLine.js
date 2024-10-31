@@ -42,11 +42,12 @@ const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate
           {company} | {location}
         </Typography>
 
-        {bulletPoints.map((bulletPt, index) => (
-          <Typography key={index} variant="body1">
-            • {bulletPt}
-          </Typography>
-        ))}
+        {bulletPoints &&
+          bulletPoints.map((bulletPt, index) => (
+            <Typography key={index} variant="body1">
+              • {bulletPt}
+            </Typography>
+          ))}
       </TimelineContent>
     </TimelineItem>
   );

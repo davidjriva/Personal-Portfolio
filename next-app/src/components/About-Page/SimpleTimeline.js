@@ -12,7 +12,6 @@ import {
 } from '@mui/lab';
 import { Typography, Box, IconButton } from '@mui/material';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import experienceData from '@/data/experiences.json';
 import ViewExperienceButton from '@/components/About-Page/ViewExperienceButton';
 
@@ -38,16 +37,18 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
       </TimelineSeparator>
       <TimelineContent sx={{ pl: 2, alignItems: 'center' }}>
         <Typography variant="body1" component="span">
-          {title} at{' '}
-          <a
-            href={companyWebsiteLink}
-            target="_blank"
-            style={{ color: '#38c0f2', textDecoration: 'none' }}
-            onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-            onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
-          >
-            {company}
-          </a>
+          {title} {!title.startsWith('Graduated') && 'at '}
+          {!title.startsWith('Graduated') && (
+            <a
+              href={companyWebsiteLink}
+              target="_blank"
+              style={{ color: '#38c0f2', textDecoration: 'none' }}
+              onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+              onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
+            >
+              {company}
+            </a>
+          )}
         </Typography>
       </TimelineContent>
     </TimelineItem>
@@ -59,8 +60,6 @@ const SimpleTimeline = () => {
     return new Date(b.startDate) - new Date(a.startDate);
   });
 
-  const router = useRouter();
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Timeline sx={{ maxWidth: '20vw', paddingTop: 5 }}>
@@ -70,7 +69,7 @@ const SimpleTimeline = () => {
           </React.Fragment>
         ))}
       </Timeline>
-      
+
       <ViewExperienceButton />
     </Box>
   );

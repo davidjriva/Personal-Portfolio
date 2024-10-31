@@ -30,14 +30,6 @@ const MainPage = () => {
           <About />
         </section>
 
-        <section id="experience">
-          <Experience />
-        </section>
-
-        <section id="education">
-          <Education />
-        </section>
-
         <section id="projects">
           <Projects />
         </section>
