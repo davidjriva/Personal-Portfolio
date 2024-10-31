@@ -11,19 +11,10 @@ import {
 } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
-import experienceData from '../../data/experiences.json';
+import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
 
-const ExperienceTimelineItem = ({
-  title,
-  company,
-  logoImage,
-  location,
-  startDate,
-  endDate,
-  bulletPoints,
-  shouldShowText,
-}) => {
+const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate, endDate, bulletPoints }) => {
   return (
     <TimelineItem>
       <TimelineOppositeContent sx={{ m: 'auto 0' }} align="right" variant="body2">
@@ -37,12 +28,12 @@ const ExperienceTimelineItem = ({
             alt={`${company} logo`}
             width={24}
             height={24}
-            style={{ alignSelf: 'center', opacity: shouldShowText ? 1 : 0, transition: 'opacity 0.5s ease' }}
+            style={{ alignSelf: 'center', transition: 'opacity 0.5s ease' }}
           />
         </TimelineDot>
         <TimelineConnector sx={{ height: '30px' }} />
       </TimelineSeparator>
-      <TimelineContent sx={{ py: '24px', px: 2, transition: 'opacity 0.5s ease', opacity: shouldShowText ? 1 : 0 }}>
+      <TimelineContent sx={{ py: '24px', px: 2, transition: 'opacity 0.5s ease' }}>
         <Typography variant="h6" component="span">
           {title}
         </Typography>
@@ -62,33 +53,14 @@ const ExperienceTimelineItem = ({
 };
 
 const ExperienceTimeline = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
   const sortedExperienceData = [...experienceData].sort((a, b) => {
     return new Date(b.startDate) - new Date(a.startDate);
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollPosition(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const scrollPositions = [1400, 1800, 2150, 2350];
-
   return (
     <Timeline>
       {sortedExperienceData.map((experience, index) => (
-        <React.Fragment key={experience.title}>
-          {<ExperienceTimelineItem {...experience} shouldShowText={scrollPosition >= scrollPositions[index]} />}
-        </React.Fragment>
+        <React.Fragment key={experience.title}>{<ExperienceTimelineItem {...experience} />}</React.Fragment>
       ))}
     </Timeline>
   );

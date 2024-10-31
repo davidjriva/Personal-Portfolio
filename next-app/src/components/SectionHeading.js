@@ -1,5 +1,3 @@
-'use client';
-
 const SectionHeading = ({ sectionName }) => {
   return (
     <h2
@@ -9,7 +7,7 @@ const SectionHeading = ({ sectionName }) => {
         textShadow: '3px 3px #011627',
         fontFamily: 'sans-serif',
         color: '#FFF',
-        fontSize: '5rem',
+        fontSize: '3rem',
       }}
     >
       <span

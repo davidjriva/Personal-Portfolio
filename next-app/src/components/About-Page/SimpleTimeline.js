@@ -10,9 +10,11 @@ import {
   TimelineContent,
 } from '@mui/lab';
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Box, IconButton } from '@mui/material';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
   return (
@@ -57,14 +59,23 @@ const SimpleTimeline = () => {
     return new Date(b.startDate) - new Date(a.startDate);
   });
 
+  const router = useRouter();
+
   return (
-    <Timeline sx={{ maxWidth: '20vw', paddingTop: 5 }}>
-      {sortedExperienceData.map((experience, index) => (
-        <React.Fragment key={experience.title}>
-          <SimpleTimelineItem {...experience} isEnd={index === sortedExperienceData.length - 1} />
-        </React.Fragment>
-      ))}
-    </Timeline>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Timeline sx={{ maxWidth: '20vw', paddingTop: 5 }}>
+        {sortedExperienceData.map((experience, index) => (
+          <React.Fragment key={experience.title}>
+            <SimpleTimelineItem {...experience} isEnd={index === sortedExperienceData.length - 1} />
+          </React.Fragment>
+        ))}
+      </Timeline>
+
+      <IconButton sx={{ color: '#38c0f2' }} onClick={() => router.push('/experience')}>
+        <Typography sx={{ color: '#38c0f2' }}> See Full Timeline </Typography>
+        <KeyboardDoubleArrowRightIcon />
+      </IconButton>
+    </Box>
   );
 };
 
