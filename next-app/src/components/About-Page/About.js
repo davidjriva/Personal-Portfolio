@@ -29,8 +29,7 @@ const About = () => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'center',
-        gap: 1,
+        justifyContent: 'center'
       }}
     >
       <HeadShotImage width={100} height={100} />
