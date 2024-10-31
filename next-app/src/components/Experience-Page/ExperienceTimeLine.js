@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import {
   Timeline,
   TimelineItem,
@@ -9,7 +10,6 @@ import {
   TimelineDot,
   TimelineContent,
 } from '@mui/lab';
-import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
@@ -28,12 +28,12 @@ const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate
             alt={`${company} logo`}
             width={24}
             height={24}
-            style={{ alignSelf: 'center', transition: 'opacity 0.5s ease' }}
+            style={{ alignSelf: 'center' }}
           />
         </TimelineDot>
         <TimelineConnector sx={{ height: '30px' }} />
       </TimelineSeparator>
-      <TimelineContent sx={{ py: '24px', px: 2, transition: 'opacity 0.5s ease' }}>
+      <TimelineContent sx={{ py: '24px', px: 2 }}>
         <Typography variant="h6" component="span">
           {title}
         </Typography>
@@ -53,14 +53,26 @@ const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate
 };
 
 const ExperienceTimeline = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 1);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const sortedExperienceData = [...experienceData].sort((a, b) => {
     return new Date(b.startDate) - new Date(a.startDate);
   });
 
   return (
-    <Timeline>
-      {sortedExperienceData.map((experience, index) => (
-        <React.Fragment key={experience.title}>{<ExperienceTimelineItem {...experience} />}</React.Fragment>
+    <Timeline sx={{ opacity: visible ? 1 : 0, transition: 'opacity 1s ease-in-out' }}>
+      {sortedExperienceData.map((experience) => (
+        <React.Fragment key={experience.title}>
+          <ExperienceTimelineItem {...experience} />
+        </React.Fragment>
       ))}
     </Timeline>
   );
