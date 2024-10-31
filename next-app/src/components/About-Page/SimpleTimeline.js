@@ -17,8 +17,8 @@ import Image from 'next/image';
 const SimpleTimelineItem = ({ title, company, logoImage, startDate, isEnd }) => {
   return (
     <TimelineItem>
-      <TimelineOppositeContent sx={{ m: 'auto 0', pr: 1, alignItems: 'center'}}>
-        <Typography variant="body2">{startDate}</Typography>
+      <TimelineOppositeContent >
+        <Typography variant="body2" sx={{marginTop: 1.75}}>{startDate}</Typography>
       </TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot sx={{ backgroundColor: 'white' }}>
@@ -27,12 +27,12 @@ const SimpleTimelineItem = ({ title, company, logoImage, startDate, isEnd }) => 
             alt={`${company} logo`}
             width={24}
             height={24}
-            style={{ alignSelf: 'center', transition: 'opacity 0.5s ease' }}
+            style={{ alignSelf: 'center' }}
           />
         </TimelineDot>
-        {!isEnd && <TimelineConnector sx={{ height: '20px' }} />}
+        {!isEnd && <TimelineConnector />}
       </TimelineSeparator>
-      <TimelineContent sx={{ m: 'auto 0', pl: 2, alignItems: 'center'}}>
+      <TimelineContent sx={{ pl: 2, alignItems: 'center' }}>
         <Typography variant="body1" component="span">
           {title} at {company}
         </Typography>
