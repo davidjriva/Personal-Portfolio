@@ -1,16 +1,11 @@
 name: next-app-CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'personal-portfolio/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'personal-portfolio/**'
+      - 'next-app/**'
 
 jobs:
   build:
@@ -26,15 +21,15 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        working-directory: ./personal-portfolio
+        working-directory: ./next-app
         run: npm ci
 
       - name: Build the app
-        working-directory: ./personal-portfolio
+        working-directory: ./next-app
         run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: ./personal-portfolio/.next
+          path: ./next-app/.next
