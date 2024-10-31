@@ -3,41 +3,39 @@ import HeadShotImage from './HeadshotImage';
 import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import Biography from './Biography';
-import SectionHeading from '@/components/SectionHeading';
 
-const NewAbout = () => {
+const AboutTextSection = () => {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+      }}
+    >
+      <AboutHeader />
+      <Biography />
+      <AboutFooter />
+    </Box>
+  );
+};
+
+const About = () => {
   return (
     <Box
       sx={{
         marginTop: 10,
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        position: 'relative',
+        gap: 1,
       }}
     >
-      <SectionHeading sectionName="About" />
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: 10,
-          justifyContent: 'center',
-        }}
-      >
-        <HeadShotImage width={400} height={400} />
-
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-          <AboutHeader />
-
-          <Biography />
-
-          <AboutFooter />
-        </Box>
-      </Box>
+      <HeadShotImage width={100} height={100} />
+      <AboutTextSection />
     </Box>
   );
 };
 
-export default NewAbout;
+export default About;

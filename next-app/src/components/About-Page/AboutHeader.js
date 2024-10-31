@@ -6,9 +6,11 @@ const AboutHeader = () => {
       <Typography
         variant="h1"
         sx={{
-          color: 'white',
           fontWeight: 'bold',
-          marginBottom: 1, // Optional: space below the title
+          marginBottom: 1,
+          textDecoration: 'underline',
+          textDecorationThickness: '2px',
+          textUnderlineOffset: '10px',
         }}
       >
         David Riva

@@ -5,7 +5,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   typography: {
     fontFamily: '--font-montserrat, Arial, sans-serif',
-    h1: { fontWeight: 'bold', fontSize: '2.5rem' },
+    h1: { fontWeight: 'bold', fontSize: '2.5rem', color: 'white' },
     h2: { fontWeight: 'bold', color: 'white' },
     h3: { fontWeight: 'bold', color: 'white' },
     h4: { fontWeight: 'bold', color: 'white' },
