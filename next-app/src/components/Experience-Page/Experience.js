@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import ExperienceTimeLine from './ExperienceTimeLine';
+import ExperienceTimeline from './ExperienceTimeline';
 import SectionHeading from '@/components/SectionHeading';
 
 const Experience = () => {
@@ -21,7 +21,7 @@ const Experience = () => {
           marginTop: 10,
         }}
       >
-        <ExperienceTimeLine />
+        <ExperienceTimeline />
       </Box>
     </Box>
   );

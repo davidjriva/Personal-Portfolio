@@ -3,6 +3,7 @@ import HeadShotImage from './HeadshotImage';
 import AboutHeader from './AboutHeader';
 import AboutFooter from './AboutFooter';
 import Biography from './Biography';
+import SimpleTimeline from './SimpleTimeline';
 
 const AboutTextSection = () => {
   return (
@@ -34,6 +35,7 @@ const About = () => {
     >
       <HeadShotImage width={100} height={100} />
       <AboutTextSection />
+      <SimpleTimeline />
     </Box>
   );
 };

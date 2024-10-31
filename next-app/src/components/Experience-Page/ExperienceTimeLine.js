@@ -14,7 +14,7 @@ import { Typography } from '@mui/material';
 import experienceData from '../../data/experiences.json';
 import Image from 'next/image';
 
-const ExperienceTimeLineItem = ({
+const ExperienceTimelineItem = ({
   title,
   company,
   logoImage,
@@ -61,7 +61,7 @@ const ExperienceTimeLineItem = ({
   );
 };
 
-const ExperienceTimeLine = () => {
+const ExperienceTimeline = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const sortedExperienceData = [...experienceData].sort((a, b) => {
@@ -87,11 +87,11 @@ const ExperienceTimeLine = () => {
     <Timeline>
       {sortedExperienceData.map((experience, index) => (
         <React.Fragment key={experience.title}>
-          {<ExperienceTimeLineItem {...experience} shouldShowText={scrollPosition >= scrollPositions[index]} />}
+          {<ExperienceTimelineItem {...experience} shouldShowText={scrollPosition >= scrollPositions[index]} />}
         </React.Fragment>
       ))}
     </Timeline>
   );
 };
 
-export default ExperienceTimeLine;
+export default ExperienceTimeline;
