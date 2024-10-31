@@ -25,7 +25,7 @@ const About = () => {
   return (
     <Box
       sx={{
-        marginTop: 10,
+        marginTop: 5,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -35,7 +35,10 @@ const About = () => {
     >
       <HeadShotImage width={100} height={100} />
       <AboutTextSection />
-      <SimpleTimeline />
+
+      <Box sx={{ marginTop: 10 }}>
+        <SimpleTimeline />
+      </Box>
     </Box>
   );
 };

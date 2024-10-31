@@ -8,6 +8,26 @@ import SectionHeading from './SectionHeading';
 const ChildPageNavBar = () => {
   const router = useRouter();
 
+  const handleClick = () => {
+    router.push('/');
+
+    setTimeout(() => {
+      const element = document.getElementById('about');
+
+      // Scroll to slightly above the section
+      if (element) {
+        const offset = 70;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }, 100);
+  };
+
   return (
     <AppBar
       sx={{
@@ -17,7 +37,7 @@ const ChildPageNavBar = () => {
       }}
     >
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
-        <IconButton sx={{ color: 'white' }} onClick={() => router.push('/')}>
+        <IconButton sx={{ color: 'white' }} onClick={handleClick}>
           <KeyboardDoubleArrowLeftIcon />
         </IconButton>
 

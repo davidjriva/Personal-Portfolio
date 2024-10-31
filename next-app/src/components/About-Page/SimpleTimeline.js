@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import {
   Timeline,
   TimelineItem,
@@ -9,12 +10,11 @@ import {
   TimelineDot,
   TimelineContent,
 } from '@mui/lab';
-import React from 'react';
 import { Typography, Box, IconButton } from '@mui/material';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import experienceData from '@/data/experiences.json';
+import ViewExperienceButton from '@/components/About-Page/ViewExperienceButton';
 
 const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
   return (
@@ -70,11 +70,8 @@ const SimpleTimeline = () => {
           </React.Fragment>
         ))}
       </Timeline>
-
-      <IconButton sx={{ color: '#38c0f2' }} onClick={() => router.push('/experience')}>
-        <Typography sx={{ color: '#38c0f2' }}> See Full Timeline </Typography>
-        <KeyboardDoubleArrowRightIcon />
-      </IconButton>
+      
+      <ViewExperienceButton />
     </Box>
   );
 };
