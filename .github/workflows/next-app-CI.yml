@@ -1,11 +1,6 @@
 name: next-app-CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'next-app/**'
   pull_request:
     branches:
       - main
