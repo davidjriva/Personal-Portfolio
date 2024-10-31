@@ -16,7 +16,7 @@ import Image from 'next/image';
 
 const SimpleTimelineItem = ({ title, company, logoImage, startDate }) => {
   return (
-    <TimelineItem>
+    <TimelineItem sx={{ maxWidth: '20vw' }}>
       <TimelineOppositeContent sx={{ m: 'auto 0', pr: 1, alignItems: 'center', maxWidth: '10vw' }}>
         <Typography variant="body2">{startDate}</Typography>
       </TimelineOppositeContent>
@@ -33,7 +33,7 @@ const SimpleTimelineItem = ({ title, company, logoImage, startDate }) => {
         </TimelineDot>
         <TimelineConnector sx={{ height: '20px' }} />
       </TimelineSeparator>
-      <TimelineContent sx={{ m: 'auto 0', pl: 2, alignItems: 'center' }}>
+      <TimelineContent sx={{ m: 'auto 0', pl: 2, alignItems: 'center', maxWidth: '15vw' }}>
         <Typography variant="body1" component="span">
           {title} at {company}
         </Typography>
@@ -48,7 +48,7 @@ const SimpleTimeline = () => {
   });
 
   return (
-    <Timeline>
+    <Timeline sx={{ maxWidth: '20vw' }}>
       {sortedExperienceData.map((experience) => (
         <React.Fragment key={experience.title}>
           <SimpleTimelineItem {...experience} />
