@@ -14,14 +14,13 @@ import { Typography } from '@mui/material';
 import experienceData from '../../data/experiences.json';
 import Image from 'next/image';
 
-const SimpleTimelineItem = ({ title, company, logoImage, startDate }) => {
+const SimpleTimelineItem = ({ title, company, logoImage, startDate, isEnd }) => {
   return (
-    <TimelineItem sx={{ maxWidth: '20vw' }}>
-      <TimelineOppositeContent sx={{ m: 'auto 0', pr: 1, alignItems: 'center', maxWidth: '10vw' }}>
+    <TimelineItem>
+      <TimelineOppositeContent sx={{ m: 'auto 0', pr: 1, alignItems: 'center'}}>
         <Typography variant="body2">{startDate}</Typography>
       </TimelineOppositeContent>
       <TimelineSeparator>
-        <TimelineConnector sx={{ height: '20px' }} />
         <TimelineDot sx={{ backgroundColor: 'white' }}>
           <Image
             src={`/images/${logoImage}`}
@@ -31,9 +30,9 @@ const SimpleTimelineItem = ({ title, company, logoImage, startDate }) => {
             style={{ alignSelf: 'center', transition: 'opacity 0.5s ease' }}
           />
         </TimelineDot>
-        <TimelineConnector sx={{ height: '20px' }} />
+        {!isEnd && <TimelineConnector sx={{ height: '20px' }} />}
       </TimelineSeparator>
-      <TimelineContent sx={{ m: 'auto 0', pl: 2, alignItems: 'center', maxWidth: '15vw' }}>
+      <TimelineContent sx={{ m: 'auto 0', pl: 2, alignItems: 'center'}}>
         <Typography variant="body1" component="span">
           {title} at {company}
         </Typography>
@@ -48,10 +47,10 @@ const SimpleTimeline = () => {
   });
 
   return (
-    <Timeline sx={{ maxWidth: '20vw' }}>
-      {sortedExperienceData.map((experience) => (
+    <Timeline sx={{ maxWidth: '20vw', paddingTop: 5 }}>
+      {sortedExperienceData.map((experience, index) => (
         <React.Fragment key={experience.title}>
-          <SimpleTimelineItem {...experience} />
+          <SimpleTimelineItem {...experience} isEnd={index === sortedExperienceData.length - 1} />
         </React.Fragment>
       ))}
     </Timeline>
