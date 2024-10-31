@@ -11,14 +11,16 @@ import {
 } from '@mui/lab';
 import React from 'react';
 import { Typography } from '@mui/material';
-import experienceData from '../../data/experiences.json';
+import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
 
-const SimpleTimelineItem = ({ title, company, logoImage, startDate, isEnd }) => {
+const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
   return (
     <TimelineItem>
-      <TimelineOppositeContent >
-        <Typography variant="body2" sx={{marginTop: 1.75}}>{startDate}</Typography>
+      <TimelineOppositeContent>
+        <Typography variant="body2" sx={{ marginTop: 1.75 }}>
+          {startDate}
+        </Typography>
       </TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot sx={{ backgroundColor: 'white' }}>
@@ -34,7 +36,16 @@ const SimpleTimelineItem = ({ title, company, logoImage, startDate, isEnd }) => 
       </TimelineSeparator>
       <TimelineContent sx={{ pl: 2, alignItems: 'center' }}>
         <Typography variant="body1" component="span">
-          {title} at {company}
+          {title} at{' '}
+          <a
+            href={companyWebsiteLink}
+            target="_blank"
+            style={{ color: '#38c0f2', textDecoration: 'none' }}
+            onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+            onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
+          >
+            {company}
+          </a>
         </Typography>
       </TimelineContent>
     </TimelineItem>
