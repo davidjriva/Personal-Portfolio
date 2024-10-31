@@ -54,8 +54,8 @@ const NavBar = () => {
             <FormattedLink
               key={page}
               page={page}
-              active={activePage === page} // Pass active state to link
-              setActivePage={setActivePage} // Set active page on section change
+              active={activePage === page}
+              setActivePage={setActivePage}
             />
           ))}
         </Box>

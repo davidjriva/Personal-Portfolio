@@ -38,7 +38,7 @@ const ChildPageNavBar = () => {
     >
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
         <IconButton sx={{ color: 'white' }} onClick={handleClick}>
-          <KeyboardDoubleArrowLeftIcon />
+          <KeyboardDoubleArrowLeftIcon sx={{ width: '35px', height: '35px' }} />
         </IconButton>
 
         <Box
