@@ -13,11 +13,16 @@ const Skills = () => {
     <Box
       sx={{
         marginTop: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        backgroundColor: '#565859',
+        borderTop: '8px solid rgba(0,0,0,0.1)',
+        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)'
       }}
     >
       <SectionHeading sectionName="Skills" />

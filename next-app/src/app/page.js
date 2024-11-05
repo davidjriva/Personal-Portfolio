@@ -30,12 +30,12 @@ const MainPage = () => {
           <About />
         </section>
 
-        <section id="projects">
-          <Projects />
-        </section>
-
         <section id="skills">
           <Skills />
+        </section>
+
+        <section id="projects">
+          <Projects />
         </section>
 
         <section id="awards">
