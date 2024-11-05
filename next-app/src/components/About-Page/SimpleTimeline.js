@@ -13,6 +13,7 @@ import {
 import { Typography, Box, IconButton } from '@mui/material';
 import Image from 'next/image';
 import experienceData from '@/data/experiences.json';
+import ClickableLink from '@/components/About-Page/ClickableLink';
 import ViewExperienceButton from '@/components/About-Page/ViewExperienceButton';
 
 const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
@@ -38,17 +39,7 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
       <TimelineContent sx={{ pl: 2, alignItems: 'center' }}>
         <Typography variant="body1" component="span">
           {title} {!title.startsWith('Graduated') && 'at '}
-          {!title.startsWith('Graduated') && (
-            <a
-              href={companyWebsiteLink}
-              target="_blank"
-              style={{ color: '#38c0f2', textDecoration: 'none' }}
-              onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-              onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
-            >
-              {company}
-            </a>
-          )}
+          {!title.startsWith('Graduated') && <ClickableLink link={companyWebsiteLink} company={company} />}
         </Typography>
       </TimelineContent>
     </TimelineItem>

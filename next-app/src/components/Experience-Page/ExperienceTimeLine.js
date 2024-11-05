@@ -69,7 +69,7 @@ const ExperienceTimeline = () => {
   });
 
   return (
-    <Timeline sx={{ opacity: visible ? 1 : 0, transition: 'opacity 1s ease-in-out' }}>
+    <Timeline sx={{ opacity: visible ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}>
       {sortedExperienceData.map((experience) => (
         <React.Fragment key={experience.title}>
           <ExperienceTimelineItem {...experience} />
