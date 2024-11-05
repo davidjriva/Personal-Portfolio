@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Divider } from '@mui/material';
 import SkillCard from './SkillCard';
+import SkillCardContainer from '@/components/Skills-Page/SkillCardContainer'
 import SectionHeading from '@/components/SectionHeading';
 import skillsData from '@/data/skills.json';
 
@@ -29,7 +30,7 @@ const Skills = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
         {skillsData.map((skill, index) => (
           <React.Fragment key={skill.title}>
-            <SkillCard {...skill} />
+            <SkillCardContainer {...skill} />
             {index < skillsData.length - 1 && <Divider sx={{ margin: '1rem 0', backgroundColor: 'lightgray' }} />}
           </React.Fragment>
         ))}

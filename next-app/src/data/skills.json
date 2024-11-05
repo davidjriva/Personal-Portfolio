@@ -13,23 +13,23 @@
     },
     {
         "title": "Frameworks",
-        "items": ["React.js", "Node.js", "Express.js", "Mongoose"]
+        "items": ["React.js", "Node.js", "Express.js", "Mongoose.js"]
     },
     {
         "title": "Testing Frameworks",
         "items": ["JUnit", "Jacoco", "Jest", "Supertest", "Mockito"]
     },
     {
-        "title": "Machine Learning",
-        "items": ["TensorFlow", "Keras", "NumPy"]
+        "title": "Data Science & Machine Learning",
+        "items": ["TensorFlow", "Keras", "NumPy", "Pandas", "Scikit-Learn", "Matplotlib"]
     },
     {
         "title": "Data Engineering and Big Data",
-        "items": ["Hadoop", "Apache Spark", "PySpark", "MongoDB", "AWS RedShift", "AWS S3", "Databricks", "DBeaver", "Pandas", "Scikit-Learn", "Matplotlib"]
+        "items": ["Hadoop", "Apache Spark/PySpark", "MongoDB", "AWS RedShift", "AWS S3"]
     },
     {   
         "title": "Tools",
-        "items": ["Git", "GitHub", "Visual Studio Code", "Postman", "Package Managers (Pip & NPM)", "Debuggers", "Zenhub"]
+        "items": ["Git", "GitHub", "Visual Studio Code", "Postman", "Package Managers (Pip & NPM)", "Debuggers"]
     }, 
     {
         "title": "Concepts",
