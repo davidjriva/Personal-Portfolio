@@ -17,7 +17,6 @@ const Footer = () => {
         position: 'relative',
         bottom: 0,
         padding: '1rem',
-        marginTop: 10
       }}
     >
       <ReturnToTopButton />

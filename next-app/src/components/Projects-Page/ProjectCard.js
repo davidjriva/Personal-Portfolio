@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import CardContent from '@mui/material/CardContent';
-import { Typography, Box, Card, CardMedia, Button } from '@mui/material';
+import { Typography, Box, Card, Button } from '@mui/material';
 
 const ProjectImage = ({ coverImage, title }) => {
   return (

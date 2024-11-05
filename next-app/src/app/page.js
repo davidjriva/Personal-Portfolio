@@ -34,14 +34,14 @@ const MainPage = () => {
           <Skills />
         </section>
 
-        <section id="projects">
-          <Projects />
-        </section>
-
         <section id="awards">
           <Awards />
         </section>
 
+        <section id="projects">
+          <Projects />
+        </section>
+        
         <Footer />
       </Box>
     </Box>

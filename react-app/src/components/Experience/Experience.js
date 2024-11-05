@@ -29,7 +29,6 @@ const Experience = () => {
       {sortedExperienceData.map((experience) => (
         <React.Fragment key={experience.title}>
           <ExperienceCard {...experience} />
-          <Divider sx={{ marginBottom: 2 }} />
         </React.Fragment>
       ))}
     </Box>

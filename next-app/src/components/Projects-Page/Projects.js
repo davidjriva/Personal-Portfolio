@@ -10,10 +10,11 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        padding: '2rem',
-        maxWidth: '1200px',
+        padding: '5rem',
         margin: '0 auto',
         textAlign: 'center',
+        borderTop: '8px solid rgba(0,0,0,0.1)',
+        backgroundColor: '#565859',
       }}
     >
       <SectionHeading sectionName="projects" />

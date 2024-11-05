@@ -13,8 +13,7 @@ const Skills = () => {
     <Box
       sx={{
         marginTop: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
+        padding: '5rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

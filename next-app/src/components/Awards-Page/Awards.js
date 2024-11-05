@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import AwardCard from './AwardCard';
 import SectionHeading from '@/components/SectionHeading';
 import awardsData from '@/data/awards.json';
@@ -12,12 +12,14 @@ const Awards = () => {
   return (
     <Box
       sx={{
-        marginTop: 10,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '5rem',
         position: 'relative',
+        borderTop: '8px solid rgba(0,0,0,0.1)',
+        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)'
       }}
     >
       <SectionHeading sectionName="Awards" />

@@ -11,7 +11,7 @@ const linkStyles = {
   fontSize: '1.2rem',
   textDecoration: 'none',
   cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif'
+  fontFamily: 'Montserrat, Arial, sans-serif',
 };
 
 const FormattedLink = ({ page, active, setActivePage }) => {
@@ -33,7 +33,7 @@ const FormattedLink = ({ page, active, setActivePage }) => {
   );
 };
 
-const pages = ['About', 'Experience', 'Education', 'Projects', 'Skills', 'Awards'];
+const pages = ['About', 'Skills', 'Projects', 'Awards'];
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
@@ -51,12 +51,7 @@ const NavBar = () => {
       <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
           {pages.map((page) => (
-            <FormattedLink
-              key={page}
-              page={page}
-              active={activePage === page}
-              setActivePage={setActivePage}
-            />
+            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
           ))}
         </Box>
       </Toolbar>
