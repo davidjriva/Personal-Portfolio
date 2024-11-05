@@ -31,7 +31,7 @@ const ProjectHeader = ({ title, author, dateStarted, dateCompleted, description 
       <Typography sx={{ mb: 1 }} color="text.secondary">
         {dateStarted} - {dateCompleted}
       </Typography>
-      <Typography variant="body2" sx={{ mb: 2, color: '#282829' }}>
+      <Typography variant="body1" sx={{ mb: 2, color: '#282829' }}>
         {description}
       </Typography>
     </Box>
@@ -48,14 +48,14 @@ const ProjectFooter = ({ technologies, link }) => {
         boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
       }}
     >
-      <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 1, color: '#282829' }}>
+      <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 1, color: '#282829' }}>
         Technologies:
       </Typography>
 
       <Box>
         {technologies.map((technology, index) => (
           <Box key={index} sx={{ mb: 1 }}>
-            <Typography variant="body2" sx={{ color: '#282829' }}>
+            <Typography variant="body1" sx={{ color: '#282829' }}>
               {technology.location}: {technology.tools.join(', ')}
             </Typography>
           </Box>
