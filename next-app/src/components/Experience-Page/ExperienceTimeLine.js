@@ -14,7 +14,7 @@ import { Typography } from '@mui/material';
 import experienceData from '@/data/experiences.json';
 import Image from 'next/image';
 
-const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate, endDate, bulletPoints }) => {
+const ExperienceTimeLineItem = ({ title, company, logoImage, location, startDate, endDate, bulletPoints }) => {
   return (
     <TimelineItem>
       <TimelineOppositeContent sx={{ m: 'auto 0' }} align="right" variant="body2">
@@ -53,7 +53,7 @@ const ExperienceTimelineItem = ({ title, company, logoImage, location, startDate
   );
 };
 
-const ExperienceTimeline = () => {
+const ExperienceTimeLine = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -72,11 +72,11 @@ const ExperienceTimeline = () => {
     <Timeline sx={{ opacity: visible ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}>
       {sortedExperienceData.map((experience) => (
         <React.Fragment key={experience.title}>
-          <ExperienceTimelineItem {...experience} />
+          <ExperienceTimeLineItem {...experience} />
         </React.Fragment>
       ))}
     </Timeline>
   );
 };
 
-export default ExperienceTimeline;
+export default ExperienceTimeLine;

@@ -8,6 +8,11 @@ import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer/Footer';
 
+export const metadata = {
+  title: 'DR | Personal Portfolio',
+  description: "David Riva's Personal Portfolio",
+};
+
 const MainPage = () => {
   return (
     <Box
@@ -39,7 +44,7 @@ const MainPage = () => {
         <section id="projects">
           <Projects />
         </section>
-        
+
         <Footer />
       </Box>
     </Box>
