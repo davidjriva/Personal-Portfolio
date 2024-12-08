@@ -1,5 +1,5 @@
 import { Typography, Box } from '@mui/material';
-import AdvancedSkillCard from '@/components/Skills-Page/AdvancedSkillCard';
+import SkillCard from '@/components/Skills-Page/SkillCard';
 
 const SkillCardContainer = ({ title, items }) => {
   return (
@@ -25,9 +25,7 @@ const SkillCardContainer = ({ title, items }) => {
           justifyContent: 'center',
         }}
       >
-        {items.map((item) => (
-          <AdvancedSkillCard key={item} item={item} parent={title}/>
-        ))}
+        <SkillCard title={title} items={items} />
       </Box>
     </Box>
   );

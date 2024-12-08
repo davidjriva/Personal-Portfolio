@@ -1,12 +1,8 @@
 import { Typography } from '@mui/material';
 
-const SkillCard = ({ title, items }) => {
+const SkillCard = ({ items }) => {
   return (
     <>
-      <Typography variant="h6">
-        {title}
-      </Typography>
-
       <Typography variant="body1">
         {items.join(', ')}
       </Typography>

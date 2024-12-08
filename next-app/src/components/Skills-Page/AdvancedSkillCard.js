@@ -12,7 +12,9 @@ const AdvancedSkillCard = ({ item, parent }) => {
       }}
     >
       <Image
-        src={`/images/skills-logos/${parent.toLowerCase().replace("/", ":")}/${item.toLowerCase().replace("/", ":")}-logo.png`} // Use the imageName prop to specify the image source
+        src={`/images/skills-logos/${parent.toLowerCase().replace('/', ':')}/${item
+          .toLowerCase()
+          .replace('/', ':')}-logo.png`} // Use the imageName prop to specify the image source
         alt={item}
         width={80}
         height={80}
