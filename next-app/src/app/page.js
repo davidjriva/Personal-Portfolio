@@ -10,7 +10,7 @@ import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer/Footer';
 
 export const metadata = {
-  title: 'Personal Portfolio',
+  title: 'DR | Personal Portfolio',
   description: "David Riva's Personal Portfolio",
 };
 
