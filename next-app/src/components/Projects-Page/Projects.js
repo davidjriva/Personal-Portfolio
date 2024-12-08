@@ -1,0 +1,27 @@
+import { Box, Typography } from '@mui/material';
+import SectionHeading from '@/components/SectionHeading';
+import ProjectsContainer from './ProjectsContainer';
+
+export const metadata = {
+  title: 'David Riva | Projects',
+};
+
+const Projects = () => {
+  return (
+    <Box
+      sx={{
+        padding: '5rem',
+        margin: '0 auto',
+        textAlign: 'center',
+        borderTop: '8px solid rgba(0,0,0,0.1)',
+        backgroundColor: '#565859',
+      }}
+    >
+      <SectionHeading sectionName="projects" />
+      
+      <ProjectsContainer />
+    </Box>
+  );
+};
+
+export default Projects;

@@ -1,0 +1,50 @@
+import { Typography } from '@mui/material';
+
+const AboutHeader = () => {
+  return (
+    <>
+      <Typography
+        variant="h1"
+        sx={{
+          fontWeight: 'bold',
+          marginBottom: 1,
+          textDecoration: 'underline',
+          textDecorationThickness: '2px',
+          textUnderlineOffset: '10px',
+        }}
+      >
+        David Riva
+      </Typography>
+
+      <Typography
+        variant="h5"
+        sx={{
+          color: '#38c0f2',
+          marginBottom: 1,
+        }}
+      >
+        Technical Trainer
+      </Typography>
+
+      <Typography
+        sx={{
+          color: 'darkgray',
+          marginBottom: 2,
+        }}
+      >
+        Bay Area, CA. |{' '}
+        <a
+          href="mailto:davidjriva@gmail.com"
+          style={{
+            color: '#0a73c9',
+            textDecoration: 'none',
+          }}
+        >
+          davidjriva@gmail.com
+        </a>
+      </Typography>
+    </>
+  );
+};
+
+export default AboutHeader;
