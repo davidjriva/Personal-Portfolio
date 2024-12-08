@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import Head from 'next/head';
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
 import Projects from '@/components/Projects-Page/Projects';
@@ -7,6 +8,11 @@ import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer/Footer';
+
+export const metadata = {
+  title: 'Personal Portfolio',
+  description: "David Riva's Personal Portfolio",
+};
 
 const MainPage = () => {
   return (
@@ -39,7 +45,7 @@ const MainPage = () => {
         <section id="projects">
           <Projects />
         </section>
-        
+
         <Footer />
       </Box>
     </Box>
