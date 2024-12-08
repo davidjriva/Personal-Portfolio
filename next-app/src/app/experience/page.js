@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import ExperienceTimeline from '@/components/Experience-Page/ExperienceTimeline';
+import ExperienceTimeLine from '@/components/Experience-Page/ExperienceTimeLine';
 import ChildPageNavBar from '@/components/ChildPageNavBar';
 
 const ExperiencePage = () => {
@@ -17,7 +17,7 @@ const ExperiencePage = () => {
     >
       <ChildPageNavBar />
       <Box sx={{ marginTop: 10 }}>
-        <ExperienceTimeline />
+        <ExperienceTimeLine />
       </Box>
     </Box>
   );
