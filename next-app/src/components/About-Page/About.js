@@ -12,6 +12,9 @@ const AboutTextSection = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
+        textAlign: { xs: 'center', sm: 'center', md: 'left' },
+        pl: { xs: '40px', sm: 0, md: 0 },
+        pr: { xs: '40px', sm: 0, md: 0 },
       }}
     >
       <AboutHeader />
@@ -26,10 +29,13 @@ const About = () => {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
+        minHeight: '750px',
+        pt: '40px',
+        pb: '40px',
       }}
     >
       <HeadShotImage width={100} height={100} />

@@ -30,8 +30,8 @@ const HeadShotImage = ({ width, height }) => {
         overflow: 'hidden',
         borderRadius: '50%',
         animation: `${glowAnimation} 5s infinite`,
-        marginBottom: 50,
-        marginRight: 10
+        marginBottom: { xs: '40px', sm: '40px', md: 50 },
+        marginRight: { xs: 0, sm: 0, md: 10 },
       }}
     >
       <Image

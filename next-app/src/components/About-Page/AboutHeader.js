@@ -11,6 +11,7 @@ const AboutHeader = () => {
           textDecoration: 'underline',
           textDecorationThickness: '2px',
           textUnderlineOffset: '10px',
+          fontSize: { xs: '1.75rem', sm: '2.5rem', md: '2.5rem' },
         }}
       >
         David Riva
