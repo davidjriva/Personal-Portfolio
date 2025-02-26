@@ -69,7 +69,12 @@ const AnimatedTypingTypography = () => {
   }, []);
 
   return (
-    <Typography variant="h1">
+    <Typography
+      variant="h1"
+      sx={{
+        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+      }}
+    >
       I'm {getArticle(roles[roleIndex])} {text}
       <span style={{ color: '#38c0f2', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
     </Typography>

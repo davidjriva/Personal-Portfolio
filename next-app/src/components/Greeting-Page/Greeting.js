@@ -19,7 +19,12 @@ const Greeting = () => {
         position: 'relative',
       }}
     >
-      <Typography variant="h1">
+      <Typography
+        variant="h1"
+        sx={{
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+        }}
+      >
         Hello, I'm <span style={{ color: '#38c0f2' }}>David</span>.
       </Typography>
 
