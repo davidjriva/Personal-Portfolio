@@ -33,7 +33,7 @@ const MainPage = () => {
           <About />
         </section>
 
-        <section id="skills">
+        {/* <section id="skills">
           <Skills />
         </section>
 
@@ -43,7 +43,7 @@ const MainPage = () => {
 
         <section id="projects">
           <Projects />
-        </section>
+        </section> */}
 
         <Footer />
       </Box>
