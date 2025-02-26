@@ -16,7 +16,8 @@ const Footer = () => {
         justifyContent: 'center',
         position: 'relative',
         bottom: 0,
-        padding: '1rem',
+        pt: '1rem',
+        pb: '1rem',
       }}
     >
       <ReturnToTopButton />

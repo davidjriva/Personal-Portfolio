@@ -4,7 +4,15 @@ import ResumeButton from './ResumeButton';
 
 const AboutFooter = () => {
   return (
-    <Box sx={{ marginTop: 4, display: 'flex', justifyContent: 'flex-start', gap: 2 }}>
+    <Box
+      sx={{
+        marginTop: 4,
+        display: 'flex',
+        justifyContent: 'flex-start',
+        gap: 2,
+        flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+      }}
+    >
       <ResumeButton />
       <SocialLinks />
     </Box>

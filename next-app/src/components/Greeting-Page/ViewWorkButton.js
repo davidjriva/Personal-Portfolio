@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 const ViewWorkButton = () => {
@@ -29,12 +29,20 @@ const ViewWorkButton = () => {
         color: '#38c0f2',
         display: 'flex',
         alignItems: 'center',
+        textTransform: 'none',
         '&:hover': {
           backgroundColor: 'rgba(10, 115, 201, 0.5)',
         },
       }}
     >
-      View my work
+      <Typography
+        sx={{
+          color: '#38c0f2',
+          fontSize: { xs: '0.8rem', sm: '0.9rem', md: '1rem' },
+        }}
+      >
+        View my work
+      </Typography>
       <KeyboardDoubleArrowDownIcon sx={{ marginLeft: '8px', fontSize: '20px' }} />
     </Button>
   );
