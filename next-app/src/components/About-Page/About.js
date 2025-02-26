@@ -35,7 +35,15 @@ const About = () => {
       <HeadShotImage width={100} height={100} />
       <AboutTextSection />
 
-      <Box sx={{ marginTop: 10 }}>
+      <Box
+        sx={{
+          marginTop: 10,
+          display: { xs: 'none', md: 'block' }, // Hide on small screens, show on larger screens
+          '@media (max-width: 1250px)': {
+            display: 'none', // Hide when screen width is ≤ 1250px
+          },
+        }}
+      >
         <SimpleTimeline />
       </Box>
     </Box>
