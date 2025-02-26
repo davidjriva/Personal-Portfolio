@@ -1,0 +1,15 @@
+.scroll-link {
+    font-size: 0.9rem; /* Default font size for xs */
+}
+  
+@media (min-width: 600px) {
+    .scroll-link {
+        font-size: 1rem; /* Font size for sm */
+    }
+}
+
+@media (min-width: 900px) {
+    .scroll-link {
+        font-size: 1.2rem; /* Font size for md */
+    }
+}

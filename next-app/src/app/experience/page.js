@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import ExperienceTimeLine from '@/components/Experience-Page/ExperienceTimeLine';
-import ChildPageNavBar from '@/components/ChildPageNavBar';
+import ChildPageNavBar from '@/components/Navbars/ExperiencePageNavBar';
 
 const ExperiencePage = () => {
   return (

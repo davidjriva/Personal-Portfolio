@@ -3,7 +3,7 @@
 import { Toolbar, AppBar, IconButton, Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import SectionHeading from './SectionHeading';
+import SectionHeading from '../SectionHeading';
 
 const ChildPageNavBar = () => {
   const router = useRouter();
