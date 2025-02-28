@@ -1,23 +1,31 @@
+'use client';
+
+import { useState } from 'react';
+import FilteringMenu from './Filtering/FilteringMenu';
 import ProjectCards from './ProjectCards';
+import useProjectFilter from './Filtering/useProjectFilter';
 import projectData from '../../data/projects.json';
-import { Box } from '@mui/material';
 
 const ProjectsContainer = () => {
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const { searchText, setSearchText, selectedChips, setSelectedChips, uniqueTools } = useProjectFilter(
+    projectData,
+    setFilteredProjects
+  );
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        overflowX: 'auto',
-        gap: 2,
-        padding: 2,
-        whiteSpace: 'nowrap',
-        '&::-webkit-scrollbar': { height: '6px' },
-        '&::-webkit-scrollbar-thumb': { backgroundColor: '#888', borderRadius: '4px' },
-        '&::-webkit-scrollbar-thumb:hover': { backgroundColor: '#555' },
-      }}
-    >
-      <ProjectCards projects={projectData} />
-    </Box>
+    <>
+      <FilteringMenu
+        projectData={projectData}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        selectedChips={selectedChips}
+        setSelectedChips={setSelectedChips}
+        uniqueTools={uniqueTools}
+      />
+
+      <ProjectCards filteredProjects={filteredProjects} />
+    </>
   );
 };
 
