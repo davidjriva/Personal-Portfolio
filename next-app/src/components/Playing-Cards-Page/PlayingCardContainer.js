@@ -13,7 +13,7 @@ import './playing-cards.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PlayingCards = () => {
+const PlayingCardContainer = () => {
   const container = useRef(null);
   const cardRefs = useRef([]);
 
@@ -147,4 +147,4 @@ const PlayingCards = () => {
   );
 };
 
-export default PlayingCards;
+export default PlayingCardContainer;
