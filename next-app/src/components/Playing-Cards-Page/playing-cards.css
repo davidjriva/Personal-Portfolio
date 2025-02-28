@@ -8,7 +8,7 @@
 
 html, body {
     width: 100%;
-    height: 500vh;
+    /* height: 500vh; */ /* WARN: This style should only be uncommented if you want to use the playing card style. */
     font-family: "Instrument Serif";
 }
 
