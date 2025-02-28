@@ -34,8 +34,8 @@ const About = () => {
         justifyContent: 'center',
         width: '100%',
         minHeight: '750px',
-        pt: '40px',
-        pb: '40px',
+        pt: '80px',
+        pb: '80px',
       }}
     >
       <HeadShotImage width={100} height={100} />
@@ -43,7 +43,6 @@ const About = () => {
 
       <Box
         sx={{
-          marginTop: 10,
           display: { xs: 'none', md: 'block' }, // Hide on small screens, show on larger screens
           '@media (max-width: 1250px)': {
             display: 'none', // Hide when screen width is ≤ 1250px
