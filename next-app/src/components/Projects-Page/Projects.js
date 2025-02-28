@@ -10,7 +10,10 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        padding: {xs:0, sm: 0, md: '5rem'},
+        pt: '80px',
+        pb: '80px',
+        pl: { xs: 0, sm: 0, md: '80px' },
+        pr: { xs: 0, sm: 0, md: '80px' },
         margin: '0 auto',
         textAlign: 'center',
         borderTop: '8px solid rgba(0,0,0,0.1)',
@@ -18,7 +21,7 @@ const Projects = () => {
       }}
     >
       <SectionHeading sectionName="projects" />
-      
+
       <ProjectsContainer />
     </Box>
   );
