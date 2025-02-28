@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
 import Projects from '@/components/Projects-Page/Projects';
@@ -26,27 +27,35 @@ const MainPage = () => {
         <Greeting />
       </Box>
 
-      <NavBar />
-
       <Box>
+        <NavBar />
+
         <section id="about">
           <About />
-        </section>
-        {/* 
-        <section id="skills">
-          <Skills />
-        </section>
-        
-        <section id="awards">
-          <Awards />
         </section>
 
         <section id="projects">
           <Projects />
+        </section>
+
+        {/* <section id="playing-cards">
+          <PlayingCardContainer />
         </section> */}
 
-        <Footer />
+        {/* 
+          <section id="skills">
+            <Skills />
+          </section>
+          
+          <section id="awards">
+            <Awards />
+          </section>
+          */}
+
+        {/* <Footer /> */}
       </Box>
+
+      <Footer />
     </Box>
   );
 };
