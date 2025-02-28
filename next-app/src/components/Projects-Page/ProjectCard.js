@@ -25,7 +25,18 @@ const ProjectImage = ({ coverImage, title }) => {
 const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description }) => {
   return (
     <Box sx={{ mb: 2 }}>
-      <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', mb: 1, color: '#282829' }}>
+      <Typography
+        variant="h5"
+        component="div"
+        sx={{
+          fontWeight: 'bold',
+          mb: 1,
+          color: '#282829',
+          whiteSpace: 'normal',
+          overflowWrap: 'break-word',
+          wordBreak: 'break-word',
+        }}
+      >
         {title}
       </Typography>
       <Typography sx={{ mb: 1 }} color="text.secondary">
@@ -64,7 +75,16 @@ const ProjectFooter = ({ technologies, link }) => {
       <Box>
         {technologies.map((technology, index) => (
           <Box key={index} sx={{ mb: 1 }}>
-            <Typography variant="body1" sx={{ color: '#282829', fontSize: '0.9rem' }}>
+            <Typography
+              variant="body1"
+              sx={{
+                color: '#282829',
+                fontSize: '0.9rem',
+                whiteSpace: 'normal',
+                overflowWrap: 'break-word',
+                wordBreak: 'break-word',
+              }}
+            >
               {technology.location}: {technology.tools.join(', ')}
             </Typography>
           </Box>
@@ -95,7 +115,7 @@ const ProjectCard = forwardRef(
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: height || 'auto',
-          minWidth: '400px',
+          minWidth: { xs: '300px', sm: '300px', md: '400px' },
         }}
       >
         <ProjectImage {...props} />
