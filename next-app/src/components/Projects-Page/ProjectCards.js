@@ -4,12 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import ProjectCard from './ProjectCard';
 import { Box } from '@mui/material';
 
-const ProjectCards = ({ projects }) => {
+const ProjectCards = ({ filteredProjects }) => {
   const [maxHeight, setMaxHeight] = useState(0);
   const cardRefs = useRef([]);
 
   // Sorts all projects chronologically by start date.
-  const sortedProjectData = [...projects].sort((a, b) => {
+  const sortedProjectData = [...filteredProjects].sort((a, b) => {
     return new Date(b.dateStarted) - new Date(a.dateStarted);
   });
 
