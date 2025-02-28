@@ -45,9 +45,9 @@ const NavBar = () => {
       sx={{
         top: 0,
         zIndex: 999,
-        height: '7vh',
+        width: '100%',
         backgroundColor: '#333',
-        height: '100%',
+        height: '64px',
       }}
     >
       <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

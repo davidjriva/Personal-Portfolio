@@ -5,7 +5,8 @@
         "author": "David Riva",
         "dateStarted": "July 2024",
         "dateCompleted": "August 2024",
-        "description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world! 🌎 ⛰️🌊🌲",
+        "long_description": "I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users can purchase tours using Stripe for payment processing and view their booked tours. The page is fully functional as an e-commerce platform where users can create profiles, book tours with guides, and explore the world! 🌎 ⛰️🌊🌲",
+        "short_description": "A fully functional e-commerce platform for booking guided nature tours. Users can browse tours, inspect details, make purchases via Stripe, and manage their bookings.", 
         "technologies": [
             {
                 "location": "Front-End",
@@ -32,7 +33,8 @@
         "author": "David Riva",
         "dateStarted": "January 2024",
         "dateCompleted": "February 2024",
-        "description": "Designed and implemented a distributed network of N nodes capable of routing packets based on Dijkstra's shortest path algorithm in a simulated network topology.\nImplemented communication between nodes using the TCP/IP model, facilitating packet exchange through a custom marshalling and demarshalling system.\nOptimized performance by introducing multi-threading for parallel message sending and receiving within each node in the system.",
+        "long_description": "Designed and implemented a distributed network of N nodes capable of routing packets based on Dijkstra's shortest path algorithm in a simulated network topology.\nImplemented communication between nodes using the TCP/IP model, facilitating packet exchange through a custom marshalling and demarshalling system.\nOptimized performance by introducing multi-threading for parallel message sending and receiving within each node in the system.",
+        "short_description": "A distributed network simulation where nodes route packets using Dijkstra’s shortest path algorithm. Features TCP/IP-based communication, custom marshalling, and multi-threaded message handling.", 
         "technologies": [
             {
                 "location": "Distributed Systems",
@@ -47,7 +49,8 @@
         "author": "David Riva & CS314 [Software Development] Teammates",
         "dateStarted": "August 2023",
         "dateCompleted": "December 2023",
-        "description": "Designed and implemented a comprehensive trip planning and optimization application as a full-stack developer.\nIntegrated and utilized multiple RESTful APIs across the application's stack to enhance its functionalities.\nDemonstrated proficiency in Agile methodologies by following Scrum practices, leading meetings with a team of 4 other students.\nEnsured deployment and documentation of the product through bi-monthly releases, ensuring clear and accessible information for users & stakeholders.",
+        "long_description": "Designed and implemented a comprehensive trip planning and optimization application as a full-stack developer.\nIntegrated and utilized multiple RESTful APIs across the application's stack to enhance its functionalities.\nDemonstrated proficiency in Agile methodologies by following Scrum practices, leading meetings with a team of 4 other students.\nEnsured deployment and documentation of the product through bi-monthly releases, ensuring clear and accessible information for users & stakeholders.",
+        "short_description": "A full-stack application for planning and optimizing trips, integrating multiple RESTful APIs. Developed with Agile methodologies, ensuring bi-monthly releases and team collaboration.",
         "technologies": [
             {
                 "location": "Front-End",
@@ -70,7 +73,8 @@
         "author": "David Riva",
         "dateStarted": "November 2023",
         "dateCompleted": "December 2023",
-        "description": "pre-trained CNN on ImageNet used to classify plant diseases.",
+        "long_description": "pre-trained CNN on ImageNet used to classify plant diseases.",
+        "short_description": "A deep learning model leveraging a pre-trained CNN on ImageNet to classify plant diseases. Implemented with TensorFlow, Keras, and PySpark for scalable processing.", 
         "technologies": [
             {
                 "location": "Deep Learning",
@@ -85,7 +89,8 @@
         "author": "David Riva",
         "dateStarted": "Dec 2023",
         "dateCompleted": "Dec 2023",
-        "description": "Custom CNN model for playing card classification.",
+        "long_description": "Custom CNN model for playing card classification.",
+        "short_description": "A custom convolutional neural network (CNN) trained to recognize playing cards. Built using TensorFlow and Keras for accurate classification.", 
         "technologies": [
             {
                 "location": "Deep Learning",
@@ -100,7 +105,8 @@
         "author": "David Riva",
         "dateStarted": "November 2019",
         "dateCompleted": "December 2019",
-        "description": "A simple game of Pong between two players or one-player and a CPU.",
+        "long_description": "A simple game of Pong between two players or one-player and a CPU.",
+        "short_description": "A simple recreation of the classic Pong game, featuring both single-player (CPU) and two-player modes. Developed in Java for a nostalgic arcade experience.", 
         "technologies": [
             {
                 "location": "Application",
@@ -115,7 +121,8 @@
         "author": "David Riva",
         "dateStarted": "August 2019",
         "dateCompleted": "September 2019",
-        "description": "An application that visualizes different sorting algorithms in real-time across random data points. Allows the user to add data points, randomize all data points, select the algorithm to use, step through the sorting algorithm in real-time, and sort all the data points automatically.",
+        "long_description": "An application that visualizes different sorting algorithms in real-time across random data points. Allows the user to add data points, randomize all data points, select the algorithm to use, step through the sorting algorithm in real-time, and sort all the data points automatically.",
+        "short_description": "An interactive tool that visualizes various sorting algorithms in real time. Users can manipulate data points, randomize inputs, and step through sorting processes dynamically.", 
         "technologies": [
             {
                 "location": "Application",
@@ -130,7 +137,8 @@
         "author": "David Riva",
         "dateStarted": "October 2024",
         "dateCompleted": "October 2024",
-        "description": "A Next.js application that allows users to complete a form, which automatically generates a pre-written email in Outlook based on their input. The project was later converted into an Electron.js application for easy distribution, enabling users to add it to their favorites for quick access. It leverages inter-process communication to directly launch Outlook on the user's computer and load the email template seamlessly.",
+        "long_description": "A Next.js application that allows users to complete a form, which automatically generates a pre-written email in Outlook based on their input. The project was later converted into an Electron.js application for easy distribution, enabling users to add it to their favorites for quick access. It leverages inter-process communication to directly launch Outlook on the user's computer and load the email template seamlessly.",
+        "short_description": "A Next.js and Electron.js application that generates pre-written emails in Outlook based on user input. Designed for efficiency, it enables quick access and seamless email composition.", 
         "technologies": [
             {
                 "location": "Front-End",
