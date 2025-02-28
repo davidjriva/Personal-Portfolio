@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
 import Projects from '@/components/Projects-Page/Projects';

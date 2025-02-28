@@ -7,6 +7,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
+import projectData from '../../data/projects.json';
 import Card from './Card';
 import './playing-cards.css';
 
@@ -113,6 +114,17 @@ const PlayingCards = () => {
     };
   }, []);
 
+  /* 
+    Sorts all projects chronologically by start date.
+
+    Only the eight most recent projects are displayed
+  */
+  const sortedProjectData = [...projectData]
+    .sort((a, b) => {
+      return new Date(b.dateStarted) - new Date(a.dateStarted);
+    })
+    .slice(0, 8);
+
   return (
     <>
       <ReactLenis root>
@@ -124,7 +136,7 @@ const PlayingCards = () => {
                 id={`card-${index + 1}`}
                 frontSrc="/images/playing-card-cover.png"
                 frontAlt="Card Image"
-                backText="Your card details appear here"
+                projectData={sortedProjectData[index]}
                 ref={(el) => (cardRefs.current[index] = el)}
               />
             ))}
