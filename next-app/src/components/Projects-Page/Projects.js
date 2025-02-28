@@ -10,7 +10,7 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        padding: {xs:0, sm: 0, md: '5rem'},
+        padding: '5rem',
         margin: '0 auto',
         textAlign: 'center',
         borderTop: '8px solid rgba(0,0,0,0.1)',

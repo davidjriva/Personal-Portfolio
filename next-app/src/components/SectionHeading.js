@@ -3,7 +3,7 @@ const SectionHeading = ({ sectionName }) => {
     <h2
       style={{
         marginTop: '0px',
-        marginBottom: '80px',
+        marginBottom: '8px',
         textShadow: '3px 3px #011627',
         fontFamily: 'sans-serif',
         color: '#FFF',
