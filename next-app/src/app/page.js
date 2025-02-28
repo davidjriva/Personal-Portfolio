@@ -7,7 +7,7 @@ import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbars/NavBar';
 import Footer from '@/components/Footer/Footer';
-import PlayingCardContainer from '@/components/Playing-Cards-Page/PlayingCards';
+import PlayingCardContainer from '@/components/Playing-Cards-Page/PlayingCardContainer';
 
 export const metadata = {
   title: 'DR | Personal Portfolio',
@@ -54,6 +54,8 @@ const MainPage = () => {
 
         {/* <Footer /> */}
       </Box>
+
+      <Footer />
     </Box>
   );
 };
