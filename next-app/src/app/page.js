@@ -8,6 +8,7 @@ import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbars/NavBar';
 import Footer from '@/components/Footer/Footer';
+import PlayingCardContainer from '@/components/Playing-Cards-Page/PlayingCardContainer';
 
 export const metadata = {
   title: 'DR | Personal Portfolio',
@@ -38,9 +39,9 @@ const MainPage = () => {
           <Projects />
         </section>
 
-        {/* <section id="playing-cards">
+        <section id="playing-cards">
           <PlayingCardContainer />
-        </section> */}
+        </section>
 
         {/* 
           <section id="skills">
