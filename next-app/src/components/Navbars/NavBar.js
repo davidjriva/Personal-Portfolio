@@ -26,7 +26,10 @@ const FormattedLink = ({ page, active, setActivePage }) => {
       className="scroll-link"
       style={{
         ...linkStyles,
-        color: active ? 'white' : 'gray',
+        color: active ? 'white' : '#C2C2C2',
+        fontWeight: active ? 'bold' : 'normal',
+        borderBottom: active ? '2px solid white' : 'none',
+        padding: '4px 8px',
       }}
     >
       {page}
