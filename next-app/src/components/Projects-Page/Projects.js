@@ -20,7 +20,7 @@ const Projects = () => {
         backgroundColor: '#565859',
       }}
     >
-      <SectionHeading sectionName="projects" />
+      <SectionHeading sectionName="Projects" />
 
       <ProjectsContainer />
     </Box>
