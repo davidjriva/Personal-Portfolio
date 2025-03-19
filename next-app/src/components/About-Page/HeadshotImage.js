@@ -31,9 +31,10 @@ const HeadShotImage = ({ width, height }) => {
         borderRadius: '50%',
         animation: `${glowAnimation} 5s infinite`,
         marginBottom: { xs: '40px', sm: '40px', md: 50 },
-        marginLeft: { xs: '40px', sm: 0},
+        marginLeft: { xs: '40px', sm: 0 },
         marginRight: { xs: 0, sm: 0, md: 10 },
         alignSelf: { xs: 'flex-start', sm: 'unset' },
+        display: { xs: 'none', sm: 'block' },
       }}
     >
       <Image

@@ -34,7 +34,7 @@ const About = () => {
         justifyContent: 'center',
         width: '100%',
         minHeight: '750px',
-        pt: '80px',
+        pt: { xs: 0, sm: '80px' },
         pb: '80px',
       }}
     >
