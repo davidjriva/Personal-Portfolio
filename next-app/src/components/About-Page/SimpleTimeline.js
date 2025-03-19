@@ -39,7 +39,7 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
       <TimelineContent sx={{ pl: 2, alignItems: 'center' }}>
         <Typography variant="body1" component="span">
           {title} {!title.startsWith('Graduated') && 'at '}
-          {!title.startsWith('Graduated') && <ClickableLink link={companyWebsiteLink} company={company} />}
+          {!title.startsWith('Graduated') && <ClickableLink link={companyWebsiteLink} text={company} />}
         </Typography>
       </TimelineContent>
     </TimelineItem>
