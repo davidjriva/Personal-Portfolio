@@ -10,7 +10,7 @@ import {
   TimelineDot,
   TimelineContent,
 } from '@mui/lab';
-import { Typography, Box, IconButton } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import Image from 'next/image';
 import experienceData from '@/data/experiences.json';
 import ClickableLink from '@/components/About-Page/ClickableLink';

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-const ClickableLink = ({link, company}) => {
+const ClickableLink = ({ link, company }) => {
   return (
     <a
       href={link}
@@ -8,6 +8,7 @@ const ClickableLink = ({link, company}) => {
       style={{ color: '#38c0f2', textDecoration: 'none' }}
       onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
       onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
+      onClick={(e) => (e.currentTarget.style.color = '#0073e6')}
     >
       {company}
     </a>
