@@ -12,7 +12,7 @@ const AboutTextSection = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        textAlign: { xs: 'center', sm: 'center', md: 'left' },
+        textAlign: 'left',
         pl: { xs: '40px', sm: 0, md: 0 },
         pr: { xs: '40px', sm: 0, md: 0 },
       }}
