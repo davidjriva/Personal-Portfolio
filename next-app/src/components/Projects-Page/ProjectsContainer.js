@@ -1,8 +1,21 @@
+'use client';
+
 import ProjectCards from './ProjectCards';
 import projectData from '../../data/projects.json';
 import { Box } from '@mui/material';
 
 const ProjectsContainer = () => {
+  const scrollToCenter = (index) => {
+    const cardElement = document.getElementById(`project-card-${index}`);
+    if (cardElement) {
+      cardElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -16,7 +29,7 @@ const ProjectsContainer = () => {
         '&::-webkit-scrollbar-thumb:hover': { backgroundColor: '#555' },
       }}
     >
-      <ProjectCards projects={projectData} />
+      <ProjectCards projects={projectData} onClick={scrollToCenter} />
     </Box>
   );
 };
