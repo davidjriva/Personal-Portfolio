@@ -1,6 +1,6 @@
 [
     {
-        "coverImage": "Nature-Nomads-Cover.jpeg",
+        "coverImage": "Nature-Nomads-Cover.webp",
         "title" : "Nature Nomads",
         "author": "David Riva",
         "dateStarted": "July 2024",
@@ -28,7 +28,7 @@
         "link": "https://github.com/davidjriva/Nature-Nomads"
     },
     {
-        "coverImage": "Dijkstras-Shortest-Cover.jpeg",
+        "coverImage": "Dijkstras-Shortest-Cover.webp",
         "title" : "Optimal Pathways: A Distributed Messaging Network",
         "author": "David Riva",
         "dateStarted": "January 2024",
@@ -44,7 +44,7 @@
         "link": "https://github.com/davidjriva/Distributed-Systems-Projects/tree/main/hw1"
     },
     {
-        "coverImage": "Trip-Planner-Cover.jpeg",
+        "coverImage": "Trip-Planner-Cover.webp",
         "title": "Trip Planning Application",
         "author": "David Riva & CS314 [Software Development] Teammates",
         "dateStarted": "August 2023",
@@ -68,7 +68,7 @@
         "link": "https://github.com/davidjriva/Trip-Planner"
     },
     {
-        "coverImage": "Plant-Disease-Cover.jpeg",
+        "coverImage": "Plant-Disease-Cover.webp",
         "title": "Plant Disease Classifier",
         "author": "David Riva",
         "dateStarted": "November 2023",
@@ -84,7 +84,7 @@
         "link": "https://github.com/davidjriva/Plant-Disease-Classifier"
     },
     {
-        "coverImage": "Card-Classifier-Cover.jpeg",
+        "coverImage": "Card-Classifier-Cover.webp",
         "title" : "Playing Card Classifier",
         "author": "David Riva",
         "dateStarted": "Dec 2023",
@@ -100,7 +100,7 @@
         "link": "https://github.com/davidjriva/Playing-Card-Classifier"
     },
     {
-        "coverImage": "Pong-Cover.jpeg",
+        "coverImage": "Pong-Cover.webp",
         "title": "Pong",
         "author": "David Riva",
         "dateStarted": "November 2019",
@@ -116,7 +116,7 @@
         "link": "https://github.com/davidjriva/Pong"
     },
     {
-        "coverImage": "Sorting-Visualization-Cover.jpeg",
+        "coverImage": "Sorting-Visualization-Cover.webp",
         "title": "Sorting Algorithms Visualization",
         "author": "David Riva",
         "dateStarted": "August 2019",
@@ -132,7 +132,7 @@
         "link": "https://github.com/davidjriva/Sorting-Algorithms"
     },
     {
-        "coverImage": "Email-Templating-Utility-Cover.jpeg",
+        "coverImage": "Email-Templating-Utility-Cover.webp",
         "title": "Email Templating Utility Tool",
         "author": "David Riva",
         "dateStarted": "October 2024",
