@@ -39,7 +39,7 @@ const HeadShotImage = ({ width, height }) => {
     >
       <Image
         alt="Photo of David Riva"
-        src="/images/headshot.jpeg"
+        src="/images/headshot.webp"
         width={width}
         height={height}
         style={{
