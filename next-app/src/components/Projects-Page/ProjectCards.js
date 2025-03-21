@@ -1,10 +1,8 @@
-'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import ProjectCard from './ProjectCard';
 import { Box } from '@mui/material';
 
-const ProjectCards = ({ projects }) => {
+const ProjectCards = ({ projects, onClick }) => {
   const [maxHeight, setMaxHeight] = useState(0);
   const cardRefs = useRef([]);
 
@@ -27,7 +25,14 @@ const ProjectCards = ({ projects }) => {
   return (
     <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto' }}>
       {sortedProjectData.map((project, index) => (
-        <ProjectCard key={project.title} ref={(el) => (cardRefs.current[index] = el)} {...project} height={maxHeight} />
+        <ProjectCard
+          key={project.title}
+          id={`project-card-${index}`} // Use a unique id for each project card
+          ref={(el) => (cardRefs.current[index] = el)}
+          {...project}
+          height={maxHeight}
+          onClick={() => onClick(index)} // Pass the index to the onClick handler
+        />
       ))}
     </Box>
   );

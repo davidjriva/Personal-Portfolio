@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import { forwardRef } from 'react';
 import CardContent from '@mui/material/CardContent';
@@ -99,11 +97,27 @@ const ProjectFooter = ({ technologies, link }) => {
 };
 
 const ProjectCard = forwardRef(
-  ({ coverImage, title, author, dateStarted, dateCompleted, short_description, technologies, link, height }, ref) => {
+  (
+    {
+      coverImage,
+      title,
+      author,
+      dateStarted,
+      dateCompleted,
+      short_description,
+      technologies,
+      link,
+      height,
+      onClick,
+      id,
+    },
+    ref
+  ) => {
     const props = { coverImage, title, author, dateStarted, dateCompleted, short_description, technologies, link };
 
     return (
       <Card
+        id={id} // Use the id passed from ProjectsContainer
         sx={{
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
@@ -117,6 +131,7 @@ const ProjectCard = forwardRef(
           height: height || 'auto',
           minWidth: { xs: '300px', sm: '300px', md: '400px' },
         }}
+        onClick={onClick}
       >
         <ProjectImage {...props} />
 

@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import ClickableLink from './ClickableLink';
 
 const AboutHeader = () => {
   return (
@@ -33,16 +34,7 @@ const AboutHeader = () => {
           marginBottom: 2,
         }}
       >
-        Bay Area, CA. |{' '}
-        <a
-          href="mailto:davidjriva@gmail.com"
-          style={{
-            color: '#0a73c9',
-            textDecoration: 'none',
-          }}
-        >
-          davidjriva@gmail.com
-        </a>
+        Bay Area, CA. | <ClickableLink link="mailto:davidjriva@gmail.com" text="davidjriva@gmail.com" />
       </Typography>
     </>
   );

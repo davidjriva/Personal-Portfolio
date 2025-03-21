@@ -12,6 +12,7 @@ const linkStyles = {
   textDecoration: 'none',
   cursor: 'pointer',
   fontFamily: 'Montserrat, Arial, sans-serif',
+  transition: 'all 0.3s ease', // smooth transition for on-hover and click-effects
 };
 
 const FormattedLink = ({ page, active, setActivePage }) => {

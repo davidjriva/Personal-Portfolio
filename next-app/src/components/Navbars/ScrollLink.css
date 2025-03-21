@@ -13,3 +13,14 @@
         font-size: 1.2rem; /* Font size for md */
     }
 }
+
+/* Hover effect */
+.scroll-link:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+  
+/* Click effect (active state) */
+.scroll-link:active {
+    transform: scale(0.95);
+}
