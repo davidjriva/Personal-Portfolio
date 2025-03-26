@@ -36,6 +36,11 @@ export const metadata = {
 };
 
 const MainPage = () => {
+
+  // Added comment here so GitHub will let me make a PR ;D
+  console.log("Delete me.");
+
+  
   return (
     <Box
       sx={{
