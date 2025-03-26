@@ -6,7 +6,7 @@ import Projects from '@/components/Projects-Page/Projects';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
-import NavBar from '@/components/Navbars/NavBar';
+import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
 export const metadata = {
