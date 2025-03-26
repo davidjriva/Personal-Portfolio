@@ -14,7 +14,6 @@ import { Typography, Box } from '@mui/material';
 import Image from 'next/image';
 import experienceData from '@/data/experiences.json';
 import ClickableLink from '@/components/About-Page/ClickableLink';
-import ViewExperienceButton from '@/components/About-Page/ViewExperienceButton';
 
 const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
   return (
@@ -60,8 +59,6 @@ const SimpleTimeline = () => {
           </React.Fragment>
         ))}
       </Timeline>
-
-      <ViewExperienceButton />
     </Box>
   );
 };
