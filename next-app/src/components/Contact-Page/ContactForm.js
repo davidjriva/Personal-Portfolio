@@ -55,9 +55,6 @@ const ContactForm = () => {
         boxShadow: 3,
       }}
     >
-      <Typography variant="h4" sx={{ textAlign: 'center', color: '#333', marginBottom: 3 }}>
-        Contact Me
-      </Typography>
 
       <form onSubmit={handleSubmit}>
         <TextField
