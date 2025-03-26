@@ -19,7 +19,7 @@ export const metadata = {
     siteName: 'David Riva Portfolio',
     images: [
       {
-        url: 'https://davidriva.dev/images/website_preview.webp',
+        url: 'https://davidriva.dev/images/website_preview.png',
         width: 1200,
         height: 630,
         alt: "David Riva's headshot",
@@ -31,7 +31,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'David Riva - Technical Trainer',
     description: 'Experienced software engineer specializing in UI/UX and data visualization.',
-    images: ['https://davidriva.dev/images/website_preview.webp'],
+    images: ['https://davidriva.dev/images/website_preview.png'],
   },
 };
 
