@@ -12,6 +12,27 @@ import Footer from '@/components/Footer/Footer';
 export const metadata = {
   title: 'DR | Personal Portfolio',
   description: "David Riva's Personal Portfolio",
+  openGraph: {
+    title: 'David Riva - Personal Portfolio',
+    description: 'Experienced software engineer specializing in UI/UX and big data visualization.',
+    url: 'https://davidriva.dev',
+    siteName: 'David Riva Portfolio',
+    images: [
+      {
+        url: 'https://www.davidriva.dev/images/headshot.webp', // Now using the working URL
+        width: 1200,
+        height: 630,
+        alt: "David Riva's headshot",
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'David Riva - Technical Trainer',
+    description: 'Experienced software engineer specializing in UI/UX and data visualization.',
+    images: ['https://www.davidriva.dev/images/headshot.webp'],
+  },
 };
 
 const MainPage = () => {
