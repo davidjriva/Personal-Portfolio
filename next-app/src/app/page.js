@@ -29,7 +29,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David Riva - Technical Trainer',
+    title: 'David Riva - Personal Portfolio',
     description: 'Experienced software engineer specializing in UI/UX and data visualization.',
     images: ['https://davidriva.dev/images/website_preview.png'],
   },
