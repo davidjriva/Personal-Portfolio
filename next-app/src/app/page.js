@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
 import Projects from '@/components/Projects-Page/Projects';
+import Contact from '@/components/Contact-Page/Contact';
 import Skills from '@/components/Skills-Page/Skills';
 import Awards from '@/components/Awards-Page/Awards';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -57,6 +58,10 @@ const MainPage = () => {
 
         <section id="projects">
           <Projects />
+        </section>
+
+        <section id="contact">
+          <Contact />
         </section>
 
         {/* <section id="playing-cards">
