@@ -47,15 +47,14 @@ const ContactForm = () => {
     <Box
       sx={{
         width: '100%',
-        maxWidth: '600px',
-        margin: 'auto',
+        height: 'fit-content',
+        maxWidth: '800px',
         backgroundColor: '#ffffff', // Light background for form
-        padding: 4,
+        padding: { xs: 2, sm: 3, md: 4 }, // Adjust padding for smaller screens
         borderRadius: 2,
         boxShadow: 3,
       }}
     >
-
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth

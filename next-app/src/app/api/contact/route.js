@@ -34,7 +34,7 @@ export async function POST(req) {
           <p><strong>Subject:</strong> ${subject}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
-        `, // HTML content
+        `,
     };
 
     await transporter.sendMail(mailOptions);

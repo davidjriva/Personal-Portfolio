@@ -16,6 +16,7 @@ const Footer = () => {
         justifyContent: 'center',
         position: 'relative',
         bottom: 0,
+        mt: '80px',
         pt: '1rem',
         pb: '1rem',
       }}
