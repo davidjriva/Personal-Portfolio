@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(req) {
   try {
-    const formData = await req.json(); // Get the form data from the request body
+    const formData = await req.json(); 
 
     const { name, email, subject, message } = formData;
 
