@@ -38,7 +38,7 @@ const FormattedLink = ({ page, active, setActivePage }) => {
   );
 };
 
-const pages = ['About', 'Projects'];
+const pages = ['About', 'Projects', 'Contact'];
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
