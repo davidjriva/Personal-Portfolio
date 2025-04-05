@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { Analytics } from '@vercel/analytics/next';
 
 import Greeting from '@/components/Greeting-Page/Greeting';
 import About from '@/components/About-Page/About';
@@ -43,7 +44,10 @@ const MainPage = () => {
         backgroundColor: '#282829',
         position: 'relative',
       }}
-    >
+    > 
+      {/* Enables Vercel deployment analytics */}
+      <Analytics />
+
       <Box sx={{ position: 'relative', height: '100vh' }}>
         <ParticleBackground />
         <Greeting />
