@@ -19,7 +19,22 @@ const Contact = () => {
     >
       <SectionHeading sectionName="Contact Me" />
 
-      <ContactForm />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: {
+            xs: '75%', // mobile
+            sm: '70%', // tablets
+            md: '70%', // small desktops
+            lg: '70%', // large desktops
+          },
+        }}
+      >
+        <ContactForm />
+      </Box>
     </Box>
   );
 };
