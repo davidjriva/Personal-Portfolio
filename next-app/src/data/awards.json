@@ -2,21 +2,25 @@
     {
         "title": "1st Place C3 Agentic AI Hackathon Winner (400+ participants)",
         "description": "Recognized for building agentic developer tools that dramatically accelerated UI component development. Used React, TypeScript, Material UI, and an in-house LLM to streamline workflows and enhance productivity.",
-        "date": "May 2025"
+        "date": "May 2025",
+        "tags": ["award", "project", "recognition", "hackathon", "competition"]
     },
     {
         "title": "Summa Cum Laude",
         "description": "Received distinction for achieving outstanding academic performance (4.0 GPA)",
-        "date": "May 2024"
+        "date": "May 2024",
+        "tags": ["award", "academic", "college", "honor", "gpa", "dean's list"]
     },
     {
         "title": "Excellence in Data Science Award",
         "description": "Awarded for outstanding performance in the Celebrating Undergraduate Research Competition.",
-        "date": "April 2023"
+        "date": "April 2023",
+        "tags": ["academic", "college"]
     },
     {
         "title": "Dean's List",
         "description": "Achieved Dean's List recognition for maintaining a GPA of 3.5 or higher across all semesters at Colorado State University.",
-        "date": "Fall 2021 - Spring 2024"
+        "date": "Fall 2021 - Spring 2024",
+        "tags": ["academic", "college"]
     }
 ]
