@@ -20,7 +20,7 @@ export async function POST(req) {
     }
 
     // 1️⃣ Retrieve relevant context via RAG
-    const results = await searchEmbeddings(message, 3); // top 3 results
+    const results = await searchEmbeddings(message, 10); // top 10 results
     const context = results
       .map((item) =>
         Object.entries(item)
@@ -41,7 +41,14 @@ export async function POST(req) {
       messages: [
         {
           role: 'system',
-          content: 'You are a helpful assistant answering questions about David Riva using provided context.',
+          content: `You are a knowledgeable and professional AI assistant for David Riva's personal website. 
+          Your role is to answer questions about David in detail using the provided context and memory. 
+          Always prioritize accuracy and clarity, and when possible, elaborate with specifics about his 
+          work experience, education, technical skills, and notable projects. 
+          If the context does not contain enough information, politely acknowledge this rather than inventing details. 
+          Keep the tone friendly, approachable, and professional—like a conversation with a well-informed colleague.
+          When dates are mentioned in the context (e.g., work experience, education, projects, awards), always present them 
+          in **descending chronological order (most recent first)** when listing or summarizing.`,
         },
         {
           role: 'user',

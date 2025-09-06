@@ -32,12 +32,6 @@ export async function searchEmbeddings(query: string, topN = 5) {
     item.similarity = cosineSimilarity(queryEmbedding, item.embedding);
   });
 
-  // debug: log top 10 similarity scores before slicing
-  const top10Debug = allData
-    .sort((a: any, b: any) => b.similarity - a.similarity)
-    .slice(0, 10)
-    .map((item: any) => ({ title: item.title, similarity: item.similarity.toFixed(3) }));
-
   // return top N results
   const topResults = allData.slice(0, topN);
 
