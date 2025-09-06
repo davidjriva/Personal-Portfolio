@@ -10,7 +10,7 @@
       "bulletPoints": [
         "Excited to get started and learn more about technical education and AI 😎"
       ],
-      "tags": ["employment", "job", "technical training", "AI", "education", "software", "full-stack", "learning"]
+      "tags": ["work", "job", "employment", "experience", "job", "technical training", "AI", "education", "software", "full-stack", "learning"]
     },
     {
       "title": "Graduated from Colorado State University, Summa Cum Laude",
@@ -20,7 +20,7 @@
       "location": "Fort Collins, CO",
       "startDate": "May 2024",
       "endDate": "May 2024",
-      "tags": ["education", "graduation", "computer science", "honor", "summa cum laude", "academic achievement"]
+      "tags": ["award", "education", "graduation", "computer science", "honor", "summa cum laude", "academic achievement"]
     },
     {
       "title": "Research Assistant [Full-stack Developer]",
@@ -37,7 +37,7 @@
         "Managed source control, met deadlines, and attended weekly Scrum meetings in collaboration with a team of 12 individuals.",
         "Designed visualization components, including interactive charts and a map interface, enabling intuitive data exploration across multiple datasets."
       ],
-      "tags": ["research", "full-stack", "developer", "Python", "React", "TypeScript", "MongoDB", "data visualization", "award", "teamwork", "agile"]
+      "tags": ["work", "job", "employment", "experience", "research", "full-stack", "developer", "Python", "React", "TypeScript", "MongoDB", "data visualization", "award", "teamwork", "agile"]
     },
     {
       "title": "Data Science Intern",
@@ -53,7 +53,7 @@
         "Applied machine learning modeling and forecasting techniques with Scikit-Learn & Facebook Prophet, along with data visualization using Matplotlib & Seaborn.",
         "Developed RESTful APIs & wrappers."
       ],
-      "tags": ["internship", "data science", "ETL", "AWS", "RedShift", "Python", "SQL", "machine learning", "forecasting", "data visualization", "APIs"]
+      "tags": ["work", "job", "employment", "experience", "internship", "data science", "ETL", "AWS", "RedShift", "Python", "SQL", "machine learning", "forecasting", "data visualization", "APIs"]
     },
     {
       "title": "Teaching Assistant",
@@ -68,7 +68,7 @@
         "Conveyed complex technical concepts in a clear and accessible way.",
         "Personalized problem-solving during individualized office hours & managed course curriculum."
       ],
-      "tags": ["teaching", "assistant", "education", "data structures", "algorithms", "leadership", "mentoring", "computer science"]
+      "tags": ["work", "job", "employment", "experience", "teaching", "assistant", "education", "data structures", "algorithms", "leadership", "mentoring", "computer science"]
     }
   ]
   
