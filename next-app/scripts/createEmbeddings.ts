@@ -54,7 +54,7 @@ async function embedFile(filePath: string) {
     if (!text) continue; // skip if empty
 
     const embeddingRes = await client.embeddings.create({
-      model: "text-embedding-3-small",
+      model: "text-embedding-3-large",
       input: text,
     });
 

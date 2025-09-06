@@ -1,17 +1,3 @@
-/*
-    This module provides functionality to perform semantic search over your JSON data embeddings. Specifically, it:
-
-    1. Loads all precomputed embeddings from your _embeddings.json files (awards, experiences, projects, skills) into memory.
-
-    2. Generates an embedding for a user-provided query using OpenAI’s text-embedding-3-small model.
-
-    3. Computes similarity between the query embedding and each item’s embedding in the JSON files using cosine similarity.
-
-    4. Sorts the data by similarity score in descending order.
-
-    5. Returns the top N results, allowing your application to find the most relevant items across all JSON datasets.
-*/
-
 import fs from "fs";
 import OpenAI from "openai";
 
@@ -36,7 +22,7 @@ const allData = [...awards, ...experiences, ...projects, ...skills];
 export async function searchEmbeddings(query: string, topN = 5) {
   // generate query embedding
   const embeddingRes = await client.embeddings.create({
-    model: "text-embedding-3-small",
+    model: "text-embedding-3-large",
     input: query,
   });
   const queryEmbedding = embeddingRes.data[0].embedding;
@@ -46,8 +32,14 @@ export async function searchEmbeddings(query: string, topN = 5) {
     item.similarity = cosineSimilarity(queryEmbedding, item.embedding);
   });
 
-  // return top N results
-  return allData
+  // debug: log top 10 similarity scores before slicing
+  const top10Debug = allData
     .sort((a: any, b: any) => b.similarity - a.similarity)
-    .slice(0, topN);
+    .slice(0, 10)
+    .map((item: any) => ({ title: item.title, similarity: item.similarity.toFixed(3) }));
+
+  // return top N results
+  const topResults = allData.slice(0, topN);
+
+  return topResults;
 }
