@@ -3,48 +3,59 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+// Simple in-memory session store
+const sessionMemory = new Map();
+const MAX_MEMORY_PAIRS = 3; // last 3 Q&A pairs
+
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { message } = body;
+    const { message, sessionId } = body;
 
-    if (!message || message.trim() === '') {
-      return new Response(JSON.stringify({ error: 'Message is required' }), {
+    if (!message || !sessionId || message.trim() === '') {
+      return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
     // 1️⃣ Retrieve relevant context via RAG
-    const results = await searchEmbeddings(message, 5); // top 5 results
-
-    // Flatten results into context string
+    const results = await searchEmbeddings(message, 3); // top 3 results
     const context = results
       .map((item) =>
-        Object.values(item)
-          .filter((v) => v && v !== item.embedding)
-          .map((v) => (Array.isArray(v) ? v.join('. ') : v))
+        Object.entries(item)
+          .filter(([key, value]) => key !== 'embedding' && value)
+          .map(([key, value]) => (Array.isArray(value) ? value.join('. ') : value))
           .join('. ')
       )
       .join('\n\n');
 
-    // 2️⃣ Send user question + context to LLM
+    // 2️⃣ Build memory context: last 3 Q&A pairs
+    const memory = sessionMemory.get(sessionId) || [];
+    const recentMemory = memory.slice(-MAX_MEMORY_PAIRS); // ✅ only last 3 pairs
+    const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
+
+    // 3️⃣ Send user question + memory + RAG context to LLM
     const chatResponse = await client.chat.completions.create({
-      model: 'gpt-4o-mini', // you can pick any Chat model
+      model: 'gpt-4o-mini',
       messages: [
         {
           role: 'system',
-          content: 'You are a helpful assistant that answers questions about David based on the context provided.',
+          content: 'You are a helpful assistant answering questions about David Riva using provided context.',
         },
         {
           role: 'user',
-          content: `Context: ${context}\n\nQuestion: ${message}`,
+          content: `Memory:\n${memoryContext}\n\nContext:\n${context}\n\nQuestion:\n${message}`,
         },
       ],
       temperature: 0.2,
     });
 
-    const responseText = chatResponse.choices[0].message.content;
+    const responseText = chatResponse?.choices?.[0]?.message?.content || '';
+
+    // 4️⃣ Save the new Q&A pair in memory (keep last 3 pairs)
+    const updatedMemory = [...recentMemory, { question: message, answer: responseText }];
+    sessionMemory.set(sessionId, updatedMemory);
 
     return new Response(JSON.stringify({ response: responseText }), {
       status: 200,

@@ -3,12 +3,21 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Box, Button, TextField, Typography, Paper, CircularProgress } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid'; // install with `npm i uuid`
 
 export default function ChatPage() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+
+  const [sessionId, setSessionId] = useState(null);
+
+  useEffect(() => {
+    // generate a sessionId once per page load
+    const id = uuidv4();
+    setSessionId(id);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -19,7 +28,7 @@ export default function ChatPage() {
   }, [messages, loading]);
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !sessionId) return;
 
     setMessages((prev) => [...prev, { role: 'user', text: input }]);
     setLoading(true);
@@ -28,7 +37,7 @@ export default function ChatPage() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
+        body: JSON.stringify({ message: input, sessionId }), // include sessionId
       });
 
       const data = await res.json();
