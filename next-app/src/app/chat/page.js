@@ -2,19 +2,16 @@
 
 import { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Box, Button, TextField, Typography, Paper, CircularProgress } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid'; // install with `npm i uuid`
+import { Box, Button, TextField, Typography, Paper } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function ChatPage() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
-
   const [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
-    // generate a sessionId once per page load
     const id = uuidv4();
     setSessionId(id);
   }, []);
@@ -25,77 +22,66 @@ export default function ChatPage() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, loading]);
+  }, [messages]);
 
   const sendMessage = async () => {
     if (!input.trim() || !sessionId) return;
 
+    // Add user message
     setMessages((prev) => [...prev, { role: 'user', text: input }]);
-    setLoading(true);
+    const userMessage = input;
+    setInput('');
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input, sessionId }), // include sessionId
+        body: JSON.stringify({ message: userMessage, sessionId }),
       });
 
-      const data = await res.json();
-      setMessages((prev) => [...prev, { role: 'assistant', text: data.response }]);
-      setInput('');
+      if (!res.body) throw new Error('No response body');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+
+      // Add empty assistant message
+      let assistantIndex;
+      setMessages((prev) => {
+        assistantIndex = prev.length;
+        return [...prev, { role: 'assistant', text: '' }];
+      });
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        fullText += chunk;
+
+        setMessages((prev) => prev.map((msg, i) => (i === assistantIndex ? { ...msg, text: fullText } : msg)));
+      }
     } catch (err) {
       console.error('Error sending message:', err);
-    } finally {
-      setLoading(false);
+      setMessages((prev) => [...prev, { role: 'assistant', text: 'Sorry, there was an error sending the message.' }]);
     }
   };
 
   return (
-    <Box
-      sx={{
-        p: 3,
-        maxWidth: 600,
-        mx: 'auto',
-        minHeight: '100vh',
-        backgroundColor: '#1e1e1e',
-        color: '#fff',
-      }}
-    >
+    <Box sx={{ p: 3, maxWidth: 600, mx: 'auto', minHeight: '100vh', backgroundColor: '#1e1e1e', color: '#fff' }}>
       <Typography variant="h4" gutterBottom sx={{ color: '#fff', mb: 3 }}>
         Chat with your data
       </Typography>
 
       <Paper
         variant="outlined"
-        sx={{
-          p: 2,
-          minHeight: 300,
-          mb: 2,
-          overflowY: 'auto',
-          backgroundColor: '#2c2c2c',
-          borderColor: '#444',
-        }}
+        sx={{ p: 2, minHeight: 300, mb: 2, overflowY: 'auto', backgroundColor: '#2c2c2c', borderColor: '#444' }}
       >
         {messages.map((msg, i) => (
-          <Box
-            key={i}
-            sx={{
-              mb: 1,
-              backgroundColor: msg.role === 'user' ? '#3a3a3a' : '#444',
-              p: 1,
-              borderRadius: 1,
-            }}
-          >
-            <Typography
-              variant="subtitle2"
-              sx={{
-                color: msg.role === 'user' ? '#90caf9' : '#f48fb1',
-                mb: 0.5,
-              }}
-            >
+          <Box key={i} sx={{ mb: 1, backgroundColor: msg.role === 'user' ? '#3a3a3a' : '#444', p: 1, borderRadius: 1 }}>
+            <Typography variant="subtitle2" sx={{ color: msg.role === 'user' ? '#90caf9' : '#f48fb1', mb: 0.5 }}>
               {msg.role}:
             </Typography>
-
             {msg.role === 'assistant' ? (
               <ReactMarkdown
                 children={msg.text}
@@ -113,14 +99,6 @@ export default function ChatPage() {
             )}
           </Box>
         ))}
-        {loading && (
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-            <CircularProgress size={20} sx={{ mr: 1, color: '#90caf9' }} />
-            <Typography variant="body2" sx={{ color: '#fff' }}>
-              Assistant is typing...
-            </Typography>
-          </Box>
-        )}
         <div ref={messagesEndRef} />
       </Paper>
 
@@ -147,7 +125,7 @@ export default function ChatPage() {
           variant="contained"
           color="primary"
           onClick={sendMessage}
-          disabled={loading || !input.trim()}
+          disabled={!input.trim()}
           sx={{ backgroundColor: '#90caf9', color: '#000', '&:hover': { backgroundColor: '#64b5f6' } }}
         >
           Send

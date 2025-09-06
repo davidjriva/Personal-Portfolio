@@ -36,40 +36,59 @@ export async function POST(req) {
     const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
 
     // 3️⃣ Send user question + memory + RAG context to LLM
-    const chatResponse = await client.chat.completions.create({
+    const stream = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         {
           role: 'system',
           content: `You are a knowledgeable and professional AI assistant for David Riva's personal website. 
-          Your role is to answer questions about David in detail using the provided context and memory. 
-          Always prioritize accuracy and clarity, and when possible, elaborate with specifics about his 
-          work experience, education, technical skills, and notable projects. 
-          If the context does not contain enough information, politely acknowledge this rather than inventing details. 
-          Keep the tone friendly, approachable, and professional—like a conversation with a well-informed colleague.
-          When dates are mentioned in the context (e.g., work experience, education, projects, awards), always present them 
-          in **descending chronological order (most recent first)** when listing or summarizing.`,
+            Your role is to answer questions about David in detail using the provided context and memory. 
+            Always prioritize accuracy and clarity, and when possible, elaborate with specifics about his 
+            work experience, education, technical skills, and notable projects. 
+            If the context does not contain enough information, politely acknowledge this rather than inventing details. 
+            Keep the tone friendly, approachable, and professional—like a conversation with a well-informed colleague.
+            When dates are mentioned in the context (e.g., work experience, education, projects, awards), always present them 
+            in **descending chronological order (most recent first)** when listing or summarizing.`,
         },
         {
           role: 'user',
           content: `Memory:\n${memoryContext}\n\nContext:\n${context}\n\nQuestion:\n${message}`,
         },
       ],
+      stream: true,
       temperature: 0.2,
     });
 
-    const responseText = chatResponse?.choices?.[0]?.message?.content || '';
-
-    // 4️⃣ Save the new Q&A pair in memory (keep last 3 pairs)
-    const updatedMemory = [...recentMemory, { question: message, answer: responseText }];
-    sessionMemory.set(sessionId, updatedMemory);
-
-    return new Response(JSON.stringify({ response: responseText }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        let fullText = '';
+        try {
+          for await (const chunk of stream) {
+            const text = chunk.choices[0]?.delta?.content || '';
+            if (text) {
+              fullText += text;
+              controller.enqueue(encoder.encode(text)); // stream each chunk to frontend
+            }
+          }
+          sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
+        } catch (err) {
+          console.error('Streaming error:', err);
+        } finally {
+          controller.close();
+        }
+      },
     });
-  } catch (err) {
-    console.error('Error in /api/chat:', err);
+
+    return new Response(readable, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
+      },
+    });
+  } catch (error) {
+    console.error('Error streaming response in /api/chat:', error);
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
