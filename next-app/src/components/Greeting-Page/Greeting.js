@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import ViewWorkButton from '@/components/Greeting-Page/ViewWorkButton';
 import AnimatedTypingTypography from '@/components/Greeting-Page/AnimatedTypingTypography';
