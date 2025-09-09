@@ -11,7 +11,7 @@ const Biography = () => {
       }}
     >
       <Typography variant="body1">
-        Hi, I'm David. I'm a Technical Trainer @ <ClickableLink link="https://c3.ai" company="C3 AI" /> based in the Bay
+        Hi, I'm David. I'm a Technical Trainer @ <ClickableLink link="https://c3.ai" text="C3 AI" /> based in the Bay
         Area, CA, and a graduate of Colorado State University, where I received a B.S. in Computer Science with Summa
         Cum Laude distinctions. I'm incredibly passionate about software engineering & UI / UX design.
       </Typography>
