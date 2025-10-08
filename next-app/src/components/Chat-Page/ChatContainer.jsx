@@ -9,7 +9,7 @@ import MessagesList from '@/components/Chat-Page/MessagesList';
 import ChatInput from '@/components/Chat-Page/ChatInput';
 
 // --------------------- ChatPage ---------------------
-export default function ChatPage() {
+const ChatContainer = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [sessionId, setSessionId] = useState(null);
@@ -77,4 +77,6 @@ export default function ChatPage() {
     <ChatInput input={input} setInput={setInput} sendMessage={sendMessage} />
     </Box>
   );
-}
+};
+
+export default ChatContainer;

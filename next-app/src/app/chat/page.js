@@ -3,14 +3,14 @@
 import { Box } from '@mui/material';
 
 import ParticleBackground from '@/components/ParticleBackground';
-import ChatWindow from '@/components/Chat-Page/ChatWindow';
+import ChatContainer from '@/components/Chat-Page/ChatContainer';
 
 // --------------------- ChatPage ---------------------
 export default function ChatPage() {
   return (
     <Box sx={{ position: 'relative' }}>
       <ParticleBackground />
-      <ChatWindow />
+      <ChatContainer />
     </Box>
   );
 }
