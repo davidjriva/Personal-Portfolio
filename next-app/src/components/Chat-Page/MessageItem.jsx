@@ -3,6 +3,16 @@ import ReactMarkdown from 'react-markdown';
 
 const MessageItem = ({ msg }) => {
     const isUser = msg.role === 'user';
+
+    const typographyStyles = {
+      fontFamily: 'var(--font-montserrat), Arial, sans-serif',
+      fontWeight: 400,
+      lineHeight: 1.6,
+      fontSize: '1rem !important',
+      color: '#fff',
+      marginBottom: '4px',
+    };
+
     return (
       <Box sx={{ mb: 1, backgroundColor: isUser ? '#3a3a3a' : '#444', p: 1, borderRadius: 1 }}>
         <Typography variant="subtitle2" sx={{ color: isUser ? '#90caf9' : '#f48fb1', mb: 0.5 }}>
@@ -12,10 +22,16 @@ const MessageItem = ({ msg }) => {
           <ReactMarkdown
             children={msg.text}
             components={{
-              p: ({ node, ...props }) => <Typography variant="body1" sx={{ color: '#fff', mb: 0.5 }} {...props} />,
-              li: ({ node, ...props }) => <li style={{ color: '#fff', marginBottom: '4px' }} {...props} />,
-              strong: ({ node, ...props }) => <strong style={{ color: '#fff' }} {...props} />,
-              em: ({ node, ...props }) => <em style={{ color: '#fff' }} {...props} />,
+              p: ({ node, ...props }) => <Typography variant="body1" sx={typographyStyles} {...props} />,
+              li: ({ node, ...props }) => <li style={{ ...typographyStyles, marginBottom: '4px' }} {...props} />,
+              strong: ({ node, ...props }) => <strong style={typographyStyles} {...props} />,
+              em: ({ node, ...props }) => <em style={typographyStyles} {...props} />,
+              h1: ({ node, ...props }) => <Typography variant="h4" sx={typographyStyles} {...props} />,
+              h2: ({ node, ...props }) => <Typography variant="h5" sx={typographyStyles} {...props} />,
+              h3: ({ node, ...props }) => <Typography variant="h6" sx={typographyStyles} {...props} />,
+              h4: ({ node, ...props }) => <Typography variant="subtitle1" sx={typographyStyles} {...props} />,
+              h5: ({ node, ...props }) => <Typography variant="subtitle2" sx={typographyStyles} {...props} />,
+              h6: ({ node, ...props }) => <Typography variant="body1" sx={typographyStyles} {...props} />,
             }}
           />
         ) : (
