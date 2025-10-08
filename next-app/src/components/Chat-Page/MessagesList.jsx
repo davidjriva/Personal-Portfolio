@@ -9,6 +9,7 @@ const MessagesList = ({ messages }) => {
     const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   
     useEffect(() => {
+      if (messages.length === 0) return; // only scroll once chatting begins
       scrollToBottom();
     }, [messages]);
   
