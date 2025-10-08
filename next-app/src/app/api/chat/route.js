@@ -27,6 +27,9 @@ const MAX_MEMORY_PAIRS = 3; // last 3 Q&A pairs
 const MAX_REQUESTS = 5; // max requests
 const WINDOW_MS = 60 * 1000; // per 1 minute
 
+// The maximum allowed message length in characters
+const MAX_MESSAGE_LENGTH = 1000;
+
 async function checkRateLimit(redis, ip) {
   const now = Date.now();
   const key = `rate:${ip}`;
@@ -63,6 +66,7 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401 });
     }
 
+    // Validate request format
     const body = await req.json();
     const { message, sessionId } = body;
 
@@ -73,6 +77,15 @@ export async function POST(req) {
       });
     }
 
+    // Validate message length
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Message too long. Maximum length is ${MAX_MESSAGE_LENGTH} characters.` }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate IP address and enforce rate limiting (5 requests / 1 minute)
     const forwarded = req.headers.get('x-forwarded-for');
     let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
 
@@ -89,7 +102,7 @@ export async function POST(req) {
       );
     }
 
-    // 1️⃣ Retrieve relevant context via RAG
+    // Retrieve relevant chunks for RAG
     const results = await searchEmbeddings(message, 10); // top 10 results
     const context = results
       .map((item) =>
@@ -100,12 +113,12 @@ export async function POST(req) {
       )
       .join('\n\n');
 
-    // 2️⃣ Build memory context: last 3 Q&A pairs
+    // Add last 3 Q&A pairs as short-term memory
     const memory = sessionMemory.get(sessionId) || [];
     const recentMemory = memory.slice(-MAX_MEMORY_PAIRS); // ✅ only last 3 pairs
     const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
 
-    // 3️⃣ Send user question + memory + RAG context to LLM
+    // Send user question + short-term memory + relevant documents to LLM
     const stream = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -129,6 +142,7 @@ export async function POST(req) {
       temperature: 0.2,
     });
 
+    // Stream the LLM response to the client
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
