@@ -1,6 +1,8 @@
 import { searchEmbeddings } from '../../../lib/search';
 import OpenAI from 'openai';
 
+import jwt from 'jsonwebtoken';
+
 // Redis kv store for maintaing state across edge (serverless) functions. This is especially important since we need to maintain rate limiting state across serverless functions to harden this endpoint.
 import { createClient } from 'redis';
 
@@ -48,6 +50,19 @@ async function checkRateLimit(redis, ip) {
 
 export async function POST(req) {
   try {
+    // Verify JWT
+    const authHeader = req.headers.get('authorization');
+    const token = authHeader?.split(' ')[1];
+    if (!token) {
+      return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
+    }
+
+    try {
+      jwt.verify(token, process.env.FRONTEND_JWT_SECRET); // throws if invalid
+    } catch (err) {
+      return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401 });
+    }
+
     const body = await req.json();
     const { message, sessionId } = body;
 

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid';
 
 import MessagesList from '@/components/Chat-Page/MessagesList';
 import ChatInput from '@/components/Chat-Page/ChatInput';
@@ -10,11 +9,24 @@ import ChatInput from '@/components/Chat-Page/ChatInput';
 const ChatContainer = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
-  const [sessionId, setSessionId] = useState(null);
   const [started, setStarted] = useState(false);
 
+  const [token, setToken] = useState(null);
+  const [sessionId, setSessionId] = useState(null);
+
   useEffect(() => {
-    setSessionId(uuidv4());
+    const getToken = async () => {
+      try {
+        const res = await fetch('/api/token'); // automatically works in dev and prod
+        const data = await res.json();
+        setToken(data.token);
+        setSessionId(data.sessionId);
+      } catch (err) {
+        console.error('Failed to get token:', err);
+      }
+    };
+
+    getToken();
   }, []);
 
   const sendMessage = async () => {
@@ -29,7 +41,7 @@ const ChatContainer = () => {
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ message: userMessage, sessionId }),
       });
 
