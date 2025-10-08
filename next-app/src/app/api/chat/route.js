@@ -1,19 +1,36 @@
 import { searchEmbeddings } from '../../../lib/search';
 import OpenAI from 'openai';
 
+// Redis kv store for maintaing state across edge (serverless) functions. This is especially important since we need to maintain rate limiting state across serverless functions to harden this endpoint.
+import { createClient } from 'redis';
+
+let redis;
+
+async function getRedisClient() {
+  if (!redis) {
+    redis = createClient({ url: process.env.REDIS_URL });
+    redis.on('error', (err) => console.error('Redis Client Error', err));
+    await redis.connect();
+  }
+  return redis;
+}
+
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Simple in-memory session store
 const sessionMemory = new Map();
 const MAX_MEMORY_PAIRS = 3; // last 3 Q&A pairs
 
-const rateLimitMap = new Map(); // sessionId -> { count, timestamp }
+// Rate limiting map: IP -> { count, timestamp }
 const MAX_REQUESTS = 5; // max requests
 const WINDOW_MS = 60 * 1000; // per 1 minute
 
-function checkRateLimit(sessionId) {
+async function checkRateLimit(redis, ip) {
   const now = Date.now();
-  const entry = rateLimitMap.get(sessionId) || { count: 0, timestamp: now };
+  const key = `rate:${ip}`;
+
+  const data = await redis.get(key);
+  let entry = data ? JSON.parse(data) : { count: 0, timestamp: now };
 
   // reset window if expired
   if (now - entry.timestamp > WINDOW_MS) {
@@ -22,9 +39,10 @@ function checkRateLimit(sessionId) {
   }
 
   entry.count += 1;
-  rateLimitMap.set(sessionId, entry);
 
-  // return whether request is allowed
+  // set TTL for the window
+  await redis.set(key, JSON.stringify(entry), { PX: WINDOW_MS });
+
   return entry.count <= MAX_REQUESTS;
 }
 
@@ -40,11 +58,20 @@ export async function POST(req) {
       });
     }
 
-    if (!checkRateLimit(sessionId)) {
-      return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const forwarded = req.headers.get('x-forwarded-for');
+    let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
+
+    if (process.env.NODE_ENV === 'development' && ip === 'unknown') ip = sessionId; // fallback for local/dev to sessionId
+
+    redis = await getRedisClient();
+    if (!(await checkRateLimit(redis, ip))) {
+      return new Response(
+        JSON.stringify({
+          error:
+            '⚠️ You have exceeded the rate limit for messages. Please wait 1 minute before sending another message.',
+        }),
+        { status: 429, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     // 1️⃣ Retrieve relevant context via RAG

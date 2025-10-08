@@ -33,6 +33,16 @@ const ChatContainer = () => {
         body: JSON.stringify({ message: userMessage, sessionId }),
       });
 
+      // Handle rate limiting before streaming
+      if (res.status === 429) {
+        const data = await res.json();
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', type: 'rate-limit', text: data.error },
+        ]);
+        return;
+      }
+
       if (!res.body) throw new Error('No response body');
 
       const reader = res.body.getReader();
