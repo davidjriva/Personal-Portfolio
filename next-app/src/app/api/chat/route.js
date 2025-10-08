@@ -7,6 +7,27 @@ const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const sessionMemory = new Map();
 const MAX_MEMORY_PAIRS = 3; // last 3 Q&A pairs
 
+const rateLimitMap = new Map(); // sessionId -> { count, timestamp }
+const MAX_REQUESTS = 5; // max requests
+const WINDOW_MS = 60 * 1000; // per 1 minute
+
+function checkRateLimit(sessionId) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(sessionId) || { count: 0, timestamp: now };
+
+  // reset window if expired
+  if (now - entry.timestamp > WINDOW_MS) {
+    entry.count = 0;
+    entry.timestamp = now;
+  }
+
+  entry.count += 1;
+  rateLimitMap.set(sessionId, entry);
+
+  // return whether request is allowed
+  return entry.count <= MAX_REQUESTS;
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -15,6 +36,13 @@ export async function POST(req) {
     if (!message || !sessionId || message.trim() === '') {
       return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), {
         status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!checkRateLimit(sessionId)) {
+      return new Response(JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }), {
+        status: 429,
         headers: { 'Content-Type': 'application/json' },
       });
     }
