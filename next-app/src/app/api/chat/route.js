@@ -17,9 +17,9 @@ async function getRedisClient() {
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Simple in-memory session store
+// Simple in-memory session store (short-term memory)
 const sessionMemory = new Map();
-const MAX_MEMORY_PAIRS = 3; // last 3 Q&A pairs
+const MAX_MEMORY_PAIRS = 2; // last 2 Q&A pairs
 
 // Rate limiting
 const MAX_REQUESTS = 5;
@@ -106,7 +106,7 @@ export async function POST(req) {
 
     // Retrieve embeddings
     console.log('Searching embeddings...');
-    const results = await searchEmbeddings(message, 10);
+    const results = await searchEmbeddings(message);
     console.log(`Found ${results.length} embedding results`);
 
     const context = results
