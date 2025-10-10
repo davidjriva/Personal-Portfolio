@@ -3,8 +3,6 @@ import OpenAI from 'openai';
 import jwt from 'jsonwebtoken';
 import { createClient } from 'redis';
 
-export const runtime = 'force-dynamic';
-
 let redis;
 
 async function getRedisClient() {
