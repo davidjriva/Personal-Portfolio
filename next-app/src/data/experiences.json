@@ -1,6 +1,6 @@
 [
     {
-      "title": "Senior Associate Technical Trainer",
+      "title": "Software Engineer, Technical Training",
       "company": "C3 AI",
       "companyWebsiteLink": "https://c3.ai/",
       "logoImage": "C3_AI.webp",
@@ -8,7 +8,11 @@
       "startDate": "September 2024",
       "endDate": "Present",
       "bulletPoints": [
-        "Excited to get started and learn more about technical education and AI 😎"
+        "Achieved 1st place at the C3 Agentic AI Hackathon 2025 by creating agentic tooling that significantly boosted developer efficiency in UI component creation, demonstrating strong computer science fundamentals and intuitive UI design using React, TypeScript, and an in-house LLM.",
+        "Led the development of C3 AI's training website, launching an LMS for 8,000+ learners using JavaScript, HTML, and CSS, effectively adapting to evolving requirements and tight deadlines while aligning product direction with user needs.",
+        "Created internal productivity tools to automate customer-facing processes, utilizing React, JavaScript, Next.js, and Electron.js, which resulted in an 80% reduction in the time to send learners feedback and showcased practical software development and UI design expertise.",
+        "Developed and administered curriculum for 8,000+ learners in data science, machine learning, and application development using the C3 AI framework, JavaScript, and Python, reinforcing technical training through agile Scrum methodologies and long-term vision in educational product development.",
+        "Resolved customer obstacles through personalized debugging sessions, reinforcing customer interaction skills and ensuring technology worked seamlessly across diverse engineering teams."
       ],
       "tags": ["work", "job", "employment", "experience", "job", "technical training", "AI", "education", "software", "full-stack", "learning"]
     },
@@ -23,7 +27,7 @@
       "tags": ["award", "education", "graduation", "computer science", "honor", "summa cum laude", "academic achievement"]
     },
     {
-      "title": "Research Assistant [Full-stack Developer]",
+      "title": "Full-Stack Developer, University Research",
       "company": "Colorado State University",
       "companyWebsiteLink": "https://compsci.colostate.edu/",
       "logoImage": "CSU_logo.webp",
@@ -40,7 +44,7 @@
       "tags": ["work", "job", "employment", "experience", "research", "full-stack", "developer", "Python", "React", "TypeScript", "MongoDB", "data visualization", "award", "teamwork", "agile"]
     },
     {
-      "title": "Data Science Intern",
+      "title": "Machine Learning Engineer, Internship",
       "company": "Hewlett Packard Inc.",
       "companyWebsiteLink": "https://www.hp.com/us-en/home.html",
       "logoImage": "hp_logo.webp",
