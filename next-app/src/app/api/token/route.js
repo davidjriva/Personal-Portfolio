@@ -9,21 +9,29 @@ const TOKEN_TTL = '5m'; // short-lived token
 export async function GET(req) {
   try {
     // Verify origin
-
     const origin = req.headers.get('origin') || '';
 
-    console.log('Origin = ', origin);
-
-    if (process.env.NODE_ENV !== 'development') {
-      const allowed = ['https://www.davidriva.dev', `https://${process.env.VERCEL_URL}`];
-
-      console.log('Allowed = ', allowed);
+    const isProduction = process.env.VERCEL_ENV === 'production';
+    const isPreview = process.env.VERCEL_ENV === 'preview';
+    
+    if (isProduction) {
+      const allowed = ['https://www.davidriva.dev'];
       if (!allowed.includes(origin)) {
         return new Response(JSON.stringify({ error: 'Origin not allowed' }), { status: 403 });
       }
-    }
+    } else if (isPreview) {
+      const allowedPreview = [`https://${process.env.VERCEL_URL}`];
+      if (!allowedPreview.includes(origin)) {
+        return new Response(JSON.stringify({ error: 'Origin not allowed (preview)' }), { status: 403 });
+      }
+    } else {
+      // development
+      const allowedDev = ['http://localhost:3000', 'http://127.0.0.1:3000', ''];
+      if (!allowedDev.includes(origin)) {
+        return new Response(JSON.stringify({ error: 'Origin not allowed (dev)' }), { status: 403 });
+      }
+    }    
 
-    console.log('Generating session ID and JWT token...');
     // Generate session ID and JWT token
 
     const sessionId = uuidv4();
