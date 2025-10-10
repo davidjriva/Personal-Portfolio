@@ -27,7 +27,7 @@ export async function GET(req) {
       }
     } else if (isPreview) {
       console.log('Environment: Preview');
-      const allowedPreview = [`https://${process.env.VERCEL_URL}`];
+      const allowedPreview = [`https://${process.env.VERCEL_URL}`, '']; // allow requests where origin header is missing
       console.log('Allowed preview origins:', allowedPreview);
       if (!allowedPreview.includes(origin)) {
         console.warn('Origin not allowed in preview:', origin);
