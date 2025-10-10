@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const TOKEN_TTL = '5m'; // short-lived token
 

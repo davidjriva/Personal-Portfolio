@@ -3,6 +3,8 @@ import OpenAI from 'openai';
 
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+
 // Redis kv store for maintaing state across edge (serverless) functions. This is especially important since we need to maintain rate limiting state across serverless functions to harden this endpoint.
 import { createClient } from 'redis';
 
