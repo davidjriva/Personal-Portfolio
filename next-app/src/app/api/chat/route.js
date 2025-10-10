@@ -149,14 +149,26 @@ export async function POST(req) {
     const readable = new ReadableStream({
       async start(controller) {
         let fullText = '';
+        let hasSentFirstChunk = false; // ✅ Track first chunk
+
         try {
           for await (const chunk of stream) {
             const text = chunk.choices[0]?.delta?.content || '';
             if (text) {
               fullText += text;
-              controller.enqueue(encoder.encode(text)); // stream each chunk to frontend
+
+              // Send the first tiny chunk immediately to avoid timeout
+              if (!hasSentFirstChunk) {
+                controller.enqueue(encoder.encode(text.slice(0, 5))); // send first 5 chars fast
+                hasSentFirstChunk = true;
+              }
+
+              // Then stream the rest normally
+              controller.enqueue(encoder.encode(text));
             }
           }
+
+          // Save memory after streaming completes
           sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
         } catch (err) {
           console.error('Streaming error:', err);
