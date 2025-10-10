@@ -44,6 +44,34 @@ const MessageItem = ({ msg }) => {
             h6: ({ node, ...props }) => (
               <Typography sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1rem', mt: 1, mb: 0.5 }} {...props} />
             ),
+            code: ({ node, inline, className, ...props }) => (
+              <Box
+                component="code"
+                sx={{
+                  fontFamily: 'monospace',
+                  color: '#fff', // white text
+                  backgroundColor: '#333', // dark background
+                  p: inline ? '0 4px' : 1,
+                  borderRadius: 1,
+                  display: inline ? 'inline' : 'block',
+                  overflowX: 'auto',
+                }}
+                {...props}
+              />
+            ),
+            pre: ({ node, ...props }) => (
+              <Box
+                component="pre"
+                sx={{
+                  backgroundColor: '#333',
+                  color: '#fff',
+                  p: 1,
+                  borderRadius: 1,
+                  overflowX: 'auto',
+                }}
+                {...props}
+              />
+            ),
           }}
           />        
         ) : (
