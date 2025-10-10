@@ -95,8 +95,8 @@ const ChatContainer = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center', // always center vertically
-        alignItems: 'center',     // always center horizontally
+        justifyContent: 'center',
+        alignItems: 'center',
         p: 3,
         color: '#fff',
       }}

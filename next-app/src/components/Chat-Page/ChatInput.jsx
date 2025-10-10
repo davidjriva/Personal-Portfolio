@@ -13,7 +13,7 @@ const ChatInput = ({ input, setInput, sendMessage }) => {
         display: 'flex',
         alignItems: 'center',
         p: '4px 8px',
-        borderRadius: '999px', // fully rounded
+        borderRadius: '999px',
         backgroundColor: '#2c2c2c',
         border: '1px solid #555',
         '&:hover': { borderColor: '#90caf9' },

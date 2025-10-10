@@ -49,8 +49,8 @@ const MessageItem = ({ msg }) => {
                 component="code"
                 sx={{
                   fontFamily: 'monospace',
-                  color: '#fff', // white text
-                  backgroundColor: '#333', // dark background
+                  color: '#fff',
+                  backgroundColor: '#333',
                   p: inline ? '0 4px' : 1,
                   borderRadius: 1,
                   display: inline ? 'inline' : 'block',
