@@ -7,24 +7,20 @@ let redis;
 
 async function getRedisClient() {
   if (!redis) {
+    const start = Date.now();
     redis = createClient({ url: process.env.REDIS_URL });
     redis.on('error', (err) => console.error('Redis Client Error', err));
     await redis.connect();
+    console.log(`Redis connected in ${Date.now() - start}ms`);
   }
   return redis;
 }
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-// Simple in-memory session store (short-term memory)
 const sessionMemory = new Map();
-const MAX_MEMORY_PAIRS = 2; // last 2 Q&A pairs
-
-// Rate limiting
+const MAX_MEMORY_PAIRS = 2;
 const MAX_REQUESTS = 5;
 const WINDOW_MS = 60 * 1000;
-
-// Max message length
 const MAX_MESSAGE_LENGTH = 1500;
 
 async function checkRateLimit(redis, ip) {
@@ -40,18 +36,18 @@ async function checkRateLimit(redis, ip) {
 
   entry.count += 1;
   await redis.set(key, JSON.stringify(entry), { PX: WINDOW_MS });
-
   return entry.count <= MAX_REQUESTS;
 }
 
 export async function POST(req) {
+  const startTotal = Date.now();
+  console.log(`[${new Date().toISOString()}] POST /api/chat start`);
+
   try {
-    // Verify JWT
+    // JWT Verification
     const authHeader = req.headers.get('authorization');
     const token = authHeader?.split(' ')[1];
-    if (!token) {
-      return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
-    }
+    if (!token) return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
 
     try {
       jwt.verify(token, process.env.FRONTEND_JWT_SECRET);
@@ -64,38 +60,26 @@ export async function POST(req) {
     const { message, sessionId } = body;
 
     if (!message || !sessionId || message.trim() === '') {
-      return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), {
+      return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), { status: 400 });
+    }
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return new Response(JSON.stringify({ error: `Message too long. Max length is ${MAX_MESSAGE_LENGTH}.` }), {
         status: 400,
-        headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    if (message.length > MAX_MESSAGE_LENGTH) {
-      return new Response(
-        JSON.stringify({ error: `Message too long. Maximum length is ${MAX_MESSAGE_LENGTH} characters.` }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // IP and rate limiting
+    // Rate limiting
     const forwarded = req.headers.get('x-forwarded-for');
     let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
     if (process.env.NODE_ENV === 'development' && ip === 'unknown') ip = sessionId;
 
     redis = await getRedisClient();
     if (!(await checkRateLimit(redis, ip))) {
-      return new Response(
-        JSON.stringify({
-          error:
-            '⚠️ You have exceeded the rate limit for messages. Please wait 1 minute before sending another message.',
-        }),
-        { status: 429, headers: { 'Content-Type': 'application/json' } }
-      );
+      return new Response(JSON.stringify({ error: '⚠️ Rate limit exceeded. Please wait 1 minute.' }), { status: 429 });
     }
 
     // Retrieve embeddings
     const results = await searchEmbeddings(message);
-
     const context = results
       .map((item) =>
         Object.entries(item)
@@ -105,22 +89,21 @@ export async function POST(req) {
       )
       .join('\n\n');
 
-    // Add last 2 Q&A pairs
+    // Retrieve recent memory
     const memory = sessionMemory.get(sessionId) || [];
     const recentMemory = memory.slice(-MAX_MEMORY_PAIRS);
     const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
 
-    // Optimized system prompt
+    // Prepare system prompt
     const systemPrompt = `
     You are a concise, professional AI assistant for David Riva's personal website.
     - Answer accurately using the provided context and memory.
     - Keep answers short and focused (≤300 words, avoid extra commentary).
-    - If information is missing, say "I'm not sure how to answer this question, could you rephrase it?".
     - Use basic Markdown only (headings, lists, bold).
     - Friendly and professional tone.
     `;
 
-    // Create OpenAI streaming
+    // LLM Streaming
     const stream = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -132,35 +115,23 @@ export async function POST(req) {
       ],
       stream: true,
       temperature: 0.2,
-      max_tokens: 300, // shorter token limit for faster output
     });
 
-    // Stream response with buffer
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
         let fullText = '';
-        let buffer = '';
-
         try {
           for await (const chunk of stream) {
-            const text = chunk.choices[0]?.delta?.content || '';
+            const text = chunk.choices[0]?.delta?.content;
             if (text) {
-              buffer += text;
+              controller.enqueue(encoder.encode(text));
               fullText += text;
-
-              // Send in 50-char batches for faster streaming
-              if (buffer.length >= 100) {
-                controller.enqueue(encoder.encode(buffer));
-                buffer = '';
-              }
             }
           }
 
-          // Send any remaining buffer
-          if (buffer.length) controller.enqueue(encoder.encode(buffer));
-
           sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
+          console.log(`LLM stream finished`);
         } catch (err) {
           console.error('Streaming error:', err);
         } finally {
@@ -177,10 +148,12 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.error('Error streaming response in /api/chat:', error);
+    console.error('Error in /api/chat:', error);
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
+  } finally {
+    console.log(`Total request duration: ${Date.now() - startTotal}ms`);
   }
 }
