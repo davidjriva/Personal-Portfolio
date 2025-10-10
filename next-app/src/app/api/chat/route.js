@@ -139,7 +139,7 @@ export async function POST(req) {
           - Present dates in **descending chronological order** (most recent first) when listing or summarizing.  
           - Use **Markdown** to structure your answers: headings, lists, bold, italics, and newlines for readability.  
           - Keep the tone **friendly, approachable, and professional**—like conversing with a well-informed colleague.  
-          - Aim for conciseness: The answer must be less than **1000 characters**.
+          - Aim for conciseness: The answer must be less than **500 characters**.
           
           Make your answers **well-structured, visually clear, and easy to read**.`,
         },
