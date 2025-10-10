@@ -90,7 +90,7 @@ const ChatContainer = () => {
       sx={{
         position: 'relative',
         zIndex: 1,
-        maxWidth: 600,
+        maxWidth: 768,
         mx: 'auto',
         minHeight: '100vh',
         display: 'flex',
