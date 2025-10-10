@@ -12,22 +12,18 @@ export async function GET(req) {
 
     const origin = req.headers.get('origin') || '';
 
+    console.log('Origin = ', origin);
+
     if (process.env.NODE_ENV !== 'development') {
-      const allowed = ['https://www.davidriva.dev'];
+      const allowed = ['https://www.davidriva.dev', `https://${process.env.VERCEL_URL}`];
+
+      console.log('Allowed = ', allowed);
       if (!allowed.includes(origin)) {
         return new Response(JSON.stringify({ error: 'Origin not allowed' }), { status: 403 });
       }
-    } else {
-      // In dev, allow localhost
-      // Also allow Vercel previews
-      if (
-        !['http://localhost:3000', 'http://127.0.0.1:3000'].includes(origin) ||
-        process.env.VERCEL_ENV === 'preview'
-      ) {
-        console.warn(`Dev: ignoring unknown origin: ${origin}`);
-      }
     }
 
+    console.log('Generating session ID and JWT token...');
     // Generate session ID and JWT token
 
     const sessionId = uuidv4();
