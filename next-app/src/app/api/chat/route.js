@@ -3,6 +3,8 @@ import OpenAI from 'openai';
 
 import jwt from 'jsonwebtoken';
 
+export const runtime = 'nodejs'; // ensures it uses Node.js Server Function. If you run as an edge function, this will get cut-off mid-stream since they can only run for 10 seconds.
+
 // Redis kv store for maintaing state across edge (serverless) functions. This is especially important since we need to maintain rate limiting state across serverless functions to harden this endpoint.
 import { createClient } from 'redis';
 
