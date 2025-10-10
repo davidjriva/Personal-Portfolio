@@ -30,7 +30,7 @@ const MAX_REQUESTS = 5; // max requests
 const WINDOW_MS = 60 * 1000; // per 1 minute
 
 // The maximum allowed message length in characters
-const MAX_MESSAGE_LENGTH = 1000;
+const MAX_MESSAGE_LENGTH = 1500;
 
 async function checkRateLimit(redis, ip) {
   const now = Date.now();
