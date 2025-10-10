@@ -2,13 +2,20 @@ import React from 'react';
 import { Box, Divider } from '@mui/material';
 import AwardCard from './AwardCard';
 import SectionHeading from '@/components/SectionHeading';
-import awardsData from '@/data/awards.json';
 
 export const metadata = {
   title: 'David Riva | Awards',
 };
 
 const Awards = () => {
+  const [awardsData, setAwardsData] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/awards.json')
+      .then((res) => res.json())
+      .then((data) => setAwardsData(data));
+  }, []);
+
   return (
     <Box
       sx={{
@@ -19,7 +26,7 @@ const Awards = () => {
         padding: '5rem',
         position: 'relative',
         borderTop: '8px solid rgba(0,0,0,0.1)',
-        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)'
+        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)',
       }}
     >
       <SectionHeading sectionName="Awards" />
