@@ -7,6 +7,8 @@ const TOKEN_TTL = '5m'; // short-lived token
 
 export async function GET(req) {
   try {
+    // Verify origin
+
     const origin = req.headers.get('origin') || '';
 
     if (process.env.NODE_ENV !== 'development') {
@@ -16,10 +18,16 @@ export async function GET(req) {
       }
     } else {
       // In dev, allow localhost
-      if (!['http://localhost:3000', 'http://127.0.0.1:3000'].includes(origin)) {
+      // Also allow Vercel previews
+      if (
+        !['http://localhost:3000', 'http://127.0.0.1:3000'].includes(origin) ||
+        process.env.VERCEL_ENV === 'preview'
+      ) {
         console.warn(`Dev: ignoring unknown origin: ${origin}`);
       }
     }
+
+    // Generate session ID and JWT token
 
     const sessionId = uuidv4();
     const payload = { sid: sessionId, role: 'frontend' };
