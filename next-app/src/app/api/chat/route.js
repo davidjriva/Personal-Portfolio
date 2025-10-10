@@ -128,7 +128,7 @@ export async function POST(req) {
     You are a concise, professional AI assistant for David Riva's personal website.
   - Answer accurately using the provided context and memory.
   - Keep answers short and focused (≤200 words, avoid extra commentary).
-  - If information is missing, say "I don't know" instead of guessing.
+  - If information is missing, say "I'm not sure how to answer this question, could you rephrase it?" instead of guessing.
   - Use basic Markdown only (headings, lists, bold).
   - Friendly and professional tone.
   `;
