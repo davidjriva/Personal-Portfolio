@@ -149,6 +149,10 @@ export async function POST(req) {
     const readable = new ReadableStream({
       async start(controller) {
         let fullText = '';
+    
+        // Immediately send a single space or newline so Vercel sees activity
+        controller.enqueue(encoder.encode(' '));
+    
         try {
           for await (const chunk of stream) {
             const text = chunk.choices[0]?.delta?.content || '';
@@ -157,6 +161,8 @@ export async function POST(req) {
               controller.enqueue(encoder.encode(text)); // stream each chunk to frontend
             }
           }
+    
+          // Save memory after the stream is done
           sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
         } catch (err) {
           console.error('Streaming error:', err);
@@ -164,7 +170,7 @@ export async function POST(req) {
           controller.close();
         }
       },
-    });
+    });    
 
     return new Response(readable, {
       headers: {
