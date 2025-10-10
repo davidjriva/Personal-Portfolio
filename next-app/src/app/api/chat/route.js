@@ -139,7 +139,7 @@ export async function POST(req) {
             If the context does not contain enough information, politely acknowledge this rather than inventing details. 
             Keep the tone friendly, approachable, and professional—like a conversation with a well-informed colleague.
             When dates are mentioned in the context (e.g., work experience, education, projects, awards), always present them 
-            in **descending chronological order (most recent first)** when listing or summarizing. Answer the user's query **concisely** with 500 characters or less.`,
+            in **descending chronological order (most recent first)** when listing or summarizing. Answer the user's query **concisely** with 1000 characters or less.`,
         },
         {
           role: 'user',
