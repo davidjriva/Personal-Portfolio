@@ -20,20 +20,32 @@ const MessageItem = ({ msg }) => {
         </Typography>
         {msg.role === 'assistant' ? (
           <ReactMarkdown
-            children={msg.text}
-            components={{
-              p: ({ node, ...props }) => <Typography variant="body1" sx={typographyStyles} {...props} />,
-              li: ({ node, ...props }) => <li style={{ ...typographyStyles, marginBottom: '4px' }} {...props} />,
-              strong: ({ node, ...props }) => <strong style={typographyStyles} {...props} />,
-              em: ({ node, ...props }) => <em style={typographyStyles} {...props} />,
-              h1: ({ node, ...props }) => <Typography variant="h4" sx={typographyStyles} {...props} />,
-              h2: ({ node, ...props }) => <Typography variant="h5" sx={typographyStyles} {...props} />,
-              h3: ({ node, ...props }) => <Typography variant="h6" sx={typographyStyles} {...props} />,
-              h4: ({ node, ...props }) => <Typography variant="subtitle1" sx={typographyStyles} {...props} />,
-              h5: ({ node, ...props }) => <Typography variant="subtitle2" sx={typographyStyles} {...props} />,
-              h6: ({ node, ...props }) => <Typography variant="body1" sx={typographyStyles} {...props} />,
-            }}
-          />
+          children={msg.text}
+          components={{
+            p: ({ node, ...props }) => <Typography variant="body1" sx={typographyStyles} {...props} />,
+            li: ({ node, ...props }) => <li style={{ ...typographyStyles, marginBottom: '6px' }} {...props} />,
+            strong: ({ node, ...props }) => <strong style={{ ...typographyStyles, fontWeight: 700 }} {...props} />,
+            em: ({ node, ...props }) => <em style={typographyStyles} {...props} />,
+            h1: ({ node, ...props }) => (
+              <Typography variant="h3" sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1.8rem', mt: 2, mb: 1 }} {...props} />
+            ),
+            h2: ({ node, ...props }) => (
+              <Typography variant="h4" sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1.6rem', mt: 2, mb: 1 }} {...props} />
+            ),
+            h3: ({ node, ...props }) => (
+              <Typography variant="h5" sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1.4rem', mt: 1.5, mb: 1 }} {...props} />
+            ),
+            h4: ({ node, ...props }) => (
+              <Typography variant="h6" sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1.2rem', mt: 1, mb: 0.8 }} {...props} />
+            ),
+            h5: ({ node, ...props }) => (
+              <Typography sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1.1rem', mt: 1, mb: 0.6 }} {...props} />
+            ),
+            h6: ({ node, ...props }) => (
+              <Typography sx={{ ...typographyStyles, fontWeight: 700, fontSize: '1rem', mt: 1, mb: 0.5 }} {...props} />
+            ),
+          }}
+          />        
         ) : (
           <Typography variant="body1" sx={{ color: '#fff' }}>
             {msg.text}
