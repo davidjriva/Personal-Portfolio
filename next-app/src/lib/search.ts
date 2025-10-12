@@ -12,7 +12,11 @@ function cosineSimilarity(vecA, vecB) {
 
 // Fetch JSON from public folder
 async function loadJson(filename, reqUrl) {
-  const baseUrl = new URL(reqUrl).origin;
+  const baseUrl =
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000"; // fallback for local dev
+
   const res = await fetch(`${baseUrl}/data/${filename}`);
   if (!res.ok) throw new Error(`Failed to fetch ${filename} from ${baseUrl}`);
   return await res.json();
