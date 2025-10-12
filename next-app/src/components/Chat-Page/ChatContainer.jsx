@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import MessagesList from '@/components/Chat-Page/MessagesList';
@@ -14,10 +14,20 @@ const ChatContainer = () => {
   const [token, setToken] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
+  const messagesEndRef = useRef(null);
+  const currentStreamController = useRef(null);
+  const assistantTextRef = useRef('');
+
+  // Auto-scroll on messages update
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Get JWT token and sessionId
   useEffect(() => {
     const getToken = async () => {
       try {
-        const res = await fetch('/api/token'); // automatically works in dev and prod
+        const res = await fetch('/api/token');
         const data = await res.json();
         setToken(data.token);
         setSessionId(data.sessionId);
@@ -25,7 +35,6 @@ const ChatContainer = () => {
         console.error('Failed to get token:', err);
       }
     };
-
     getToken();
   }, []);
 
@@ -34,18 +43,37 @@ const ChatContainer = () => {
 
     if (!started) setStarted(true);
 
+    // Cancel any previous streaming
+    if (currentStreamController.current) {
+      currentStreamController.current.abort();
+    }
+
     const userMessage = input;
     setMessages((prev) => [...prev, { role: 'user', text: userMessage }]);
     setInput('');
 
+    const controller = new AbortController();
+    currentStreamController.current = controller;
+
+    // Add assistant message placeholder and keep reference
+    let assistantIndex;
+    assistantTextRef.current = '';
+    setMessages((prev) => {
+      assistantIndex = prev.length;
+      return [...prev, { role: 'assistant', text: '', typing: true }];
+    });
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ message: userMessage, sessionId }),
+        signal: controller.signal,
       });
 
-      // Handle rate limiting before streaming
       if (res.status === 429) {
         const data = await res.json();
         setMessages((prev) => [
@@ -59,29 +87,46 @@ const ChatContainer = () => {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let fullText = '';
-
-      let assistantIndex;
-      setMessages((prev) => {
-        assistantIndex = prev.length;
-        return [...prev, { role: 'assistant', text: '' }];
-      });
+      let lastUpdate = Date.now();
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
+
         const chunk = decoder.decode(value, { stream: true });
-        fullText += chunk;
-        setMessages((prev) =>
-          prev.map((msg, i) => (i === assistantIndex ? { ...msg, text: fullText } : msg))
-        );
+        assistantTextRef.current += chunk;
+
+        // Batch updates every 50ms
+        if (Date.now() - lastUpdate > 50) {
+          setMessages((prev) =>
+            prev.map((msg, i) =>
+              i === assistantIndex
+                ? { ...msg, text: assistantTextRef.current, typing: true }
+                : msg
+            )
+          );
+          lastUpdate = Date.now();
+        }
       }
+
+      // Final update: stop typing
+      setMessages((prev) =>
+        prev.map((msg, i) =>
+          i === assistantIndex ? { ...msg, text: assistantTextRef.current, typing: false } : msg
+        )
+      );
     } catch (err) {
-      console.error('Error sending message:', err);
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', text: 'Sorry, there was an error sending the message.' },
-      ]);
+      if (err.name === 'AbortError') {
+        console.log('Previous stream aborted');
+      } else {
+        console.error('Error sending message:', err);
+        setMessages((prev) => [
+          ...prev,
+          { role: 'assistant', text: 'Sorry, there was an error sending the message.' },
+        ]);
+      }
+    } finally {
+      currentStreamController.current = null;
     }
   };
 
@@ -102,7 +147,6 @@ const ChatContainer = () => {
       }}
     >
       {!started ? (
-        // Landing text before chat starts
         <Box sx={{ textAlign: 'center', width: '100%' }}>
           <Typography variant="h5" sx={{ color: '#fff', mb: 3 }}>
             Hey, I'm David's assistant. Ready to learn more?
@@ -110,9 +154,9 @@ const ChatContainer = () => {
           <ChatInput input={input} setInput={setInput} sendMessage={sendMessage} />
         </Box>
       ) : (
-        // Full chat window (messages + input) in the same position
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
           <MessagesList messages={messages} />
+          <div ref={messagesEndRef} />
           <ChatInput input={input} setInput={setInput} sendMessage={sendMessage} />
         </Box>
       )}
