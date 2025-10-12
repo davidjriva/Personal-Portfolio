@@ -78,7 +78,7 @@ export async function POST(req) {
     }
 
     // Retrieve embeddings
-    const results = await searchEmbeddings(message, req.url);
+    const results = await searchEmbeddings(message);
     const context = results
       .map((item) =>
         Object.entries(item)

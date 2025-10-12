@@ -15,29 +15,17 @@ function cosineSimilarity(vecA, vecB) {
   return dot / (normA * normB);
 }
 
-// Fetch JSON from public folder
-async function loadJson(filename, reqUrl) {
-  const baseUrl =
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000"; // fallback for local dev
-
-  const res = await fetch(`${baseUrl}/data/${filename}`);
-  if (!res.ok) throw new Error(`Failed to fetch ${filename} from ${baseUrl}`);
-  return await res.json();
-}
-
 let allDataCache = null;
 
-async function loadAllData(reqUrl) {
+async function loadAllData() {
   if (allDataCache) return allDataCache;
 
   allDataCache = [...awards, ...experiences, ...projects, ...skills];
   return allDataCache;
 }
 
-export async function searchEmbeddings(query, reqUrl, topN = 5) {
-  const allData = await loadAllData(reqUrl);
+export async function searchEmbeddings(query, topN = 5) {
+  const allData = await loadAllData();
 
   const embeddingRes = await client.embeddings.create({
     model: "text-embedding-3-large",
