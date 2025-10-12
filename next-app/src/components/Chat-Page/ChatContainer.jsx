@@ -40,29 +40,29 @@ const ChatContainer = () => {
 
   const sendMessage = async () => {
     if (!input.trim() || !sessionId) return;
-
+  
     if (!started) setStarted(true);
-
-    // Cancel any previous streaming
+  
+    // Cancel previous streaming
     if (currentStreamController.current) {
       currentStreamController.current.abort();
     }
-
+  
     const userMessage = input;
     setMessages((prev) => [...prev, { role: 'user', text: userMessage }]);
     setInput('');
-
+  
     const controller = new AbortController();
     currentStreamController.current = controller;
-
-    // Add assistant message placeholder and keep reference
+  
+    // Placeholder for assistant
     let assistantIndex;
     assistantTextRef.current = '';
     setMessages((prev) => {
       assistantIndex = prev.length;
       return [...prev, { role: 'assistant', text: '', typing: true }];
     });
-
+  
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -73,7 +73,7 @@ const ChatContainer = () => {
         body: JSON.stringify({ message: userMessage, sessionId }),
         signal: controller.signal,
       });
-
+  
       if (res.status === 429) {
         const data = await res.json();
         setMessages((prev) => [
@@ -82,37 +82,51 @@ const ChatContainer = () => {
         ]);
         return;
       }
-
+  
       if (!res.body) throw new Error('No response body');
-
+  
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let lastUpdate = Date.now();
-
+  
+      let buffer = '';
+      let updateScheduled = false;
+  
+      const flushBuffer = () => {
+        setMessages((prev) =>
+          prev.map((msg, i) =>
+            i === assistantIndex
+              ? { ...msg, text: assistantTextRef.current + buffer, typing: true }
+              : msg
+          )
+        );
+        assistantTextRef.current += buffer;
+        buffer = '';
+        updateScheduled = false;
+      };
+  
+      const scheduleUpdate = () => {
+        if (!updateScheduled) {
+          updateScheduled = true;
+          requestAnimationFrame(flushBuffer);
+        }
+      };
+  
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-
+  
         const chunk = decoder.decode(value, { stream: true });
-        assistantTextRef.current += chunk;
-
-        // Batch updates every 50ms
-        if (Date.now() - lastUpdate > 50) {
-          setMessages((prev) =>
-            prev.map((msg, i) =>
-              i === assistantIndex
-                ? { ...msg, text: assistantTextRef.current, typing: true }
-                : msg
-            )
-          );
-          lastUpdate = Date.now();
-        }
+        buffer += chunk;
+        scheduleUpdate();
       }
-
-      // Final update: stop typing
+  
+      // Final flush
+      if (buffer) flushBuffer();
+  
+      // Stop typing
       setMessages((prev) =>
         prev.map((msg, i) =>
-          i === assistantIndex ? { ...msg, text: assistantTextRef.current, typing: false } : msg
+          i === assistantIndex ? { ...msg, typing: false } : msg
         )
       );
     } catch (err) {
@@ -128,7 +142,7 @@ const ChatContainer = () => {
     } finally {
       currentStreamController.current = null;
     }
-  };
+  };  
 
   return (
     <Box
