@@ -80,12 +80,15 @@ export async function POST(req) {
     // Retrieve embeddings
     const results = await searchEmbeddings(message);
     const context = results
-      .map((item) =>
-        Object.entries(item)
+      .map((item) => {
+        return Object.entries(item)
           .filter(([k, v]) => k !== 'embedding' && v)
-          .map(([k, v]) => (Array.isArray(v) ? v.join('. ') : v))
-          .join('. ')
-      )
+          .map(([k, v]) => {
+            const value = Array.isArray(v) ? v.join('. ') : v;
+            return `**${k}:** ${value}`;
+          })
+          .join('\n');
+      })
       .join('\n\n');
 
     // Retrieve memory
@@ -93,16 +96,14 @@ export async function POST(req) {
     const recentMemory = memory.slice(-MAX_MEMORY_PAIRS);
     const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
 
-    // System prompt
     const systemPrompt = `
-You are a concise, professional AI assistant for David Riva's personal website.
-- Answer accurately using the provided context and memory.
-- Keep answers short and focused (≤300 words, avoid extra commentary).
-- Use basic Markdown only (headings, lists, bold).
-- Friendly and professional tone.
-- Only answer using memory or context that is directly relevant to the current question.
-- Do not include information about projects, work experiences, or any information not requested by the user.
-`;
+    You are a professional AI assistant for David Riva's personal website.
+    - Answer accurately using the provided context and memory.
+    - Keep answers concise (≤300 words), professional, and friendly.
+    - Use basic Markdown only (headings, lists, bold).
+    - Only answer about David's experiences, skills, projects, awards, and related professional information.
+    - If the user asks about something not in the context/memory, respond honestly that you don't have information.
+    `;
 
     // Stream response from OpenAI
     const stream = await client.chat.completions.create({
