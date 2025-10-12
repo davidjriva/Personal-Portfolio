@@ -10,15 +10,9 @@ function cosineSimilarity(vecA, vecB) {
   return dot / (normA * normB);
 }
 
-// Compute base URL from the edge function
-function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-}
-
 // Fetch JSON from public folder
-async function loadJson(filename) {
-  const baseUrl = getBaseUrl();
+async function loadJson(filename, reqUrl) {
+  const baseUrl = new URL(reqUrl).origin;
   const res = await fetch(`${baseUrl}/data/${filename}`);
   if (!res.ok) throw new Error(`Failed to fetch ${filename} from ${baseUrl}`);
   return await res.json();
@@ -26,22 +20,22 @@ async function loadJson(filename) {
 
 let allDataCache = null;
 
-async function loadAllData() {
+async function loadAllData(reqUrl) {
   if (allDataCache) return allDataCache;
 
   const [awards, experiences, projects, skills] = await Promise.all([
-    loadJson("awards_embeddings.json"),
-    loadJson("experiences_embeddings.json"),
-    loadJson("projects_embeddings.json"),
-    loadJson("skills_embeddings.json"),
+    loadJson("awards_embeddings.json", reqUrl),
+    loadJson("experiences_embeddings.json", reqUrl),
+    loadJson("projects_embeddings.json", reqUrl),
+    loadJson("skills_embeddings.json", reqUrl),
   ]);
 
   allDataCache = [...awards, ...experiences, ...projects, ...skills];
   return allDataCache;
 }
 
-export async function searchEmbeddings(query, topN = 5) {
-  const allData = await loadAllData();
+export async function searchEmbeddings(query, reqUrl, topN = 5) {
+  const allData = await loadAllData(reqUrl);
 
   const embeddingRes = await client.embeddings.create({
     model: "text-embedding-3-large",
