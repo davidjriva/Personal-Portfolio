@@ -1,4 +1,9 @@
 import OpenAI from "openai";
+import awards from "@/../public/data/awards_embeddings.json"
+import experiences from "@/../public/data/experiences_embeddings.json"
+import projects from  "@/../public/data/projects_embeddings.json"
+import skills from  "@/../public/data/skills_embeddings.json"
+
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -26,13 +31,6 @@ let allDataCache = null;
 
 async function loadAllData(reqUrl) {
   if (allDataCache) return allDataCache;
-
-  const [awards, experiences, projects, skills] = await Promise.all([
-    loadJson("awards_embeddings.json", reqUrl),
-    loadJson("experiences_embeddings.json", reqUrl),
-    loadJson("projects_embeddings.json", reqUrl),
-    loadJson("skills_embeddings.json", reqUrl),
-  ]);
 
   allDataCache = [...awards, ...experiences, ...projects, ...skills];
   return allDataCache;
