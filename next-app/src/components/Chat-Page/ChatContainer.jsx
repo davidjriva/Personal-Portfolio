@@ -14,14 +14,8 @@ const ChatContainer = () => {
   const [token, setToken] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
-  const messagesEndRef = useRef(null);
   const currentStreamController = useRef(null);
   const assistantTextRef = useRef('');
-
-  // Auto-scroll on messages update
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
 
   // Get JWT token and sessionId
   useEffect(() => {
@@ -40,21 +34,21 @@ const ChatContainer = () => {
 
   const sendMessage = async () => {
     if (!input.trim() || !sessionId) return;
-  
+
     if (!started) setStarted(true);
-  
+
     // Cancel previous streaming
     if (currentStreamController.current) {
       currentStreamController.current.abort();
     }
-  
+
     const userMessage = input;
     setMessages((prev) => [...prev, { role: 'user', text: userMessage }]);
     setInput('');
-  
+
     const controller = new AbortController();
     currentStreamController.current = controller;
-  
+
     // Placeholder for assistant
     let assistantIndex;
     assistantTextRef.current = '';
@@ -62,7 +56,7 @@ const ChatContainer = () => {
       assistantIndex = prev.length;
       return [...prev, { role: 'assistant', text: '', typing: true }];
     });
-  
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
@@ -73,7 +67,7 @@ const ChatContainer = () => {
         body: JSON.stringify({ message: userMessage, sessionId }),
         signal: controller.signal,
       });
-  
+
       if (res.status === 429) {
         const data = await res.json();
         setMessages((prev) => [
@@ -82,15 +76,15 @@ const ChatContainer = () => {
         ]);
         return;
       }
-  
+
       if (!res.body) throw new Error('No response body');
-  
+
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-  
+
       let buffer = '';
       let updateScheduled = false;
-  
+
       const flushBuffer = () => {
         setMessages((prev) =>
           prev.map((msg, i) =>
@@ -103,26 +97,26 @@ const ChatContainer = () => {
         buffer = '';
         updateScheduled = false;
       };
-  
+
       const scheduleUpdate = () => {
         if (!updateScheduled) {
           updateScheduled = true;
           requestAnimationFrame(flushBuffer);
         }
       };
-  
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-  
+
         const chunk = decoder.decode(value, { stream: true });
         buffer += chunk;
         scheduleUpdate();
       }
-  
+
       // Final flush
       if (buffer) flushBuffer();
-  
+
       // Stop typing
       setMessages((prev) =>
         prev.map((msg, i) =>
@@ -142,7 +136,7 @@ const ChatContainer = () => {
     } finally {
       currentStreamController.current = null;
     }
-  };  
+  };
 
   return (
     <Box
@@ -170,7 +164,6 @@ const ChatContainer = () => {
       ) : (
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
           <MessagesList messages={messages} />
-          <div ref={messagesEndRef} />
           <ChatInput input={input} setInput={setInput} sendMessage={sendMessage} />
         </Box>
       )}
