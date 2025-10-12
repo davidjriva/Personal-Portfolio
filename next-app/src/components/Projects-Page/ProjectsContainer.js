@@ -1,11 +1,18 @@
 'use client';
 
 import ProjectCards from './ProjectCards';
-import projectData from '../../data/projects.json';
-import { Box, IconButton } from '@mui/material';
-import { useState, useRef } from 'react';
+import { Box } from '@mui/material';
+import { useState, useEffect, useRef } from 'react';
 
 const ProjectsContainer = () => {
+  const [projectData, setProjectData] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/projects.json')
+      .then((res) => res.json())
+      .then((data) => setProjectData(data));
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current centered card index
   const containerRef = useRef(null);
 

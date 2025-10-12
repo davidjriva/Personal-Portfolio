@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Timeline,
   TimelineItem,
@@ -12,7 +12,6 @@ import {
 } from '@mui/lab';
 import { Typography, Box } from '@mui/material';
 import Image from 'next/image';
-import experienceData from '@/data/experiences.json';
 import ClickableLink from '@/components/About-Page/ClickableLink';
 
 const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, isEnd }) => {
@@ -46,6 +45,14 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
 };
 
 const SimpleTimeline = () => {
+  const [experienceData, setExperienceData] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/experiences.json')
+      .then((res) => res.json())
+      .then((data) => setExperienceData(data));
+  }, []);
+
   const sortedExperienceData = [...experienceData].sort((a, b) => {
     return new Date(b.startDate) - new Date(a.startDate);
   });

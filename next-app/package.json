@@ -19,8 +19,13 @@
     "@mui/material-nextjs": "^6.1.5",
     "@studio-freight/react-lenis": "^0.0.47",
     "@tsparticles/react": "^3.0.0",
+    "@upstash/redis": "^1.35.5",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/kv": "^3.0.0",
+    "dotenv": "^17.2.2",
     "gsap": "^3.12.7",
+    "jose": "^6.1.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "^14.2.26",
     "nodemailer": "^6.10.0",
     "openai": "^6.3.0",
@@ -28,8 +33,15 @@
     "react-dom": "^18",
     "react-helmet-async": "^2.0.5",
     "react-intersection-observer": "^9.13.1",
+    "react-markdown": "^10.1.0",
     "react-scroll": "^1.9.0",
+    "redis": "^5.8.3",
     "sharp": "^0.33.5",
-    "tsparticles": "^3.5.0"
+    "tsparticles": "^3.5.0",
+    "uuid": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.1",
+    "typescript": "5.9.2"
   }
 }

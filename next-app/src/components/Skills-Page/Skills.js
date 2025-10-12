@@ -1,15 +1,22 @@
 import React from 'react';
 import { Box, Divider } from '@mui/material';
 import SkillCard from './SkillCard';
-import SkillCardContainer from '@/components/Skills-Page/SkillCardContainer'
+import SkillCardContainer from '@/components/Skills-Page/SkillCardContainer';
 import SectionHeading from '@/components/SectionHeading';
-import skillsData from '@/data/skills.json';
 
 export const metadata = {
   title: 'David Riva | Skills',
 };
 
 const Skills = () => {
+  const [skillsData, setSkillsData] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/skills.json')
+      .then((res) => res.json())
+      .then((data) => setSkillsData(data));
+  }, []);
+
   return (
     <Box
       sx={{
@@ -22,7 +29,7 @@ const Skills = () => {
         position: 'relative',
         backgroundColor: '#565859',
         borderTop: '8px solid rgba(0,0,0,0.1)',
-        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)'
+        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)',
       }}
     >
       <SectionHeading sectionName="Skills" />

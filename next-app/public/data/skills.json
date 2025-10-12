@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Primary Programming Languages",
+        "items": ["Java", "JavaScript", "TypeScript", "HTML", "CSS", "Python"],
+        "tags": ["programming", "languages", "core", "development", "coding"]
+    },
+    {
+        "title": "Secondary Programming Languages",
+        "items": ["C/C++", "SQL", "Bash"],
+        "tags": ["programming", "languages", "secondary", "systems", "scripting"]
+    },
+    {
+        "title": "CI/CD",
+        "items": ["Github Actions"],
+        "tags": ["devops", "automation", "continuous integration", "continuous deployment", "CI/CD"]
+    },
+    {
+        "title": "Frameworks",
+        "items": ["React.js", "Node.js", "Express.js", "Mongoose.js"],
+        "tags": ["frameworks", "web development", "frontend", "backend", "full-stack"]
+    },
+    {
+        "title": "Testing Frameworks",
+        "items": ["JUnit", "Jacoco", "Jest", "Supertest", "Mockito"],
+        "tags": ["testing", "unit testing", "integration testing", "quality assurance", "QA"]
+    },
+    {
+        "title": "Data Science & Machine Learning",
+        "items": ["TensorFlow", "Keras", "NumPy", "Pandas", "Scikit-Learn", "Matplotlib"],
+        "tags": ["machine learning", "AI", "deep learning", "data science", "analytics", "ML"]
+    },
+    {
+        "title": "Data Engineering and Big Data",
+        "items": ["Hadoop", "Apache Spark/PySpark", "MongoDB", "AWS RedShift", "AWS S3"],
+        "tags": ["big data", "data engineering", "ETL", "databases", "cloud computing"]
+    },
+    {   
+        "title": "Tools",
+        "items": ["Git", "GitHub", "Visual Studio Code", "Postman", "Package Managers (Pip & NPM)", "Debuggers"],
+        "tags": ["tools", "development tools", "version control", "IDE", "productivity"]
+    }, 
+    {
+        "title": "Concepts",
+        "items": ["RESTful APIs", "Object Oriented Programming", "Design Patterns", "Software Development Methodologies (Agile)", "MVC Architecture"],
+        "tags": ["concepts", "software engineering", "architecture", "best practices", "OOP", "APIs"]
+    },
+    {
+        "title": "Soft Skills",
+        "items": ["Leadership", "Teamwork", "Collaboration", "Written and Verbal Communication"],
+        "tags": ["soft skills", "communication", "teamwork", "leadership", "collaboration"]
+    }
+]
