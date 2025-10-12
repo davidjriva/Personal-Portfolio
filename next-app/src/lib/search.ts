@@ -10,11 +10,9 @@ function cosineSimilarity(vecA, vecB) {
   return dot / (normA * normB);
 }
 
-// Compute absolute URL in Edge
+// Compute base URL from the edge function
 function getBaseUrl() {
-  // If running on Vercel, use VERCEL_URL
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  // Otherwise fallback to localhost
   return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 }
 
