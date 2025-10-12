@@ -24,6 +24,7 @@
     "@vercel/kv": "^3.0.0",
     "dotenv": "^17.2.2",
     "gsap": "^3.12.7",
+    "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.2.26",
     "nodemailer": "^6.10.0",

@@ -1,7 +1,7 @@
 import { searchEmbeddings } from '../../../lib/search';
 import OpenAI from 'openai';
-import jwt from 'jsonwebtoken';
 import { Redis } from '@upstash/redis';
+import { jwtVerify } from 'jose';
 
 export const runtime = 'edge';
 
@@ -13,19 +13,18 @@ const redis = new Redis({
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const sessionMemory = new Map();
-
-const MAX_MEMORY_PAIRS = 2;
+const MAX_MEMORY_PAIRS = 3;
 const MAX_REQUESTS = 5;
 const WINDOW_MS = 60 * 1000;
 const MAX_MESSAGE_LENGTH = 1500;
 
-// --- Rate limiting helper ---
+// --- Rate limiting ---
 async function checkRateLimit(ip) {
   const key = `rate:${ip}`;
   const now = Date.now();
 
-  const data = await redis.get(key);
-  const entry = data || { count: 0, timestamp: now };
+  let entry = await redis.get(key);
+  if (!entry) entry = { count: 0, timestamp: now };
 
   if (now - entry.timestamp > WINDOW_MS) {
     entry.count = 0;
@@ -37,36 +36,41 @@ async function checkRateLimit(ip) {
   return entry.count <= MAX_REQUESTS;
 }
 
-// --- Edge POST handler ---
+// --- Edge route handler ---
 export async function POST(req) {
   const startTotal = Date.now();
   console.log(`[${new Date().toISOString()}] POST /api/chat start`);
 
   try {
-    // JWT Verification
+    // JWT verification using 'jose'
     const authHeader = req.headers.get('authorization');
     const token = authHeader?.split(' ')[1];
     if (!token) return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
 
     try {
-      jwt.verify(token, process.env.FRONTEND_JWT_SECRET);
+      await jwtVerify(token, new TextEncoder().encode(process.env.FRONTEND_JWT_SECRET));
     } catch {
       return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401 });
     }
 
     // Parse body
-    const { message, sessionId } = await req.json();
+    const body = await req.json();
+    const message = body.message;
+    const sessionId = body.sessionId;
+
     if (!message || !sessionId || message.trim() === '') {
       return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), { status: 400 });
     }
+
     if (message.length > MAX_MESSAGE_LENGTH) {
       return new Response(JSON.stringify({ error: `Message too long. Max length is ${MAX_MESSAGE_LENGTH}.` }), {
         status: 400,
       });
     }
 
-    // Rate limit
-    let ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || req.headers.get('x-real-ip') || 'unknown';
+    // Rate limiting
+    const forwarded = req.headers.get('x-forwarded-for');
+    let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
     if (process.env.NODE_ENV === 'development' && ip === 'unknown') ip = sessionId;
 
     if (!(await checkRateLimit(ip))) {
@@ -91,14 +95,16 @@ export async function POST(req) {
 
     // System prompt
     const systemPrompt = `
-    You are a concise, professional AI assistant for David Riva's personal website.
-    - Answer accurately using the provided context and memory.
-    - Keep answers short and focused (≤1000 words, avoid extra commentary).
-    - Use basic Markdown only (headings, lists, bold).
-    - Friendly and professional tone.
-    `;
+You are a concise, professional AI assistant for David Riva's personal website.
+- Answer accurately using the provided context and memory.
+- Keep answers short and focused (≤300 words, avoid extra commentary).
+- Use basic Markdown only (headings, lists, bold).
+- Friendly and professional tone.
+- Only answer using memory or context that is directly relevant to the current question.
+- Do not include information about projects, work experiences, or any information not requested by the user.
+`;
 
-    // LLM streaming
+    // Stream response from OpenAI
     const stream = await client.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
@@ -122,7 +128,6 @@ export async function POST(req) {
             }
           }
           sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
-          console.log('LLM stream finished');
         } catch (err) {
           console.error('Streaming error:', err);
         } finally {
@@ -144,7 +149,5 @@ export async function POST(req) {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
-  } finally {
-    console.log(`Total request duration: ${Date.now() - startTotal}ms`);
   }
 }

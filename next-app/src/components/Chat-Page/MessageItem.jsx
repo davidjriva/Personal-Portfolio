@@ -13,12 +13,17 @@ const MessageItem = ({ msg }) => {
     marginBottom: '4px',
   };
 
+  const linkStyles = {
+    color: "rgb(56, 192, 242)",
+    textDecoration: "none",
+    wordBreak: "break-word",
+  };
+
   return (
     <Box sx={{ mb: 1, backgroundColor: isUser ? '#3a3a3a' : '#444', p: 1, borderRadius: 1 }}>
       <Typography variant="subtitle2" sx={{ color: isUser ? '#90caf9' : '#f48fb1', mb: 0.5 }}>
         {msg.role}:
       </Typography>
-      {msg.role === 'assistant' ? (
         <ReactMarkdown
           children={msg.text}
           components={{
@@ -72,13 +77,16 @@ const MessageItem = ({ msg }) => {
                 {...props}
               />
             ),
+            a: ({ node, ...props }) => (
+              <a
+                style={linkStyles}
+                target="_blank"
+                rel="noopener noreferrer"
+                {...props}
+              />
+            )
           }}
         />
-      ) : (
-        <Typography variant="body1" sx={{ color: '#fff' }}>
-          {msg.text}
-        </Typography>
-      )}
     </Box>
   );
 }
