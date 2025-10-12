@@ -4,15 +4,6 @@ import { Paper } from '@mui/material';
 import MessageItem from '@/components/Chat-Page/MessageItem';
 
 const MessagesList = ({ messages }) => {
-    const messagesEndRef = useRef(null);
-  
-    const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  
-    useEffect(() => {
-      if (messages.length === 0) return; // only scroll once chatting begins
-      scrollToBottom();
-    }, [messages]);
-  
     return (
       <Paper
         variant="outlined"
@@ -21,7 +12,6 @@ const MessagesList = ({ messages }) => {
         {messages.map((msg, i) => (
           <MessageItem key={i} msg={msg} />
         ))}
-        <div ref={messagesEndRef} />
       </Paper>
     );
 };

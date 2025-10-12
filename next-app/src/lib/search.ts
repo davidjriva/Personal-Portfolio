@@ -23,7 +23,7 @@ async function loadAllData() {
   return allDataCache;
 }
 
-export async function searchEmbeddings(query, topN = 5) {
+export async function searchEmbeddings(query, topN = 10) {
   const allData = await loadAllData();
 
   const embeddingRes = await client.embeddings.create({
