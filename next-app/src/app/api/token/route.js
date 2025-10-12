@@ -17,7 +17,9 @@ export async function GET(req) {
     if (isProduction) {
       const allowed = ['https://www.davidriva.dev', 'https://davidriva.dev'];
 
-      if (!allowed.includes(origin)) {
+      // Allow missing origin for same-origin browser requests
+      const isAllowed = !origin || allowed.includes(origin);
+      if (!isAllowed) {
         console.warn('Origin not allowed in production:', origin);
         return new Response(JSON.stringify({ error: 'Origin not allowed' }), { status: 403 });
       }
