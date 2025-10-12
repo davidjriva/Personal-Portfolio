@@ -14,7 +14,8 @@ const MessageItem = ({ msg }) => {
     marginBottom: "4px",
   };
 
-  const displayText = msg.text;
+  // Determine if assistant has started streaming
+  const showDots = msg.role === "assistant" && (!msg.text || msg.text.length === 0);
 
   return (
     <Box
@@ -33,13 +34,13 @@ const MessageItem = ({ msg }) => {
       </Typography>
 
       {msg.role === "assistant" ? (
-        msg.typing ? (
+        showDots ? (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <BouncingDotsLoadingAnimation dotSize={8} dotColor="#38c0f2" spacing={4} />
           </Box>
         ) : (
           <ReactMarkdown
-            children={displayText}
+            children={msg.text}
             components={{
               p: ({ node, ...props }) => (
                 <Typography variant="body1" sx={typographyStyles} {...props} />
