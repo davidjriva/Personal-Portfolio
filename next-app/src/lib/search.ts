@@ -4,7 +4,6 @@ import experiences from "@/../public/data/experiences_embeddings.json"
 import projects from  "@/../public/data/projects_embeddings.json"
 import skills from  "@/../public/data/skills_embeddings.json"
 
-
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Cosine similarity

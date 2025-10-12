@@ -15,7 +15,7 @@ export async function GET(req) {
     const isPreview = process.env.VERCEL_ENV === 'preview';
 
     if (isProduction) {
-      const allowed = ['https://www.davidriva.dev'];
+      const allowed = ['https://www.davidriva.dev', 'https://davidriva.dev'];
 
       if (!allowed.includes(origin)) {
         console.warn('Origin not allowed in production:', origin);
