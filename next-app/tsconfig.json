@@ -27,6 +27,6 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/lib/testSearchTool.js", "src/lib/searchTool.ts", "src/lib/search.ts"  ],
   "exclude": ["node_modules"]
 }

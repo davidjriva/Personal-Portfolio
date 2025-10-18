@@ -1,4 +1,5 @@
-import { searchEmbeddings } from '../../../lib/search';
+import { searchEmbeddings } from '../../../lib/search.js';
+import { retrieveRelevantDocuments } from '../../../lib/searchTool.ts';
 import OpenAI from 'openai';
 import { Redis } from '@upstash/redis';
 import { jwtVerify } from 'jose';
@@ -11,14 +12,10 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_KV_REST_API_TOKEN,
 });
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const sessionMemory = new Map();
-const MAX_MEMORY_PAIRS = 3;
+// --- Rate limiting ---
 const MAX_REQUESTS = 5;
 const WINDOW_MS = 60 * 1000;
-const MAX_MESSAGE_LENGTH = 1500;
 
-// --- Rate limiting ---
 async function checkRateLimit(ip) {
   const key = `rate:${ip}`;
   const now = Date.now();
@@ -35,6 +32,13 @@ async function checkRateLimit(ip) {
   await redis.set(key, entry, { ex: WINDOW_MS / 1000 });
   return entry.count <= MAX_REQUESTS;
 }
+
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const sessionMemory = new Map();
+const MAX_MEMORY_PAIRS = 3;
+
+const MAX_MESSAGE_LENGTH = 1500;
 
 // --- Edge route handler ---
 export async function POST(req) {
@@ -105,6 +109,39 @@ export async function POST(req) {
     - Only answer about David's experiences, skills, projects, awards, and related professional information.
     - If the user asks about something not in the context/memory, respond honestly that you don't have information.
     `;
+
+    const searchTool = [
+      {
+        type: 'function',
+        name: 'retrieveRelevantDocuments',
+        description:
+          "Retrieve specific documents about David Riva's work experience, awards, technical skills, or technical coding projects.",
+        parameters: {
+          type: 'object',
+          properties: {
+            query: {
+              type: 'string',
+              description: 'Optional: a specific search query or keyword to filter documents',
+            },
+            topK: {
+              type: 'number',
+              description: 'Optional: the number of top results to return (default 5)',
+            },
+            minScore: {
+              type: 'number',
+              description: 'Optional: minimum similarity score to include in results (0-1, default 0)',
+            },
+            useEmbeddingCache: {
+              type: 'boolean',
+              description: 'Optional: whether to use cached embeddings to speed up searches (default true)',
+            },
+          },
+          required: ['query'],
+          additionalProperties: false,
+        },
+        strict: true,
+      },
+    ];
 
     // Stream response from OpenAI
     const stream = await client.chat.completions.create({
