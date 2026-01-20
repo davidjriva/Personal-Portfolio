@@ -1,7 +1,5 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
-import { Box } from '@mui/material';
-import NavBar from '../components/Navbar/NavBar';
 import theme from '../theme';
 import { Montserrat } from 'next/font/google';
 import { GlobalStyles } from '@mui/material';
