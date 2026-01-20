@@ -16,7 +16,7 @@ export default function ChatPage() {
           position: 'absolute',
           top: { xs: '1rem', sm: '2rem', md: '3rem' },
           left: { xs: '1rem', sm: '2rem', md: '3rem' },
-          zIndex: 1,
+          zIndex: 10,
         }}
       >
         <StyledButton href="/" text={'Return to home'} icon={<HomeIcon />} component={Link} />
@@ -31,6 +31,7 @@ export default function ChatPage() {
           width: '100%',
           height: '100%',
           zIndex: 0,
+          pointerEvents: 'none',
         }}
       >
         <ParticleBackground interactive={false} />
