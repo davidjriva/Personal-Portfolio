@@ -2,10 +2,10 @@
 
 import { Box, Typography, Stack } from '@mui/material';
 import AnimatedTypingTypography from '@/components/Greeting-Page/AnimatedTypingTypography';
-import StyledButton from '@/components/Buttons/StyledButton';
+import StyledButton from '@/components/StyledButton';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import AssistantIcon from '@mui/icons-material/Assistant';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 const Greeting = () => {
   const scrollToSection = () => {
@@ -20,8 +20,6 @@ const Greeting = () => {
       behavior: 'smooth',
     });
   };
-
-  const redirectToChat = () => redirect('/chat');
 
   return (
     <Box
@@ -49,7 +47,7 @@ const Greeting = () => {
 
       <Stack direction="row" spacing={2} sx={{ marginTop: 4 }}>
         <StyledButton onClick={scrollToSection} text="View my work" icon={<KeyboardDoubleArrowDownIcon />}/>
-        <StyledButton onClick={redirectToChat} text="Chat with my agent" icon={<AssistantIcon />}/>
+        <StyledButton href="/chat" text="Chat with my agent" icon={<AssistantIcon />} component={Link} />
       </Stack>
     </Box>
   );

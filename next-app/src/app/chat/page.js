@@ -1,18 +1,18 @@
 'use client';
 
-import { Box } from '@mui/material';
-import StyledButton from '@/components/Buttons/StyledButton';
+import { Box, Button } from '@mui/material';
+import StyledButton from '@/components/StyledButton';
 import ParticleBackground from '@/components/ParticleBackground';
 import ChatContainer from '@/components/Chat-Page/ChatContainer';
 import HomeIcon from '@mui/icons-material/Home';
-import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export default function ChatPage() {
   return (
     <Box sx={{ position: 'relative', backgroundColor: '#282829' }}>
       {/* Back Button */}
       <Box sx={{ position: 'absolute', top: '3rem', left: '3rem', zIndex: 1 }}>
-        <StyledButton onClick={() => redirect('/')} text={'Return to home'} icon={<HomeIcon />} />
+        <StyledButton href="/" text={'Return to home'} icon={<HomeIcon />} component={Link} />
       </Box>
 
       {/* Particle Background */}
