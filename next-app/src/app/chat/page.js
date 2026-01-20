@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import StyledButton from '@/components/StyledButton';
 import ParticleBackground from '@/components/ParticleBackground';
 import ChatContainer from '@/components/Chat-Page/ChatContainer';
@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default function ChatPage() {
   return (
-    <Box sx={{ position: 'relative', backgroundColor: '#282829' }}>
+    <Box sx={{ position: 'relative', backgroundColor: '#282829', minHeight: '100vh' }}>
       {/* Back Button */}
       <Box
         sx={{
@@ -38,7 +38,16 @@ export default function ChatPage() {
       </Box>
 
       {/* Chat Container */}
-      <ChatContainer />
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 1, 
+          paddingTop: { xs: '5rem', sm: '6rem', md: '7rem' },
+          overflow: 'hidden',
+        }}
+      >
+        <ChatContainer />
+      </Box>
     </Box>
   );
 }
