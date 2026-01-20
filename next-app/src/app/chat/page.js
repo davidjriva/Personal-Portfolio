@@ -11,7 +11,14 @@ export default function ChatPage() {
   return (
     <Box sx={{ position: 'relative', backgroundColor: '#282829' }}>
       {/* Back Button */}
-      <Box sx={{ position: 'absolute', top: '3rem', left: '3rem', zIndex: 1 }}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: { xs: '1rem', sm: '2rem', md: '3rem' },
+          left: { xs: '1rem', sm: '2rem', md: '3rem' },
+          zIndex: 1,
+        }}
+      >
         <StyledButton href="/" text={'Return to home'} icon={<HomeIcon />} component={Link} />
       </Box>
 
