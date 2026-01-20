@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import StyledButton from '@/components/StyledButton';
 import ParticleBackground from '@/components/ParticleBackground';
 import ChatContainer from '@/components/Chat-Page/ChatContainer';
@@ -9,9 +9,16 @@ import Link from 'next/link';
 
 export default function ChatPage() {
   return (
-    <Box sx={{ position: 'relative', backgroundColor: '#282829' }}>
+    <Box sx={{ position: 'relative', backgroundColor: '#282829', minHeight: '100vh' }}>
       {/* Back Button */}
-      <Box sx={{ position: 'absolute', top: '3rem', left: '3rem', zIndex: 1 }}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: { xs: '1rem', sm: '2rem', md: '3rem' },
+          left: { xs: '1rem', sm: '2rem', md: '3rem' },
+          zIndex: 10,
+        }}
+      >
         <StyledButton href="/" text={'Return to home'} icon={<HomeIcon />} component={Link} />
       </Box>
 
@@ -24,13 +31,23 @@ export default function ChatPage() {
           width: '100%',
           height: '100%',
           zIndex: 0,
+          pointerEvents: 'none',
         }}
       >
         <ParticleBackground interactive={false} />
       </Box>
 
       {/* Chat Container */}
-      <ChatContainer />
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 1, 
+          paddingTop: { xs: '5rem', sm: '6rem', md: '7rem' },
+          overflow: 'hidden',
+        }}
+      >
+        <ChatContainer />
+      </Box>
     </Box>
   );
 }

@@ -45,7 +45,7 @@ const Greeting = () => {
 
       <AnimatedTypingTypography />
 
-      <Stack direction="row" spacing={2} sx={{ marginTop: 4 }}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 2, sm: 4 }} sx={{ marginTop: { xs: 3, sm: 4 } }}>
         <StyledButton onClick={scrollToSection} text="View my work" icon={<KeyboardDoubleArrowDownIcon />}/>
         <StyledButton href="/chat" text="Chat with my agent" icon={<AssistantIcon />} component={Link} />
       </Stack>
