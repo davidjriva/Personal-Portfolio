@@ -1,8 +1,10 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ViewWorkButton from '@/components/Greeting-Page/ViewWorkButton';
+import { Box, Typography, Stack } from '@mui/material';
 import AnimatedTypingTypography from '@/components/Greeting-Page/AnimatedTypingTypography';
+import ViewWorkButton from '@/components/Greeting-Page/ViewWorkButton';
+import AgentChatButton from '@/components/Greeting-Page/AgentChatButton';
+
 
 const Greeting = () => {
   return (
@@ -29,7 +31,10 @@ const Greeting = () => {
 
       <AnimatedTypingTypography />
 
-      <ViewWorkButton />
+      <Stack direction="row" spacing={2} sx={{ marginTop: 4 }}>
+        <ViewWorkButton />
+        <AgentChatButton />
+      </Stack>
     </Box>
   );
 };
