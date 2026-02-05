@@ -119,13 +119,13 @@ const ProjectFooter = ({ link }) => {
       fullWidth
       sx={{
         mt: 'auto',
-        color: 'text.primary',
-        borderColor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.23)',
+        color: '#38c0f2',
+        borderColor: '#38c0f2',
         borderRadius: '8px',
         textTransform: 'none',
         '&:hover': {
-          borderColor: 'text.primary',
-          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+          borderColor: '#38c0f2',
+          bgcolor: 'rgba(56, 192, 242, 0.1)',
         },
       }}
     >
