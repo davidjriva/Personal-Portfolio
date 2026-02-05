@@ -41,8 +41,10 @@ const MainPage = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#282829',
+        bgcolor: 'background.default',
+        color: 'text.primary',
         position: 'relative',
+        minHeight: '100vh',
       }}
     > 
       {/* Enables Vercel deployment analytics */}

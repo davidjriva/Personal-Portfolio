@@ -17,28 +17,28 @@ const SearchBar = ({ projectNames, searchText, setSearchText }) => {
               borderRadius: '200px',
               backgroundColor: 'transparent',
               '& fieldset': {
-                borderColor: 'lightgray',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: 'lightgray',
+                borderColor: 'text.primary',
               },
               '&.Mui-focused fieldset': {
-                borderColor: 'lightgray',
+                borderColor: 'text.primary',
               },
             },
             '& .MuiInputBase-input': {
-              color: 'white',
+              color: 'text.primary',
             },
             '& .MuiInputLabel-root': {
-              color: 'white',
+              color: 'text.secondary',
               '&.Mui-focused': {
-                color: 'white',
+                color: 'text.primary',
               },
             },
           }}
         />
       )}
-      PaperComponent={(props) => <Paper {...props} sx={{ backgroundColor: '#282829', color: 'lightgray' }} />}
+      PaperComponent={(props) => <Paper {...props} sx={{ bgcolor: 'background.paper', color: 'text.primary' }} />}
     />
   );
 };

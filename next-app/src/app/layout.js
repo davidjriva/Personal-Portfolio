@@ -1,8 +1,7 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import theme from '../theme';
+import { ColorModeProvider } from '../contexts/ColorModeContext';
 import { Montserrat } from 'next/font/google';
-import { GlobalStyles } from '@mui/material';
+
 
 const montserrat = Montserrat({
   weight: ['400', '700'],
@@ -15,9 +14,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={montserrat.variable}>
-        <GlobalStyles styles={{ body: { margin: 0, padding: 0 } }} />
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ColorModeProvider>{children}</ColorModeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

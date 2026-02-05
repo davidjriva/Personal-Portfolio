@@ -49,8 +49,9 @@ const ContactForm = () => {
         width: '100%',
         height: 'fit-content',
         maxWidth: '800px',
-        backgroundColor: '#ffffff', // Light background for form
-        padding: { xs: 2, sm: 3, md: 4 }, // Adjust padding for smaller screens
+        bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#ffffff',
+        color: 'text.primary',
+        padding: { xs: 2, sm: 3, md: 4 },
         borderRadius: 2,
         boxShadow: 3,
       }}
@@ -66,17 +67,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333', // Lighter text color for label
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'text.primary',
               '& fieldset': {
-                borderColor: '#aaa', // Lighter border color
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888', // Darker border on hover
+                borderColor: 'text.primary',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368', // Focused border color
+                borderColor: 'primary.main',
               },
             },
           }}

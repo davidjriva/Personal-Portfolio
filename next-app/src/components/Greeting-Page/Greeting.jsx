@@ -24,7 +24,7 @@ const Greeting = () => {
   return (
     <Box
       sx={{
-        color: 'white',
+        color: 'white', // Always white since banner has dark particle background
         height: '100vh',
         width: '100vw',
         display: 'flex',
@@ -46,7 +46,7 @@ const Greeting = () => {
       <AnimatedTypingTypography />
 
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 2, sm: 4 }} sx={{ marginTop: { xs: 3, sm: 4 } }}>
-        <StyledButton onClick={scrollToSection} text="View my work" icon={<KeyboardDoubleArrowDownIcon />}/>
+        <StyledButton onClick={scrollToSection} text="View my work" icon={<KeyboardDoubleArrowDownIcon />} />
         <StyledButton href="/chat" text="Chat with my agent" icon={<AssistantIcon />} component={Link} />
       </Stack>
     </Box>

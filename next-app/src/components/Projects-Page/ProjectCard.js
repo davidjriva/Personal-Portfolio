@@ -14,7 +14,7 @@ const ProjectImage = ({ coverImage, title }) => {
         position: 'relative',
         height: '200px',
         width: '100%',
-        backgroundColor: '#1a1a1a',
+        bgcolor: 'background.paper',
         overflow: 'hidden',
       }}
     >
@@ -53,19 +53,20 @@ const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description })
         sx={{
           fontWeight: 'bold',
           mb: 0.5,
-          color: 'white',
+          color: 'text.primary',
           lineHeight: 1.3,
         }}
       >
         {title}
       </Typography>
-      <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.6)', display: 'block', mb: 2 }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 2 }}>
         {dateStarted} - {dateCompleted}
       </Typography>
       <Typography
         variant="body2"
         sx={{
-          color: 'rgba(255,255,255,0.8)',
+          color: 'text.primary',
+          opacity: 0.8,
           lineHeight: 1.6,
           mb: 2,
           display: '-webkit-box',
@@ -93,12 +94,12 @@ const ProjectTech = ({ technologies }) => {
           label={tool}
           size="small"
           sx={{
-            backgroundColor: 'rgba(255,255,255,0.1)',
-            color: 'rgba(255,255,255,0.9)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+            color: 'text.primary',
+            border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
             backdropFilter: 'blur(4px)',
             '&:hover': {
-              backgroundColor: 'rgba(255,255,255,0.2)',
+              bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
             },
           }}
         />
@@ -118,13 +119,13 @@ const ProjectFooter = ({ link }) => {
       fullWidth
       sx={{
         mt: 'auto',
-        color: 'white',
-        borderColor: 'rgba(255,255,255,0.3)',
+        color: 'text.primary',
+        borderColor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.23)',
         borderRadius: '8px',
         textTransform: 'none',
         '&:hover': {
-          borderColor: 'white',
-          backgroundColor: 'rgba(255,255,255,0.05)',
+          borderColor: 'text.primary',
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
         },
       }}
     >
@@ -159,18 +160,18 @@ const ProjectCard = forwardRef(
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: 'rgba(30, 30, 30, 0.6)',
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(30, 30, 30, 0.6)' : 'rgba(255, 255, 255, 0.9)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.08)'}`,
           borderRadius: '16px',
           overflow: 'hidden',
           transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
           cursor: onClick ? 'pointer' : 'default',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          boxShadow: (theme) => theme.palette.mode === 'dark' ? '0 4px 20px rgba(0,0,0,0.1)' : '0 4px 20px rgba(0,0,0,0.08)',
           '&:hover': {
             transform: 'translateY(-8px)',
-            boxShadow: '0 12px 30px rgba(0,0,0,0.3)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: (theme) => theme.palette.mode === 'dark' ? '0 12px 30px rgba(0,0,0,0.3)' : '0 12px 30px rgba(0,0,0,0.15)',
+            border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)'}`,
             '& .project-image': {
               transform: 'scale(1.05)',
             },
