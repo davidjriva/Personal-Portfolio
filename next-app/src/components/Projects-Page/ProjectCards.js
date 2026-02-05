@@ -1,41 +1,66 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material'; // Using Grid (v2 is now default in v7)
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const ProjectCards = ({ projects, onClick }) => {
-  const [maxHeight, setMaxHeight] = useState(0);
-  const cardRefs = useRef([]);
+gsap.registerPlugin(ScrollTrigger);
+
+const ProjectCards = ({ projects }) => {
+  const containerRef = useRef(null);
 
   // Sorts all projects chronologically by start date.
   const sortedProjectData = [...projects].sort((a, b) => {
     return new Date(b.dateStarted) - new Date(a.dateStarted);
   });
 
-  /* 
-    Find tallest card after rendering.
-    We use this to make all project card components the same height.
-  */
   useEffect(() => {
-    if (cardRefs.current.length) {
-      const tallest = Math.max(...cardRefs.current.map((ref) => ref?.offsetHeight || 0));
-      setMaxHeight(tallest);
-    }
+    if (!containerRef.current || sortedProjectData.length === 0) return;
+
+    const cards = containerRef.current.querySelectorAll('.project-card-item');
+    
+    gsap.fromTo(cards, 
+      { 
+        y: 50, 
+        opacity: 0 
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%', // Animation starts when top of container hits 80% of viewport height
+        }
+      }
+    );
+
+    // Refresh ScrollTrigger after render
+    ScrollTrigger.refresh();
+
+    return () => {
+        // Cleanup ScrollTriggers
+        ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+
   }, [sortedProjectData]);
 
   return (
-    <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto' }}>
-      {sortedProjectData.map((project, index) => (
-        <ProjectCard
-          key={project.title}
-          id={`project-card-${index}`} // Use a unique id for each project card
-          ref={(el) => (cardRefs.current[index] = el)}
-          {...project}
-          height={maxHeight}
-          onClick={() => onClick(index)} // Pass the index to the onClick handler
-        />
-      ))}
+    <Box ref={containerRef} sx={{ width: '100%', py: 4 }}>
+      <Grid container spacing={4} sx={{width: '100%', margin: 0}}>
+        {sortedProjectData.map((project, index) => (
+          <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={project.title} className="project-card-item">
+            <ProjectCard
+              {...project}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };
 
 export default ProjectCards;
+

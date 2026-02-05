@@ -16,8 +16,8 @@ const Projects = () => {
         pr: { xs: 0, sm: 0, md: '80px' },
         margin: '0 auto',
         textAlign: 'center',
-        borderTop: '8px solid rgba(0,0,0,0.1)',
-        backgroundColor: '#565859',
+        // borderTop: '8px solid rgba(0,0,0,0.1)', // Removed border
+        // backgroundColor: '#565859', // Removed background to blend with main page
       }}
     >
       <SectionHeading sectionName="Projects" />
