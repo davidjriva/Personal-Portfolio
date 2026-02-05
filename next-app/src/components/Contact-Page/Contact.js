@@ -14,7 +14,6 @@ const Contact = () => {
         width: '100%',
         pt: '80px',
         pb: '80px',
-        borderTop: '8px solid rgba(0,0,0,0.1)',
       }}
     >
       <SectionHeading sectionName="Contact Me" />
