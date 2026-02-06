@@ -15,7 +15,7 @@ const SectionHeading = ({ sectionName }) => {
         variant="h2"
         sx={{
           fontWeight: 800,
-          color: 'text.primary',
+          color: 'inherit',
           fontSize: { xs: '2.5rem', md: '4rem' },
           letterSpacing: '-0.02em',
           lineHeight: 1.1,

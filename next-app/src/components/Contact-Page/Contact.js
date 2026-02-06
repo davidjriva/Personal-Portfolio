@@ -12,8 +12,8 @@ const Contact = () => {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        pt: '80px',
-        pb: '80px',
+        pt: '60px',
+        pb: '60px',
       }}
     >
       <SectionHeading sectionName="Contact Me" />

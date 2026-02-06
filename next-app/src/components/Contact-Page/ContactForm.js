@@ -49,8 +49,8 @@ const ContactForm = () => {
         width: '100%',
         height: 'fit-content',
         maxWidth: '800px',
-        bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#ffffff',
-        color: 'text.primary',
+        bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.08)',
+        color: 'inherit',
         padding: { xs: 2, sm: 3, md: 4 },
         borderRadius: 2,
         boxShadow: 3,
@@ -70,12 +70,12 @@ const ContactForm = () => {
               color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
-              color: 'text.primary',
+              color: 'inherit',
               '& fieldset': {
                 borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: 'text.primary',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
                 borderColor: 'primary.main',

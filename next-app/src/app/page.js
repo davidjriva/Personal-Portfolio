@@ -55,36 +55,43 @@ const MainPage = () => {
         <Greeting />
       </Box>
 
-      <Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <NavBar />
 
-        <section id="about">
+        <Box 
+          id="about"
+          sx={{ 
+            bgcolor: '#262624', 
+            width: '100%',
+            color: 'white',
+            borderBottom: '1.5px solid rgba(255, 255, 255, 0.15)'
+          }}
+        >
           <About />
-        </section>
+        </Box>
 
-        <section id="projects">
+        <Box 
+          id="projects"
+          sx={{ 
+            bgcolor: '#1F1E1D', 
+            width: '100%',
+            color: 'white',
+            borderBottom: '1.5px solid rgba(255, 255, 255, 0.15)'
+          }}
+        >
           <Projects />
-        </section>
+        </Box>
 
-        <section id="contact">
+        <Box 
+          id="contact"
+          sx={{ 
+            bgcolor: '#141413', 
+            width: '100%',
+            color: 'white'
+          }}
+        >
           <Contact />
-        </section>
-
-        {/* <section id="playing-cards">
-          <PlayingCardContainer />
-        </section> */}
-
-        {/* 
-          <section id="skills">
-            <Skills />
-          </section>
-          
-          <section id="awards">
-            <Awards />
-          </section>
-          */}
-
-        {/* <Footer /> */}
+        </Box>
       </Box>
 
       <Footer />

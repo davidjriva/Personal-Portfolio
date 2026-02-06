@@ -30,7 +30,7 @@ const AboutHeader = () => {
 
       <Typography
         sx={{
-          color: 'darkgray',
+          color: 'rgba(255, 255, 255, 0.6)',
           marginBottom: 2,
         }}
       >

@@ -53,7 +53,7 @@ const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description })
         sx={{
           fontWeight: 'bold',
           mb: 0.5,
-          color: 'text.primary',
+          color: 'inherit',
           lineHeight: 1.3,
         }}
       >
@@ -65,7 +65,7 @@ const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description })
       <Typography
         variant="body2"
         sx={{
-          color: 'text.primary',
+          color: 'inherit',
           opacity: 0.8,
           lineHeight: 1.6,
           mb: 2,
@@ -160,7 +160,8 @@ const ProjectCard = forwardRef(
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(30, 30, 30, 0.6)' : 'rgba(255, 255, 255, 0.9)',
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.1)',
+          color: 'white',
           backdropFilter: 'blur(10px)',
           border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.08)'}`,
           borderRadius: '16px',

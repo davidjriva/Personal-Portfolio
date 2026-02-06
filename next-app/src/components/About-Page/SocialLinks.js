@@ -19,7 +19,7 @@ const SocialLinks = () => {
       <Link href="https://github.com/davidjriva" target="_blank" rel="noopener" color="inherit">
         <IconButton
           sx={{
-            color: hasGitHubIconBeenClicked ? '#9974cf' : 'text.primary',
+            color: hasGitHubIconBeenClicked ? '#9974cf' : 'inherit',
             fontSize: '40px',
             '&:hover': {
               color: '#a28be5',
@@ -37,7 +37,7 @@ const SocialLinks = () => {
       <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener" color="inherit">
         <IconButton
           sx={{
-            color: hasLinkedInIconBeenClicked ? '#07a2f7' : 'text.primary',
+            color: hasLinkedInIconBeenClicked ? '#07a2f7' : 'inherit',
             fontSize: '40px',
             '&:hover': {
               color: '#4abfff',
