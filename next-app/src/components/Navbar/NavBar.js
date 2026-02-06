@@ -59,12 +59,13 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: '#141413',
+        bgcolor: theme.palette.mode === 'dark' ? '#141413' : 'rgba(255, 255, 255, 0.8)',
         backdropFilter: 'blur(10px)',
         height: '64px',
-        color: 'white',
+        color: theme.palette.text.primary,
         transition: 'all 0.3s ease',
-        borderBottom: '0.0625rem solid #30302e',
+        borderBottom: `0.0625rem solid ${theme.palette.mode === 'dark' ? '#30302e' : '#e0e0e0'}`,
+        boxShadow: theme.palette.mode === 'dark' ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
       }}
     >
       <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
@@ -80,7 +81,8 @@ const NavBar = () => {
               fontWeight: 800,
               letterSpacing: '-0.5px',
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem'
+              fontSize: '1.25rem',
+              color: theme.palette.mode === 'dark' ? 'white' : 'text.primary',
             }}
           >
             DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
@@ -94,7 +96,11 @@ const NavBar = () => {
             ))}
           </Box>
 
-          <IconButton onClick={toggleColorMode} color="inherit">
+          <IconButton 
+            onClick={toggleColorMode} 
+            color="inherit"
+            aria-label={`Switch to ${theme.palette.mode === 'dark' ? 'light' : 'dark'} mode`}
+          >
             {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
         </Box>

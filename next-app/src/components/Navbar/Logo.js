@@ -86,7 +86,7 @@ const Logo = () => {
         <path
           className="code-slash"
           d="M56 35L44 65"
-          stroke="white"
+          stroke="currentColor"
           strokeWidth="5"
           strokeLinecap="round"
         />
@@ -107,15 +107,15 @@ const Logo = () => {
 
         {/* Code Content on Screen - Adjusted for new rectangle position */}
         <g className="monitor-code" opacity="0">
-          <path className="code-line" d="M35 38H50" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <path className="code-line" d="M35 38H50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
           <path className="code-line" d="M35 45H60" stroke="#38c0f2" strokeWidth="2.5" strokeLinecap="round" />
-          <path className="code-line" d="M35 52H42" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+          <path className="code-line" d="M35 52H42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
         </g>
         
         {/* Monitor Stand Group - More Compact Stand */}
         <g className="monitor-stand-all" opacity="0">
-          <path d="M50 58V68" stroke="white" strokeWidth="4" strokeLinecap="round" /> {/* Shortened Stem */}
-          <path d="M42 68H58" stroke="white" strokeWidth="4" strokeLinecap="round" /> {/* Sized Base */}
+          <path d="M50 58V68" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /> {/* Shortened Stem */}
+          <path d="M42 68H58" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /> {/* Sized Base */}
         </g>
       </svg>
     </Box>

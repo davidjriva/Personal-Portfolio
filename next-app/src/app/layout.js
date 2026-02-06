@@ -11,8 +11,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: 'DR | Personal Portfolio',
-  description: "David Riva's Personal Portfolio",
+  title: 'David Riva | Full Stack Software Engineer Portfolio',
+  description: "Explore the portfolio of David Riva, a software engineer specializing in UI/UX, full-stack development, and data visualization. View projects involving React, Node.js, and Distributed Systems.",
+  keywords: ["David Riva", "Software Engineer", "Full Stack Developer", "UI/UX Design", "React Developer", "Node.js", "Portfolio", "Web Development"],
   openGraph: {
     title: 'David Riva - Personal Portfolio',
     description: 'Experienced software engineer specializing in UI/UX and big data visualization.',
