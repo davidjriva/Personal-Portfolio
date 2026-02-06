@@ -62,7 +62,7 @@ const NavBar = () => {
         transition: 'background-color 0.3s ease',
       }}
     >
-      <Toolbar constant sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: { xs: '0', sm: 'auto' }, marginRight: 'auto' }}>
            {/* Placeholder for left content if any, or centering logic adjustment */}
         </Box>
