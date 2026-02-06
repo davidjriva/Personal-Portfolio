@@ -18,9 +18,9 @@
     "@mui/material": "^7.3.7",
     "@mui/material-nextjs": "^7.3.7",
     "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
     "@upstash/redis": "^1.35.5",
     "@vercel/analytics": "^1.5.0",
-    "@vercel/kv": "^3.0.0",
     "dotenv": "^17.2.2",
     "gsap": "^3.12.7",
     "jose": "^6.1.0",
@@ -36,7 +36,6 @@
     "react-scroll": "^1.9.0",
     "redis": "^5.8.3",
     "sharp": "^0.33.5",
-    "tsparticles": "^3.5.0",
     "uuid": "^12.0.0"
   },
   "devDependencies": {

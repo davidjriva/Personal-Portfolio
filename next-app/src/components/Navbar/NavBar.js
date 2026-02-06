@@ -1,8 +1,9 @@
 'use client';
 
 import { Link as ScrollLink } from 'react-scroll';
-import { Toolbar, Box, AppBar, IconButton, useTheme } from '@mui/material';
+import { Toolbar, Box, AppBar, IconButton, useTheme, alpha, Typography } from '@mui/material';
 import { useState } from 'react';
+import Logo from './Logo';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useColorMode } from '@/contexts/ColorModeContext';
@@ -42,6 +43,8 @@ const FormattedLink = ({ page, active, setActivePage }) => {
   );
 };
 
+
+
 const pages = ['About', 'Projects', 'Contact'];
 
 const NavBar = () => {
@@ -51,30 +54,47 @@ const NavBar = () => {
 
   return (
     <AppBar
-      position="sticky"
+      position="fixed"
       sx={{
         top: 0,
-        zIndex: 999,
+        zIndex: 1100,
         width: '100%',
-        bgcolor: 'background.paper',
+        bgcolor: '#141413',
+        backdropFilter: 'blur(10px)',
         height: '64px',
-        color: 'text.primary',
-        transition: 'background-color 0.3s ease',
+        color: 'white',
+        transition: 'all 0.3s ease',
+        borderBottom: '0.0625rem solid #30302e',
       }}
     >
-      <Toolbar constant sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: { xs: '0', sm: 'auto' }, marginRight: 'auto' }}>
-           {/* Placeholder for left content if any, or centering logic adjustment */}
+      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+        <Box 
+          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <Logo />
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              fontWeight: 800,
+              letterSpacing: '-0.5px',
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: '1.25rem'
+            }}
+          >
+            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
+          </Typography>
         </Box>
         
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
-          ))}
-        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', mr: 2 }}>
+            {pages.map((page) => (
+              <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
+            ))}
+          </Box>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+          <IconButton onClick={toggleColorMode} color="inherit">
             {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
         </Box>

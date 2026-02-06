@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
-import { loadFull } from 'tsparticles';
+import { loadSlim } from '@tsparticles/slim';
 import baseOptions from '../particles-options/parallax-bubble.json';
 
 const ParticleBackground = ({ interactive = true, backgroundColor }) => {
@@ -12,32 +12,41 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
-      await loadFull(engine);
+      await loadSlim(engine);
     }).then(() => {
       setInit(true);
     });
   }, []);
 
   const options = useMemo(() => {
-    const updatedOptions = JSON.parse(JSON.stringify(baseOptions));
-    
-    // Update background color
-    updatedOptions.background.color.value = backgroundColor || theme.palette.background.default;
-    
-    // Update particle colors
     const particleColor = theme.palette.mode === 'dark' ? '#ffffff' : '#000000';
-    updatedOptions.particles.color.value = particleColor;
     
-    if (updatedOptions.particles.links) {
-      updatedOptions.particles.links.color.value = particleColor;
-    }
-
-    if (!interactive) {
-      delete updatedOptions.interactivity;
-    }
-    
-    return updatedOptions;
-  }, [theme.palette.mode, theme.palette.background.default, interactive]);
+    return {
+      ...baseOptions,
+      background: {
+        ...baseOptions.background,
+        color: {
+          ...baseOptions.background?.color,
+          value: backgroundColor || theme.palette.background.default
+        }
+      },
+      particles: {
+        ...baseOptions.particles,
+        color: {
+          ...baseOptions.particles?.color,
+          value: particleColor
+        },
+        links: baseOptions.particles?.links ? {
+          ...baseOptions.particles.links,
+          color: {
+            ...baseOptions.particles.links.color,
+            value: particleColor
+          }
+        } : baseOptions.particles?.links
+      },
+      interactivity: interactive ? baseOptions.interactivity : undefined
+    };
+  }, [theme.palette.mode, theme.palette.background.default, interactive, backgroundColor]);
 
   if (!init) {
     return null;
