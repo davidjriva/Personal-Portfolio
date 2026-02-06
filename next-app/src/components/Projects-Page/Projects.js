@@ -10,8 +10,8 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        pt: '80px',
-        pb: '80px',
+        pt: '60px',
+        pb: '60px',
         pl: { xs: 0, sm: 0, md: '80px' },
         pr: { xs: 0, sm: 0, md: '80px' },
         margin: '0 auto',

@@ -7,7 +7,8 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#333',
+        bgcolor: (theme) => theme.palette.mode === 'dark' ? '#262624' : '#f8f9fa',
+        color: 'text.primary',
         width: '100%',
         height: '10vh',
         display: 'flex',
@@ -16,7 +17,7 @@ const Footer = () => {
         justifyContent: 'center',
         position: 'relative',
         bottom: 0,
-        mt: '80px',
+        mt: 0,
         pt: '1rem',
         pb: '1rem',
       }}
@@ -25,7 +26,7 @@ const Footer = () => {
 
       <Typography
         variant="body2"
-        color="white"
+        color="text.primary"
         sx={{
           textAlign: 'center',
           marginTop: '1rem', // Add top margin for spacing

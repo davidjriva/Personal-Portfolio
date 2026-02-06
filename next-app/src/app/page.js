@@ -1,4 +1,7 @@
+'use client';
+
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/next';
 
 import Greeting from '@/components/Greeting-Page/Greeting';
@@ -11,78 +14,71 @@ import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
-export const metadata = {
-  title: 'DR | Personal Portfolio',
-  description: "David Riva's Personal Portfolio",
-  openGraph: {
-    title: 'David Riva - Personal Portfolio',
-    description: 'Experienced software engineer specializing in UI/UX and big data visualization.',
-    url: 'https://davidriva.dev',
-    siteName: 'David Riva Portfolio',
-    images: [
-      {
-        url: 'https://davidriva.dev/images/website_preview.png',
-        width: 1200,
-        height: 630,
-        alt: "David Riva's headshot",
-      },
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'David Riva - Personal Portfolio',
-    description: 'Experienced software engineer specializing in UI/UX and data visualization.',
-    images: ['https://davidriva.dev/images/website_preview.png'],
-  },
-};
 
 const MainPage = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        backgroundColor: '#282829',
+        bgcolor: 'background.default',
+        color: 'text.primary',
         position: 'relative',
+        minHeight: '100vh',
       }}
     > 
       {/* Enables Vercel deployment analytics */}
       <Analytics />
 
-      <Box sx={{ position: 'relative', height: '100vh' }}>
-        <ParticleBackground />
+      <Box 
+        sx={{ 
+          position: 'relative', 
+          height: '100vh',
+          bgcolor: theme.palette.mode === 'dark' ? 'transparent' : '#e9ecef'
+        }}
+      >
+        <ParticleBackground 
+          backgroundColor={theme.palette.mode === 'dark' ? '#282829' : '#e9ecef'} 
+        />
         <Greeting />
       </Box>
 
-      <Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <NavBar />
 
-        <section id="about">
+        <Box 
+          id="about"
+          sx={{ 
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? '#262624' : '#f8f9fa', 
+            width: '100%',
+            color: (theme) => theme.palette.mode === 'dark' ? 'white' : 'text.primary',
+            borderBottom: (theme) => `1.5px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
+          }}
+        >
           <About />
-        </section>
+        </Box>
 
-        <section id="projects">
+        <Box 
+          id="projects"
+          sx={{ 
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? '#1F1E1D' : '#f1f3f5', 
+            width: '100%',
+            color: (theme) => theme.palette.mode === 'dark' ? 'white' : 'text.primary',
+            borderBottom: (theme) => `1.5px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.08)'}`
+          }}
+        >
           <Projects />
-        </section>
+        </Box>
 
-        <section id="contact">
+        <Box 
+          id="contact"
+          sx={{ 
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? '#141413' : '#e9ecef', 
+            width: '100%',
+            color: (theme) => theme.palette.mode === 'dark' ? 'white' : 'text.primary'
+          }}
+        >
           <Contact />
-        </section>
-
-        {/* <section id="playing-cards">
-          <PlayingCardContainer />
-        </section> */}
-
-        {/* 
-          <section id="skills">
-            <Skills />
-          </section>
-          
-          <section id="awards">
-            <Awards />
-          </section>
-          */}
-
-        {/* <Footer /> */}
+        </Box>
       </Box>
 
       <Footer />

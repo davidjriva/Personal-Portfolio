@@ -49,8 +49,9 @@ const ContactForm = () => {
         width: '100%',
         height: 'fit-content',
         maxWidth: '800px',
-        backgroundColor: '#ffffff', // Light background for form
-        padding: { xs: 2, sm: 3, md: 4 }, // Adjust padding for smaller screens
+        bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(255, 255, 255, 0.08)',
+        color: 'inherit',
+        padding: { xs: 2, sm: 3, md: 4 },
         borderRadius: 2,
         boxShadow: 3,
       }}
@@ -66,17 +67,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333', // Lighter text color for label
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa', // Lighter border color
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888', // Darker border on hover
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368', // Focused border color
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -92,17 +94,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -117,17 +120,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -144,17 +148,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -162,12 +167,12 @@ const ContactForm = () => {
         <Button
           type="submit"
           variant="contained"
-          color="primary"
           sx={{
             width: '100%',
             padding: '12px 0',
             fontSize: '16px',
             backgroundColor: '#1976d2',
+            color: 'white',
             '&:hover': {
               backgroundColor: '#1565c0',
             },

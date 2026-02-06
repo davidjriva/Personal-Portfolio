@@ -34,8 +34,8 @@ const About = () => {
         justifyContent: 'center',
         width: '100%',
         minHeight: '750px',
-        pt: '80px',
-        pb: '80px',
+        pt: '60px',
+        pb: '60px',
       }}
     >
       <HeadShotImage width={100} height={100} />

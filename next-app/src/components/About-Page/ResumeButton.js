@@ -8,7 +8,19 @@ const ResumeButton = () => {
   };
 
   return (
-    <Button variant="contained" color="primary" onClick={handleResumeClick} sx={{ marginTop: '1rem', marginBottom: 2 }}>
+    <Button 
+      variant="contained" 
+      onClick={handleResumeClick} 
+      sx={{ 
+        marginTop: '1rem', 
+        marginBottom: 2,
+        backgroundColor: '#1976d2',
+        color: 'white',
+        '&:hover': {
+          backgroundColor: '#1565c0',
+        },
+      }}
+    >
       View Resume as PDF
     </Button>
   );
