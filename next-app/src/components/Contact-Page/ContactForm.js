@@ -169,6 +169,7 @@ const ContactForm = () => {
             padding: '12px 0',
             fontSize: '16px',
             backgroundColor: '#1976d2',
+            color: 'white',
             '&:hover': {
               backgroundColor: '#1565c0',
             },
