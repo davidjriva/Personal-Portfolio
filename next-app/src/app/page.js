@@ -4,13 +4,15 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/next';
 
-import Greeting from '@/components/Greeting-Page/Greeting';
-import About from '@/components/About-Page/About';
-import Projects from '@/components/Projects-Page/Projects';
-import Contact from '@/components/Contact-Page/Contact';
-import Skills from '@/components/Skills-Page/Skills';
-import Awards from '@/components/Awards-Page/Awards';
-import ParticleBackground from '@/components/ParticleBackground';
+import dynamic from 'next/dynamic';
+
+const Greeting = dynamic(() => import('@/components/Greeting-Page/Greeting'), { ssr: false });
+const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
+const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
+const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
+const Skills = dynamic(() => import('@/components/Skills-Page/Skills'), { ssr: false });
+const Awards = dynamic(() => import('@/components/Awards-Page/Awards'), { ssr: false });
+const ParticleBackground = dynamic(() => import('@/components/ParticleBackground'), { ssr: false });
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
