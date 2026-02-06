@@ -1,11 +1,12 @@
 import { Button, Typography } from '@mui/material';
 
-const StyledButton = ({ href, onClick, text, icon, component }) => {
+const StyledButton = ({ href, onClick, text, icon, component, ...props }) => {
   return (
     <Button
       onClick={onClick}
       href={href}
       component={component}
+      {...props}
       sx={{
         marginTop: '20px',
         backgroundColor: 'rgba(10, 115, 201, 0.15)',
