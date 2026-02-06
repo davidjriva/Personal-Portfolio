@@ -24,7 +24,7 @@ const Greeting = () => {
   return (
     <Box
       sx={{
-        color: 'white', // Always white since banner has dark particle background
+        color: 'text.primary', // Adapts to theme mode now that particle background is theme-aware
         height: '100vh',
         width: '100vw',
         display: 'flex',

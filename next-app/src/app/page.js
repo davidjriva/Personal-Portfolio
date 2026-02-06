@@ -1,6 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/next';
 
 import Greeting from '@/components/Greeting-Page/Greeting';
@@ -15,6 +16,7 @@ import Footer from '@/components/Footer/Footer';
 
 
 const MainPage = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -27,8 +29,16 @@ const MainPage = () => {
       {/* Enables Vercel deployment analytics */}
       <Analytics />
 
-      <Box sx={{ position: 'relative', height: '100vh' }}>
-        <ParticleBackground />
+      <Box 
+        sx={{ 
+          position: 'relative', 
+          height: '100vh',
+          bgcolor: theme.palette.mode === 'dark' ? 'transparent' : '#e9ecef'
+        }}
+      >
+        <ParticleBackground 
+          backgroundColor={theme.palette.mode === 'dark' ? '#282829' : '#e9ecef'} 
+        />
         <Greeting />
       </Box>
 
