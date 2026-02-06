@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: 'background.paper',
+        bgcolor: (theme) => theme.palette.mode === 'dark' ? '#262624' : '#f8f9fa',
         color: 'text.primary',
         width: '100%',
         height: '10vh',
@@ -17,7 +17,7 @@ const Footer = () => {
         justifyContent: 'center',
         position: 'relative',
         bottom: 0,
-        mt: '80px',
+        mt: 0,
         pt: '1rem',
         pb: '1rem',
       }}

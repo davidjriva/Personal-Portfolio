@@ -94,17 +94,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -119,17 +120,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
@@ -146,17 +148,18 @@ const ContactForm = () => {
           sx={{
             marginBottom: 2,
             '& .MuiInputLabel-root': {
-              color: '#333',
+              color: 'text.secondary',
             },
             '& .MuiOutlinedInput-root': {
+              color: 'inherit',
               '& fieldset': {
-                borderColor: '#aaa',
+                borderColor: 'text.secondary',
               },
               '&:hover fieldset': {
-                borderColor: '#888',
+                borderColor: 'inherit',
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#5f6368',
+                borderColor: 'primary.main',
               },
             },
           }}
