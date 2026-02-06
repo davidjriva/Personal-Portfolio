@@ -15,6 +15,7 @@ const ResumeButton = () => {
         marginTop: '1rem', 
         marginBottom: 2,
         backgroundColor: '#1976d2',
+        color: 'white',
         '&:hover': {
           backgroundColor: '#1565c0',
         },
