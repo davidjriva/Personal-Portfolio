@@ -31,6 +31,8 @@ const MainPage = () => {
       {/* Enables Vercel deployment analytics */}
       <Analytics />
 
+      <NavBar />
+
       <Box 
         sx={{ 
           position: 'relative', 
@@ -45,8 +47,6 @@ const MainPage = () => {
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <NavBar />
-
         <Box 
           id="about"
           sx={{ 
