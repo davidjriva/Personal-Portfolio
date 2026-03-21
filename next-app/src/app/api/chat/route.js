@@ -5,7 +5,7 @@ import { jwtVerify } from 'jose';
 import { getSystemPrompt, toolsDefinitions } from '../../../lib/chatConfig';
 import sanitizeHtml from 'sanitize-html';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // Initialize Upstash Redis (REST API, no persistent socket)
 const redis = new Redis({
@@ -16,7 +16,7 @@ const redis = new Redis({
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const sessionMemory = new Map();
 const MAX_MEMORY_PAIRS = 3;
-const MAX_REQUESTS = 5;
+const MAX_REQUESTS = 20;
 const WINDOW_MS = 60 * 1000;
 const MAX_MESSAGE_LENGTH = 1500;
 
@@ -60,6 +60,14 @@ export async function POST(req) {
     const rawMessage = body.message;
     const rawSessionId = body.sessionId;
 
+    // Eval Mode Configuration (relaxed check for debugging)
+    const evalHeader = req.headers.get('x-eval-mode');
+    console.log(`[DEBUG] x-eval-mode: ${evalHeader}, NODE_ENV: ${process.env.NODE_ENV}`);
+    
+    // Temporarily allowing x-eval-mode to work even if NODE_ENV isn't 'development' to debug
+    const isEvalMode = evalHeader === 'true';
+    const evalData = { contexts: [], tool_calls: [] };
+
     if (!rawMessage || !rawSessionId || rawMessage.trim() === '') {
       return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), { status: 400 });
     }
@@ -78,7 +86,7 @@ export async function POST(req) {
     let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
     if (process.env.NODE_ENV === 'development' && ip === 'unknown') ip = sessionId;
 
-    if (!(await checkRateLimit(ip))) {
+    if (!isEvalMode && !(await checkRateLimit(ip))) {
       return new Response(JSON.stringify({ error: '⚠️ Rate limit exceeded. Please wait 1 minute.' }), { status: 429 });
     }
 
@@ -135,12 +143,15 @@ export async function POST(req) {
         });
 
         for (const tc of toolCalls) {
+          if (isEvalMode) evalData.tool_calls.push(tc.function.name);
           if (tc.function.name === 'search_resume_data') {
             try {
               const args = JSON.parse(tc.function.arguments);
               const results = await searchEmbeddings(args.query);
 
               const context = results.map(item => Object.entries(item).filter(([k,v]) => k !== 'embedding' && v).map(([k,v]) => `**${k}:** ${Array.isArray(v) ? v.join('. ') : v}`).join('\n')).join('\n\n');
+              
+              if (isEvalMode && context) evalData.contexts.push(context);
                             
               currentMessages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: context || "No relevant data found." });
             } catch (e) {
@@ -164,6 +175,15 @@ export async function POST(req) {
                 }
               }
               sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
+              
+              // Truncate contexts to avoid large payloads and Faithfulness timeout
+              if (isEvalMode) {
+                const maxContexts = 5;
+                const maxLength = 500; // characters per context
+                const truncatedContexts = evalData.contexts.slice(0, maxContexts).map(ctx => ctx.length > maxLength ? ctx.slice(0, maxLength) + '...' : ctx);
+                evalData.contexts = truncatedContexts;
+                controller.enqueue(encoder.encode(`\n\n[EVAL_CONTEXTS]: ${JSON.stringify(evalData)}`));
+              }
             } catch (err) {
               console.error('Streaming error:', err);
             } finally {

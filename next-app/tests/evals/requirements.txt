@@ -1,0 +1,5 @@
+pytest
+deepeval
+requests
+python-dotenv
+pyjwt
