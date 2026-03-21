@@ -1,6 +1,6 @@
 [
     {
-      "title": "Software Engineer, Technical Training",
+      "title": "Technical Trainer (Forward Deployed Engineer)",
       "company": "C3 AI",
       "companyWebsiteLink": "https://c3.ai/",
       "logoImage": "C3_AI.webp",
@@ -9,7 +9,7 @@
       "endDate": "Present",
       "bulletPoints": [
         "Achieved 1st place at the C3 Agentic AI Hackathon 2025 by creating agentic tooling that significantly boosted developer efficiency in UI component creation, demonstrating strong computer science fundamentals and intuitive UI design using React, TypeScript, and an in-house LLM.",
-        "Led the development of C3 AI's training website, launching an LMS for 8,000+ learners using JavaScript, HTML, and CSS, effectively adapting to evolving requirements and tight deadlines while aligning product direction with user needs.",
+        "Spearheaded the development of C3 AI's core training platform serving 8,000+ learners globally. Leveraged JavaScript, HTML, and CSS to rapidly deliver features under tight deadlines, actively shaping product direction to meet critical user needs.",
         "Created internal productivity tools to automate customer-facing processes, utilizing React, JavaScript, Next.js, and Electron.js, which resulted in an 80% reduction in the time to send learners feedback and showcased practical software development and UI design expertise.",
         "Developed and administered curriculum for 8,000+ learners in data science, machine learning, and application development using the C3 AI framework, JavaScript, and Python, reinforcing technical training through agile Scrum methodologies and long-term vision in educational product development.",
         "Resolved customer obstacles through personalized debugging sessions, reinforcing customer interaction skills and ensuring technology worked seamlessly across diverse engineering teams."

@@ -68,10 +68,10 @@ async function embedFile(filePath: string) {
 
 async function main() {
   const files = [
-    path.join(__dirname, "../src/data/awards.json"),
-    path.join(__dirname, "../src/data/experiences.json"),
-    path.join(__dirname, "../src/data/projects.json"),
-    path.join(__dirname, "../src/data/skills.json"),
+    path.join(__dirname, "../public/data/awards.json"),
+    path.join(__dirname, "../public/data/experiences.json"),
+    path.join(__dirname, "../public/data/projects.json"),
+    path.join(__dirname, "../public/data/skills.json"),
   ];
 
   for (const file of files) {

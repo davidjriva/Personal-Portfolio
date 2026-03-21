@@ -30,7 +30,7 @@ const ProjectsContainer = () => {
       {loading ? (
         <Grid container spacing={4}>
           {[1, 2, 3, 4, 5, 6].map((item) => (
-            <Grid item key={item} xs={12} sm={6} md={4}>
+            <Grid key={item} size={{ xs: 12, sm: 6, md: 4 }}>
               <Box sx={{ p: 2, bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)', borderRadius: 2 }}>
                 <Skeleton variant="rectangular" height={200} sx={{ borderRadius: 1 }} />
                 <Skeleton variant="text" sx={{ mt: 2, fontSize: '1.5rem' }} />

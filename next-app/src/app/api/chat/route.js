@@ -2,6 +2,7 @@ import { searchEmbeddings } from '../../../lib/search';
 import OpenAI from 'openai';
 import { Redis } from '@upstash/redis';
 import { jwtVerify } from 'jose';
+import { getSystemPrompt, toolsDefinitions } from '../../../lib/chatConfig';
 
 export const runtime = 'edge';
 
@@ -77,74 +78,105 @@ export async function POST(req) {
       return new Response(JSON.stringify({ error: '⚠️ Rate limit exceeded. Please wait 1 minute.' }), { status: 429 });
     }
 
-    // Retrieve embeddings
-    const results = await searchEmbeddings(message);
-    const context = results
-      .map((item) => {
-        return Object.entries(item)
-          .filter(([k, v]) => k !== 'embedding' && v)
-          .map(([k, v]) => {
-            const value = Array.isArray(v) ? v.join('. ') : v;
-            return `**${k}:** ${value}`;
-          })
-          .join('\n');
-      })
-      .join('\n\n');
-
     // Retrieve memory
     const memory = sessionMemory.get(sessionId) || [];
     const recentMemory = memory.slice(-MAX_MEMORY_PAIRS);
     const memoryContext = recentMemory.map((pair) => `User: ${pair.question}\nAssistant: ${pair.answer}`).join('\n\n');
 
-    const systemPrompt = `
-    You are a professional AI assistant for David Riva's personal website.
-    - Answer accurately using the provided context and memory.
-    - Keep answers concise (≤1000 words), professional, and friendly.
-    - Use basic Markdown only (headings, lists, bold).
-    - When mentioning dates, list them in **descending chronological order**.
-    - Only answer about David's experiences, skills, projects, awards, and related professional information.
-    - If the user asks about something not in the context/memory, respond honestly that you don't have information.
-    `;
+    const systemPrompt = getSystemPrompt();
 
-    // Stream response from OpenAI
-    const stream = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: `Memory:\n${memoryContext}\n\nContext:\n${context}\n\nQuestion:\n${message}` },
-      ],
-      stream: true,
-      temperature: 0.2,
-    });
+    let currentMessages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: `Memory:\n${memoryContext}\n\nQuestion:\n${message}` }
+    ];
 
-    const encoder = new TextEncoder();
-    const readable = new ReadableStream({
-      async start(controller) {
-        let fullText = '';
-        try {
-          for await (const chunk of stream) {
-            const text = chunk.choices[0]?.delta?.content;
-            if (text) {
-              controller.enqueue(encoder.encode(text));
-              fullText += text;
+    while (true) {
+      const stream = await client.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: currentMessages,
+        tools: toolsDefinitions,
+        stream: true,
+        temperature: 0.2,
+      });
+
+      const streamIter = stream[Symbol.asyncIterator]();
+      const firstChunk = await streamIter.next();
+      if (firstChunk.done) break;
+
+      const delta = firstChunk.value.choices[0]?.delta;
+
+      if (delta?.tool_calls) {
+        let toolCallsMap = new Map();
+        const mergeToolCall = (tc) => {
+          if (!toolCallsMap.has(tc.index)) {
+            toolCallsMap.set(tc.index, { id: tc.id, type: 'function', function: { name: tc.function?.name || '', arguments: '' } });
+          }
+          let existing = toolCallsMap.get(tc.index);
+          if (tc.function?.arguments) existing.function.arguments += tc.function.arguments;
+        };
+
+        delta.tool_calls.forEach(mergeToolCall);
+        
+        for await (const chunk of streamIter) {
+          if (chunk.choices[0]?.delta?.tool_calls) {
+            chunk.choices[0].delta.tool_calls.forEach(mergeToolCall);
+          }
+        }
+
+        const toolCalls = Array.from(toolCallsMap.values());
+        currentMessages.push({
+          role: 'assistant',
+          tool_calls: toolCalls,
+          content: null,
+        });
+
+        for (const tc of toolCalls) {
+          if (tc.function.name === 'search_resume_data') {
+            try {
+              const args = JSON.parse(tc.function.arguments);
+              const results = await searchEmbeddings(args.query);
+
+              const context = results.map(item => Object.entries(item).filter(([k,v]) => k !== 'embedding' && v).map(([k,v]) => `**${k}:** ${Array.isArray(v) ? v.join('. ') : v}`).join('\n')).join('\n\n');
+                            
+              currentMessages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: context || "No relevant data found." });
+            } catch (e) {
+              currentMessages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: "Error executing search." });
             }
           }
-          sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
-        } catch (err) {
-          console.error('Streaming error:', err);
-        } finally {
-          controller.close();
         }
-      },
-    });
+      } else {
+        const encoder = new TextEncoder();
+        const readable = new ReadableStream({
+          async start(controller) {
+            let fullText = delta?.content || '';
+            if (delta?.content) controller.enqueue(encoder.encode(delta.content));
 
-    return new Response(readable, {
-      headers: {
-        'Content-Type': 'text/event-stream; charset=utf-8',
-        'Cache-Control': 'no-cache, no-transform',
-        Connection: 'keep-alive',
-      },
-    });
+            try {
+              for await (const chunk of streamIter) {
+                const text = chunk.choices[0]?.delta?.content;
+                if (text) {
+                  controller.enqueue(encoder.encode(text));
+                  fullText += text;
+                }
+              }
+              sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
+            } catch (err) {
+              console.error('Streaming error:', err);
+            } finally {
+              controller.close();
+            }
+          }
+        });
+
+        return new Response(readable, {
+          headers: {
+            'Content-Type': 'text/event-stream; charset=utf-8',
+            'Cache-Control': 'no-cache, no-transform',
+            Connection: 'keep-alive',
+          },
+        });
+      }
+    }
   } catch (err) {
     console.error('Error in /api/chat:', err);
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
