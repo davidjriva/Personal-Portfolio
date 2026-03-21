@@ -6,8 +6,27 @@ export const dynamic = 'force-dynamic';
 
 const TOKEN_TTL = '5m'; // short-lived token
 
-export async function GET(req) {
+export async function POST(req) {
   try {
+    const { captchaToken } = await req.json();
+    if (!captchaToken) {
+      return new Response(JSON.stringify({ error: 'Missing captcha token' }), { status: 400 });
+    }
+
+    const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+    const captchaRes = await fetch(verifyEndpoint, {
+      method: 'POST',
+      body: `secret=${encodeURIComponent(process.env.TURNSTILE_SECRET_KEY)}&response=${encodeURIComponent(captchaToken)}`,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    const captchaData = await captchaRes.json();
+    if (!captchaData.success) {
+      return new Response(JSON.stringify({ error: 'Invalid captcha' }), { status: 403 });
+    }
+
     // Get origin header
     const origin = req.headers.get('origin') || '';
 
@@ -31,9 +50,9 @@ export async function GET(req) {
         return new Response(JSON.stringify({ error: 'Origin not allowed (preview)' }), { status: 403 });
       }
     } else {
-      const allowedDev = ['http://localhost:3000', 'http://127.0.0.1:3000', ''];
+      const isAllowedDev = !origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:');
 
-      if (!allowedDev.includes(origin)) {
+      if (!isAllowedDev) {
         console.warn('Origin not allowed in dev:', origin);
         return new Response(JSON.stringify({ error: 'Origin not allowed (dev)' }), { status: 403 });
       }

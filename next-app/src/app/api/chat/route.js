@@ -3,6 +3,7 @@ import OpenAI from 'openai';
 import { Redis } from '@upstash/redis';
 import { jwtVerify } from 'jose';
 import { getSystemPrompt, toolsDefinitions } from '../../../lib/chatConfig';
+import sanitizeHtml from 'sanitize-html';
 
 export const runtime = 'edge';
 
@@ -56,12 +57,15 @@ export async function POST(req) {
 
     // Parse body
     const body = await req.json();
-    const message = body.message;
-    const sessionId = body.sessionId;
+    const rawMessage = body.message;
+    const rawSessionId = body.sessionId;
 
-    if (!message || !sessionId || message.trim() === '') {
+    if (!rawMessage || !rawSessionId || rawMessage.trim() === '') {
       return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), { status: 400 });
     }
+
+    const message = sanitizeHtml(rawMessage, { allowedTags: [], allowedAttributes: {} });
+    const sessionId = sanitizeHtml(rawSessionId, { allowedTags: [], allowedAttributes: {} });
 
     if (message.length > MAX_MESSAGE_LENGTH) {
       return new Response(JSON.stringify({ error: `Message too long. Max length is ${MAX_MESSAGE_LENGTH}.` }), {

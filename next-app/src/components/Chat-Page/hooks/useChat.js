@@ -11,18 +11,20 @@ export default function useChat() {
   const currentStreamController = useRef(null);
   const assistantTextRef = useRef('');
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await fetch('/api/token');
-        const data = await res.json();
-        setToken(data.token);
-        setSessionId(data.sessionId);
-      } catch (err) {
-        console.error('Failed to get token:', err);
-      }
-    };
-    fetchToken();
+  const fetchToken = useCallback(async (captchaToken) => {
+    try {
+      const res = await fetch('/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ captchaToken }),
+      });
+      if (!res.ok) throw new Error('Token fetch failed');
+      const data = await res.json();
+      setToken(data.token);
+      setSessionId(data.sessionId);
+    } catch (err) {
+      console.error('Failed to get token:', err);
+    }
   }, []);
 
   const sendMessage = useCallback(
@@ -114,5 +116,5 @@ export default function useChat() {
     [sessionId, started, token]
   );
 
-  return { messages, started, sendMessage, setStarted };
+  return { messages, started, sendMessage, setStarted, fetchToken, hasToken: !!token };
 }

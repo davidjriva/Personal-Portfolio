@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import { Turnstile } from '@marsidev/react-turnstile';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const ContactForm = () => {
   });
 
   const [status, setStatus] = useState(''); // For success or error messages
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   // Handle input changes and update state
   const handleChange = (e) => {
@@ -29,7 +31,7 @@ const ContactForm = () => {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, captchaToken }),
       });
 
       if (response.ok) {
@@ -164,9 +166,18 @@ const ContactForm = () => {
             },
           }}
         />
+        {!captchaToken && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+              onSuccess={(token) => setCaptchaToken(token)}
+            />
+          </Box>
+        )}
         <Button
           type="submit"
           variant="contained"
+          disabled={!captchaToken}
           sx={{
             width: '100%',
             padding: '12px 0',

@@ -1,7 +1,7 @@
 import { Box, InputBase, IconButton, Paper } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-const ChatInput = ({ input, setInput, sendMessage }) => {
+const ChatInput = ({ input, setInput, sendMessage, disabled = false }) => {
   return (
     <Paper
       component="form"
@@ -22,6 +22,7 @@ const ChatInput = ({ input, setInput, sendMessage }) => {
       <InputBase
         placeholder="Ask anything"
         value={input}
+        disabled={disabled}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -39,7 +40,7 @@ const ChatInput = ({ input, setInput, sendMessage }) => {
       <IconButton
         type="submit"
         color="primary"
-        disabled={!input.trim()}
+        disabled={!input.trim() || disabled}
         sx={{
           ml: 1,
           backgroundColor: '#90caf9',
