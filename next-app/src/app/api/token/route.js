@@ -50,9 +50,9 @@ export async function POST(req) {
         return new Response(JSON.stringify({ error: 'Origin not allowed (preview)' }), { status: 403 });
       }
     } else {
-      const allowedDev = ['http://localhost:3000', 'http://127.0.0.1:3000', ''];
+      const isAllowedDev = !origin || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:');
 
-      if (!allowedDev.includes(origin)) {
+      if (!isAllowedDev) {
         console.warn('Origin not allowed in dev:', origin);
         return new Response(JSON.stringify({ error: 'Origin not allowed (dev)' }), { status: 403 });
       }
