@@ -1,6 +1,8 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ColorModeProvider } from '../contexts/ColorModeContext';
 import { Montserrat } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 
 const montserrat = Montserrat({
@@ -44,6 +46,8 @@ export default function RootLayout({ children }) {
         <AppRouterCacheProvider>
           <ColorModeProvider>{children}</ColorModeProvider>
         </AppRouterCacheProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
