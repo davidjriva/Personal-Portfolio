@@ -3,7 +3,7 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/next';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import dynamic from 'next/dynamic';
 
 const Greeting = dynamic(() => import('@/components/Greeting-Page/Greeting'), { ssr: false });
@@ -30,6 +30,7 @@ const MainPage = () => {
     > 
       {/* Enables Vercel deployment analytics */}
       <Analytics />
+      <SpeedInsights />
 
       <NavBar />
 
