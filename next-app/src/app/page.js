@@ -2,7 +2,6 @@
 
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Analytics } from '@vercel/analytics/next';
 
 import dynamic from 'next/dynamic';
 
@@ -28,8 +27,6 @@ const MainPage = () => {
         minHeight: '100vh',
       }}
     > 
-      {/* Enables Vercel deployment analytics */}
-      <Analytics />
 
       <NavBar />
 
