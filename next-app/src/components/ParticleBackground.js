@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useMemo, useState, useEffect } from 'react';
-import { useTheme } from '@mui/material/styles';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import baseOptions from '../particles-options/parallax-bubble.json';
 
 const ParticleBackground = ({ interactive = true, backgroundColor }) => {
-  const theme = useTheme();
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -18,39 +16,35 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
     });
   }, []);
 
-  const options = useMemo(() => {
-    const particleColor = theme.palette.mode === 'dark' ? '#ffffff' : '#000000';
-    
-    return {
+  const options = useMemo(
+    () => ({
       ...baseOptions,
       background: {
         ...baseOptions.background,
         color: {
           ...baseOptions.background?.color,
-          value: backgroundColor || theme.palette.background.default
-        }
+          value: backgroundColor || '#0b0920',
+        },
       },
       particles: {
         ...baseOptions.particles,
         color: {
           ...baseOptions.particles?.color,
-          value: particleColor
+          value: '#ffffff',
         },
-        links: baseOptions.particles?.links ? {
-          ...baseOptions.particles.links,
-          color: {
-            ...baseOptions.particles.links.color,
-            value: particleColor
-          }
-        } : baseOptions.particles?.links
+        links: baseOptions.particles?.links
+          ? {
+              ...baseOptions.particles.links,
+              color: { ...baseOptions.particles.links.color, value: '#ffffff' },
+            }
+          : baseOptions.particles?.links,
       },
-      interactivity: interactive ? baseOptions.interactivity : undefined
-    };
-  }, [theme.palette.mode, theme.palette.background.default, interactive, backgroundColor]);
+      interactivity: interactive ? baseOptions.interactivity : undefined,
+    }),
+    [interactive, backgroundColor]
+  );
 
-  if (!init) {
-    return null;
-  }
+  if (!init) return null;
 
   return <Particles id="tsparticles" options={options} />;
 };
