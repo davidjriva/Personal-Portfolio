@@ -9,9 +9,6 @@ const AboutHeader = () => {
         sx={{
           fontWeight: 'bold',
           marginBottom: 1,
-          textDecoration: 'underline',
-          textDecorationThickness: '2px',
-          textUnderlineOffset: '10px',
           fontSize: { xs: '1.75rem', sm: '2.5rem', md: '2.5rem' },
         }}
       >
@@ -30,7 +27,7 @@ const AboutHeader = () => {
 
       <Typography
         sx={{
-          color: 'text.secondary',
+          color: 'rgba(255, 255, 255, 0.55)',
           marginBottom: 2,
         }}
       >
