@@ -25,8 +25,21 @@ const MainPage = () => {
     >
       <NavBar />
 
-      <Box sx={{ position: 'relative', height: '100vh', bgcolor: 'transparent' }}>
-        <ParticleBackground backgroundColor="#0f0c29" />
+      <Box
+        sx={{
+          position: 'relative',
+          height: '100vh',
+          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
+          backgroundSize: '400% 400%',
+          animation: 'gradShift 16s ease infinite',
+          '@keyframes gradShift': {
+            '0%': { backgroundPosition: '0% 50%' },
+            '50%': { backgroundPosition: '100% 50%' },
+            '100%': { backgroundPosition: '0% 50%' },
+          },
+        }}
+      >
+        <ParticleBackground backgroundColor="transparent" />
         <Greeting />
       </Box>
 

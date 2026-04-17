@@ -50,10 +50,15 @@ const About = () => {
           borderRadius: '50%',
           background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
           flexShrink: 0,
+          width: 286,
+          height: 286,
+          display: { xs: 'none', sm: 'flex' },
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <Box sx={{ borderRadius: '50%', overflow: 'hidden', bgcolor: '#0b0920' }}>
-          <HeadShotImage width={100} height={100} />
+        <Box sx={{ borderRadius: '50%', overflow: 'hidden', bgcolor: '#0b0920', width: 280, height: 280 }}>
+          <HeadShotImage width={280} height={280} />
         </Box>
       </Box>
 

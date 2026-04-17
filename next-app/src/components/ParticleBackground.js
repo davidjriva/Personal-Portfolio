@@ -16,6 +16,8 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
     });
   }, []);
 
+  const isTransparent = backgroundColor === 'transparent';
+
   const options = useMemo(
     () => ({
       ...baseOptions,
@@ -23,8 +25,9 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
         ...baseOptions.background,
         color: {
           ...baseOptions.background?.color,
-          value: backgroundColor || '#0b0920',
+          value: isTransparent ? '#000000' : (backgroundColor || '#0b0920'),
         },
+        opacity: isTransparent ? 0 : (baseOptions.background?.opacity ?? 1),
       },
       particles: {
         ...baseOptions.particles,
@@ -41,7 +44,7 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
       },
       interactivity: interactive ? baseOptions.interactivity : undefined,
     }),
-    [interactive, backgroundColor]
+    [interactive, backgroundColor, isTransparent]
   );
 
   if (!init) return null;

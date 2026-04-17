@@ -6,14 +6,6 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import AssistantIcon from '@mui/icons-material/Assistant';
 import Link from 'next/link';
 
-const gradShiftKeyframes = `
-  @keyframes gradShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-`;
-
 const Greeting = () => {
   const scrollToSection = () => {
     const section = document.getElementById('about');
@@ -22,19 +14,7 @@ const Greeting = () => {
   };
 
   return (
-    <>
-      <style>{gradShiftKeyframes}</style>
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 8s ease infinite',
-          zIndex: 0,
-        }}
-      />
-      <Box
+    <Box
         sx={{
           color: '#ffffff',
           height: '100vh',
@@ -47,23 +27,6 @@ const Greeting = () => {
           zIndex: 1,
         }}
       >
-        <Box
-          sx={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            px: 2,
-            py: 0.75,
-            mb: 2,
-            borderRadius: '20px',
-            background: 'rgba(56, 192, 242, 0.08)',
-            border: '1px solid rgba(56, 192, 242, 0.25)',
-          }}
-        >
-          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.75)', fontSize: '0.85rem' }}>
-            Hello, I'm
-          </Typography>
-        </Box>
-
         <Typography
           variant="h1"
           sx={{
@@ -73,8 +36,8 @@ const Greeting = () => {
             mb: 1,
           }}
         >
-          <span style={{ color: '#ffffff' }}>David</span>{' '}
-          <span style={{ color: '#38c0f2' }}>Riva</span>
+          <span style={{ color: '#ffffff' }}>Hello, I'm </span>
+          <span style={{ color: '#38c0f2' }}>David</span>
         </Typography>
 
         <AnimatedTypingTypography />
@@ -140,7 +103,6 @@ const Greeting = () => {
           </Box>
         </Stack>
       </Box>
-    </>
   );
 };
 
