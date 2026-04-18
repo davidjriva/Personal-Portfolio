@@ -3,10 +3,10 @@
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
 
-const HeroChat = dynamic(() => import('@/components/Greeting-Page/HeroChat'), { ssr: false });
 const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
 const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
 const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
+import HeroChat from '@/components/Greeting-Page/HeroChat';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
