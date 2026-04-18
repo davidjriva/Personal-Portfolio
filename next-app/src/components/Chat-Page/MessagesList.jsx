@@ -3,18 +3,19 @@ import { Box } from '@mui/material';
 import MessageItem from '@/components/Chat-Page/MessageItem';
 
 const MessagesList = ({ messages }) => {
-  const bottomRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   return (
-    <Box sx={{ height: '100%', overflowY: 'auto' }}>
+    <Box ref={containerRef} sx={{ height: '100%', overflowY: 'auto' }}>
       {messages.map((msg, i) => (
         <MessageItem key={i} msg={msg} />
       ))}
-      <div ref={bottomRef} />
     </Box>
   );
 };

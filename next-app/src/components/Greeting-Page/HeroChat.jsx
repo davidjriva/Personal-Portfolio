@@ -32,6 +32,7 @@ const CHIPS = [
 
 const HeroChat = () => {
   const [input, setInput] = useState('');
+  const [turnstileError, setTurnstileError] = useState(false);
   const { messages, started, sendMessage, fetchToken, hasToken } = useChat();
 
   const scrollToAbout = () => {
@@ -85,9 +86,11 @@ const HeroChat = () => {
           <ChatInput input={input} setInput={setInput} sendMessage={handleSend} disabled={!hasToken} />
         </Box>
 
-        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.25)', minHeight: '1.2em' }}>
-          {!hasToken ? 'Verifying\u2026' : ''}
-        </Typography>
+        {turnstileError && (
+          <Typography variant="caption" sx={{ color: 'rgba(255,100,100,0.85)', minHeight: '1.2em' }}>
+            Verification failed — chat is temporarily unavailable.
+          </Typography>
+        )}
 
         <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center">
           {CHIPS.map((chip) => (
@@ -111,21 +114,17 @@ const HeroChat = () => {
           ))}
         </Stack>
 
-        {/* Turnstile — always mounted, hidden once verified */}
-        <Box
-          sx={{
-            visibility: hasToken ? 'hidden' : 'visible',
-            height: hasToken ? 0 : 'auto',
-            overflow: 'hidden',
-            justifyContent: 'center',
-            display: 'flex',
-          }}
-        >
-          <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
-            onSuccess={(captchaToken) => fetchToken(captchaToken)}
-          />
-        </Box>
+        {/* Turnstile — runs silently; only shows UI if Cloudflare requires a challenge */}
+        {!hasToken && !turnstileError && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+              onSuccess={(captchaToken) => fetchToken(captchaToken)}
+              onError={() => setTurnstileError(true)}
+              appearance="interaction-only"
+            />
+          </Box>
+        )}
 
         <Box
           component="button"
@@ -209,8 +208,8 @@ const HeroChat = () => {
           </Typography>
         </Box>
 
-        {/* Messages list */}
-        <Box sx={{ flex: 1, overflow: 'hidden', px: 2, pt: 1 }}>
+        {/* Messages list — minHeight: 0 forces flex to respect overflow boundary */}
+        <Box sx={{ flex: 1, minHeight: 0, overflow: 'hidden', px: 2, pt: 1 }}>
           <MessagesList messages={messages} />
         </Box>
 
