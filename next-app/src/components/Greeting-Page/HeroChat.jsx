@@ -1,0 +1,226 @@
+'use client';
+
+import { useState } from 'react';
+import { Box, Typography, Chip, Stack } from '@mui/material';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import { Turnstile } from '@marsidev/react-turnstile';
+import AnimatedTypingTypography from '@/components/Greeting-Page/AnimatedTypingTypography';
+import ChatInput from '@/components/Chat-Page/ChatInput';
+import MessagesList from '@/components/Chat-Page/MessagesList';
+import useChat from '@/components/Chat-Page/hooks/useChat';
+
+const CHIPS = [
+  {
+    label: '🤖 What AI have you built?',
+    bg: 'rgba(56,192,242,0.08)',
+    border: 'rgba(56,192,242,0.22)',
+    color: '#38c0f2',
+  },
+  {
+    label: '💼 Tell me about your experience',
+    bg: 'rgba(110,64,201,0.08)',
+    border: 'rgba(110,64,201,0.22)',
+    color: '#a680ff',
+  },
+  {
+    label: '🚀 Featured projects',
+    bg: 'rgba(255,255,255,0.04)',
+    border: 'rgba(255,255,255,0.12)',
+    color: 'rgba(255,255,255,0.5)',
+  },
+];
+
+const HeroChat = () => {
+  const [input, setInput] = useState('');
+  const { messages, started, sendMessage, fetchToken, hasToken } = useChat();
+
+  const scrollToAbout = () => {
+    const section = document.getElementById('about');
+    const elementPosition = section.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: elementPosition - 70, behavior: 'smooth' });
+  };
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    sendMessage(input);
+    setInput('');
+  };
+
+  return (
+    <Box sx={{ position: 'relative', width: '100%', height: '100%', color: '#ffffff', zIndex: 1 }}>
+      {/* Pre-chat view */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 2,
+          px: 3,
+          opacity: started ? 0 : 1,
+          transform: started ? 'translateY(-10px)' : 'translateY(0)',
+          transition: 'opacity 300ms ease-out, transform 300ms ease-out',
+          pointerEvents: started ? 'none' : 'auto',
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
+            fontWeight: 900,
+            lineHeight: 1.1,
+            textAlign: 'center',
+          }}
+        >
+          <span style={{ color: '#ffffff' }}>Hello, I&apos;m </span>
+          <span style={{ color: '#38c0f2' }}>David</span>
+        </Typography>
+
+        <AnimatedTypingTypography />
+
+        <Box sx={{ width: '100%', maxWidth: 500 }}>
+          <ChatInput input={input} setInput={setInput} sendMessage={handleSend} disabled={!hasToken} />
+        </Box>
+
+        <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.25)', minHeight: '1.2em' }}>
+          {!hasToken ? 'Verifying\u2026' : ''}
+        </Typography>
+
+        <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center">
+          {CHIPS.map((chip) => (
+            <Chip
+              key={chip.label}
+              label={chip.label}
+              disabled={!hasToken}
+              onClick={() => sendMessage(chip.label)}
+              sx={{
+                background: chip.bg,
+                border: `1px solid ${chip.border}`,
+                color: chip.color,
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '0.82rem',
+                cursor: 'pointer',
+                '& .MuiChip-label': { color: chip.color },
+                '&:hover': { opacity: 0.85 },
+                '&.Mui-disabled': { opacity: 0.4 },
+              }}
+            />
+          ))}
+        </Stack>
+
+        {/* Turnstile — always mounted, hidden once verified */}
+        <Box sx={{ display: hasToken ? 'none' : 'flex', justifyContent: 'center' }}>
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+            onSuccess={(captchaToken) => fetchToken(captchaToken)}
+          />
+        </Box>
+
+        <Box
+          component="button"
+          onClick={scrollToAbout}
+          sx={{
+            position: 'absolute',
+            bottom: 32,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 1,
+            px: 3,
+            py: 1.25,
+            borderRadius: '50px',
+            background: 'transparent',
+            border: '1px solid rgba(255,255,255,0.2)',
+            color: 'rgba(255,255,255,0.6)',
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: 600,
+            fontSize: '0.9rem',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            '&:hover': { borderColor: 'rgba(255,255,255,0.5)', color: '#fff' },
+          }}
+        >
+          <KeyboardDoubleArrowDownIcon fontSize="small" />
+          View my work
+        </Box>
+      </Box>
+
+      {/* Chat-active view */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          opacity: started ? 1 : 0,
+          transition: 'opacity 300ms ease-out 100ms',
+          pointerEvents: started ? 'auto' : 'none',
+        }}
+      >
+        {/* Agent header */}
+        <Box
+          sx={{
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1.5,
+            px: 3,
+            py: 1.5,
+            borderBottom: '1px solid rgba(255,255,255,0.07)',
+          }}
+        >
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 800,
+              fontSize: '1rem',
+              color: '#fff',
+              flexShrink: 0,
+            }}
+          >
+            D
+          </Box>
+          <Box sx={{ flex: 1 }}>
+            <Typography sx={{ fontWeight: 800, fontSize: '0.95rem', lineHeight: 1.2 }}>
+              David&apos;s AI Agent
+            </Typography>
+            <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.2 }}>
+              Knows David&apos;s experience, projects &amp; skills
+            </Typography>
+          </Box>
+          <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>
+            ↓ scroll for portfolio
+          </Typography>
+        </Box>
+
+        {/* Messages list */}
+        <Box sx={{ flex: 1, overflow: 'hidden', px: 2, pt: 1 }}>
+          <MessagesList messages={messages} />
+        </Box>
+
+        {/* Input bar */}
+        <Box
+          sx={{
+            flexShrink: 0,
+            px: 3,
+            py: 1.5,
+            borderTop: '1px solid rgba(255,255,255,0.07)',
+            background: 'rgba(0,0,0,0.2)',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <ChatInput input={input} setInput={setInput} sendMessage={handleSend} disabled={!hasToken} />
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default HeroChat;
