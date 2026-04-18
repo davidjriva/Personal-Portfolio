@@ -36,6 +36,7 @@ const HeroChat = () => {
 
   const scrollToAbout = () => {
     const section = document.getElementById('about');
+    if (!section) return;
     const elementPosition = section.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: elementPosition - 70, behavior: 'smooth' });
   };
@@ -94,7 +95,7 @@ const HeroChat = () => {
               key={chip.label}
               label={chip.label}
               disabled={!hasToken}
-              onClick={() => sendMessage(chip.label)}
+              onClick={() => { sendMessage(chip.label); setInput(''); }}
               sx={{
                 background: chip.bg,
                 border: `1px solid ${chip.border}`,
@@ -111,7 +112,15 @@ const HeroChat = () => {
         </Stack>
 
         {/* Turnstile — always mounted, hidden once verified */}
-        <Box sx={{ display: hasToken ? 'none' : 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            visibility: hasToken ? 'hidden' : 'visible',
+            height: hasToken ? 0 : 'auto',
+            overflow: 'hidden',
+            justifyContent: 'center',
+            display: 'flex',
+          }}
+        >
           <Turnstile
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
             onSuccess={(captchaToken) => fetchToken(captchaToken)}
