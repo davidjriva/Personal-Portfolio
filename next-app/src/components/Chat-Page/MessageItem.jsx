@@ -43,36 +43,35 @@ const MessageItem = ({ msg }) => {
           ) : (
             <ReactMarkdown
               components={{
-                p: ({ node, ...props }) => <Typography sx={mdStyles} {...props} />,
-                li: ({ node, ...props }) => <li style={{ ...mdStyles, marginBottom: '6px' }} {...props} />,
-                strong: ({ node, ...props }) => <strong style={{ ...mdStyles, fontWeight: 700 }} {...props} />,
-                em: ({ node, ...props }) => <em style={mdStyles} {...props} />,
-                h1: ({ node, ...props }) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.4rem', mt: 2, mb: 1 }} {...props} />,
-                h2: ({ node, ...props }) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.2rem', mt: 1.5, mb: 0.8 }} {...props} />,
-                h3: ({ node, ...props }) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.05rem', mt: 1.2, mb: 0.6 }} {...props} />,
-                code: ({ node, inline, ...props }) => (
+                p: (props) => <Typography sx={mdStyles} {...props} />,
+                li: (props) => <li style={{ ...mdStyles, marginBottom: '6px' }} {...props} />,
+                strong: (props) => <strong style={{ ...mdStyles, fontWeight: 700 }} {...props} />,
+                em: (props) => <em style={mdStyles} {...props} />,
+                h1: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.4rem', mt: 2, mb: 1 }} {...props} />,
+                h2: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.2rem', mt: 1.5, mb: 0.8 }} {...props} />,
+                h3: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.05rem', mt: 1.2, mb: 0.6 }} {...props} />,
+                code: (props) => (
                   <Box
                     component="code"
                     sx={{
                       fontFamily: 'monospace',
                       color: '#38c0f2',
                       backgroundColor: 'rgba(56,192,242,0.08)',
-                      p: inline ? '0 4px' : 1,
+                      p: '0 4px',
                       borderRadius: 1,
-                      display: inline ? 'inline' : 'block',
-                      overflowX: 'auto',
+                      display: 'inline',
                     }}
                     {...props}
                   />
                 ),
-                pre: ({ node, ...props }) => (
+                pre: (props) => (
                   <Box
                     component="pre"
                     sx={{ backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', p: 1, borderRadius: 1, overflowX: 'auto' }}
                     {...props}
                   />
                 ),
-                a: ({ node, ...props }) => <a style={{ color: '#38c0f2', textDecoration: 'none' }} {...props} />,
+                a: (props) => <a style={{ color: '#38c0f2', textDecoration: 'none' }} {...props} />,
               }}
             >
               {msg.text}
