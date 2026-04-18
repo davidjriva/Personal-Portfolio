@@ -1,19 +1,22 @@
 import { useRef, useEffect } from 'react';
-import { Paper } from '@mui/material';
-
+import { Box } from '@mui/material';
 import MessageItem from '@/components/Chat-Page/MessageItem';
 
 const MessagesList = ({ messages }) => {
-    return (
-      <Paper
-        variant="outlined"
-        sx={{ p: 2, minHeight: 300, mb: 2, overflowY: 'auto', backgroundColor: '#2c2c2c', borderColor: '#444' }}
-      >
-        {messages.map((msg, i) => (
-          <MessageItem key={i} msg={msg} />
-        ))}
-      </Paper>
-    );
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  return (
+    <Box sx={{ height: '100%', overflowY: 'auto' }}>
+      {messages.map((msg, i) => (
+        <MessageItem key={i} msg={msg} />
+      ))}
+      <div ref={bottomRef} />
+    </Box>
+  );
 };
 
 export default MessagesList;
