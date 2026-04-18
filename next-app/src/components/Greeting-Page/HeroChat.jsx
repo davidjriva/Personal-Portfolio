@@ -15,18 +15,27 @@ const CHIPS = [
     bg: 'rgba(56,192,242,0.14)',
     border: 'rgba(56,192,242,0.55)',
     color: '#38c0f2',
+    hoverBg: 'rgba(56,192,242,0.26)',
+    hoverBorder: 'rgba(56,192,242,0.9)',
+    glow: '0 0 14px rgba(56,192,242,0.35)',
   },
   {
     label: '💼 Tell me about your experience',
     bg: 'rgba(110,64,201,0.14)',
     border: 'rgba(110,64,201,0.55)',
     color: '#b894ff',
+    hoverBg: 'rgba(110,64,201,0.28)',
+    hoverBorder: 'rgba(110,64,201,0.9)',
+    glow: '0 0 14px rgba(110,64,201,0.35)',
   },
   {
     label: '🚀 Featured projects',
     bg: 'rgba(255,255,255,0.08)',
     border: 'rgba(255,255,255,0.3)',
-    color: 'rgba(255,255,255,0.8)',
+    color: 'rgba(255,255,255,0.85)',
+    hoverBg: 'rgba(255,255,255,0.16)',
+    hoverBorder: 'rgba(255,255,255,0.6)',
+    glow: 'none',
   },
 ];
 
@@ -100,16 +109,25 @@ const HeroChat = () => {
               disabled={!hasToken}
               onClick={() => { sendMessage(chip.label); setInput(''); }}
               sx={{
+                height: 'auto',
                 background: chip.bg,
                 border: `1px solid ${chip.border}`,
-                color: chip.color,
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '0.82rem',
-                fontWeight: 600,
                 backdropFilter: 'blur(8px)',
                 cursor: 'pointer',
-                '& .MuiChip-label': { color: chip.color },
-                '&:hover': { opacity: 0.85 },
+                transition: 'all 0.2s ease',
+                '& .MuiChip-label': {
+                  color: chip.color,
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  px: 2,
+                  py: 1,
+                },
+                '&:hover': {
+                  background: chip.hoverBg,
+                  borderColor: chip.hoverBorder,
+                  boxShadow: chip.glow,
+                },
                 '&.Mui-disabled': { opacity: 0.4 },
               }}
             />
@@ -148,7 +166,7 @@ const HeroChat = () => {
             fontSize: '0.9rem',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            '&:hover': { borderColor: 'rgba(255,255,255,0.5)', color: '#fff' },
+            '&:hover': { borderColor: 'rgba(255,255,255,0.7)', color: '#fff', background: 'rgba(255,255,255,0.07)' },
           }}
         >
           <KeyboardDoubleArrowDownIcon fontSize="small" />
