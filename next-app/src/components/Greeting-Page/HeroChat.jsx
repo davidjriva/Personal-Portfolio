@@ -9,6 +9,54 @@ import ChatInput from '@/components/Chat-Page/ChatInput';
 import MessagesList from '@/components/Chat-Page/MessagesList';
 import useChat from '@/components/Chat-Page/hooks/useChat';
 
+const CHIP_CACHE = {
+  '🤖 What AI have you built?': `## AI Projects & Work
+
+**This portfolio agent** — an agentic RAG system built with Next.js, GPT-4o-mini, and OpenAI embeddings. It uses cosine similarity search over pre-computed embeddings to retrieve relevant context from my resume, then streams responses via SSE. Rate-limited via Upstash Redis and protected by Cloudflare Turnstile.
+
+**C3 Agentic AI Hackathon (2025) — 1st place** — built agentic tooling using React, TypeScript, and C3 AI's in-house LLM that significantly boosted developer efficiency in UI component creation.
+
+**Machine Learning models:**
+- **Plant Disease Classifier** — fine-tuned a pre-trained CNN (ImageNet) using TensorFlow, Keras, and PySpark to classify plant diseases from leaf images
+- **Playing Card Classifier** — custom CNN trained to recognize all 52 playing cards with high accuracy
+
+I also work daily with C3 AI's enterprise ML platform, training 8,000+ learners on data science, ML pipelines, and application development.`,
+
+  '💼 Tell me about your experience': `## Experience
+
+**Technical Trainer (Forward Deployed Engineer) — C3 AI** *(Sept 2024 – Present)*
+Redwood City, CA
+- 🏆 1st place, C3 Agentic AI Hackathon 2025
+- Core training platform serving 8,000+ learners globally
+- Built internal automation tools (React, Next.js, Electron.js) cutting learner feedback time by 80%
+- Curriculum development in data science, ML, and application development
+
+**Full-Stack Developer, University Research — Colorado State University** *(Dec 2022 – Jan 2024)*
+- Urban Sustain Project: accessible interface to 20TB+ datasets for social & environmental researchers
+- Built geospatial visualizations with React, TypeScript, Python/Flask, and MongoDB
+- 🏆 Excellence in Data Science Award, CSU Celebrating Undergraduate Research
+
+**Machine Learning Engineer Intern — Hewlett Packard Inc.** *(May – Aug 2023)*
+Vancouver, WA
+- Built 3 ETL pipelines (AWS S3 → Redshift) and developed ML forecasting models with Scikit-Learn & Facebook Prophet
+
+**Teaching Assistant — Colorado State University** *(Aug – Dec 2022)*
+- CS-165 Data Structures & Algorithms, 30 students
+
+🎓 B.S. Computer Science, Colorado State University — *Summa Cum Laude, May 2024*`,
+
+  '🚀 Featured projects': `## Featured Projects
+
+**[Email Templating Utility Tool](https://github.com/davidjriva/Email-Sender-Util)** *(Oct 2024)*
+A Next.js + Electron.js app that generates pre-written emails in Outlook from a form. Uses inter-process communication and AppleScript to launch Outlook directly — reduced feedback turnaround at C3 AI by 80%.
+
+**[Nature Nomads](https://github.com/davidjriva/Nature-Nomads)** *(Jul – Aug 2024)*
+Full-stack e-commerce platform for booking guided nature tours. Stripe payments, user profiles, tour browsing — built with Node.js, Express, MongoDB, and JavaScript.
+
+**[Trip Planning Application](https://github.com/davidjriva/Trip-Planner)** *(Aug – Dec 2023)*
+Collaborative full-stack trip optimization app built with React, Java, SQL (MariaDB), and multiple RESTful APIs. Followed Agile/Scrum with a team of 5.`,
+};
+
 const CHIPS = [
   {
     label: '🤖 What AI have you built?',
@@ -42,7 +90,7 @@ const CHIPS = [
 const HeroChat = () => {
   const [input, setInput] = useState('');
   const [turnstileError, setTurnstileError] = useState(false);
-  const { messages, started, sendMessage, fetchToken, hasToken } = useChat();
+  const { messages, started, sendMessage, addCachedExchange, fetchToken, hasToken } = useChat();
 
   const scrollToAbout = () => {
     const section = document.getElementById('about');
@@ -107,7 +155,12 @@ const HeroChat = () => {
               key={chip.label}
               label={chip.label}
               disabled={!hasToken}
-              onClick={() => { sendMessage(chip.label); setInput(''); }}
+              onClick={() => {
+                const cached = CHIP_CACHE[chip.label];
+                if (cached) addCachedExchange(chip.label, cached);
+                else sendMessage(chip.label);
+                setInput('');
+              }}
               sx={{
                 height: 'auto',
                 background: chip.bg,

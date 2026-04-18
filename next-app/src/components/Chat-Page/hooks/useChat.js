@@ -116,5 +116,14 @@ export default function useChat() {
     [sessionId, started, token]
   );
 
-  return { messages, started, sendMessage, setStarted, fetchToken, hasToken: !!token };
+  const addCachedExchange = useCallback((userText, assistantText) => {
+    if (!started) setStarted(true);
+    setMessages((prev) => [
+      ...prev,
+      { role: 'user', text: userText },
+      { role: 'assistant', text: assistantText, typing: false },
+    ]);
+  }, [started]);
+
+  return { messages, started, sendMessage, addCachedExchange, setStarted, fetchToken, hasToken: !!token };
 }
