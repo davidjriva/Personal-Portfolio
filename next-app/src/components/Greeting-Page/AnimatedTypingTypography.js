@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 
-const ROLES = ['full-stack developer', 'data scientist', 'educator'];
+const ROLES = ['forward deployed engineer', 'applied AI engineer', 'full-stack developer'];
 
 const AnimatedTypingTypography = () => {
   const baseTypingSpeed = 100; // Base speed for typing (in ms)
