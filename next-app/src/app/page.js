@@ -3,13 +3,13 @@
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
 
-const Greeting = dynamic(() => import('@/components/Greeting-Page/Greeting'), { ssr: false });
+const HeroChat = dynamic(() => import('@/components/Greeting-Page/HeroChat'), { ssr: false });
 const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
 const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
 const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 const Skills = dynamic(() => import('@/components/Skills-Page/Skills'), { ssr: false });
 const Awards = dynamic(() => import('@/components/Awards-Page/Awards'), { ssr: false });
-const ParticleBackground = dynamic(() => import('@/components/ParticleBackground'), { ssr: false });
+import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
@@ -40,7 +40,7 @@ const MainPage = () => {
         }}
       >
         <ParticleBackground backgroundColor="transparent" />
-        <Greeting />
+        <HeroChat />
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
