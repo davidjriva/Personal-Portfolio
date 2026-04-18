@@ -1,0 +1,54 @@
+<h2>What should the hero background feel like?</h2>
+<p class="subtitle">The current particle animation would be replaced. Pick the feel that fits the glass/gradient direction best.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="mesh-gradient" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#1a1a2e 100%);padding:0;overflow:hidden;position:relative;height:160px;">
+      <div style="position:absolute;top:-40px;left:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(56,192,242,0.35) 0%,transparent 70%);"></div>
+      <div style="position:absolute;bottom:-40px;right:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(110,64,201,0.4) 0%,transparent 70%);"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+        <div style="color:#38c0f2;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">HELLO, I'M</div>
+        <div style="color:#fff;font-size:20px;font-weight:800;">David Riva</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Mesh Gradient (Static)</h3>
+      <p>Soft radial glows of cyan + purple bleeding into a deep dark background. No animation — pure atmosphere. Fast, elegant, zero distraction.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="animated-gradient" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;position:relative;height:160px;">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#0d1b2a,#1a0a2e);background-size:400% 400%;animation:gradShift 6s ease infinite;"></div>
+      <style>@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}</style>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:1;">
+        <div style="color:#38c0f2;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">HELLO, I'M</div>
+        <div style="color:#fff;font-size:20px;font-weight:800;">David Riva</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Animated Gradient</h3>
+      <p>A slow, breathing color-shift gradient cycling through deep purples and navy. Subtle motion without distracting particles. Feels alive but calm.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="grid-glow" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0a0a0f;padding:0;overflow:hidden;position:relative;height:160px;">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" xmlns="http://www.w3.org/2000/svg">
+        <defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38c0f2" stroke-width="0.5"/></pattern></defs>
+        <rect width="100%" height="100%" fill="url(#g)"/>
+      </svg>
+      <div style="position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(56,192,242,0.2) 0%,transparent 65%);"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:1;">
+        <div style="color:#38c0f2;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">HELLO, I'M</div>
+        <div style="color:#fff;font-size:20px;font-weight:800;">David Riva</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Grid + Glow</h3>
+      <p>Faint dot/line grid with a cyan radial glow centered behind the text. Tech-forward without being heavy. Works great with the glass card aesthetic.</p>
+    </div>
+  </div>
+
+</div>

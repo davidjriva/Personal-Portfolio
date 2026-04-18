@@ -1,0 +1,9 @@
+{"type":"server-started","port":59691,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:59691","screen_dir":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content","state_dir":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/state"}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/aesthetic-direction.html"}
+{"source":"user-event","type":"click","text":"HELLO, I'M\n        David Riva\n        Technical Trainer & Engineer\n        \n          View Work\n          Chat\n        \n      \n    \n    \n      B — Glass / Gradient\n      Deep purple-to-dark gradients, frosted glass cards, glowing accents. Current vibes of high-end SaaS products. Feels premium and modern.","choice":"glass-gradient","id":null,"timestamp":1776410707598}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/waiting-1.html"}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/hero-background.html"}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/hero-bg-v2.html"}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/waiting-2.html"}
+{"type":"screen-added","file":"/Users/davidriva/Desktop/Repos/Personal-Portfolio/.superpowers/brainstorm/14971-1776410642/content/design-hero.html"}
+{"type":"server-stopped","reason":"idle timeout"}

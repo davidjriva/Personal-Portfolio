@@ -5,15 +5,16 @@ import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import baseOptions from '../particles-options/parallax-bubble.json';
 
+// Start engine initialization immediately on module load, not on component mount
+const engineReady = initParticlesEngine(async (engine) => {
+  await loadSlim(engine);
+});
+
 const ParticleBackground = ({ interactive = true, backgroundColor }) => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    engineReady.then(() => setInit(true));
   }, []);
 
   const isTransparent = backgroundColor === 'transparent';
