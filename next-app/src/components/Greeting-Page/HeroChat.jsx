@@ -12,19 +12,17 @@ import useChat from '@/components/Chat-Page/hooks/useChat';
 const CHIP_CACHE = {
   'What AI have you built?': `## AI Projects & Work
 
-**This portfolio agent** — an agentic RAG system built with Next.js, GPT-4o-mini, and OpenAI embeddings. It uses cosine similarity search over pre-computed embeddings to retrieve relevant context from my resume, then streams responses via SSE. Rate-limited via Upstash Redis and protected by Cloudflare Turnstile.
+**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** — end-to-end RAG system built to production standards. Hybrid semantic + keyword retrieval (Pinecone + BM25), cross-encoder reranking (BAAI/bge-reranker-large), GPT-4o-mini generation, and automated RAGAS quality gates (faithfulness + answer relevancy > 0.8). Orchestrated with a LangGraph state machine; traced via LangSmith.
 
-**C3 Agentic AI Hackathon (2025) — 1st place** — built agentic tooling using React, TypeScript, and C3 AI's in-house LLM that significantly boosted developer efficiency in UI component creation.
+**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** — fully automated newsletter pipeline running twice daily. Fetches 10+ RSS/Atom feeds, scores each article with Claude (Anthropic SDK) using ephemeral prompt caching, ranks by impact + authenticity, and emails a digest. FastAPI dashboard + launchd scheduling — zero infrastructure required.
 
-**Machine Learning models:**
-- **Plant Disease Classifier** — fine-tuned a pre-trained CNN (ImageNet) using TensorFlow, Keras, and PySpark to classify plant diseases from leaf images
-- **Playing Card Classifier** — custom CNN trained to recognize all 52 playing cards with high accuracy
+**[This portfolio agent](https://github.com/davidjriva/Personal-Portfolio)** — agentic RAG chat built with Next.js and GPT-4o-mini. Cosine similarity search over pre-computed OpenAI embeddings, streaming SSE responses, JWT + Cloudflare Turnstile auth, Upstash Redis rate limiting, and an automated DeepEval test suite for continuous LLM quality evaluation.
 
-I also work daily with C3 AI's enterprise ML platform, training 8,000+ learners on data science, ML pipelines, and application development.`,
+**C3 Agentic AI Hackathon (2025) — 1st place** — agentic tooling with React, TypeScript, and C3 AI's in-house LLM that boosted developer efficiency in UI component creation.`,
 
   'Tell me about your experience': `## Experience
 
-**Technical Trainer (Forward Deployed Engineer) — C3 AI** *(Sept 2024 – Present)*
+**Training Engineer, Generative AI — C3 AI** *(Sept 2024 – Apr 2026)*
 Redwood City, CA
 - 🏆 1st place, C3 Agentic AI Hackathon 2025
 - Core training platform serving 8,000+ learners globally
@@ -43,18 +41,20 @@ Vancouver, WA
 **Teaching Assistant — Colorado State University** *(Aug – Dec 2022)*
 - CS-165 Data Structures & Algorithms, 30 students
 
-🎓 B.S. Computer Science, Colorado State University — *Summa Cum Laude, May 2024*`,
+🎓 B.S. Computer Science, Colorado State University — *Summa Cum Laude, May 2024*
+
+**Key skills:** LangChain · LangGraph · LangSmith · Pinecone · RAGAS · DeepEval · Python · TypeScript · React · Next.js · Apache Spark · Databricks · AWS`,
 
   'Featured projects': `## Featured Projects
 
-**[Email Templating Utility Tool](https://github.com/davidjriva/Email-Sender-Util)** *(Oct 2024)*
-A Next.js + Electron.js app that generates pre-written emails in Outlook from a form. Uses inter-process communication and AppleScript to launch Outlook directly — reduced feedback turnaround at C3 AI by 80%.
+**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** *(Mar – Apr 2025)*
+Production-grade RAG system answering natural language questions over PDFs. Hybrid retrieval (dense + BM25), cross-encoder reranking, and RAGAS automated quality gates. Stack: LangChain · LangGraph · Pinecone · FastAPI · Docker · Poetry.
 
-**[Nature Nomads](https://github.com/davidjriva/Nature-Nomads)** *(Jul – Aug 2024)*
-Full-stack e-commerce platform for booking guided nature tours. Stripe payments, user profiles, tour browsing — built with Node.js, Express, MongoDB, and JavaScript.
+**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** *(Feb – Mar 2025)*
+Automated newsletter pipeline — fetches 10+ RSS feeds, scores articles with Claude (prompt caching), ranks by impact, and emails a daily digest. FastAPI dashboard + launchd scheduling. Stack: Python · Anthropic Claude API · FastAPI · SQLite.
 
-**[Trip Planning Application](https://github.com/davidjriva/Trip-Planner)** *(Aug – Dec 2023)*
-Collaborative full-stack trip optimization app built with React, Java, SQL (MariaDB), and multiple RESTful APIs. Followed Agile/Scrum with a team of 5.`,
+**[Personal Portfolio](https://github.com/davidjriva/Personal-Portfolio)** *(Nov 2024 – Apr 2025)*
+This site — Next.js portfolio with an embedded GPT-4o-mini RAG chat agent, streaming SSE responses, JWT + Turnstile auth, Redis rate limiting, and a DeepEval automated eval suite. Stack: Next.js · React · MUI · OpenAI · DeepEval.`,
 };
 
 const CHIPS = [
