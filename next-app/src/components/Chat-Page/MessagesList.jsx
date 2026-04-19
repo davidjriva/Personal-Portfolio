@@ -12,7 +12,7 @@ const MessagesList = ({ messages }) => {
   }, [messages]);
 
   return (
-    <Box ref={containerRef} sx={{ height: '100%', overflowY: 'auto' }}>
+    <Box ref={containerRef} sx={{ height: '100%', overflowY: 'auto', px: 1, py: 1 }}>
       {messages.map((msg, i) => (
         <MessageItem key={i} msg={msg} />
       ))}

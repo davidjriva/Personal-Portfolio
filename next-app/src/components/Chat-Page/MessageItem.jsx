@@ -18,7 +18,7 @@ const MessageItem = ({ msg }) => {
   return (
     <Box
       sx={{
-        mb: 1.5,
+        mb: 2,
         display: 'flex',
         justifyContent: isUser ? 'flex-end' : 'flex-start',
       }}
@@ -26,8 +26,8 @@ const MessageItem = ({ msg }) => {
       <Box
         sx={{
           maxWidth: '80%',
-          px: 2,
-          py: 1,
+          px: 2.5,
+          py: 1.5,
           borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
           background: isUser ? 'rgba(56,192,242,0.12)' : 'rgba(255,255,255,0.05)',
           border: isUser
