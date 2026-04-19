@@ -11,9 +11,9 @@ const Biography = () => {
       }}
     >
       <Typography variant="body1">
-        Hi, I&apos;m David. I&apos;m a Technical Trainer @ <ClickableLink link="https://c3.ai" text="C3 AI" /> based in the Bay
-        Area, CA, and a graduate of Colorado State University, where I received a B.S. in Computer Science with Summa
-        Cum Laude distinctions. I&apos;m incredibly passionate about software engineering & UI / UX design.
+        Hi, I&apos;m David. I&apos;m a software engineer based in the Bay Area, CA, and a graduate of Colorado State
+        University, where I received a B.S. in Computer Science with Summa Cum Laude distinctions. I&apos;m incredibly
+        passionate about software engineering &amp; UI / UX design.
       </Typography>
       <Typography variant="body1" sx={{ marginTop: 2 }}>
         I&apos;m experienced in full-stack development, data engineering, and big data visualization.
