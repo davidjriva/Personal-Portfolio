@@ -1,135 +1,86 @@
-import { Box, Typography } from "@mui/material";
-import ReactMarkdown from "react-markdown";
-import BouncingDotsLoadingAnimation from "@/components/Chat-Page/BouncingDotsLoadingAnimation";
+import { Box, Typography } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import BouncingDotsLoadingAnimation from '@/components/Chat-Page/BouncingDotsLoadingAnimation';
 
 const MessageItem = ({ msg }) => {
-  const isUser = msg.role === "user";
+  const isUser = msg.role === 'user';
+  const showDots = msg.role === 'assistant' && (!msg.text || msg.text.length === 0);
 
-  const typographyStyles = {
-    fontFamily: "var(--font-montserrat), Arial, sans-serif",
+  const mdStyles = {
+    fontFamily: 'var(--font-montserrat), Arial, sans-serif',
     fontWeight: 400,
     lineHeight: 1.6,
-    fontSize: "1rem !important",
-    color: "#fff",
-    marginBottom: "4px",
+    fontSize: '0.95rem',
+    color: '#fff',
+    marginBottom: '4px',
   };
-
-  // Determine if assistant has started streaming
-  const showDots = msg.role === "assistant" && (!msg.text || msg.text.length === 0);
 
   return (
     <Box
       sx={{
-        mb: 1,
-        backgroundColor: isUser ? "#3a3a3a" : "#444",
-        p: 1,
-        borderRadius: 1,
+        mb: 2,
+        display: 'flex',
+        justifyContent: isUser ? 'flex-end' : 'flex-start',
       }}
     >
-      <Typography
-        variant="subtitle2"
-        sx={{ color: isUser ? "#90caf9" : "#f48fb1", mb: 0.5 }}
+      <Box
+        sx={{
+          maxWidth: '80%',
+          px: 2.5,
+          py: 1.5,
+          borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+          background: isUser ? 'rgba(56,192,242,0.12)' : 'rgba(255,255,255,0.05)',
+          border: isUser
+            ? '1px solid rgba(56,192,242,0.22)'
+            : '1px solid rgba(255,255,255,0.09)',
+        }}
       >
-        {msg.role}:
-      </Typography>
-
-      {msg.role === "assistant" ? (
-        showDots ? (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <BouncingDotsLoadingAnimation dotSize={8} dotColor="#38c0f2" spacing={4} />
-          </Box>
+        {msg.role === 'assistant' ? (
+          showDots ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', py: 0.5 }}>
+              <BouncingDotsLoadingAnimation dotSize={8} dotColor="#38c0f2" spacing={4} />
+            </Box>
+          ) : (
+            <ReactMarkdown
+              components={{
+                p: (props) => <Typography sx={mdStyles} {...props} />,
+                li: (props) => <li style={{ ...mdStyles, marginBottom: '6px' }} {...props} />,
+                strong: (props) => <strong style={{ ...mdStyles, fontWeight: 700 }} {...props} />,
+                em: (props) => <em style={mdStyles} {...props} />,
+                h1: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.4rem', mt: 2, mb: 1 }} {...props} />,
+                h2: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.2rem', mt: 1.5, mb: 0.8 }} {...props} />,
+                h3: (props) => <Typography sx={{ ...mdStyles, fontWeight: 700, fontSize: '1.05rem', mt: 1.2, mb: 0.6 }} {...props} />,
+                code: (props) => (
+                  <Box
+                    component="code"
+                    sx={{
+                      fontFamily: 'monospace',
+                      color: '#38c0f2',
+                      backgroundColor: 'rgba(56,192,242,0.08)',
+                      p: '0 4px',
+                      borderRadius: 1,
+                      display: 'inline',
+                    }}
+                    {...props}
+                  />
+                ),
+                pre: (props) => (
+                  <Box
+                    component="pre"
+                    sx={{ backgroundColor: 'rgba(0,0,0,0.3)', color: '#fff', p: 1, borderRadius: 1, overflowX: 'auto' }}
+                    {...props}
+                  />
+                ),
+                a: (props) => <a style={{ color: '#38c0f2', textDecoration: 'none' }} {...props} />,
+              }}
+            >
+              {msg.text}
+            </ReactMarkdown>
+          )
         ) : (
-          <ReactMarkdown
-            children={msg.text}
-            components={{
-              p: ({ node, ...props }) => (
-                <Typography variant="body1" sx={typographyStyles} {...props} />
-              ),
-              li: ({ node, ...props }) => (
-                <li style={{ ...typographyStyles, marginBottom: "6px" }} {...props} />
-              ),
-              strong: ({ node, ...props }) => (
-                <strong style={{ ...typographyStyles, fontWeight: 700 }} {...props} />
-              ),
-              em: ({ node, ...props }) => <em style={typographyStyles} {...props} />,
-              h1: ({ node, ...props }) => (
-                <Typography
-                  variant="h4"
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "1.5rem", mt: 2, mb: 1 }}
-                  {...props}
-                />
-              ),
-              h2: ({ node, ...props }) => (
-                <Typography
-                  variant="h5"
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "1.3rem", mt: 1.8, mb: 0.9 }}
-                  {...props}
-                />
-              ),
-              h3: ({ node, ...props }) => (
-                <Typography
-                  variant="h6"
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "1.15rem", mt: 1.5, mb: 0.8 }}
-                  {...props}
-                />
-              ),
-              h4: ({ node, ...props }) => (
-                <Typography
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "1.05rem", mt: 1, mb: 0.6 }}
-                  {...props}
-                />
-              ),
-              h5: ({ node, ...props }) => (
-                <Typography
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "1rem", mt: 0.8, mb: 0.5 }}
-                  {...props}
-                />
-              ),
-              h6: ({ node, ...props }) => (
-                <Typography
-                  sx={{ ...typographyStyles, fontWeight: 700, fontSize: "0.95rem", mt: 0.5, mb: 0.4 }}
-                  {...props}
-                />
-              ),
-              code: ({ node, inline, className, ...props }) => (
-                <Box
-                  component="code"
-                  sx={{
-                    fontFamily: "monospace",
-                    color: "#fff",
-                    backgroundColor: "#333",
-                    p: inline ? "0 4px" : 1,
-                    borderRadius: 1,
-                    display: inline ? "inline" : "block",
-                    overflowX: "auto",
-                  }}
-                  {...props}
-                />
-              ),
-              pre: ({ node, ...props }) => (
-                <Box
-                  component="pre"
-                  sx={{
-                    backgroundColor: "#333",
-                    color: "#fff",
-                    p: 1,
-                    borderRadius: 1,
-                    overflowX: "auto",
-                  }}
-                  {...props}
-                />
-              ),
-              a: ({ node, ...props }) => (
-                <a style={{ color: "rgb(56, 192, 242)", textDecoration: "none" }} {...props} />
-              ),
-            }}
-          />
-        )
-      ) : (
-        <Typography variant="body1" sx={{ color: "#fff" }}>
-          {msg.text}
-        </Typography>
-      )}
+          <Typography sx={{ ...mdStyles, color: '#fff' }}>{msg.text}</Typography>
+        )}
+      </Box>
     </Box>
   );
 };

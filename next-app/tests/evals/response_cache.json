@@ -1,0 +1,34 @@
+{
+  "0b9994f3de38ab0b5c568fb7d0741286fbd9129e4753f3d10231858e3f7a42d4": {
+    "input": "Can you summarize David's experience with Next.js?",
+    "actual_output": "David Riva has experience with Next.js in the following projects: 1. **Email Templating Utility Tool**    - **Date:** October 2024    - **Description:** A Next.js application that generates pre-written emails in Outlook based on user input. It was later converted into an Electron.js application for easy distribution.    - **Link:** [GitHub Repository](https://github.com/davidjriva/Email-Sender-Util) 2. **Technical Trainer (Forward Deployed Engineer) at C3 AI**    - **Start Date:** September 2024    - **Description:** Developed internal productivity tools using React, JavaScript, Next.js, and Electron.js, which significantly reduced the time to send feedback to learners.    These experiences highlight David's proficiency in using Next.js for web applications and productivity tools.",
+    "eval_data": {
+      "contexts": [
+        "**title:** Frameworks\n**items:** React.js. Node.js. Express.js. Mongoose.js\n**tags:** frameworks. web development. frontend. backend. full-stack\n**similarity:** 0.45234866307064564\n\n**coverImage:** Nature-Nomads-Cover.webp\n**title:** Nature Nomads\n**author:** David Riva\n**dateStarted:** July 2024\n**dateCompleted:** August 2024\n**long_description:** I built an e-commerce platform using the above technologies. The platform allows users to view tours of nature and inspect their details pages. Users..."
+      ],
+      "tool_calls": [
+        "search_resume_data"
+      ]
+    }
+  },
+  "a4002de01b35c4f94b9a3af7920317f5730fdb4a20c06c37162623cb29ee5618": {
+    "input": "Where did David go to school?",
+    "actual_output": "David Riva graduated from **Colorado State University**, where he achieved **Summa Cum Laude** honors in May 2024.",
+    "eval_data": {
+      "contexts": [
+        "**title:** Excellence in Data Science Award\n**description:** Awarded for outstanding performance in the Celebrating Undergraduate Research Competition.\n**date:** April 2023\n**tags:** award. academic. college\n**similarity:** 0.2796860025717358\n\n**title:** Graduated from Colorado State University, Summa Cum Laude\n**company:** Colorado State University\n**companyWebsiteLink:** https://compsci.colostate.edu/\n**logoImage:** CSU_logo.webp\n**location:** Fort Collins, CO\n**startDate:** May 2024\n**endDate..."
+      ],
+      "tool_calls": [
+        "search_resume_data"
+      ]
+    }
+  },
+  "a8dff0b94d755eded31d962155fe3a77bd5e4131e9cc499aa2ee5a4ee5119251": {
+    "input": "Hi there! How are you?",
+    "actual_output": "I'm here and ready to assist you! How can I help you today?",
+    "eval_data": {
+      "contexts": [],
+      "tool_calls": []
+    }
+  }
+}

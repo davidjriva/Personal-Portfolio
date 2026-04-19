@@ -1,5 +1,6 @@
 [
     {
+      "featured": true,
       "coverImage": "Nature-Nomads-Cover.webp",
       "title": "Nature Nomads",
       "author": "David Riva",
@@ -29,6 +30,7 @@
       "tags": ["distributed systems", "networking", "Java", "TCP/IP", "Dijkstra", "algorithms", "simulation", "multi-threading"]
     },
     {
+      "featured": true,
       "coverImage": "Trip-Planner-Cover.webp",
       "title": "Trip Planning Application",
       "author": "David Riva & CS314 [Software Development] Teammates",
@@ -93,6 +95,7 @@
       "tags": ["algorithm", "Java", "visualization", "sorting", "interactive", "application"]
     },
     {
+      "featured": true,
       "coverImage": "Email-Templating-Utility-Cover.webp",
       "title": "Email Templating Utility Tool",
       "author": "David Riva",

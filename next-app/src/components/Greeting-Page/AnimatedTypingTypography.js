@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 
+const ROLES = ['forward deployed engineer', 'applied AI engineer', 'full-stack developer'];
+
 const AnimatedTypingTypography = () => {
-  const roles = ['full-stack developer', 'data scientist', 'educator']; // List of roles to type and delete
   const baseTypingSpeed = 100; // Base speed for typing (in ms)
   const baseDeletingSpeed = 50; // Base speed for deleting (in ms)
   const delayBeforeDeleting = 1200; // Shorter delay before starting to delete (in ms)
@@ -29,7 +30,7 @@ const AnimatedTypingTypography = () => {
 
   // Typing and deleting effect logic
   useEffect(() => {
-    const currentRole = `${roles[roleIndex]}.`;
+    const currentRole = `${ROLES[roleIndex]}.`;
     let timer;
 
     if (!deleting && index < currentRole.length) {
@@ -53,7 +54,7 @@ const AnimatedTypingTypography = () => {
       // Switch to the next role after deletion is done
       timer = setTimeout(() => {
         setDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % roles.length); // Move to the next role in the array
+        setRoleIndex((prev) => (prev + 1) % ROLES.length); // Move to the next role in the array
       }, delayBetweenRoles); // Small pause before typing the next role
     }
 
@@ -75,7 +76,7 @@ const AnimatedTypingTypography = () => {
         fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
       }}
     >
-      I'm {getArticle(roles[roleIndex])} {text}
+      I&apos;m {getArticle(ROLES[roleIndex])} {text}
       <span style={{ color: '#38c0f2', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
     </Typography>
   );

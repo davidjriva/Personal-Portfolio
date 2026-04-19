@@ -1,0 +1,74 @@
+<h2>Particles or no particles?</h2>
+<p class="subtitle">Both use the animated gradient (Option B). The question is whether floating particles add or distract.</p>
+
+<div class="split">
+
+  <div class="mockup">
+    <div class="mockup-header">A — Animated Gradient Only</div>
+    <div class="mockup-body" style="padding:0;overflow:hidden;position:relative;height:220px;cursor:pointer;" data-choice="gradient-only" onclick="toggleSelect(this)">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#0d1b2a,#1a0a2e);background-size:400% 400%;animation:gradShift 6s ease infinite;"></div>
+      <div style="position:absolute;top:-20px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(56,192,242,0.2) 0%,transparent 70%);"></div>
+      <div style="position:absolute;bottom:-30px;right:-10px;width:160px;height:160px;background:radial-gradient(circle,rgba(110,64,201,0.25) 0%,transparent 70%);"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;">
+        <div style="color:#38c0f2;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">HELLO, I'M</div>
+        <div style="color:#fff;font-size:18px;font-weight:800;margin-bottom:4px;">David Riva</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:10px;">Technical Trainer</div>
+        <div style="margin-top:14px;background:rgba(56,192,242,0.15);border:1px solid rgba(56,192,242,0.4);border-radius:20px;padding:5px 16px;color:#38c0f2;font-size:9px;font-weight:700;backdrop-filter:blur(4px);">View My Work ↓</div>
+      </div>
+      <div style="position:absolute;bottom:8px;right:8px;font-size:9px;color:rgba(255,255,255,0.3);">click to select</div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">B — Animated Gradient + Particles</div>
+    <div class="mockup-body" style="padding:0;overflow:hidden;position:relative;height:220px;cursor:pointer;" data-choice="gradient-particles" onclick="toggleSelect(this)">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0f0c29,#302b63,#0d1b2a,#1a0a2e);background-size:400% 400%;animation:gradShift 6s ease infinite;"></div>
+      <!-- Simulated particles -->
+      <canvas id="pc" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+      <script>
+        (function(){
+          const c=document.getElementById('pc');
+          if(!c)return;
+          const ctx=c.getContext('2d');
+          c.width=c.offsetWidth||400;c.height=c.offsetHeight||220;
+          const pts=Array.from({length:40},()=>({
+            x:Math.random()*c.width,y:Math.random()*c.height,
+            vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+            r:Math.random()*1.5+0.5
+          }));
+          function draw(){
+            ctx.clearRect(0,0,c.width,c.height);
+            pts.forEach(p=>{
+              p.x+=p.vx;p.y+=p.vy;
+              if(p.x<0||p.x>c.width)p.vx*=-1;
+              if(p.y<0||p.y>c.height)p.vy*=-1;
+              ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+              ctx.fillStyle='rgba(56,192,242,0.6)';ctx.fill();
+            });
+            pts.forEach((p,i)=>pts.slice(i+1).forEach(q=>{
+              const d=Math.hypot(p.x-q.x,p.y-q.y);
+              if(d<60){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+              ctx.strokeStyle=`rgba(56,192,242,${0.15*(1-d/60)})`;ctx.lineWidth=0.5;ctx.stroke();}
+            }));
+            requestAnimationFrame(draw);
+          }
+          draw();
+        })();
+      </script>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;">
+        <div style="color:#38c0f2;font-size:9px;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;">HELLO, I'M</div>
+        <div style="color:#fff;font-size:18px;font-weight:800;margin-bottom:4px;">David Riva</div>
+        <div style="color:rgba(255,255,255,0.5);font-size:10px;">Technical Trainer</div>
+        <div style="margin-top:14px;background:rgba(56,192,242,0.15);border:1px solid rgba(56,192,242,0.4);border-radius:20px;padding:5px 16px;color:#38c0f2;font-size:9px;font-weight:700;backdrop-filter:blur(4px);">View My Work ↓</div>
+      </div>
+      <div style="position:absolute;bottom:8px;right:8px;font-size:9px;color:rgba(255,255,255,0.3);">click to select</div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+</style>
+
+<p class="subtitle" style="margin-top:24px;">Click either mockup to select, or just tell me in the terminal.</p>

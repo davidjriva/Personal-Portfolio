@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: (theme) => theme.palette.mode === 'dark' ? '#262624' : '#f8f9fa',
-        color: 'text.primary',
+        bgcolor: '#060514',
+        color: 'rgba(255, 255, 255, 0.35)',
         width: '100%',
         height: '10vh',
         display: 'flex',
@@ -23,13 +23,12 @@ const Footer = () => {
       }}
     >
       <ReturnToTopButton />
-
       <Typography
         variant="body2"
-        color="text.primary"
         sx={{
+          color: 'rgba(255, 255, 255, 0.35)',
           textAlign: 'center',
-          marginTop: '1rem', // Add top margin for spacing
+          marginTop: '1rem',
           marginBottom: 10,
         }}
       >

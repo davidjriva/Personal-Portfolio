@@ -1,0 +1,21 @@
+[
+    {
+        "input": "Can you summarize David's experience with Next.js?",
+        "expected_output": "David Riva has experience with Next.js through several projects:\n\nEmail Templating Utility Tool (October 2024)\nDeveloped a Next.js application that generates pre-written emails in Outlook based on user input. The project was later converted into an Electron.js application for easier distribution.\n\nNature Nomads (July 2024 - August 2024)\nBuilt a fully functional e-commerce platform for booking guided nature tours using Next.js, along with other technologies like Node.js and MongoDB.\n\nThese projects showcase David's ability to leverage Next.js for both web applications and e-commerce solutions.",
+        "expected_tools": [
+            "search_resume_data"
+        ]
+    },
+    {
+        "input": "Where did David go to school?",
+        "expected_output": "David graduated from Colorado State University in May 2024, earning the distinction of Summa Cum Laude for outstanding academic performance. During his time there, he was recognized on the Dean's List for maintaining a GPA of 3.5 or higher from Fall 2021 to Spring 2024.",
+        "expected_tools": [
+            "search_resume_data"
+        ]
+    },
+    {
+        "input": "Hi there! How are you?",
+        "expected_output": "Hello! I'm here to assist you with any questions you have about David Riva's professional experiences, skills, or projects. How can I help you today?",
+        "expected_tools": []
+    }
+]

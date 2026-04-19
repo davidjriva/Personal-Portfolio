@@ -4,15 +4,14 @@ import Image from 'next/image';
 import { forwardRef } from 'react';
 import CardContent from '@mui/material/CardContent';
 import { Typography, Box, Card, Button, Chip, Stack } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const ProjectImage = ({ coverImage, title }) => {
+const ProjectImage = ({ coverImage, title, featured }) => {
   return (
     <Box
       sx={{
         position: 'relative',
-        height: '200px',
+        height: featured ? '220px' : '180px',
         width: '100%',
         bgcolor: 'background.paper',
         overflow: 'hidden',
@@ -21,10 +20,7 @@ const ProjectImage = ({ coverImage, title }) => {
       <Image
         src={`/images/${coverImage}`}
         alt={`${title} cover`}
-        style={{
-          objectFit: 'cover',
-          transition: 'transform 0.5s ease',
-        }}
+        style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
         className="project-image"
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -32,48 +28,38 @@ const ProjectImage = ({ coverImage, title }) => {
       <Box
         sx={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%)',
-          opacity: 0.3,
+          inset: 0,
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(15, 12, 41, 0.65) 100%)',
         }}
       />
     </Box>
   );
 };
 
-const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description }) => {
+const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description, featured }) => {
   return (
     <Box sx={{ mb: 2 }}>
       <Typography
-        variant="h6"
+        variant={featured ? 'h6' : 'body1'}
         component="h3"
-        sx={{
-          fontWeight: 'bold',
-          mb: 0.5,
-          color: 'inherit',
-          lineHeight: 1.3,
-        }}
+        sx={{ fontWeight: 700, mb: 0.5, color: '#ffffff', lineHeight: 1.3, fontSize: featured ? '1rem' : '0.9rem' }}
       >
         {title}
       </Typography>
-      <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 2 }}>
-        {dateStarted} - {dateCompleted}
+      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.35)', display: 'block', mb: 1.5 }}>
+        {dateStarted} – {dateCompleted}
       </Typography>
       <Typography
         variant="body2"
         sx={{
-          color: 'inherit',
-          opacity: 0.8,
+          color: 'rgba(255, 255, 255, 0.55)',
           lineHeight: 1.6,
           mb: 2,
           display: '-webkit-box',
           WebkitLineClamp: 3,
           WebkitBoxOrient: 'vertical',
           overflow: 'hidden',
-          fontSize: '1rem',
+          fontSize: featured ? '0.85rem' : '0.8rem',
         }}
       >
         {short_description}
@@ -83,24 +69,22 @@ const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description })
 };
 
 const ProjectTech = ({ technologies }) => {
-  // Flatten all tools from different locations into one list for the card view
-  const allTools = technologies.flatMap(t => t.tools);
-
+  const allTools = technologies.flatMap((t) => t.tools);
   return (
-    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 3 }}>
+    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 2.5 }}>
       {allTools.map((tool, index) => (
         <Chip
           key={index}
           label={tool}
           size="small"
           sx={{
-            bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
-            color: 'text.primary',
-            border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
+            bgcolor: 'rgba(56, 192, 242, 0.08)',
+            color: '#38c0f2',
+            border: '1px solid rgba(56, 192, 242, 0.2)',
             backdropFilter: 'blur(4px)',
-            '&:hover': {
-              bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)',
-            },
+            fontSize: '0.7rem',
+            height: '22px',
+            '&:hover': { bgcolor: 'rgba(56, 192, 242, 0.15)' },
           }}
         />
       ))}
@@ -115,14 +99,16 @@ const ProjectFooter = ({ link }) => {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      endIcon={<LaunchIcon />}
+      endIcon={<LaunchIcon fontSize="small" />}
       fullWidth
       sx={{
         mt: 'auto',
         color: '#38c0f2',
-        borderColor: '#38c0f2',
+        borderColor: 'rgba(56,192,242,0.4)',
         borderRadius: '8px',
         textTransform: 'none',
+        fontSize: '0.8rem',
+        py: 0.75,
         '&:hover': {
           borderColor: '#38c0f2',
           bgcolor: 'rgba(56, 192, 242, 0.1)',
@@ -136,22 +122,9 @@ const ProjectFooter = ({ link }) => {
 
 const ProjectCard = forwardRef(
   (
-    {
-      coverImage,
-      title,
-      author,
-      dateStarted,
-      dateCompleted,
-      short_description,
-      technologies,
-      link,
-      onClick,
-      id,
-    },
+    { coverImage, title, author, dateStarted, dateCompleted, short_description, technologies, link, featured, onClick, id },
     ref
   ) => {
-    const theme = useTheme();
-
     return (
       <Card
         ref={ref}
@@ -160,34 +133,34 @@ const ProjectCard = forwardRef(
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          bgcolor: (theme) => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.04)',
-          color: 'inherit',
+          bgcolor: featured ? 'rgba(56,192,242,0.04)' : 'rgba(255, 255, 255, 0.03)',
+          color: '#ffffff',
           backdropFilter: 'blur(10px)',
-          border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.08)'}`,
+          border: featured ? '1px solid rgba(56, 192, 242, 0.2)' : '1px solid rgba(255,255,255,0.07)',
           borderRadius: '16px',
           overflow: 'hidden',
           transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
           cursor: onClick ? 'pointer' : 'default',
-          boxShadow: (theme) => theme.palette.mode === 'dark' ? '0 4px 20px rgba(0,0,0,0.1)' : '0 4px 20px rgba(0,0,0,0.08)',
+          boxShadow: featured ? '0 4px 24px rgba(56,192,242,0.06)' : '0 4px 16px rgba(0,0,0,0.15)',
           '&:hover': {
-            transform: 'translateY(-8px)',
-            boxShadow: (theme) => theme.palette.mode === 'dark' ? '0 12px 30px rgba(0,0,0,0.3)' : '0 12px 30px rgba(0,0,0,0.15)',
-            border: (theme) => `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)'}`,
-            '& .project-image': {
-              transform: 'scale(1.05)',
-            },
+            transform: 'translateY(-6px)',
+            boxShadow: featured
+              ? '0 12px 30px rgba(0,0,0,0.3), 0 0 24px rgba(56, 192, 242, 0.15)'
+              : '0 10px 24px rgba(0,0,0,0.25)',
+            border: featured ? '1px solid rgba(56, 192, 242, 0.45)' : '1px solid rgba(255,255,255,0.15)',
+            '& .project-image': { transform: 'scale(1.05)' },
           },
         }}
         onClick={onClick}
       >
-        <ProjectImage coverImage={coverImage} title={title} />
-
-        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
+        <ProjectImage coverImage={coverImage} title={title} featured={featured} />
+        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: featured ? 3 : 2.5 }}>
           <ProjectHeader
             title={title}
             dateStarted={dateStarted}
             dateCompleted={dateCompleted}
             short_description={short_description}
+            featured={featured}
           />
           <ProjectTech technologies={technologies} />
           <ProjectFooter link={link} />
@@ -197,5 +170,6 @@ const ProjectCard = forwardRef(
   }
 );
 
-export default ProjectCard;
+ProjectCard.displayName = 'ProjectCard';
 
+export default ProjectCard;
