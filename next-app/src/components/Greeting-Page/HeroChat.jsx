@@ -10,7 +10,7 @@ import MessagesList from '@/components/Chat-Page/MessagesList';
 import useChat from '@/components/Chat-Page/hooks/useChat';
 
 const CHIP_CACHE = {
-  '🤖 What AI have you built?': `## AI Projects & Work
+  'What AI have you built?': `## AI Projects & Work
 
 **This portfolio agent** — an agentic RAG system built with Next.js, GPT-4o-mini, and OpenAI embeddings. It uses cosine similarity search over pre-computed embeddings to retrieve relevant context from my resume, then streams responses via SSE. Rate-limited via Upstash Redis and protected by Cloudflare Turnstile.
 
@@ -22,7 +22,7 @@ const CHIP_CACHE = {
 
 I also work daily with C3 AI's enterprise ML platform, training 8,000+ learners on data science, ML pipelines, and application development.`,
 
-  '💼 Tell me about your experience': `## Experience
+  'Tell me about your experience': `## Experience
 
 **Technical Trainer (Forward Deployed Engineer) — C3 AI** *(Sept 2024 – Present)*
 Redwood City, CA
@@ -45,7 +45,7 @@ Vancouver, WA
 
 🎓 B.S. Computer Science, Colorado State University — *Summa Cum Laude, May 2024*`,
 
-  '🚀 Featured projects': `## Featured Projects
+  'Featured projects': `## Featured Projects
 
 **[Email Templating Utility Tool](https://github.com/davidjriva/Email-Sender-Util)** *(Oct 2024)*
 A Next.js + Electron.js app that generates pre-written emails in Outlook from a form. Uses inter-process communication and AppleScript to launch Outlook directly — reduced feedback turnaround at C3 AI by 80%.
@@ -59,7 +59,7 @@ Collaborative full-stack trip optimization app built with React, Java, SQL (Mari
 
 const CHIPS = [
   {
-    label: '🤖 What AI have you built?',
+    label: 'What AI have you built?',
     bg: 'rgba(56,192,242,0.14)',
     border: 'rgba(56,192,242,0.55)',
     color: '#38c0f2',
@@ -68,7 +68,7 @@ const CHIPS = [
     glow: '0 0 14px rgba(56,192,242,0.35)',
   },
   {
-    label: '💼 Tell me about your experience',
+    label: 'Tell me about your experience',
     bg: 'rgba(110,64,201,0.14)',
     border: 'rgba(110,64,201,0.55)',
     color: '#b894ff',
@@ -77,7 +77,7 @@ const CHIPS = [
     glow: '0 0 14px rgba(110,64,201,0.35)',
   },
   {
-    label: '🚀 Featured projects',
+    label: 'Featured projects',
     bg: 'rgba(255,255,255,0.08)',
     border: 'rgba(255,255,255,0.3)',
     color: 'rgba(255,255,255,0.85)',
@@ -90,6 +90,7 @@ const CHIPS = [
 const HeroChat = () => {
   const [input, setInput] = useState('');
   const [turnstileError, setTurnstileError] = useState(false);
+  const [needsChallenge, setNeedsChallenge] = useState(false);
   const { messages, started, sendMessage, addCachedExchange, fetchToken, hasToken } = useChat();
 
   const scrollToAbout = () => {
@@ -140,7 +141,13 @@ const HeroChat = () => {
         <AnimatedTypingTypography />
 
         <Box sx={{ width: '100%', maxWidth: 500 }}>
-          <ChatInput input={input} setInput={setInput} sendMessage={handleSend} disabled={!hasToken} />
+          <ChatInput
+            input={input}
+            setInput={setInput}
+            sendMessage={handleSend}
+            disabled={!hasToken}
+            placeholder={turnstileError ? 'Verification failed' : !hasToken ? 'Verifying...' : 'Ask anything…'}
+          />
         </Box>
 
         {turnstileError && (
@@ -189,12 +196,21 @@ const HeroChat = () => {
 
         {/* Turnstile — runs silently; only shows UI if Cloudflare requires a challenge */}
         {!hasToken && !turnstileError && (
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box
+            sx={{
+              visibility: needsChallenge ? 'visible' : 'hidden',
+              height: needsChallenge ? 'auto' : 0,
+              overflow: 'hidden',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
             <Turnstile
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
-              onSuccess={(captchaToken) => fetchToken(captchaToken)}
+              onSuccess={(captchaToken) => { fetchToken(captchaToken); setNeedsChallenge(false); }}
               onError={() => setTurnstileError(true)}
-              appearance="interaction-only"
+              onBeforeInteractive={() => setNeedsChallenge(true)}
+              options={{ appearance: 'interaction-only' }}
             />
           </Box>
         )}
@@ -297,7 +313,13 @@ const HeroChat = () => {
             backdropFilter: 'blur(12px)',
           }}
         >
-          <ChatInput input={input} setInput={setInput} sendMessage={handleSend} disabled={!hasToken} />
+          <ChatInput
+            input={input}
+            setInput={setInput}
+            sendMessage={handleSend}
+            disabled={!hasToken}
+            placeholder={!hasToken ? 'Verifying...' : 'Ask anything…'}
+          />
         </Box>
       </Box>
     </Box>

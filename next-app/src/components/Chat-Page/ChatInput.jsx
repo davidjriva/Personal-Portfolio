@@ -1,7 +1,7 @@
 import { InputBase, IconButton, Paper } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-const ChatInput = ({ input, setInput, sendMessage, disabled = false }) => {
+const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder = 'Ask anything…' }) => {
   return (
     <Paper
       component="form"
@@ -23,7 +23,7 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false }) => {
       }}
     >
       <InputBase
-        placeholder="Ask anything…"
+        placeholder={placeholder}
         value={input}
         disabled={disabled}
         onChange={(e) => setInput(e.target.value)}

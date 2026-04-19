@@ -1,50 +1,45 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { IconButton, Box } from '@mui/material';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
 const ReturnToTopButton = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 200);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  if (!visible) return null;
 
   return (
     <Box
       sx={{
-        display: 'flex', // Use flexbox to center content
-        justifyContent: 'center', // Center the button horizontally
-        alignItems: 'center', // Center the button vertically
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#38c0f2',
-        borderRadius: '8px', // Optional: add rounded corners
-        padding: '4px', // Reduce padding for less width
-        maxWidth: '50px', // Set a maximum width for the box
+        borderRadius: '8px',
+        padding: '4px',
+        maxWidth: '50px',
         margin: '0 auto',
-        '&:hover': {
-          animation: 'jump 1s infinite', // Increase duration for slower jump
+        '@keyframes jump': {
+          '0%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
+          '100%': { transform: 'translateY(0)' },
         },
+        '&:hover': { animation: 'jump 1s infinite' },
       }}
     >
       <IconButton
-        onClick={scrollToTop}
-        sx={{
-          color: 'white',
-          fontSize: '1.5rem', // Adjust font size to reduce button size
-          padding: '4px', // Reduce padding for the icon button
-        }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        sx={{ color: 'white', fontSize: '1.5rem', padding: '4px' }}
       >
         <KeyboardDoubleArrowUpIcon sx={{ fontSize: 'inherit' }} />
       </IconButton>
-      <style jsx>{`
-        @keyframes jump {
-          0% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-5px); // Adjust height of the jump
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </Box>
   );
 };

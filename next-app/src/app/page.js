@@ -41,7 +41,7 @@ const MainPage = () => {
         <HeroChat />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Box
           id="about"
           sx={{
