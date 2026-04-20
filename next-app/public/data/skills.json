@@ -1,52 +1,37 @@
 [
     {
-        "title": "Primary Programming Languages",
-        "items": ["Java", "JavaScript", "TypeScript", "HTML", "CSS", "Python"],
+        "title": "Languages",
+        "items": ["Python", "TypeScript", "Java", "HTML5", "CSS3"],
         "tags": ["programming", "languages", "core", "development", "coding"]
     },
     {
-        "title": "Secondary Programming Languages",
-        "items": ["C/C++", "SQL", "Bash"],
-        "tags": ["programming", "languages", "secondary", "systems", "scripting"]
+        "title": "AI Orchestration & Machine Learning",
+        "items": ["LangChain", "LangGraph", "LangSmith", "Agentic Workflows", "RAG Evaluation", "Pinecone (Vector DB)", "TensorFlow", "Keras"],
+        "tags": ["AI", "machine learning", "LLM", "RAG", "agents", "orchestration", "vector database", "deep learning", "artificial intelligence"]
     },
     {
-        "title": "CI/CD",
-        "items": ["Github Actions"],
-        "tags": ["devops", "automation", "continuous integration", "continuous deployment", "CI/CD"]
+        "title": "Web Development",
+        "items": ["React", "Next.js", "Node.js", "Express.js", "Mongoose"],
+        "tags": ["web development", "frontend", "backend", "full-stack", "frameworks", "React", "Next.js"]
     },
     {
-        "title": "Frameworks",
-        "items": ["React.js", "Node.js", "Express.js", "Mongoose.js"],
-        "tags": ["frameworks", "web development", "frontend", "backend", "full-stack"]
+        "title": "Big Data & Cloud",
+        "items": ["Apache Spark", "PySpark", "Hadoop", "Databricks", "Amazon Redshift", "S3 Buckets"],
+        "tags": ["big data", "cloud", "data engineering", "ETL", "AWS", "distributed computing", "Spark"]
     },
     {
-        "title": "Testing Frameworks",
-        "items": ["JUnit", "Jacoco", "Jest", "Supertest", "Mockito"],
-        "tags": ["testing", "unit testing", "integration testing", "quality assurance", "QA"]
+        "title": "Databases & Tools",
+        "items": ["MongoDB", "PostgreSQL", "Git", "Claude Code", "Cursor", "Pip", "Cargo", "NPM"],
+        "tags": ["databases", "tools", "version control", "development tools", "NoSQL", "SQL", "MongoDB", "PostgreSQL"]
     },
     {
-        "title": "Data Science & Machine Learning",
-        "items": ["TensorFlow", "Keras", "NumPy", "Pandas", "Scikit-Learn", "Matplotlib"],
-        "tags": ["machine learning", "AI", "deep learning", "data science", "analytics", "ML"]
+        "title": "Testing & Validation",
+        "items": ["Pytest", "RAGAS", "DeepEval", "JUnit", "Mockito", "Jacoco", "Jest", "Postman"],
+        "tags": ["testing", "unit testing", "integration testing", "quality assurance", "QA", "LLM evaluation", "pytest", "DeepEval", "RAGAS"]
     },
     {
-        "title": "Data Engineering and Big Data",
-        "items": ["Hadoop", "Apache Spark/PySpark", "MongoDB", "AWS RedShift", "AWS S3"],
-        "tags": ["big data", "data engineering", "ETL", "databases", "cloud computing"]
-    },
-    {   
-        "title": "Tools",
-        "items": ["Git", "GitHub", "Visual Studio Code", "Postman", "Package Managers (Pip & NPM)", "Debuggers"],
-        "tags": ["tools", "development tools", "version control", "IDE", "productivity"]
-    }, 
-    {
-        "title": "Concepts",
-        "items": ["RESTful APIs", "Object Oriented Programming", "Design Patterns", "Software Development Methodologies (Agile)", "MVC Architecture"],
-        "tags": ["concepts", "software engineering", "architecture", "best practices", "OOP", "APIs"]
-    },
-    {
-        "title": "Soft Skills",
-        "items": ["Leadership", "Teamwork", "Collaboration", "Written and Verbal Communication"],
-        "tags": ["soft skills", "communication", "teamwork", "leadership", "collaboration"]
+        "title": "Data Science Libraries",
+        "items": ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "PyCharm", "IntelliJ"],
+        "tags": ["data science", "analytics", "machine learning", "visualization", "Python", "Pandas", "NumPy"]
     }
 ]

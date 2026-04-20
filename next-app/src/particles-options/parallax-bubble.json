@@ -33,7 +33,7 @@
     "fpsLimit": 120,
     "detectRetina": true,
     "interactivity": {
-        "detectsOn": "window",
+        "detectsOn": "canvas",
         "events": {
             "onClick": {
                 "enable": true,

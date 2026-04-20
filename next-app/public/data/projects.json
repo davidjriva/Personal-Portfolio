@@ -1,6 +1,60 @@
 [
     {
       "featured": true,
+      "coverImage": "production_RAG_pipeline.webp",
+      "title": "Production RAG Pipeline",
+      "author": "David Riva",
+      "dateStarted": "March 2025",
+      "dateCompleted": "April 2025",
+      "long_description": "An end-to-end Retrieval-Augmented Generation (RAG) system built to production standards — not a tutorial project. Designed to answer natural language questions over PDF documents with measurable accuracy.\n\nIngestion: PDF parsing → chunking → dual embedding (dense + sparse BM25) → Pinecone vector store. Retrieval: Hybrid semantic + keyword search with tunable alpha weighting. Reranking: BAAI/bge-reranker-large CrossEncoder narrows top-20 results to top-5. Generation: OpenAI gpt-4o-mini produces grounded answers. Evaluation: RAGAS framework scores every response on faithfulness and answer relevancy (threshold: >0.8). Orchestration: LangGraph state machine with a parallel CLI entry point.",
+      "short_description": "A production-grade RAG system with hybrid retrieval, cross-encoder reranking, and automated RAGAS quality gates.",
+      "technologies": [
+        { "location": "Orchestration", "tools": ["LangChain", "LangGraph", "LangSmith"] },
+        { "location": "Retrieval", "tools": ["Pinecone", "BM25", "sentence-transformers"] },
+        { "location": "Generation", "tools": ["OpenAI API", "gpt-4o-mini"] },
+        { "location": "Evaluation", "tools": ["RAGAS"] },
+        { "location": "Infrastructure", "tools": ["FastAPI", "Celery", "Docker", "Poetry"] }
+      ],
+      "link": "https://github.com/davidjriva/Production_RAG_Pipeline",
+      "tags": ["RAG", "LangChain", "LangGraph", "Pinecone", "vector database", "AI", "machine learning", "Python", "FastAPI", "Docker", "RAGAS", "LLM evaluation", "retrieval", "reranking"]
+    },
+    {
+      "featured": true,
+      "coverImage": "agentic_ai_news_summary_service.webp",
+      "title": "Agentic AI News Summary Service",
+      "author": "David Riva",
+      "dateStarted": "February 2025",
+      "dateCompleted": "March 2025",
+      "long_description": "An automated AI-curated newsletter pipeline that runs twice daily, fetching articles from 10+ RSS/Atom feeds (+ Hacker News Algolia API), scoring each with an LLM, and delivering a ranked digest via email.\n\nPipeline architecture: fetcher → processor → ranker → renderer → emailer — clean linear stages, each as a pure data-transform function. LLM integration: Claude (Anthropic SDK) as default processor with ephemeral prompt caching for cost efficiency; swappable to a local llama.cpp model via OpenAI-compatible endpoint. Scoring: Each article gets LLM-assigned impact + authenticity scores combined into a rank_score stored in SQLite. FastAPI dashboard provides a live web UI to browse runs and trigger new ones. macOS automation via launchd scheduling (7 AM + 6 PM daily), no infrastructure required.",
+      "short_description": "An agentic pipeline that fetches, scores, and emails a ranked AI news digest twice daily using Claude with prompt caching.",
+      "technologies": [
+        { "location": "Backend", "tools": ["Python", "FastAPI", "SQLite"] },
+        { "location": "AI", "tools": ["Anthropic Claude API", "llama.cpp"] },
+        { "location": "Infrastructure", "tools": ["Poetry", "Jinja2", "launchd"] },
+        { "location": "Testing", "tools": ["Pytest"] }
+      ],
+      "link": "https://github.com/davidjriva/Agentic_AI_News_Summary_Service",
+      "tags": ["agentic AI", "LLM", "Claude", "Anthropic", "FastAPI", "Python", "automation", "newsletter", "RSS", "SQLite", "prompt caching", "pipeline"]
+    },
+    {
+      "featured": true,
+      "coverImage": "personal_portfolio.webp",
+      "title": "Personal Portfolio",
+      "author": "David Riva",
+      "dateStarted": "November 2024",
+      "dateCompleted": "April 2025",
+      "long_description": "A production-grade personal portfolio and AI chat agent built with Next.js and deployed on Vercel. The centerpiece is an agentic chat interface powered by GPT-4o-mini that answers questions about my experience using a RAG pipeline — embedding-based cosine similarity search over pre-computed OpenAI embeddings.\n\nKey features: agentic tool-calling loop with streaming SSE responses, Cloudflare Turnstile CAPTCHA + JWT auth, Upstash Redis rate limiting, and an automated DeepEval test suite for continuous LLM quality evaluation. The UI is built entirely with MUI on a dark theme with animated particle backgrounds and smooth scroll sections.",
+      "short_description": "A Next.js portfolio with an embedded GPT-4o-mini chat agent, RAG search, JWT auth, and automated DeepEval LLM evaluations.",
+      "technologies": [
+        { "location": "Front-End", "tools": ["Next.js", "React", "MUI", "TypeScript"] },
+        { "location": "Back-End", "tools": ["Node.js", "OpenAI API", "Upstash Redis"] },
+        { "location": "Auth & Security", "tools": ["JWT", "Cloudflare Turnstile"] },
+        { "location": "Evaluation", "tools": ["DeepEval", "Python", "Pytest"] }
+      ],
+      "link": "https://github.com/davidjriva/Personal-Portfolio",
+      "tags": ["Next.js", "React", "TypeScript", "AI", "RAG", "OpenAI", "chat agent", "portfolio", "MUI", "JWT", "DeepEval", "LLM evaluation", "full-stack", "streaming"]
+    },
+    {
       "coverImage": "Nature-Nomads-Cover.webp",
       "title": "Nature Nomads",
       "author": "David Riva",
@@ -30,7 +84,6 @@
       "tags": ["distributed systems", "networking", "Java", "TCP/IP", "Dijkstra", "algorithms", "simulation", "multi-threading"]
     },
     {
-      "featured": true,
       "coverImage": "Trip-Planner-Cover.webp",
       "title": "Trip Planning Application",
       "author": "David Riva & CS314 [Software Development] Teammates",
@@ -95,7 +148,6 @@
       "tags": ["algorithm", "Java", "visualization", "sorting", "interactive", "application"]
     },
     {
-      "featured": true,
       "coverImage": "Email-Templating-Utility-Cover.webp",
       "title": "Email Templating Utility Tool",
       "author": "David Riva",
