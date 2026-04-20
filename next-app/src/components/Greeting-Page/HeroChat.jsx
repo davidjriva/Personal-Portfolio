@@ -10,51 +10,33 @@ import MessagesList from '@/components/Chat-Page/MessagesList';
 import useChat from '@/components/Chat-Page/hooks/useChat';
 
 const CHIP_CACHE = {
-  'What AI have you built?': `## AI Projects & Work
+  'What AI have you built?': `David has built several impressive AI projects.
 
-**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** — end-to-end RAG system built to production standards. Hybrid semantic + keyword retrieval (Pinecone + BM25), cross-encoder reranking (BAAI/bge-reranker-large), GPT-4o-mini generation, and automated RAGAS quality gates (faithfulness + answer relevancy > 0.8). Orchestrated with a LangGraph state machine; traced via LangSmith.
+**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** is a production-grade system for answering natural language questions over PDFs. It uses hybrid retrieval (Pinecone + BM25), cross-encoder reranking, and automated RAGAS quality gates to ensure faithfulness and relevancy. The pipeline is orchestrated with a LangGraph state machine and traced via LangSmith.
 
-**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** — fully automated newsletter pipeline running twice daily. Fetches 10+ RSS/Atom feeds, scores each article with Claude (Anthropic SDK) using ephemeral prompt caching, ranks by impact + authenticity, and emails a digest. FastAPI dashboard + launchd scheduling — zero infrastructure required.
+**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** is a fully automated newsletter that runs twice daily. It fetches from 10+ RSS feeds, scores each article with Claude using ephemeral prompt caching, and emails a ranked digest — all with zero manual intervention.
 
-**[This portfolio agent](https://github.com/davidjriva/Personal-Portfolio)** — agentic RAG chat built with Next.js and GPT-4o-mini. Cosine similarity search over pre-computed OpenAI embeddings, streaming SSE responses, JWT + Cloudflare Turnstile auth, Upstash Redis rate limiting, and an automated DeepEval test suite for continuous LLM quality evaluation.
+**[This portfolio's chat agent](https://github.com/davidjriva/Personal-Portfolio)** is the one you're talking to right now — a RAG agent built with Next.js and GPT-4o-mini, with streaming responses, JWT + Turnstile auth, Redis rate limiting, and a DeepEval eval suite.
 
-**C3 Agentic AI Hackathon (2025) — 1st place** — agentic tooling with React, TypeScript, and C3 AI's in-house LLM that boosted developer efficiency in UI component creation.`,
+David also took **1st place at C3 AI's Agentic AI Hackathon 2025**, building agentic developer tooling with React, TypeScript, and an in-house LLM.`,
 
-  'Tell me about your experience': `## Experience
+  'Tell me about your experience': `Here's a quick overview of David's background.
 
-**Training Engineer, Generative AI — C3 AI** *(Sept 2024 – Apr 2026)*
-Redwood City, CA
-- 🏆 1st place, C3 Agentic AI Hackathon 2025
-- Core training platform serving 8,000+ learners globally
-- Built internal automation tools (React, Next.js, Electron.js) cutting learner feedback time by 80%
-- Curriculum development in data science, ML, and application development
+Most recently he was a **Training Engineer, Generative AI at C3 AI** (Sept 2024 – Apr 2026), where he built and maintained their core training platform serving 8,000+ learners, created internal automation tools that cut feedback turnaround time by 80%, and won 1st place at the C3 Agentic AI Hackathon 2025.
 
-**Full-Stack Developer, University Research — Colorado State University** *(Dec 2022 – Jan 2024)*
-- Urban Sustain Project: accessible interface to 20TB+ datasets for social & environmental researchers
-- Built geospatial visualizations with React, TypeScript, Python/Flask, and MongoDB
-- 🏆 Excellence in Data Science Award, CSU Celebrating Undergraduate Research
+Before that, he was a **Full-Stack Developer on a university research team at Colorado State University** (Dec 2022 – Jan 2024), building an accessible interface to 20TB+ environmental datasets using React, TypeScript, Python/Flask, and MongoDB. That project won the Excellence in Data Science Award at CSU's Celebrating Undergraduate Research Competition.
 
-**Machine Learning Engineer Intern — Hewlett Packard Inc.** *(May – Aug 2023)*
-Vancouver, WA
-- Built 3 ETL pipelines (AWS S3 → Redshift) and developed ML forecasting models with Scikit-Learn & Facebook Prophet
+In between, he interned as a **Machine Learning Engineer at Hewlett Packard Inc.** (May – Aug 2023), building ETL pipelines on AWS and developing ML forecasting models with Scikit-Learn and Facebook Prophet.
 
-**Teaching Assistant — Colorado State University** *(Aug – Dec 2022)*
-- CS-165 Data Structures & Algorithms, 30 students
+David graduated from Colorado State University in May 2024 with a B.S. in Computer Science, *Summa Cum Laude*.`,
 
-🎓 B.S. Computer Science, Colorado State University — *Summa Cum Laude, May 2024*
+  'Featured projects': `Here are three of David's featured projects.
 
-**Key skills:** LangChain · LangGraph · LangSmith · Pinecone · RAGAS · DeepEval · Python · TypeScript · React · Next.js · Apache Spark · Databricks · AWS`,
+**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** *(Mar – Apr 2025)* — a production-grade RAG system for answering natural language questions over PDFs. It combines dense and BM25 retrieval, cross-encoder reranking, and RAGAS quality gates to keep responses accurate and grounded. Built with LangChain, LangGraph, Pinecone, and FastAPI.
 
-  'Featured projects': `## Featured Projects
+**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** *(Feb – Mar 2025)* — an automated newsletter pipeline that fetches from 10+ RSS feeds, scores articles with Claude (using prompt caching), and emails a ranked daily digest. Runs on a launchd schedule with a FastAPI dashboard — no infrastructure needed.
 
-**[Production RAG Pipeline](https://github.com/davidjriva/Production_RAG_Pipeline)** *(Mar – Apr 2025)*
-Production-grade RAG system answering natural language questions over PDFs. Hybrid retrieval (dense + BM25), cross-encoder reranking, and RAGAS automated quality gates. Stack: LangChain · LangGraph · Pinecone · FastAPI · Docker · Poetry.
-
-**[Agentic AI News Summary Service](https://github.com/davidjriva/Agentic_AI_News_Summary_Service)** *(Feb – Mar 2025)*
-Automated newsletter pipeline — fetches 10+ RSS feeds, scores articles with Claude (prompt caching), ranks by impact, and emails a daily digest. FastAPI dashboard + launchd scheduling. Stack: Python · Anthropic Claude API · FastAPI · SQLite.
-
-**[Personal Portfolio](https://github.com/davidjriva/Personal-Portfolio)** *(Nov 2024 – Apr 2025)*
-This site — Next.js portfolio with an embedded GPT-4o-mini RAG chat agent, streaming SSE responses, JWT + Turnstile auth, Redis rate limiting, and a DeepEval automated eval suite. Stack: Next.js · React · MUI · OpenAI · DeepEval.`,
+**[This portfolio](https://github.com/davidjriva/Personal-Portfolio)** *(Nov 2024 – Apr 2025)* — the site you're on now. It has an embedded GPT-4o-mini RAG agent, streaming SSE responses, JWT + Turnstile auth, Redis rate limiting, and a DeepEval automated eval suite. Built with Next.js, React, and MUI.`,
 };
 
 const CHIPS = [
