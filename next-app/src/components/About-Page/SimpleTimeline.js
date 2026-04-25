@@ -1,99 +1,96 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import {
-  Timeline,
-  TimelineItem,
-  TimelineOppositeContent,
-  TimelineSeparator,
-  TimelineConnector,
-  TimelineDot,
-  TimelineContent,
-} from '@mui/lab';
+import { useEffect, useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import Image from 'next/image';
 
-const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, endDate, isEnd }) => {
+const ExperienceCard = ({ title, company, companyWebsiteLink, logoImage, startDate, endDate }) => {
   const isCurrent = endDate === 'Present';
   const isGraduation = title.startsWith('Graduated');
+  const displayTitle = isGraduation ? 'Graduated' : title.split(',')[0];
+  const dateText = isGraduation ? startDate : `${startDate} – ${isCurrent ? 'Present' : endDate}`;
 
   return (
-    <TimelineItem>
-      <TimelineOppositeContent sx={{ flex: 'none', width: 130, pr: 1.5, pt: '14px' }}>
+    <Box
+      component="a"
+      href={companyWebsiteLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+        p: 2,
+        borderRadius: '14px',
+        border: '1px solid rgba(255,255,255,0.06)',
+        bgcolor: 'rgba(255,255,255,0.02)',
+        textDecoration: 'none',
+        transition: 'all 0.2s ease',
+        flexShrink: 0,
+        minWidth: { xs: '280px', md: 'auto' },
+        '&:hover': {
+          bgcolor: 'rgba(255,255,255,0.04)',
+          borderColor: 'rgba(255,255,255,0.1)',
+          transform: 'translateY(-2px)',
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: 40,
+          height: 40,
+          borderRadius: '10px',
+          bgcolor: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+          overflow: 'hidden',
+        }}
+      >
+        <Image
+          src={`/images/${logoImage}`}
+          alt={`${company} logo`}
+          width={24}
+          height={24}
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
+      <Box sx={{ minWidth: 0 }}>
         <Typography
-          variant="caption"
           sx={{
-            color: isCurrent ? '#38c0f2' : 'rgba(255,255,255,0.45)',
-            fontWeight: isCurrent ? 600 : 400,
-            lineHeight: 1.4,
-            display: 'block',
+            fontWeight: 600,
+            fontSize: '0.85rem',
+            color: '#fafafa',
+            lineHeight: 1.3,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
           }}
         >
-          {isGraduation ? startDate : `${startDate} –\u00a0${isCurrent ? 'Present' : endDate}`}
+          {displayTitle}
         </Typography>
-      </TimelineOppositeContent>
-
-      <TimelineSeparator>
-        <TimelineDot
+        <Typography sx={{ fontSize: '0.78rem', color: '#38bdf8', lineHeight: 1.3, mb: 0.25 }}>
+          {company}
+        </Typography>
+        <Typography sx={{ fontSize: '0.72rem', color: '#52525b', lineHeight: 1.3 }}>
+          {dateText}
+        </Typography>
+      </Box>
+      {isCurrent && (
+        <Box
           sx={{
-            backgroundColor: '#ffffff',
-            border: isCurrent
-              ? '1.5px solid rgba(56,192,242,0.6)'
-              : '1.5px solid rgba(255,255,255,0.2)',
-            boxShadow: isCurrent ? '0 0 10px 2px rgba(56,192,242,0.25)' : 'none',
-            p: '5px',
-            m: '6px 0',
+            ml: 'auto',
+            width: 6,
+            height: 6,
+            borderRadius: '50%',
+            bgcolor: '#22c55e',
+            flexShrink: 0,
+            boxShadow: '0 0 8px rgba(34,197,94,0.4)',
           }}
-        >
-          <Image
-            src={`/images/${logoImage}`}
-            alt={`${company} logo`}
-            width={20}
-            height={20}
-            style={{ display: 'block', objectFit: 'contain' }}
-          />
-        </TimelineDot>
-        {!isEnd && (
-          <TimelineConnector
-            sx={{
-              background: 'linear-gradient(to bottom, rgba(56,192,242,0.25), rgba(110,64,201,0.15))',
-              width: '1.5px',
-            }}
-          />
-        )}
-      </TimelineSeparator>
-
-      <TimelineContent sx={{ pl: 1.5, pt: '10px', pb: '16px' }}>
-        <Box>
-          <Typography
-            variant="body2"
-            sx={{
-              fontWeight: 600,
-              fontSize: '0.8rem',
-              lineHeight: 1.35,
-              color: '#ffffff',
-              mb: 0.25,
-            }}
-          >
-            {isGraduation ? 'Graduated' : title.split(',')[0]}
-          </Typography>
-          <Typography
-            component="a"
-            href={companyWebsiteLink}
-            target="_blank"
-            variant="caption"
-            sx={{
-              color: '#38c0f2',
-              textDecoration: 'none',
-              fontSize: '0.72rem',
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            {company}
-          </Typography>
-        </Box>
-      </TimelineContent>
-    </TimelineItem>
+        />
+      )}
+    </Box>
   );
 };
 
@@ -106,46 +103,41 @@ const SimpleTimeline = () => {
       .then((data) => setExperienceData(data));
   }, []);
 
-  const sortedExperienceData = [...experienceData].sort((a, b) => {
-    return new Date(b.startDate) - new Date(a.startDate);
-  });
+  const sortedExperienceData = [...experienceData].sort(
+    (a, b) => new Date(b.startDate) - new Date(a.startDate)
+  );
+
+  if (sortedExperienceData.length === 0) return null;
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
-        px: 1,
-        py: 2,
-      }}
-    >
+    <Box>
       <Typography
-        variant="overline"
         sx={{
-          color: 'rgba(255,255,255,0.55)',
-          fontSize: '0.85rem',
-          letterSpacing: '0.18em',
-          fontWeight: 600,
-          mb: 0.5,
+          fontSize: '0.75rem',
+          fontWeight: 500,
+          color: '#52525b',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          mb: 2,
         }}
       >
         Experience
       </Typography>
-      <Timeline sx={{ maxWidth: '22vw', p: 0, m: 0 }}>
-        {sortedExperienceData.map((experience, index) => (
-          <React.Fragment key={experience.title}>
-            <SimpleTimelineItem
-              {...experience}
-              isEnd={index === sortedExperienceData.length - 1}
-            />
-          </React.Fragment>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, 1fr)',
+            lg: 'repeat(3, 1fr)',
+          },
+          gap: 1.5,
+        }}
+      >
+        {sortedExperienceData.map((exp) => (
+          <ExperienceCard key={exp.title} {...exp} />
         ))}
-      </Timeline>
+      </Box>
     </Box>
   );
 };

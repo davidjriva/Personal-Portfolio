@@ -5,10 +5,14 @@ const ClickableLink = ({ link, text }) => {
     <a
       href={link}
       target="_blank"
-      style={{ color: '#38c0f2', textDecoration: 'none' }}
-      onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-      onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
-      onClick={(e) => (e.currentTarget.style.color = '#0073e6')}
+      rel="noopener noreferrer"
+      style={{
+        color: '#38bdf8',
+        textDecoration: 'none',
+        transition: 'color 0.2s ease',
+      }}
+      onMouseOver={(e) => (e.currentTarget.style.color = '#7dd3fc')}
+      onMouseOut={(e) => (e.currentTarget.style.color = '#38bdf8')}
     >
       {text}
     </a>

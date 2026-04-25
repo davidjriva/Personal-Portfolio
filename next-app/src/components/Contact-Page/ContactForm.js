@@ -3,17 +3,24 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import { Turnstile } from '@marsidev/react-turnstile';
+import SendIcon from '@mui/icons-material/Send';
 
 const inputSx = {
-  marginBottom: 2,
-  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.55)' },
-  '& .MuiOutlinedInput-root': {
-    color: '#ffffff',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
-    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.25)' },
-    '&.Mui-focused fieldset': { borderColor: '#38c0f2' },
+  mb: 2,
+  '& .MuiInputLabel-root': {
+    color: '#52525b',
+    fontSize: '0.875rem',
   },
+  '& .MuiOutlinedInput-root': {
+    color: '#fafafa',
+    fontSize: '0.9rem',
+    backgroundColor: 'rgba(255,255,255,0.02)',
+    borderRadius: '12px',
+    '& fieldset': { borderColor: 'rgba(255,255,255,0.06)' },
+    '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.12)' },
+    '&.Mui-focused fieldset': { borderColor: 'rgba(56,189,248,0.4)' },
+  },
+  '& .MuiInputLabel-root.Mui-focused': { color: '#38bdf8' },
 };
 
 const ContactForm = () => {
@@ -49,19 +56,17 @@ const ContactForm = () => {
     <Box
       sx={{
         width: '100%',
-        height: 'fit-content',
-        maxWidth: '800px',
-        bgcolor: 'rgba(255, 255, 255, 0.04)',
-        border: '1px solid rgba(255, 255, 255, 0.09)',
-        color: '#ffffff',
-        padding: { xs: 2, sm: 3, md: 4 },
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
+        bgcolor: 'rgba(255,255,255,0.02)',
+        border: '1px solid rgba(255,255,255,0.06)',
+        borderRadius: '20px',
+        p: { xs: 3, md: 4 },
       }}
     >
       <form onSubmit={handleSubmit}>
-        <TextField fullWidth label="Your Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Your Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2, mb: 2 }}>
+          <TextField fullWidth label="Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
+          <TextField fullWidth label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
+        </Box>
         <TextField fullWidth label="Subject" name="subject" value={formData.subject} onChange={handleChange} required sx={inputSx} />
         <TextField fullWidth label="Message" name="message" multiline rows={4} value={formData.message} onChange={handleChange} required sx={inputSx} />
 
@@ -78,20 +83,25 @@ const ContactForm = () => {
           type="submit"
           variant="contained"
           disabled={!captchaToken}
+          endIcon={<SendIcon sx={{ fontSize: '0.9rem !important' }} />}
           sx={{
             width: '100%',
-            padding: '12px 0',
-            fontSize: '16px',
-            background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
-            color: '#ffffff',
-            borderRadius: '8px',
-            border: 'none',
+            py: 1.5,
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            background: 'linear-gradient(135deg, #38bdf8, #a78bfa)',
+            color: '#fff',
+            borderRadius: '12px',
+            textTransform: 'none',
+            boxShadow: 'none',
+            transition: 'all 0.2s ease',
             '&:hover': {
-              background: 'linear-gradient(135deg, #5bcff5, #8660d4)',
+              boxShadow: '0 8px 24px rgba(56,189,248,0.15)',
+              opacity: 0.9,
             },
             '&.Mui-disabled': {
-              background: 'rgba(255, 255, 255, 0.12)',
-              color: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255,255,255,0.06)',
+              color: '#52525b',
             },
           }}
         >
@@ -101,11 +111,11 @@ const ContactForm = () => {
 
       {status && (
         <Typography
-          variant="body2"
           sx={{
-            marginTop: 2,
+            mt: 2,
             textAlign: 'center',
-            color: status.includes('success') ? '#4caf50' : '#f44336',
+            fontSize: '0.85rem',
+            color: status.includes('success') ? '#22c55e' : '#ef4444',
           }}
         >
           {status}

@@ -1,39 +1,37 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import ClickableLink from './ClickableLink';
 
 const AboutHeader = () => {
   return (
-    <>
+    <Box sx={{ mb: 2 }}>
       <Typography
-        variant="h1"
+        variant="h2"
         sx={{
-          fontWeight: 'bold',
-          marginBottom: 1,
-          fontSize: { xs: '1.75rem', sm: '2.5rem', md: '2.5rem' },
+          fontSize: { xs: '1.75rem', md: '2.25rem' },
+          fontWeight: 700,
+          color: '#fafafa',
+          mb: 0.5,
         }}
       >
         David Riva
       </Typography>
 
       <Typography
-        variant="h5"
         sx={{
-          color: '#38c0f2',
-          marginBottom: 1,
+          fontSize: '1rem',
+          fontWeight: 500,
+          color: '#38bdf8',
+          mb: 1,
         }}
       >
         Training Engineer, Generative AI
       </Typography>
 
-      <Typography
-        sx={{
-          color: 'rgba(255, 255, 255, 0.55)',
-          marginBottom: 2,
-        }}
-      >
-        Bay Area, CA. | <ClickableLink link="mailto:davidjriva@gmail.com" text="davidjriva@gmail.com" />
+      <Typography sx={{ color: '#52525b', fontSize: '0.875rem' }}>
+        Bay Area, CA &middot;{' '}
+        <ClickableLink link="mailto:davidjriva@gmail.com" text="davidjriva@gmail.com" />
       </Typography>
-    </>
+    </Box>
   );
 };
 
