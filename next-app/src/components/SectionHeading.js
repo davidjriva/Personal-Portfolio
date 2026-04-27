@@ -2,40 +2,27 @@ import { Box, Typography } from '@mui/material';
 
 const SectionHeading = ({ sectionName }) => {
   return (
-    <Box 
-      sx={{ 
-        mb: '100px', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center',
-        pt: '40px'
-      }}
-    >
+    <Box sx={{ mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', pt: 2 }}>
       <Typography
-        variant="h2"
+        variant="overline"
         sx={{
-          fontWeight: 800,
-          color: 'inherit',
-          fontSize: { xs: '2.5rem', md: '4rem' },
-          letterSpacing: '-0.02em',
-          lineHeight: 1.1,
-          textAlign: 'center',
-          position: 'relative',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: '-15px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '50px',
-            height: '4px',
-            background: 'linear-gradient(90deg, #38c0f2 0%, #07a2f7 100%)',
-            borderRadius: '10px'
-          }
+          color: '#38c0f2',
+          fontSize: '0.7rem',
+          letterSpacing: '0.15em',
+          fontWeight: 600,
+          mb: 1.5,
         }}
       >
         {sectionName}
       </Typography>
+      <Box
+        sx={{
+          width: 32,
+          height: 2,
+          background: 'linear-gradient(90deg, #38c0f2, #8b5cf6)',
+          borderRadius: '1px',
+        }}
+      />
     </Box>
   );
 };

@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ContactForm from './ContactForm';
 import SectionHeading from '../SectionHeading';
 
@@ -12,24 +11,31 @@ const Contact = () => {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        pt: '60px',
-        pb: '60px',
+        pt: { xs: 6, md: 8 },
+        pb: { xs: 6, md: 8 },
       }}
     >
-      <SectionHeading sectionName="Contact Me" />
+      <SectionHeading sectionName="Contact" />
+
+      <Typography
+        sx={{
+          color: 'rgba(240,240,245,0.45)',
+          fontSize: '0.9rem',
+          textAlign: 'center',
+          mb: 4,
+          maxWidth: '420px',
+          px: 2,
+          lineHeight: 1.7,
+        }}
+      >
+        Have a question or want to work together? Drop me a message.
+      </Typography>
 
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: {
-            xs: '75%', // mobile
-            sm: '70%', // tablets
-            md: '70%', // small desktops
-            lg: '70%', // large desktops
-          },
+          width: '100%',
+          maxWidth: '560px',
+          px: { xs: 2, sm: 3 },
         }}
       >
         <ContactForm />

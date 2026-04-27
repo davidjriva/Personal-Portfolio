@@ -40,34 +40,34 @@ David graduated from Colorado State University in May 2024 with a B.S. in Comput
 };
 
 const CHIPS = [
-  {
-    label: 'What AI have you built?',
-    bg: 'rgba(56,192,242,0.14)',
-    border: 'rgba(56,192,242,0.55)',
-    color: '#38c0f2',
-    hoverBg: 'rgba(56,192,242,0.26)',
-    hoverBorder: 'rgba(56,192,242,0.9)',
-    glow: '0 0 14px rgba(56,192,242,0.35)',
-  },
-  {
-    label: 'Tell me about your experience',
-    bg: 'rgba(110,64,201,0.14)',
-    border: 'rgba(110,64,201,0.55)',
-    color: '#b894ff',
-    hoverBg: 'rgba(110,64,201,0.28)',
-    hoverBorder: 'rgba(110,64,201,0.9)',
-    glow: '0 0 14px rgba(110,64,201,0.35)',
-  },
-  {
-    label: 'Featured projects',
-    bg: 'rgba(255,255,255,0.08)',
-    border: 'rgba(255,255,255,0.3)',
-    color: 'rgba(255,255,255,0.85)',
-    hoverBg: 'rgba(255,255,255,0.16)',
-    hoverBorder: 'rgba(255,255,255,0.6)',
-    glow: 'none',
-  },
+  { label: 'What AI have you built?', variant: 'primary' },
+  { label: 'Tell me about your experience', variant: 'secondary' },
+  { label: 'Featured projects', variant: 'neutral' },
 ];
+
+const chipStyles = {
+  primary: {
+    bg: 'rgba(56,192,242,0.08)',
+    border: 'rgba(56,192,242,0.25)',
+    color: '#38c0f2',
+    hoverBg: 'rgba(56,192,242,0.16)',
+    hoverBorder: 'rgba(56,192,242,0.5)',
+  },
+  secondary: {
+    bg: 'rgba(139,92,246,0.08)',
+    border: 'rgba(139,92,246,0.25)',
+    color: '#a78bfa',
+    hoverBg: 'rgba(139,92,246,0.16)',
+    hoverBorder: 'rgba(139,92,246,0.5)',
+  },
+  neutral: {
+    bg: 'rgba(255,255,255,0.04)',
+    border: 'rgba(255,255,255,0.12)',
+    color: 'rgba(240,240,245,0.7)',
+    hoverBg: 'rgba(255,255,255,0.08)',
+    hoverBorder: 'rgba(255,255,255,0.25)',
+  },
+};
 
 const HeroChat = () => {
   const [input, setInput] = useState('');
@@ -89,7 +89,7 @@ const HeroChat = () => {
   };
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', height: '100%', color: '#ffffff', zIndex: 1 }}>
+    <Box sx={{ position: 'relative', width: '100%', height: '100%', color: '#f0f0f5', zIndex: 1 }}>
       {/* Pre-chat view */}
       <Box
         sx={{
@@ -99,7 +99,7 @@ const HeroChat = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 2,
+          gap: 2.5,
           px: 3,
           opacity: started ? 0 : 1,
           transform: started ? 'translateY(-10px)' : 'translateY(0)',
@@ -110,73 +110,85 @@ const HeroChat = () => {
         <Typography
           variant="h1"
           sx={{
-            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-            fontWeight: 900,
+            fontSize: 'clamp(2.25rem, 6vw, 3.75rem)',
+            fontWeight: 800,
             lineHeight: 1.1,
             textAlign: 'center',
+            letterSpacing: '-0.03em',
           }}
         >
-          <span style={{ color: '#ffffff' }}>Hello, I&apos;m </span>
-          <span style={{ color: '#38c0f2' }}>David</span>
+          <span style={{ color: '#f0f0f5' }}>Hello, I&apos;m </span>
+          <Box
+            component="span"
+            sx={{
+              background: 'linear-gradient(135deg, #38c0f2, #8b5cf6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            David
+          </Box>
         </Typography>
 
         <AnimatedTypingTypography />
 
-        <Box sx={{ width: '100%', maxWidth: 500 }}>
+        <Box sx={{ width: '100%', maxWidth: 520, mt: 1 }}>
           <ChatInput
             input={input}
             setInput={setInput}
             sendMessage={handleSend}
             disabled={!hasToken}
-            placeholder={turnstileError ? 'Verification failed' : !hasToken ? 'Verifying...' : 'Ask anything…'}
+            placeholder={turnstileError ? 'Verification failed' : !hasToken ? 'Verifying...' : 'Ask me anything about David...'}
           />
         </Box>
 
         {turnstileError && (
-          <Typography variant="caption" sx={{ color: 'rgba(255,100,100,0.85)', minHeight: '1.2em' }}>
+          <Typography variant="caption" sx={{ color: 'rgba(255,100,100,0.85)', textTransform: 'none', letterSpacing: 0, minHeight: '1.2em' }}>
             Verification failed — chat is temporarily unavailable.
           </Typography>
         )}
 
-        <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center">
-          {CHIPS.map((chip) => (
-            <Chip
-              key={chip.label}
-              label={chip.label}
-              disabled={!hasToken}
-              onClick={() => {
-                const cached = CHIP_CACHE[chip.label];
-                if (cached) addCachedExchange(chip.label, cached);
-                else sendMessage(chip.label);
-                setInput('');
-              }}
-              sx={{
-                height: 'auto',
-                background: chip.bg,
-                border: `1px solid ${chip.border}`,
-                backdropFilter: 'blur(8px)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                '& .MuiChip-label': {
-                  color: chip.color,
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  px: 2,
-                  py: 1,
-                },
-                '&:hover': {
-                  background: chip.hoverBg,
-                  borderColor: chip.hoverBorder,
-                  boxShadow: chip.glow,
-                },
-                '&.Mui-disabled': { opacity: 0.4 },
-              }}
-            />
-          ))}
+        <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center" sx={{ mt: 0.5 }}>
+          {CHIPS.map((chip) => {
+            const s = chipStyles[chip.variant];
+            return (
+              <Chip
+                key={chip.label}
+                label={chip.label}
+                disabled={!hasToken}
+                onClick={() => {
+                  const cached = CHIP_CACHE[chip.label];
+                  if (cached) addCachedExchange(chip.label, cached);
+                  else sendMessage(chip.label);
+                  setInput('');
+                }}
+                sx={{
+                  height: 'auto',
+                  background: s.bg,
+                  border: `1px solid ${s.border}`,
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  '& .MuiChip-label': {
+                    color: s.color,
+                    fontFamily: 'var(--font-montserrat), Arial, sans-serif',
+                    fontSize: '0.82rem',
+                    fontWeight: 500,
+                    px: 1.5,
+                    py: 0.85,
+                  },
+                  '&:hover': {
+                    background: s.hoverBg,
+                    borderColor: s.hoverBorder,
+                    transform: 'translateY(-1px)',
+                  },
+                  '&.Mui-disabled': { opacity: 0.35 },
+                }}
+              />
+            );
+          })}
         </Stack>
 
-        {/* Turnstile — runs silently; only shows UI if Cloudflare requires a challenge */}
         {!hasToken && !turnstileError && (
           <Box
             sx={{
@@ -202,26 +214,44 @@ const HeroChat = () => {
           onClick={scrollToAbout}
           sx={{
             position: 'absolute',
-            bottom: 32,
+            bottom: 36,
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 1,
-            px: 3,
-            py: 1.25,
+            gap: 0.75,
+            px: 2.5,
+            py: 1,
             borderRadius: '50px',
-            background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.4)',
-            color: 'rgba(255,255,255,0.85)',
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 600,
-            fontSize: '0.9rem',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            color: 'rgba(240,240,245,0.6)',
+            fontFamily: 'var(--font-montserrat), Arial, sans-serif',
+            fontWeight: 500,
+            fontSize: '0.8rem',
+            letterSpacing: '0.02em',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            '&:hover': { borderColor: 'rgba(255,255,255,0.7)', color: '#fff', background: 'rgba(255,255,255,0.07)' },
+            backdropFilter: 'blur(8px)',
+            '&:hover': {
+              borderColor: 'rgba(255,255,255,0.25)',
+              color: '#f0f0f5',
+              background: 'rgba(255,255,255,0.06)',
+              transform: 'translateY(-2px)',
+            },
+            '@keyframes gentleBounce': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(3px)' },
+            },
+            animation: 'gentleBounce 2.5s ease-in-out infinite',
+            '&:hover': {
+              animation: 'none',
+              borderColor: 'rgba(255,255,255,0.25)',
+              color: '#f0f0f5',
+              background: 'rgba(255,255,255,0.06)',
+            },
           }}
         >
-          <KeyboardDoubleArrowDownIcon fontSize="small" />
-          View my work
+          <KeyboardDoubleArrowDownIcon sx={{ fontSize: '1rem' }} />
+          Explore my work
         </Box>
       </Box>
 
@@ -237,7 +267,6 @@ const HeroChat = () => {
           pointerEvents: started ? 'auto' : 'none',
         }}
       >
-        {/* Agent header */}
         <Box
           sx={{
             flexShrink: 0,
@@ -246,20 +275,20 @@ const HeroChat = () => {
             gap: 1.5,
             px: 3,
             py: 1.5,
-            borderBottom: '1px solid rgba(255,255,255,0.07)',
+            borderBottom: '1px solid rgba(255,255,255,0.05)',
           }}
         >
           <Box
             sx={{
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+              width: 34,
+              height: 34,
+              borderRadius: '10px',
+              background: 'linear-gradient(135deg, #38c0f2, #8b5cf6)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 800,
-              fontSize: '1rem',
+              fontSize: '0.9rem',
               color: '#fff',
               flexShrink: 0,
             }}
@@ -267,32 +296,30 @@ const HeroChat = () => {
             D
           </Box>
           <Box sx={{ flex: 1 }}>
-            <Typography sx={{ fontWeight: 800, fontSize: '0.95rem', lineHeight: 1.2 }}>
+            <Typography sx={{ fontWeight: 700, fontSize: '0.9rem', lineHeight: 1.2, color: '#f0f0f5' }}>
               David&apos;s AI Agent
             </Typography>
-            <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.2 }}>
+            <Typography sx={{ fontSize: '0.7rem', color: 'rgba(240,240,245,0.35)', lineHeight: 1.2 }}>
               Knows David&apos;s experience, projects &amp; skills
             </Typography>
           </Box>
-          <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>
-            ↓ scroll for portfolio
+          <Typography sx={{ fontSize: '0.7rem', color: 'rgba(240,240,245,0.25)' }}>
+            &#8595; scroll for portfolio
           </Typography>
         </Box>
 
-        {/* Messages list — minHeight: 0 forces flex to respect overflow boundary */}
         <Box sx={{ flex: 1, minHeight: 0, overflow: 'hidden', px: 2, pt: 1 }}>
           <MessagesList messages={messages} />
         </Box>
 
-        {/* Input bar */}
         <Box
           sx={{
             flexShrink: 0,
             px: 3,
             py: 1.5,
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-            background: 'rgba(0,0,0,0.2)',
-            backdropFilter: 'blur(12px)',
+            borderTop: '1px solid rgba(255,255,255,0.05)',
+            background: 'rgba(0,0,0,0.25)',
+            backdropFilter: 'blur(16px)',
           }}
         >
           <ChatInput
@@ -300,7 +327,7 @@ const HeroChat = () => {
             setInput={setInput}
             sendMessage={handleSend}
             disabled={!hasToken}
-            placeholder={!hasToken ? 'Verifying...' : 'Ask anything…'}
+            placeholder={!hasToken ? 'Verifying...' : 'Ask anything...'}
           />
         </Box>
       </Box>
