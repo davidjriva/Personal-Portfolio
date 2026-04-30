@@ -1,42 +1,38 @@
-import { Box, Typography } from '@mui/material';
+'use client';
 
-const SectionHeading = ({ sectionName }) => {
+import { Box, Typography } from '@mui/material';
+import FadeIn from './FadeIn';
+
+const SectionHeading = ({ sectionName, subtitle }) => {
   return (
-    <Box 
-      sx={{ 
-        mb: '100px', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center',
-        pt: '40px'
-      }}
-    >
-      <Typography
-        variant="h2"
-        sx={{
-          fontWeight: 800,
-          color: 'inherit',
-          fontSize: { xs: '2.5rem', md: '4rem' },
-          letterSpacing: '-0.02em',
-          lineHeight: 1.1,
-          textAlign: 'center',
-          position: 'relative',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: '-15px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '50px',
-            height: '4px',
-            background: 'linear-gradient(90deg, #38c0f2 0%, #07a2f7 100%)',
-            borderRadius: '10px'
-          }
-        }}
-      >
-        {sectionName}
-      </Typography>
-    </Box>
+    <FadeIn>
+      <Box sx={{ mb: { xs: 6, md: 8 }, textAlign: 'center' }}>
+        <Typography
+          variant="overline"
+          sx={{
+            color: '#38bdf8',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            letterSpacing: '0.2em',
+            mb: 1.5,
+            display: 'block',
+          }}
+        >
+          {sectionName}
+        </Typography>
+        {subtitle && (
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: '2rem', md: '3rem' },
+              color: '#fafafa',
+            }}
+          >
+            {subtitle}
+          </Typography>
+        )}
+      </Box>
+    </FadeIn>
   );
 };
 

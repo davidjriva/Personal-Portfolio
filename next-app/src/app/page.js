@@ -2,84 +2,97 @@
 
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
-
-const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
-const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
-const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 import HeroChat from '@/components/Greeting-Page/HeroChat';
-import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
+
+const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
+const Experience = dynamic(() => import('@/components/Experience-Page/Experience'), { ssr: false });
+const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
+const Skills = dynamic(() => import('@/components/Skills-Page/Skills'), { ssr: false });
+const Awards = dynamic(() => import('@/components/Awards-Page/Awards'), { ssr: false });
+const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 
 const MainPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
+        bgcolor: '#09090b',
+        color: '#fafafa',
         position: 'relative',
         minHeight: '100vh',
       }}
     >
       <NavBar />
 
+      {/* Hero section */}
       <Box
         sx={{
           position: 'relative',
           height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.06) 0%, transparent 60%)',
         }}
       >
-        <ParticleBackground backgroundColor="transparent" />
+        {/* Dot grid background */}
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
+            maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
+            WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
+          }}
+        />
         <HeroChat />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Box
-          id="about"
-          sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <About />
-        </Box>
+      {/* Content sections */}
+      <Box id="about">
+        <About />
+      </Box>
 
-        <Box
-          id="projects"
-          sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <Projects />
-        </Box>
+      <Box
+        id="experience"
+        sx={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      >
+        <Experience />
+      </Box>
 
-        <Box
-          id="contact"
-          sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
-          }}
-        >
-          <Contact />
-        </Box>
+      <Box
+        id="projects"
+        sx={{
+          borderTop: '1px solid rgba(255,255,255,0.04)',
+          position: 'relative',
+        }}
+      >
+        <Projects />
+      </Box>
+
+      <Box
+        id="skills"
+        sx={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      >
+        <Skills />
+      </Box>
+
+      <Box
+        id="awards"
+        sx={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      >
+        <Awards />
+      </Box>
+
+      <Box
+        id="contact"
+        sx={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      >
+        <Contact />
       </Box>
 
       <Footer />
     </Box>
   );
 };
+
 export default MainPage;

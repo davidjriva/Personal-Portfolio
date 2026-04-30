@@ -1,38 +1,41 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ReturnToTopButton from './ReturnToTopButton';
+import { Box, Typography, IconButton } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
-        width: '100%',
-        height: '10vh',
+        borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+        py: 4,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        gap: 2,
       }}
     >
-      <ReturnToTopButton />
-      <Typography
-        variant="body2"
+      <IconButton
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
-          textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          width: 36,
+          height: 36,
+          borderRadius: '10px',
+          border: '1px solid rgba(255,255,255,0.06)',
+          color: '#52525b',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            borderColor: 'rgba(255,255,255,0.12)',
+            color: '#a1a1aa',
+            transform: 'translateY(-2px)',
+          },
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
+        <KeyboardArrowUpIcon fontSize="small" />
+      </IconButton>
+
+      <Typography sx={{ fontSize: '0.75rem', color: '#3f3f46' }}>
+        David Riva &copy; {new Date().getFullYear()}
       </Typography>
     </Box>
   );

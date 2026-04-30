@@ -1,40 +1,25 @@
-import React from 'react';
 import { Box } from '@mui/material';
 
-const BouncingDotsLoadingAnimation = ({
-  dotSize = 4,
-  dotColor = '#a3a1a1',
-  spacing = 4,
-  animationDuration = 0.6,
-  jumpHeight = 4,
-}) => {
-  const dotStyle = (delay) => ({
+const BouncingDotsLoadingAnimation = ({ dotSize = 5, dotColor = '#38bdf8', spacing = 3 }) => {
+  const dot = (delay) => ({
     width: dotSize,
     height: dotSize,
-    margin: `2px ${spacing}px`,
+    margin: `0 ${spacing}px`,
     borderRadius: '50%',
     backgroundColor: dotColor,
-    opacity: 1,
-    animation: `bouncing-loader ${animationDuration}s infinite alternate`,
+    animation: `pulse 1.2s ease-in-out infinite`,
     animationDelay: `${delay}s`,
+    '@keyframes pulse': {
+      '0%, 100%': { opacity: 0.3, transform: 'scale(0.8)' },
+      '50%': { opacity: 1, transform: 'scale(1)' },
+    },
   });
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center">
-      <Box sx={dotStyle(0)} />
-      <Box sx={dotStyle(0.2)} />
-      <Box sx={dotStyle(0.4)} />
-
-      <style>
-        {`
-          @keyframes bouncing-loader {
-            to {
-              opacity: 0.1;
-              transform: translateY(-${jumpHeight}px);
-            }
-          }
-        `}
-      </style>
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={dot(0)} />
+      <Box sx={dot(0.2)} />
+      <Box sx={dot(0.4)} />
     </Box>
   );
 };
