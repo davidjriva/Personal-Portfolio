@@ -1,38 +1,73 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ReturnToTopButton from './ReturnToTopButton';
+import { Box, Typography, IconButton } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
-        width: '100%',
-        height: '10vh',
+        borderTop: '1px solid rgba(255,255,255,0.04)',
+        px: { xs: 3, md: 6 },
+        py: 5,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        gap: 2,
       }}
     >
-      <ReturnToTopButton />
-      <Typography
-        variant="body2"
+      <Box
+        component="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
-          textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          width: 40,
+          height: 40,
+          borderRadius: '12px',
+          bgcolor: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          color: 'rgba(255,255,255,0.4)',
+          transition: 'all 0.25s ease',
+          '&:hover': {
+            bgcolor: 'rgba(255,255,255,0.08)',
+            color: '#fafafa',
+            borderColor: 'rgba(255,255,255,0.15)',
+          },
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
+        <KeyboardArrowUpIcon sx={{ fontSize: '1.2rem' }} />
+      </Box>
+
+      <Box sx={{ display: 'flex', gap: 1 }}>
+        <IconButton
+          component="a"
+          href="https://github.com/davidjriva"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+          sx={{ color: 'rgba(255,255,255,0.3)', '&:hover': { color: '#fafafa' } }}
+        >
+          <GitHubIcon sx={{ fontSize: '1.1rem' }} />
+        </IconButton>
+        <IconButton
+          component="a"
+          href="https://www.linkedin.com/in/david-j-riva"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+          sx={{ color: 'rgba(255,255,255,0.3)', '&:hover': { color: '#38bdf8' } }}
+        >
+          <LinkedInIcon sx={{ fontSize: '1.1rem' }} />
+        </IconButton>
+      </Box>
+
+      <Typography sx={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>
+        David Riva &copy; {new Date().getFullYear()}
       </Typography>
     </Box>
   );

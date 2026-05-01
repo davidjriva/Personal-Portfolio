@@ -2,84 +2,49 @@
 
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
-
-const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
-const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
-const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
-import HeroChat from '@/components/Greeting-Page/HeroChat';
-import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
+import Hero from '@/components/Hero/Hero';
 import Footer from '@/components/Footer/Footer';
+
+const About = dynamic(() => import('@/components/About/About'), { ssr: false });
+const Experience = dynamic(() => import('@/components/Experience/Experience'), { ssr: false });
+const Projects = dynamic(() => import('@/components/Projects/Projects'), { ssr: false });
+const Contact = dynamic(() => import('@/components/Contact/Contact'), { ssr: false });
 
 const MainPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
+        bgcolor: '#09090b',
+        color: '#fafafa',
         position: 'relative',
         minHeight: '100vh',
+        overflowX: 'hidden',
       }}
     >
       <NavBar />
 
-      <Box
-        sx={{
-          position: 'relative',
-          height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
-        }}
-      >
-        <ParticleBackground backgroundColor="transparent" />
-        <HeroChat />
+      <Hero />
+
+      <Box id="about">
+        <About />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Box
-          id="about"
-          sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <About />
-        </Box>
+      <Box id="experience">
+        <Experience />
+      </Box>
 
-        <Box
-          id="projects"
-          sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <Projects />
-        </Box>
+      <Box id="projects">
+        <Projects />
+      </Box>
 
-        <Box
-          id="contact"
-          sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
-          }}
-        >
-          <Contact />
-        </Box>
+      <Box id="contact">
+        <Contact />
       </Box>
 
       <Footer />
     </Box>
   );
 };
+
 export default MainPage;

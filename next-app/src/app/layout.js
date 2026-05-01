@@ -4,38 +4,48 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../theme';
 import { Montserrat } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const montserrat = Montserrat({
-  weight: ['400', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-montserrat',
 });
 
 export const metadata = {
-  title: 'David Riva | Full Stack Software Engineer Portfolio',
-  description: "Explore the portfolio of David Riva, a software engineer specializing in UI/UX, full-stack development, and data visualization. View projects involving React, Node.js, and Distributed Systems.",
-  keywords: ["David Riva", "Software Engineer", "Full Stack Developer", "UI/UX Design", "React Developer", "Node.js", "Portfolio", "Web Development"],
+  title: 'David Riva | AI & Full Stack Engineer',
+  description:
+    'Portfolio of David Riva — AI engineer and full-stack developer specializing in agentic systems, RAG pipelines, and production ML. Based in the Bay Area.',
+  keywords: [
+    'David Riva',
+    'AI Engineer',
+    'Full Stack Developer',
+    'RAG Pipeline',
+    'LangChain',
+    'React',
+    'Next.js',
+    'Portfolio',
+  ],
   openGraph: {
-    title: 'David Riva - Personal Portfolio',
-    description: 'Experienced software engineer specializing in UI/UX and big data visualization.',
+    title: 'David Riva — AI & Full Stack Engineer',
+    description: 'AI engineer building production-grade agentic systems and full-stack applications.',
     url: 'https://davidriva.dev',
-    siteName: 'David Riva Portfolio',
+    siteName: 'David Riva',
     images: [
       {
         url: 'https://davidriva.dev/images/website_preview.png',
         width: 1200,
         height: 630,
-        alt: "David Riva's headshot",
+        alt: 'David Riva Portfolio',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David Riva - Personal Portfolio',
-    description: 'Experienced software engineer specializing in UI/UX and data visualization.',
+    title: 'David Riva — AI & Full Stack Engineer',
+    description: 'AI engineer building production-grade agentic systems and full-stack applications.',
     images: ['https://davidriva.dev/images/website_preview.png'],
   },
 };

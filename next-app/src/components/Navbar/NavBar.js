@@ -1,92 +1,144 @@
 'use client';
 
-import { Link as ScrollLink } from 'react-scroll';
-import { Toolbar, Box, AppBar, Typography } from '@mui/material';
-import { useState } from 'react';
-import Logo from './Logo';
-import './ScrollLink.css';
+import { useState, useEffect } from 'react';
+import { Box, Typography } from '@mui/material';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
-
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
-      }}
-    >
-      {page}
-    </ScrollLink>
-  );
-};
-
-const pages = ['About', 'Projects', 'Contact'];
+const NAV_ITEMS = ['About', 'Experience', 'Projects', 'Contact'];
 
 const NavBar = () => {
-  const [activePage, setActivePage] = useState('About');
+  const [active, setActive] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      const sections = NAV_ITEMS.map((id) => document.getElementById(id.toLowerCase()));
+      const scrollPos = window.scrollY + 120;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i] && sections[i].offsetTop <= scrollPos) {
+          setActive(NAV_ITEMS[i]);
+          return;
+        }
+      }
+      setActive('');
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollTo = (id) => {
+    if (!id) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const el = document.getElementById(id.toLowerCase());
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <AppBar
-      position="fixed"
+    <Box
+      component="nav"
       sx={{
+        position: 'fixed',
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 1100,
-        width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        px: { xs: 2.5, md: 4 },
         height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
-        boxShadow: 'none',
+        bgcolor: scrolled ? 'rgba(9, 9, 11, 0.85)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px) saturate(1.5)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+        transition: 'all 0.35s ease',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Box
+        onClick={() => scrollTo(null)}
+        sx={{
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 1,
+        }}
+      >
         <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          sx={{
+            width: 32,
+            height: 32,
+            borderRadius: '8px',
+            background: 'linear-gradient(135deg, #a78bfa, #38bdf8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontWeight: 800,
+            fontSize: '0.85rem',
+            color: '#09090b',
+          }}
         >
-          <Logo />
-          <Typography
-            variant="h6"
-            component="div"
+          DR
+        </Box>
+        <Typography
+          sx={{
+            fontWeight: 700,
+            fontSize: '1rem',
+            letterSpacing: '-0.01em',
+            color: '#fafafa',
+            display: { xs: 'none', sm: 'block' },
+          }}
+        >
+          David Riva
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: { xs: 0.5, sm: 1 },
+          bgcolor: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '999px',
+          px: 1,
+          py: 0.5,
+        }}
+      >
+        {NAV_ITEMS.map((item) => (
+          <Box
+            key={item}
+            component="button"
+            onClick={() => scrollTo(item)}
             sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              background: active === item ? 'rgba(167, 139, 250, 0.15)' : 'transparent',
+              border: 'none',
+              borderRadius: '999px',
+              px: { xs: 1.5, sm: 2 },
+              py: 0.75,
+              color: active === item ? '#a78bfa' : 'rgba(255,255,255,0.5)',
+              fontSize: { xs: '0.75rem', sm: '0.8rem' },
+              fontWeight: 500,
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+              transition: 'all 0.25s ease',
+              '&:hover': {
+                color: '#fafafa',
+                background: 'rgba(255,255,255,0.06)',
+              },
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
-          ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+            {item}
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 };
 
