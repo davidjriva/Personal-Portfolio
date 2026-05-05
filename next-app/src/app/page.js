@@ -7,7 +7,6 @@ const About = dynamic(() => import('@/components/About-Page/About'), { ssr: fals
 const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
 const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 import HeroChat from '@/components/Greeting-Page/HeroChat';
-import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
@@ -15,65 +14,63 @@ const MainPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
+        bgcolor: '#0a0a0b',
+        color: '#f0ede8',
         position: 'relative',
         minHeight: '100vh',
+        overflow: 'hidden',
       }}
     >
       <NavBar />
 
+      {/* Hero Section */}
       <Box
         sx={{
           position: 'relative',
-          height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '-20%',
+            right: '-10%',
+            width: '60%',
+            height: '60%',
+            background: 'radial-gradient(ellipse at center, rgba(232, 168, 56, 0.06) 0%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            pointerEvents: 'none',
+          },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: '-10%',
+            left: '-10%',
+            width: '50%',
+            height: '50%',
+            background: 'radial-gradient(ellipse at center, rgba(100, 116, 139, 0.05) 0%, transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            pointerEvents: 'none',
           },
         }}
       >
-        <ParticleBackground backgroundColor="transparent" />
         <HeroChat />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Box
-          id="about"
-          sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
+      {/* Main Content */}
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box id="about" sx={{ width: '100%' }}>
           <About />
         </Box>
 
-        <Box
-          id="projects"
-          sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
+        <Box id="projects" sx={{ width: '100%' }}>
           <Projects />
         </Box>
 
-        <Box
-          id="contact"
-          sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
-          }}
-        >
+        <Box id="contact" sx={{ width: '100%' }}>
           <Contact />
         </Box>
       </Box>
@@ -82,4 +79,5 @@ const MainPage = () => {
     </Box>
   );
 };
+
 export default MainPage;

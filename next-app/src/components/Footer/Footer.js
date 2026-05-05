@@ -1,39 +1,81 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ReturnToTopButton from './ReturnToTopButton';
+import { Box, Typography, IconButton, Link } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
+        bgcolor: '#0a0a0b',
+        borderTop: '1px solid rgba(255, 255, 255, 0.04)',
         width: '100%',
-        height: '10vh',
+        py: 6,
+        px: { xs: 3, md: 6 },
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        justifyContent: 'space-between',
+        gap: 3,
       }}
     >
-      <ReturnToTopButton />
       <Typography
         variant="body2"
+        sx={{ color: 'rgba(240, 237, 232, 0.3)', fontSize: '0.8rem' }}
+      >
+        {new Date().getFullYear()} David Riva
+      </Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Link href="https://github.com/davidjriva" target="_blank" rel="noopener">
+          <IconButton
+            aria-label="GitHub"
+            sx={{
+              color: 'rgba(240, 237, 232, 0.4)',
+              '&:hover': { color: '#f0ede8' },
+            }}
+          >
+            <GitHubIcon fontSize="small" />
+          </IconButton>
+        </Link>
+        <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener">
+          <IconButton
+            aria-label="LinkedIn"
+            sx={{
+              color: 'rgba(240, 237, 232, 0.4)',
+              '&:hover': { color: '#f0ede8' },
+            }}
+          >
+            <LinkedInIcon fontSize="small" />
+          </IconButton>
+        </Link>
+      </Box>
+
+      <Box
+        component="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
-          textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          background: 'none',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '50%',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          color: 'rgba(240, 237, 232, 0.4)',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            color: '#f0ede8',
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+          },
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
-      </Typography>
+        <KeyboardArrowUpIcon fontSize="small" />
+      </Box>
     </Box>
   );
 };
