@@ -2,172 +2,153 @@
 
 import Image from 'next/image';
 import { forwardRef } from 'react';
-import CardContent from '@mui/material/CardContent';
-import { Typography, Box, Card, Button, Chip, Stack } from '@mui/material';
+import { Typography, Box, Chip, Stack } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const ProjectImage = ({ coverImage, title, featured }) => {
-  return (
-    <Box
-      sx={{
-        position: 'relative',
-        height: featured ? '220px' : '180px',
-        width: '100%',
-        bgcolor: 'background.paper',
-        overflow: 'hidden',
-      }}
-    >
-      <Image
-        src={`/images/${coverImage}`}
-        alt={`${title} cover`}
-        style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }}
-        className="project-image"
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(15, 12, 41, 0.65) 100%)',
-        }}
-      />
-    </Box>
-  );
-};
-
-const ProjectHeader = ({ title, dateStarted, dateCompleted, short_description, featured }) => {
-  return (
-    <Box sx={{ mb: 2 }}>
-      <Typography
-        variant={featured ? 'h6' : 'body1'}
-        component="h3"
-        sx={{ fontWeight: 700, mb: 0.5, color: '#ffffff', lineHeight: 1.3, fontSize: featured ? '1rem' : '0.9rem' }}
-      >
-        {title}
-      </Typography>
-      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.35)', display: 'block', mb: 1.5 }}>
-        {dateStarted} – {dateCompleted}
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{
-          color: 'rgba(255, 255, 255, 0.55)',
-          lineHeight: 1.6,
-          mb: 2,
-          display: '-webkit-box',
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
-          fontSize: featured ? '0.85rem' : '0.8rem',
-        }}
-      >
-        {short_description}
-      </Typography>
-    </Box>
-  );
-};
-
-const ProjectTech = ({ technologies }) => {
-  const allTools = technologies.flatMap((t) => t.tools);
-  return (
-    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 2.5 }}>
-      {allTools.map((tool, index) => (
-        <Chip
-          key={index}
-          label={tool}
-          size="small"
-          sx={{
-            bgcolor: 'rgba(56, 192, 242, 0.08)',
-            color: '#38c0f2',
-            border: '1px solid rgba(56, 192, 242, 0.2)',
-            backdropFilter: 'blur(4px)',
-            fontSize: '0.7rem',
-            height: '22px',
-            '&:hover': { bgcolor: 'rgba(56, 192, 242, 0.15)' },
-          }}
-        />
-      ))}
-    </Stack>
-  );
-};
-
-const ProjectFooter = ({ link }) => {
-  return (
-    <Button
-      variant="outlined"
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      endIcon={<LaunchIcon fontSize="small" />}
-      fullWidth
-      sx={{
-        mt: 'auto',
-        color: '#38c0f2',
-        borderColor: 'rgba(56,192,242,0.4)',
-        borderRadius: '8px',
-        textTransform: 'none',
-        fontSize: '0.8rem',
-        py: 0.75,
-        '&:hover': {
-          borderColor: '#38c0f2',
-          bgcolor: 'rgba(56, 192, 242, 0.1)',
-        },
-      }}
-    >
-      View Project
-    </Button>
-  );
-};
-
 const ProjectCard = forwardRef(
-  (
-    { coverImage, title, author, dateStarted, dateCompleted, short_description, technologies, link, featured, onClick, id },
-    ref
-  ) => {
+  ({ coverImage, title, dateStarted, dateCompleted, short_description, technologies, link, featured, id }, ref) => {
+    const allTools = technologies.flatMap((t) => t.tools);
+
     return (
-      <Card
+      <Box
         ref={ref}
         id={id}
+        component="a"
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
         sx={{
-          height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          bgcolor: featured ? 'rgba(56,192,242,0.04)' : 'rgba(255, 255, 255, 0.03)',
-          color: '#ffffff',
-          backdropFilter: 'blur(10px)',
-          border: featured ? '1px solid rgba(56, 192, 242, 0.2)' : '1px solid rgba(255,255,255,0.07)',
+          height: '100%',
+          bgcolor: featured ? 'rgba(96, 165, 250, 0.02)' : 'rgba(255, 255, 255, 0.02)',
+          border: featured ? '1px solid rgba(96, 165, 250, 0.1)' : '1px solid rgba(255, 255, 255, 0.05)',
           borderRadius: '16px',
           overflow: 'hidden',
-          transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-          cursor: onClick ? 'pointer' : 'default',
-          boxShadow: featured ? '0 4px 24px rgba(56,192,242,0.06)' : '0 4px 16px rgba(0,0,0,0.15)',
+          textDecoration: 'none',
+          color: 'inherit',
+          transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+          cursor: 'pointer',
           '&:hover': {
-            transform: 'translateY(-6px)',
+            transform: 'translateY(-4px)',
+            bgcolor: featured ? 'rgba(96, 165, 250, 0.04)' : 'rgba(255, 255, 255, 0.035)',
+            borderColor: featured ? 'rgba(96, 165, 250, 0.2)' : 'rgba(255, 255, 255, 0.1)',
             boxShadow: featured
-              ? '0 12px 30px rgba(0,0,0,0.3), 0 0 24px rgba(56, 192, 242, 0.15)'
-              : '0 10px 24px rgba(0,0,0,0.25)',
-            border: featured ? '1px solid rgba(56, 192, 242, 0.45)' : '1px solid rgba(255,255,255,0.15)',
-            '& .project-image': { transform: 'scale(1.05)' },
+              ? '0 16px 40px rgba(96, 165, 250, 0.08)'
+              : '0 12px 32px rgba(0, 0, 0, 0.2)',
+            '& .project-cover': { transform: 'scale(1.03)' },
+            '& .launch-icon': { opacity: 1, transform: 'translate(0, 0)' },
           },
         }}
-        onClick={onClick}
       >
-        <ProjectImage coverImage={coverImage} title={title} featured={featured} />
-        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: featured ? 3 : 2.5 }}>
-          <ProjectHeader
-            title={title}
-            dateStarted={dateStarted}
-            dateCompleted={dateCompleted}
-            short_description={short_description}
-            featured={featured}
+        {/* Cover image */}
+        <Box
+          sx={{
+            position: 'relative',
+            height: featured ? 200 : 170,
+            width: '100%',
+            overflow: 'hidden',
+          }}
+        >
+          <Image
+            src={`/images/${coverImage}`}
+            alt={`${title} cover`}
+            className="project-cover"
+            style={{
+              objectFit: 'cover',
+              transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+            }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <ProjectTech technologies={technologies} />
-          <ProjectFooter link={link} />
-        </CardContent>
-      </Card>
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom, transparent 40%, rgba(6, 6, 10, 0.8) 100%)',
+            }}
+          />
+          <Box
+            className="launch-icon"
+            sx={{
+              position: 'absolute',
+              top: 12,
+              right: 12,
+              width: 28,
+              height: 28,
+              borderRadius: '8px',
+              bgcolor: 'rgba(0,0,0,0.5)',
+              backdropFilter: 'blur(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              opacity: 0,
+              transform: 'translate(4px, -4px)',
+              transition: 'all 0.3s ease',
+            }}
+          >
+            <LaunchIcon sx={{ fontSize: '0.85rem', color: '#e8e8ed' }} />
+          </Box>
+        </Box>
+
+        {/* Content */}
+        <Box sx={{ p: 2.5, flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Typography sx={{ fontSize: '0.95rem', fontWeight: 600, color: '#e8e8ed', lineHeight: 1.3, mb: 0.5 }}>
+            {title}
+          </Typography>
+          <Typography sx={{ fontSize: '0.72rem', color: '#6b6b80', mb: 1.5 }}>
+            {dateStarted} — {dateCompleted}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: '0.82rem',
+              color: '#8888a0',
+              lineHeight: 1.6,
+              mb: 2,
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              flex: 1,
+            }}
+          >
+            {short_description}
+          </Typography>
+          <Stack direction="row" flexWrap="wrap" gap={0.5}>
+            {allTools.slice(0, 5).map((tool, i) => (
+              <Chip
+                key={i}
+                label={tool}
+                size="small"
+                sx={{
+                  bgcolor: 'rgba(96, 165, 250, 0.06)',
+                  color: '#6b6b80',
+                  border: '1px solid rgba(96, 165, 250, 0.08)',
+                  fontSize: '0.65rem',
+                  height: '22px',
+                  fontWeight: 500,
+                }}
+              />
+            ))}
+            {allTools.length > 5 && (
+              <Chip
+                label={`+${allTools.length - 5}`}
+                size="small"
+                sx={{
+                  bgcolor: 'rgba(255, 255, 255, 0.03)',
+                  color: '#6b6b80',
+                  border: '1px solid rgba(255, 255, 255, 0.05)',
+                  fontSize: '0.65rem',
+                  height: '22px',
+                  fontWeight: 500,
+                }}
+              />
+            )}
+          </Stack>
+        </Box>
+      </Box>
     );
-  }
+  },
 );
 
 ProjectCard.displayName = 'ProjectCard';
