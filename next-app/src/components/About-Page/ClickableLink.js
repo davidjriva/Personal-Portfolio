@@ -1,17 +1,26 @@
 'use client';
 
+import { Box } from '@mui/material';
+
 const ClickableLink = ({ link, text }) => {
   return (
-    <a
+    <Box
+      component="a"
       href={link}
       target="_blank"
-      style={{ color: '#38c0f2', textDecoration: 'none' }}
-      onMouseOver={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-      onMouseOut={(e) => (e.currentTarget.style.textDecoration = 'none')}
-      onClick={(e) => (e.currentTarget.style.color = '#0073e6')}
+      rel="noopener"
+      sx={{
+        color: '#818CF8',
+        textDecoration: 'none',
+        transition: 'color 0.2s ease',
+        '&:hover': {
+          color: '#A5B4FC',
+          textDecoration: 'underline',
+        },
+      }}
     >
       {text}
-    </a>
+    </Box>
   );
 };
 

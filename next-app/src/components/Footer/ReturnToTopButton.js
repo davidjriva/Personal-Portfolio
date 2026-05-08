@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { IconButton, Box } from '@mui/material';
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const ReturnToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 200);
+    const onScroll = () => setVisible(window.scrollY > 300);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -21,24 +21,23 @@ const ReturnToTopButton = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#38c0f2',
-        borderRadius: '8px',
-        padding: '4px',
-        maxWidth: '50px',
-        margin: '0 auto',
-        '@keyframes jump': {
-          '0%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
-          '100%': { transform: 'translateY(0)' },
+        backgroundColor: 'rgba(129, 140, 248, 0.1)',
+        border: '1px solid rgba(129, 140, 248, 0.2)',
+        borderRadius: '10px',
+        padding: '2px',
+        transition: 'all 0.25s ease',
+        '&:hover': {
+          backgroundColor: 'rgba(129, 140, 248, 0.15)',
+          borderColor: 'rgba(129, 140, 248, 0.4)',
+          transform: 'translateY(-2px)',
         },
-        '&:hover': { animation: 'jump 1s infinite' },
       }}
     >
       <IconButton
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        sx={{ color: 'white', fontSize: '1.5rem', padding: '4px' }}
+        sx={{ color: '#818CF8', fontSize: '1.25rem', padding: '4px' }}
       >
-        <KeyboardDoubleArrowUpIcon sx={{ fontSize: 'inherit' }} />
+        <KeyboardArrowUpIcon sx={{ fontSize: 'inherit' }} />
       </IconButton>
     </Box>
   );

@@ -1,39 +1,40 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import ClickableLink from './ClickableLink';
 
 const AboutHeader = () => {
   return (
-    <>
+    <Box>
       <Typography
-        variant="h1"
+        variant="h2"
         sx={{
-          fontWeight: 'bold',
-          marginBottom: 1,
-          fontSize: { xs: '1.75rem', sm: '2.5rem', md: '2.5rem' },
+          fontWeight: 700,
+          mb: 0.75,
+          fontSize: { xs: '1.75rem', sm: '2rem', md: '2.25rem' },
+          letterSpacing: '-0.02em',
+          color: '#F4F4F5',
         }}
       >
         David Riva
       </Typography>
 
       <Typography
-        variant="h5"
         sx={{
-          color: '#38c0f2',
-          marginBottom: 1,
+          fontWeight: 500,
+          fontSize: '1rem',
+          mb: 0.75,
+          background: 'linear-gradient(135deg, #818CF8 0%, #C084FC 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
         }}
       >
         Training Engineer, Generative AI
       </Typography>
 
-      <Typography
-        sx={{
-          color: 'rgba(255, 255, 255, 0.55)',
-          marginBottom: 2,
-        }}
-      >
-        Bay Area, CA. | <ClickableLink link="mailto:davidjriva@gmail.com" text="davidjriva@gmail.com" />
+      <Typography sx={{ color: '#52525B', fontSize: '0.875rem' }}>
+        Bay Area, CA &middot; <ClickableLink link="mailto:davidjriva@gmail.com" text="davidjriva@gmail.com" />
       </Typography>
-    </>
+    </Box>
   );
 };
 

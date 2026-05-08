@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 const BouncingDotsLoadingAnimation = ({
   dotSize = 4,
-  dotColor = '#a3a1a1',
+  dotColor = '#818CF8',
   spacing = 4,
   animationDuration = 0.6,
   jumpHeight = 4,
@@ -29,7 +29,7 @@ const BouncingDotsLoadingAnimation = ({
         {`
           @keyframes bouncing-loader {
             to {
-              opacity: 0.1;
+              opacity: 0.15;
               transform: translateY(-${jumpHeight}px);
             }
           }

@@ -1,35 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Box, IconButton, Link } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const SocialLinks = () => {
-  const [hasGitHubIconBeenClicked, setHasGitHubIconBeenClicked] = useState(false);
-  const [hasLinkedInIconBeenClicked, setHasLinkedInIconBeenClicked] = useState(false);
-
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
       <Link href="https://github.com/davidjriva" target="_blank" rel="noopener" color="inherit">
         <IconButton
           aria-label="GitHub Profile"
           sx={{
-            color: hasGitHubIconBeenClicked ? '#9974cf' : 'inherit',
-            fontSize: '40px',
-            '&:hover': {
-              color: '#a28be5',
-            },
-            '&:active': {
-              color: '#9974cf',
-            },
+            color: '#71717A',
+            fontSize: '28px',
+            transition: 'all 0.2s ease',
+            '&:hover': { color: '#F4F4F5', backgroundColor: 'rgba(255, 255, 255, 0.05)' },
           }}
-          onClick={() => setHasGitHubIconBeenClicked(true)}
         >
           <GitHubIcon fontSize="inherit" />
         </IconButton>
@@ -38,16 +24,11 @@ const SocialLinks = () => {
         <IconButton
           aria-label="LinkedIn Profile"
           sx={{
-            color: hasLinkedInIconBeenClicked ? '#07a2f7' : 'inherit',
-            fontSize: '40px',
-            '&:hover': {
-              color: '#4abfff',
-            },
-            '&:active': {
-              color: '#07a2f7',
-            },
+            color: '#71717A',
+            fontSize: '28px',
+            transition: 'all 0.2s ease',
+            '&:hover': { color: '#818CF8', backgroundColor: 'rgba(129, 140, 248, 0.08)' },
           }}
-          onClick={() => setHasLinkedInIconBeenClicked(true)}
         >
           <LinkedInIcon fontSize="inherit" />
         </IconButton>

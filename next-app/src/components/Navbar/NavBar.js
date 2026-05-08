@@ -6,15 +6,6 @@ import { useState } from 'react';
 import Logo from './Logo';
 import './ScrollLink.css';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
-
 const FormattedLink = ({ page, active, setActivePage }) => {
   return (
     <ScrollLink
@@ -26,11 +17,16 @@ const FormattedLink = ({ page, active, setActivePage }) => {
       onSetActive={() => setActivePage(page)}
       className="scroll-link"
       style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+        margin: '0 4px',
+        fontWeight: active ? 600 : 400,
+        textDecoration: 'none',
+        cursor: 'pointer',
+        fontFamily: 'var(--font-montserrat), Montserrat, sans-serif',
+        color: active ? '#F4F4F5' : '#71717A',
+        padding: '6px 14px',
+        borderRadius: '8px',
+        transition: 'all 0.25s ease',
+        backgroundColor: active ? 'rgba(129, 140, 248, 0.08)' : 'transparent',
       }}
     >
       {page}
@@ -50,18 +46,28 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
+        bgcolor: 'rgba(9, 9, 11, 0.8)',
+        backdropFilter: 'blur(20px) saturate(1.5)',
         height: '64px',
-        color: '#ffffff',
+        color: '#F4F4F5',
         transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
         boxShadow: 'none',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: { xs: 2, md: 4 },
+          maxWidth: '1400px',
+          mx: 'auto',
+          width: '100%',
+        }}
+      >
         <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 1.5 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <Logo />
@@ -69,18 +75,20 @@ const NavBar = () => {
             variant="h6"
             component="div"
             sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              fontSize: '1.1rem',
+              color: '#F4F4F5',
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
+            david
+            <Box component="span" sx={{ color: '#818CF8' }}>
+              riva
+            </Box>
           </Typography>
         </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
           {pages.map((page) => (
             <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
           ))}
