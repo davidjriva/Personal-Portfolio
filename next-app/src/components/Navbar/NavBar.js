@@ -1,92 +1,100 @@
 'use client';
 
 import { Link as ScrollLink } from 'react-scroll';
-import { Toolbar, Box, AppBar, Typography } from '@mui/material';
-import { useState } from 'react';
-import Logo from './Logo';
-import './ScrollLink.css';
+import { Box, Typography } from '@mui/material';
+import { useState, useEffect } from 'react';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
-
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
-      }}
-    >
-      {page}
-    </ScrollLink>
-  );
-};
-
-const pages = ['About', 'Projects', 'Contact'];
+const pages = ['About', 'Experience', 'Projects', 'Contact'];
 
 const NavBar = () => {
-  const [activePage, setActivePage] = useState('About');
+  const [activePage, setActivePage] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 100);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <AppBar
-      position="fixed"
+    <Box
       sx={{
-        top: 0,
+        position: 'fixed',
+        top: 16,
+        left: '50%',
+        transform: `translateX(-50%) translateY(${scrolled ? 0 : -80}px)`,
         zIndex: 1100,
-        width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
-        boxShadow: 'none',
+        opacity: scrolled ? 1 : 0,
+        transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 0.5,
+        px: 1,
+        py: 0.5,
+        borderRadius: '999px',
+        bgcolor: 'rgba(9, 9, 11, 0.85)',
+        backdropFilter: 'blur(24px)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
-        <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      <Box
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        sx={{
+          px: 2,
+          py: 1,
+          cursor: 'pointer',
+          borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+          mr: 0.5,
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: 800,
+            fontSize: '0.85rem',
+            letterSpacing: '-0.02em',
+            fontFamily: 'var(--font-montserrat), sans-serif',
+            color: '#f4f4f5',
+          }}
         >
-          <Logo />
-          <Typography
-            variant="h6"
-            component="div"
+          DR
+        </Typography>
+      </Box>
+
+      {pages.map((page) => (
+        <ScrollLink
+          key={page}
+          to={page.toLowerCase()}
+          spy={true}
+          smooth={true}
+          offset={-80}
+          duration={600}
+          onSetActive={() => setActivePage(page)}
+        >
+          <Box
             sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              px: { xs: 1.5, sm: 2.5 },
+              py: 1,
+              borderRadius: '999px',
+              cursor: 'pointer',
+              fontSize: { xs: '0.78rem', sm: '0.85rem' },
+              fontWeight: 500,
+              fontFamily: 'var(--font-montserrat), sans-serif',
+              color: activePage === page ? '#f4f4f5' : '#6b7280',
+              bgcolor: activePage === page ? 'rgba(99, 102, 241, 0.12)' : 'transparent',
+              transition: 'all 0.25s ease',
+              whiteSpace: 'nowrap',
+              '&:hover': {
+                color: '#f4f4f5',
+                bgcolor: activePage === page ? 'rgba(99, 102, 241, 0.12)' : 'rgba(255, 255, 255, 0.04)',
+              },
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
-          ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+            {page}
+          </Box>
+        </ScrollLink>
+      ))}
+    </Box>
   );
 };
 

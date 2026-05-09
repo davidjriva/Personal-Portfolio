@@ -6,30 +6,35 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: '#0b0920',
-      paper: 'rgba(255, 255, 255, 0.04)',
+      default: '#09090b',
+      paper: '#131316',
     },
     text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.55)',
+      primary: '#f4f4f5',
+      secondary: '#a1a1aa',
     },
     primary: {
-      main: '#38c0f2',
+      main: '#6366f1',
+      light: '#818cf8',
     },
     secondary: {
-      main: '#6e40c9',
+      main: '#a855f7',
+      light: '#c084fc',
     },
   },
   typography: {
     fontFamily: 'var(--font-montserrat), Arial, sans-serif',
-    h1: { fontWeight: 'bold', fontSize: '2.5rem' },
-    h2: { fontWeight: 'bold' },
-    h3: { fontWeight: 'bold' },
-    h4: { fontWeight: 'bold' },
-    h5: { fontWeight: 'bold' },
-    h6: { fontWeight: 'bold' },
-    body1: { fontWeight: 400, lineHeight: 1.6 },
-    body2: { fontWeight: 400 },
+    h1: { fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.0 },
+    h2: { fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1 },
+    h3: { fontWeight: 700, letterSpacing: '-0.02em' },
+    h4: { fontWeight: 600, letterSpacing: '-0.01em' },
+    h5: { fontWeight: 600 },
+    h6: { fontWeight: 600 },
+    body1: { fontWeight: 400, lineHeight: 1.7 },
+    body2: { fontWeight: 400, lineHeight: 1.6 },
+  },
+  shape: {
+    borderRadius: 12,
   },
 });
 

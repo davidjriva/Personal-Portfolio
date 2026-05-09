@@ -12,14 +12,15 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
       sx={{
         display: 'flex',
         alignItems: 'center',
-        p: '4px 8px',
+        p: '5px 8px',
         borderRadius: '999px',
-        backgroundColor: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(56,192,242,0.3)',
-        backdropFilter: 'blur(12px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(16px)',
         boxShadow: 'none',
-        '&:hover': { borderColor: 'rgba(56,192,242,0.6)' },
-        '&:focus-within': { borderColor: '#38c0f2' },
+        transition: 'border-color 0.2s ease',
+        '&:hover': { borderColor: 'rgba(255, 255, 255, 0.14)' },
+        '&:focus-within': { borderColor: 'rgba(99, 102, 241, 0.5)' },
       }}
     >
       <InputBase
@@ -34,24 +35,28 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
           }
         }}
         sx={{
-          ml: 1,
+          ml: 1.5,
           flex: 1,
-          color: '#fff',
+          color: '#f4f4f5',
+          fontSize: '0.9rem',
           fontFamily: 'var(--font-montserrat), Arial, sans-serif',
-          '& input::placeholder': { color: 'rgba(255,255,255,0.35)' },
+          '& input::placeholder': { color: 'rgba(255, 255, 255, 0.3)' },
         }}
       />
       <IconButton
         type="submit"
         disabled={!input.trim() || disabled}
         sx={{
-          ml: 1,
-          background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+          ml: 0.5,
+          width: 36,
+          height: 36,
+          background: 'linear-gradient(135deg, #6366f1, #a855f7)',
+          transition: 'opacity 0.2s',
           '&:hover': { opacity: 0.85 },
-          '&.Mui-disabled': { background: 'rgba(255,255,255,0.08)' },
+          '&.Mui-disabled': { background: 'rgba(255, 255, 255, 0.06)' },
         }}
       >
-        <SendIcon sx={{ color: '#fff', fontSize: '1.1rem' }} />
+        <SendIcon sx={{ color: '#fff', fontSize: '1rem' }} />
       </IconButton>
     </Paper>
   );
