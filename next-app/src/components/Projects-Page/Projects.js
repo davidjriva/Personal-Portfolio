@@ -10,18 +10,14 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        pt: '60px',
-        pb: '60px',
-        pl: { xs: 0, sm: 0, md: '80px' },
-        pr: { xs: 0, sm: 0, md: '80px' },
-        margin: '0 auto',
+        maxWidth: 1100,
+        mx: 'auto',
+        px: { xs: 2, md: 4 },
+        py: { xs: 8, md: 12 },
         textAlign: 'center',
-        // borderTop: '8px solid rgba(0,0,0,0.1)', // Removed border
-        // backgroundColor: '#565859', // Removed background to blend with main page
       }}
     >
-      <SectionHeading sectionName="Projects" />
-
+      <SectionHeading sectionName="Projects" subtitle="A selection of things I've built" />
       <ProjectsContainer />
     </Box>
   );

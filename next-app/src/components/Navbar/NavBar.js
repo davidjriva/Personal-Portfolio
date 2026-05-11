@@ -1,92 +1,159 @@
 'use client';
 
 import { Link as ScrollLink } from 'react-scroll';
-import { Toolbar, Box, AppBar, Typography } from '@mui/material';
+import { Toolbar, Box, AppBar, Typography, IconButton, Drawer, List, ListItem } from '@mui/material';
 import { useState } from 'react';
-import Logo from './Logo';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import './ScrollLink.css';
-
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
-
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
-      }}
-    >
-      {page}
-    </ScrollLink>
-  );
-};
 
 const pages = ['About', 'Projects', 'Contact'];
 
 const NavBar = () => {
-  const [activePage, setActivePage] = useState('About');
+  const [activePage, setActivePage] = useState('');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        top: 0,
-        zIndex: 1100,
-        width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
-        boxShadow: 'none',
-      }}
-    >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
-        <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    <>
+      <AppBar
+        position="fixed"
+        sx={{
+          top: 0,
+          zIndex: 1100,
+          width: '100%',
+          bgcolor: 'rgba(7, 7, 10, 0.8)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          height: '64px',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          boxShadow: 'none',
+        }}
+      >
+        <Toolbar
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 }, minHeight: '64px !important' }}
         >
-          <Logo />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
-            }}
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 1.5 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
-          </Typography>
-        </Box>
+            <Box
+              sx={{
+                width: 34,
+                height: 34,
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 800,
+                fontSize: '0.8rem',
+                color: '#fff',
+                fontFamily: 'var(--font-montserrat), sans-serif',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              DR
+            </Box>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                fontFamily: 'var(--font-montserrat), sans-serif',
+                fontSize: '1.1rem',
+                color: '#f5f5f7',
+                display: { xs: 'none', sm: 'block' },
+                letterSpacing: '-0.01em',
+              }}
+            >
+              David Riva
+            </Typography>
+          </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
-          ))}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+            {pages.map((page) => (
+              <ScrollLink
+                key={page}
+                to={page.toLowerCase()}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                onSetActive={() => setActivePage(page)}
+                className="scroll-link"
+                style={{
+                  padding: '6px 16px',
+                  borderRadius: '8px',
+                  fontFamily: 'var(--font-inter), var(--font-montserrat), sans-serif',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  color: activePage === page ? '#f5f5f7' : 'rgba(255,255,255,0.5)',
+                  background: activePage === page ? 'rgba(255,255,255,0.06)' : 'transparent',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  textDecoration: 'none',
+                }}
+              >
+                {page}
+              </ScrollLink>
+            ))}
+          </Box>
+
+          <IconButton sx={{ display: { md: 'none' }, color: '#f5f5f7' }} onClick={() => setMobileOpen(true)}>
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#0a0a0f',
+            width: 280,
+            borderLeft: '1px solid rgba(255,255,255,0.06)',
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1.5 }}>
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#f5f5f7' }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-      </Toolbar>
-    </AppBar>
+        <List sx={{ px: 2, pt: 2 }}>
+          {pages.map((page) => (
+            <ListItem key={page} disablePadding sx={{ mb: 0.5 }}>
+              <ScrollLink
+                to={page.toLowerCase()}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  width: '100%',
+                  padding: '14px 20px',
+                  borderRadius: '12px',
+                  color: '#f5f5f7',
+                  fontFamily: 'var(--font-montserrat), sans-serif',
+                  fontWeight: 600,
+                  fontSize: '1.1rem',
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  display: 'block',
+                  transition: 'background 0.2s ease',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.04)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+              >
+                {page}
+              </ScrollLink>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

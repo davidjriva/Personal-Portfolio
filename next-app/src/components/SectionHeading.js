@@ -1,41 +1,29 @@
 import { Box, Typography } from '@mui/material';
 
-const SectionHeading = ({ sectionName }) => {
+const SectionHeading = ({ sectionName, subtitle }) => {
   return (
-    <Box 
-      sx={{ 
-        mb: '100px', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center',
-        pt: '40px'
-      }}
-    >
+    <Box sx={{ mb: { xs: 6, md: 8 }, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography
         variant="h2"
         sx={{
           fontWeight: 800,
-          color: 'inherit',
-          fontSize: { xs: '2.5rem', md: '4rem' },
-          letterSpacing: '-0.02em',
+          fontSize: { xs: '2.25rem', md: '3.25rem' },
+          letterSpacing: '-0.03em',
           lineHeight: 1.1,
           textAlign: 'center',
-          position: 'relative',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: '-15px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '50px',
-            height: '4px',
-            background: 'linear-gradient(90deg, #38c0f2 0%, #07a2f7 100%)',
-            borderRadius: '10px'
-          }
+          background: 'linear-gradient(180deg, #f5f5f7 0%, rgba(255,255,255,0.55) 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
         }}
       >
         {sectionName}
       </Typography>
+      {subtitle && (
+        <Typography sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '1rem', mt: 1.5, textAlign: 'center', maxWidth: 500 }}>
+          {subtitle}
+        </Typography>
+      )}
     </Box>
   );
 };

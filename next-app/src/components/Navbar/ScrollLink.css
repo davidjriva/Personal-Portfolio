@@ -1,26 +1,9 @@
 .scroll-link {
-    font-size: 0.9rem; /* Default font size for xs */
-}
-  
-@media (min-width: 600px) {
-    .scroll-link {
-        font-size: 1rem; /* Font size for sm */
-    }
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
 }
 
-@media (min-width: 900px) {
-    .scroll-link {
-        font-size: 1.2rem; /* Font size for md */
-    }
-}
-
-/* Hover effect */
 .scroll-link:hover {
-    color: #fff;
-    transform: scale(1.1);
-}
-  
-/* Click effect (active state) */
-.scroll-link:active {
-    transform: scale(0.95);
+  color: #f5f5f7 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
