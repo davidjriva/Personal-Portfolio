@@ -19,28 +19,27 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
 
   return (
     <TimelineItem>
-      <TimelineOppositeContent sx={{ flex: 'none', width: 130, pr: 1.5, pt: '14px' }}>
+      <TimelineOppositeContent sx={{ flex: 'none', width: 120, pr: 1.5, pt: '14px' }}>
         <Typography
           variant="caption"
           sx={{
-            color: isCurrent ? '#38c0f2' : 'rgba(255,255,255,0.45)',
+            color: isCurrent ? '#3b82f6' : '#52525b',
             fontWeight: isCurrent ? 600 : 400,
             lineHeight: 1.4,
             display: 'block',
+            fontSize: '0.72rem',
           }}
         >
-          {isGraduation ? startDate : `${startDate} –\u00a0${isCurrent ? 'Present' : endDate}`}
+          {isGraduation ? startDate : `${startDate} – ${isCurrent ? 'Present' : endDate}`}
         </Typography>
       </TimelineOppositeContent>
 
       <TimelineSeparator>
         <TimelineDot
           sx={{
-            backgroundColor: '#ffffff',
-            border: isCurrent
-              ? '1.5px solid rgba(56,192,242,0.6)'
-              : '1.5px solid rgba(255,255,255,0.2)',
-            boxShadow: isCurrent ? '0 0 10px 2px rgba(56,192,242,0.25)' : 'none',
+            backgroundColor: '#fafafa',
+            border: isCurrent ? '1.5px solid rgba(59,130,246,0.5)' : '1.5px solid rgba(255,255,255,0.15)',
+            boxShadow: isCurrent ? '0 0 12px 2px rgba(59,130,246,0.2)' : 'none',
             p: '5px',
             m: '6px 0',
           }}
@@ -48,16 +47,16 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
           <Image
             src={`/images/${logoImage}`}
             alt={`${company} logo`}
-            width={20}
-            height={20}
+            width={18}
+            height={18}
             style={{ display: 'block', objectFit: 'contain' }}
           />
         </TimelineDot>
         {!isEnd && (
           <TimelineConnector
             sx={{
-              background: 'linear-gradient(to bottom, rgba(56,192,242,0.25), rgba(110,64,201,0.15))',
-              width: '1.5px',
+              background: 'linear-gradient(to bottom, rgba(59,130,246,0.2), rgba(139,92,246,0.1))',
+              width: '1px',
             }}
           />
         )}
@@ -71,7 +70,7 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
               fontWeight: 600,
               fontSize: '0.8rem',
               lineHeight: 1.35,
-              color: '#ffffff',
+              color: '#fafafa',
               mb: 0.25,
             }}
           >
@@ -83,10 +82,11 @@ const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, sta
             target="_blank"
             variant="caption"
             sx={{
-              color: '#38c0f2',
+              color: '#3b82f6',
               textDecoration: 'none',
               fontSize: '0.72rem',
-              '&:hover': { textDecoration: 'underline' },
+              transition: 'opacity 0.2s',
+              '&:hover': { opacity: 0.8 },
             }}
           >
             {company}
@@ -111,42 +111,13 @@ const SimpleTimeline = () => {
   });
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
-        px: 1,
-        py: 2,
-      }}
-    >
-      <Typography
-        variant="overline"
-        sx={{
-          color: 'rgba(255,255,255,0.55)',
-          fontSize: '0.85rem',
-          letterSpacing: '0.18em',
-          fontWeight: 600,
-          mb: 0.5,
-        }}
-      >
-        Experience
-      </Typography>
-      <Timeline sx={{ maxWidth: '22vw', p: 0, m: 0 }}>
-        {sortedExperienceData.map((experience, index) => (
-          <React.Fragment key={experience.title}>
-            <SimpleTimelineItem
-              {...experience}
-              isEnd={index === sortedExperienceData.length - 1}
-            />
-          </React.Fragment>
-        ))}
-      </Timeline>
-    </Box>
+    <Timeline sx={{ p: 0, m: 0 }}>
+      {sortedExperienceData.map((experience, index) => (
+        <React.Fragment key={experience.title}>
+          <SimpleTimelineItem {...experience} isEnd={index === sortedExperienceData.length - 1} />
+        </React.Fragment>
+      ))}
+    </Timeline>
   );
 };
 

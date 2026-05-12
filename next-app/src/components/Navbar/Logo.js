@@ -68,7 +68,7 @@ const Logo = () => {
         <path
           className="bracket-left"
           d="M32 38L22 50L32 62"
-          stroke="#38c0f2"
+          stroke="#3b82f6"
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -77,7 +77,7 @@ const Logo = () => {
         <path
           className="bracket-right"
           d="M68 38L78 50L68 62"
-          stroke="#38c0f2"
+          stroke="#3b82f6"
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -99,7 +99,7 @@ const Logo = () => {
           width="40"
           height="26"
           rx="2"
-          stroke="#38c0f2"
+          stroke="#3b82f6"
           strokeWidth="4"
           opacity="0"
           style={{ transformOrigin: 'center' }}
@@ -108,7 +108,7 @@ const Logo = () => {
         {/* Code Content on Screen - Adjusted for new rectangle position */}
         <g className="monitor-code" opacity="0">
           <path className="code-line" d="M35 38H50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-          <path className="code-line" d="M35 45H60" stroke="#38c0f2" strokeWidth="2.5" strokeLinecap="round" />
+          <path className="code-line" d="M35 45H60" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" />
           <path className="code-line" d="M35 52H42" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
         </g>
         

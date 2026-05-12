@@ -1,7 +1,7 @@
 import { InputBase, IconButton, Paper } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
-const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder = 'Ask anything…' }) => {
+const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder = 'Ask me anything...' }) => {
   return (
     <Paper
       component="form"
@@ -15,11 +15,12 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         p: '4px 8px',
         borderRadius: '999px',
         backgroundColor: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(56,192,242,0.3)',
+        border: '1px solid rgba(255,255,255,0.1)',
         backdropFilter: 'blur(12px)',
         boxShadow: 'none',
-        '&:hover': { borderColor: 'rgba(56,192,242,0.6)' },
-        '&:focus-within': { borderColor: '#38c0f2' },
+        transition: 'border-color 0.2s ease',
+        '&:hover': { borderColor: 'rgba(255,255,255,0.2)' },
+        '&:focus-within': { borderColor: 'rgba(59,130,246,0.5)' },
       }}
     >
       <InputBase
@@ -34,11 +35,11 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
           }
         }}
         sx={{
-          ml: 1,
+          ml: 1.5,
           flex: 1,
-          color: '#fff',
-          fontFamily: 'var(--font-montserrat), Arial, sans-serif',
-          '& input::placeholder': { color: 'rgba(255,255,255,0.35)' },
+          color: '#fafafa',
+          fontSize: '0.9rem',
+          '& input::placeholder': { color: '#52525b' },
         }}
       />
       <IconButton
@@ -46,12 +47,15 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         disabled={!input.trim() || disabled}
         sx={{
           ml: 1,
-          background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+          width: 34,
+          height: 34,
+          background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+          transition: 'opacity 0.2s ease',
           '&:hover': { opacity: 0.85 },
-          '&.Mui-disabled': { background: 'rgba(255,255,255,0.08)' },
+          '&.Mui-disabled': { background: 'rgba(255,255,255,0.06)' },
         }}
       >
-        <SendIcon sx={{ color: '#fff', fontSize: '1.1rem' }} />
+        <SendIcon sx={{ color: '#fff', fontSize: '1rem' }} />
       </IconButton>
     </Paper>
   );

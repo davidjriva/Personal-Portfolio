@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { IconButton, Box } from '@mui/material';
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import { Box, IconButton } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const ReturnToTopButton = () => {
   const [visible, setVisible] = useState(false);
@@ -21,24 +21,21 @@ const ReturnToTopButton = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#38c0f2',
-        borderRadius: '8px',
-        padding: '4px',
-        maxWidth: '50px',
-        margin: '0 auto',
-        '@keyframes jump': {
-          '0%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
-          '100%': { transform: 'translateY(0)' },
+        borderRadius: '10px',
+        border: '1px solid rgba(255,255,255,0.08)',
+        bgcolor: 'rgba(255,255,255,0.04)',
+        transition: 'all 0.2s ease',
+        '&:hover': {
+          borderColor: 'rgba(255,255,255,0.16)',
+          bgcolor: 'rgba(255,255,255,0.06)',
         },
-        '&:hover': { animation: 'jump 1s infinite' },
       }}
     >
       <IconButton
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        sx={{ color: 'white', fontSize: '1.5rem', padding: '4px' }}
+        sx={{ color: '#71717a', fontSize: '1.25rem', p: 1 }}
       >
-        <KeyboardDoubleArrowUpIcon sx={{ fontSize: 'inherit' }} />
+        <KeyboardArrowUpIcon sx={{ fontSize: 'inherit' }} />
       </IconButton>
     </Box>
   );
