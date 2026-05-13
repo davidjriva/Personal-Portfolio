@@ -3,81 +3,64 @@
 import { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 
-const ROLES = ['forward deployed engineer', 'applied AI engineer', 'full-stack developer'];
+const ROLES = ['applied AI engineer', 'full-stack developer', 'forward deployed engineer'];
 
 const AnimatedTypingTypography = () => {
-  const baseTypingSpeed = 100; // Base speed for typing (in ms)
-  const baseDeletingSpeed = 50; // Base speed for deleting (in ms)
-  const delayBeforeDeleting = 1200; // Shorter delay before starting to delete (in ms)
-  const delayBetweenRoles = 500; // Short delay between deleting and typing new role
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [cursorVisible, setCursorVisible] = useState(true);
 
-  const [text, setText] = useState(''); // Text that will be typed
-  const [index, setIndex] = useState(0); // Tracks the current character index
-  const [deleting, setDeleting] = useState(false); // Whether we are deleting the text
-  const [roleIndex, setRoleIndex] = useState(0); // Tracks the current role being typed
-  const [cursorVisible, setCursorVisible] = useState(true); // Cursor visibility for blinking effect
-
-  // Determine the appropriate article ("a" or "an") based on the role
-  const getArticle = (role) => {
-    const vowels = ['a', 'e', 'i', 'o', 'u'];
-    return vowels.includes(role[0].toLowerCase()) ? 'an' : 'a';
-  };
-
-  // Function to randomize typing and deleting speed slightly for a more natural feel
-  const getRandomSpeed = (baseSpeed) => {
-    return baseSpeed + Math.random() * 50;
-  };
-
-  // Typing and deleting effect logic
   useEffect(() => {
-    const currentRole = `${ROLES[roleIndex]}.`;
+    const currentRole = ROLES[roleIndex];
     let timer;
 
     if (!deleting && index < currentRole.length) {
-      // Typing logic
-      timer = setTimeout(() => {
-        setText((prev) => prev + currentRole[index]);
-        setIndex((prev) => prev + 1);
-      }, getRandomSpeed(baseTypingSpeed)); // Typing with slight speed randomness
+      timer = setTimeout(
+        () => {
+          setText((prev) => prev + currentRole[index]);
+          setIndex((prev) => prev + 1);
+        },
+        80 + Math.random() * 40,
+      );
     } else if (!deleting && index === currentRole.length) {
-      // Pause before deleting
-      timer = setTimeout(() => {
-        setDeleting(true);
-      }, delayBeforeDeleting);
+      timer = setTimeout(() => setDeleting(true), 1500);
     } else if (deleting && index > 0) {
-      // Deleting logic
-      timer = setTimeout(() => {
-        setText((prev) => prev.slice(0, -1));
-        setIndex((prev) => prev - 1);
-      }, getRandomSpeed(baseDeletingSpeed)); // Deleting with slight speed randomness
+      timer = setTimeout(
+        () => {
+          setText((prev) => prev.slice(0, -1));
+          setIndex((prev) => prev - 1);
+        },
+        35 + Math.random() * 25,
+      );
     } else if (deleting && index === 0) {
-      // Switch to the next role after deletion is done
       timer = setTimeout(() => {
         setDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % ROLES.length); // Move to the next role in the array
-      }, delayBetweenRoles); // Small pause before typing the next role
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      }, 400);
     }
 
     return () => clearTimeout(timer);
   }, [index, deleting, roleIndex]);
 
-  // Blinking cursor effect
   useEffect(() => {
-    const blinkCursor = setInterval(() => {
-      setCursorVisible((prev) => !prev);
-    }, 300);
-    return () => clearInterval(blinkCursor);
+    const blink = setInterval(() => setCursorVisible((prev) => !prev), 400);
+    return () => clearInterval(blink);
   }, []);
 
   return (
     <Typography
-      variant="h1"
       sx={{
-        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+        fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
+        fontWeight: 400,
+        color: 'rgba(255, 255, 255, 0.4)',
+        letterSpacing: '0.01em',
+        minHeight: '1.6em',
       }}
     >
-      I&apos;m {getArticle(ROLES[roleIndex])} {text}
-      <span style={{ color: '#38c0f2', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
+      {text}
+      <span style={{ color: '#6eb6f0', opacity: cursorVisible ? 0.7 : 0, transition: 'opacity 0.1s' }}>|</span>
     </Typography>
   );
 };

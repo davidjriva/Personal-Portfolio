@@ -3,16 +3,23 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import { Turnstile } from '@marsidev/react-turnstile';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const inputSx = {
-  marginBottom: 2,
-  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.55)' },
+  mb: 2,
+  '& .MuiInputLabel-root': {
+    color: 'rgba(255, 255, 255, 0.35)',
+    fontSize: '0.85rem',
+    fontWeight: 500,
+  },
   '& .MuiOutlinedInput-root': {
-    color: '#ffffff',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
-    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.25)' },
-    '&.Mui-focused fieldset': { borderColor: '#38c0f2' },
+    color: '#e8e6e3',
+    fontSize: '0.9rem',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: '10px',
+    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.06)' },
+    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
+    '&.Mui-focused fieldset': { borderColor: 'rgba(110, 182, 240, 0.3)', borderWidth: '1px' },
   },
 };
 
@@ -46,27 +53,17 @@ const ContactForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        height: 'fit-content',
-        maxWidth: '800px',
-        bgcolor: 'rgba(255, 255, 255, 0.04)',
-        border: '1px solid rgba(255, 255, 255, 0.09)',
-        color: '#ffffff',
-        padding: { xs: 2, sm: 3, md: 4 },
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
-      }}
-    >
+    <Box sx={{ width: '100%' }}>
       <form onSubmit={handleSubmit}>
-        <TextField fullWidth label="Your Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Your Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          <TextField fullWidth label="Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
+          <TextField fullWidth label="Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
+        </Box>
         <TextField fullWidth label="Subject" name="subject" value={formData.subject} onChange={handleChange} required sx={inputSx} />
         <TextField fullWidth label="Message" name="message" multiline rows={4} value={formData.message} onChange={handleChange} required sx={inputSx} />
 
         {!captchaToken && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
             <Turnstile
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
               onSuccess={(token) => setCaptchaToken(token)}
@@ -76,36 +73,38 @@ const ContactForm = () => {
 
         <Button
           type="submit"
-          variant="contained"
           disabled={!captchaToken}
+          endIcon={<ArrowOutwardIcon sx={{ fontSize: '0.85rem !important' }} />}
           sx={{
-            width: '100%',
-            padding: '12px 0',
-            fontSize: '16px',
-            background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
-            color: '#ffffff',
-            borderRadius: '8px',
-            border: 'none',
+            color: '#0a0a0f',
+            bgcolor: '#e8e6e3',
+            borderRadius: '10px',
+            textTransform: 'none',
+            fontSize: '0.85rem',
+            fontWeight: 600,
+            px: 3,
+            py: 1,
+            transition: 'all 0.2s ease',
             '&:hover': {
-              background: 'linear-gradient(135deg, #5bcff5, #8660d4)',
+              bgcolor: '#fff',
             },
             '&.Mui-disabled': {
-              background: 'rgba(255, 255, 255, 0.12)',
-              color: 'rgba(255, 255, 255, 0.3)',
+              bgcolor: 'rgba(255, 255, 255, 0.06)',
+              color: 'rgba(255, 255, 255, 0.2)',
             },
           }}
         >
-          Send Message
+          Send message
         </Button>
       </form>
 
       {status && (
         <Typography
-          variant="body2"
           sx={{
-            marginTop: 2,
-            textAlign: 'center',
-            color: status.includes('success') ? '#4caf50' : '#f44336',
+            mt: 2,
+            fontSize: '0.8rem',
+            fontWeight: 500,
+            color: status.includes('success') ? 'rgba(110, 220, 150, 0.8)' : 'rgba(255, 120, 120, 0.8)',
           }}
         >
           {status}

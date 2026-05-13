@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Box, Typography, Chip, Stack } from '@mui/material';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Turnstile } from '@marsidev/react-turnstile';
 import AnimatedTypingTypography from '@/components/Greeting-Page/AnimatedTypingTypography';
 import ChatInput from '@/components/Chat-Page/ChatInput';
@@ -40,33 +40,9 @@ David graduated from Colorado State University in May 2024 with a B.S. in Comput
 };
 
 const CHIPS = [
-  {
-    label: 'What AI have you built?',
-    bg: 'rgba(56,192,242,0.14)',
-    border: 'rgba(56,192,242,0.55)',
-    color: '#38c0f2',
-    hoverBg: 'rgba(56,192,242,0.26)',
-    hoverBorder: 'rgba(56,192,242,0.9)',
-    glow: '0 0 14px rgba(56,192,242,0.35)',
-  },
-  {
-    label: 'Tell me about your experience',
-    bg: 'rgba(110,64,201,0.14)',
-    border: 'rgba(110,64,201,0.55)',
-    color: '#b894ff',
-    hoverBg: 'rgba(110,64,201,0.28)',
-    hoverBorder: 'rgba(110,64,201,0.9)',
-    glow: '0 0 14px rgba(110,64,201,0.35)',
-  },
-  {
-    label: 'Featured projects',
-    bg: 'rgba(255,255,255,0.08)',
-    border: 'rgba(255,255,255,0.3)',
-    color: 'rgba(255,255,255,0.85)',
-    hoverBg: 'rgba(255,255,255,0.16)',
-    hoverBorder: 'rgba(255,255,255,0.6)',
-    glow: 'none',
-  },
+  { label: 'What AI have you built?', accent: '#6eb6f0' },
+  { label: 'Tell me about your experience', accent: '#a78bfa' },
+  { label: 'Featured projects', accent: '#e8e6e3' },
 ];
 
 const HeroChat = () => {
@@ -89,8 +65,8 @@ const HeroChat = () => {
   };
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', height: '100%', color: '#ffffff', zIndex: 1 }}>
-      {/* Pre-chat view */}
+    <Box sx={{ position: 'relative', width: '100%', height: '100vh', color: '#e8e6e3', zIndex: 1 }}>
+      {/* Pre-chat greeting */}
       <Box
         sx={{
           position: 'absolute',
@@ -99,46 +75,59 @@ const HeroChat = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 2,
+          gap: 3,
           px: 3,
           opacity: started ? 0 : 1,
-          transform: started ? 'translateY(-10px)' : 'translateY(0)',
-          transition: 'opacity 300ms ease-out, transform 300ms ease-out',
+          transform: started ? 'translateY(-20px)' : 'translateY(0)',
+          transition: 'opacity 400ms ease, transform 400ms ease',
           pointerEvents: started ? 'none' : 'auto',
         }}
       >
         <Typography
-          variant="h1"
+          variant="caption"
           sx={{
-            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-            fontWeight: 900,
-            lineHeight: 1.1,
-            textAlign: 'center',
+            color: 'rgba(255, 255, 255, 0.35)',
+            fontSize: '0.7rem',
+            mb: -1,
           }}
         >
-          <span style={{ color: '#ffffff' }}>Hello, I&apos;m </span>
-          <span style={{ color: '#38c0f2' }}>David</span>
+          Software Engineer
+        </Typography>
+
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+            fontWeight: 700,
+            lineHeight: 1.05,
+            textAlign: 'center',
+            letterSpacing: '-0.04em',
+          }}
+        >
+          David Riva
         </Typography>
 
         <AnimatedTypingTypography />
 
-        <Box sx={{ width: '100%', maxWidth: 500 }}>
+        <Box sx={{ width: '100%', maxWidth: 520, mt: 1 }}>
           <ChatInput
             input={input}
             setInput={setInput}
             sendMessage={handleSend}
             disabled={!hasToken}
-            placeholder={turnstileError ? 'Verification failed' : !hasToken ? 'Verifying...' : 'Ask anything…'}
+            placeholder={
+              turnstileError ? 'Verification failed' : !hasToken ? 'Verifying...' : 'Ask my AI agent anything...'
+            }
           />
         </Box>
 
         {turnstileError && (
-          <Typography variant="caption" sx={{ color: 'rgba(255,100,100,0.85)', minHeight: '1.2em' }}>
+          <Typography variant="body2" sx={{ color: 'rgba(255,100,100,0.7)', fontSize: '0.8rem' }}>
             Verification failed — chat is temporarily unavailable.
           </Typography>
         )}
 
-        <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center">
+        <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="center" sx={{ gap: 1 }}>
           {CHIPS.map((chip) => (
             <Chip
               key={chip.label}
@@ -152,31 +141,28 @@ const HeroChat = () => {
               }}
               sx={{
                 height: 'auto',
-                background: chip.bg,
-                border: `1px solid ${chip.border}`,
-                backdropFilter: 'blur(8px)',
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 '& .MuiChip-label': {
-                  color: chip.color,
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
+                  color: 'rgba(255, 255, 255, 0.5)',
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
                   px: 2,
-                  py: 1,
+                  py: 0.85,
                 },
                 '&:hover': {
-                  background: chip.hoverBg,
-                  borderColor: chip.hoverBorder,
-                  boxShadow: chip.glow,
+                  background: 'rgba(255, 255, 255, 0.06)',
+                  borderColor: 'rgba(255, 255, 255, 0.15)',
+                  '& .MuiChip-label': { color: '#e8e6e3' },
                 },
-                '&.Mui-disabled': { opacity: 0.4 },
+                '&.Mui-disabled': { opacity: 0.3 },
               }}
             />
           ))}
         </Stack>
 
-        {/* Turnstile — runs silently; only shows UI if Cloudflare requires a challenge */}
         {!hasToken && !turnstileError && (
           <Box
             sx={{
@@ -189,7 +175,10 @@ const HeroChat = () => {
           >
             <Turnstile
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
-              onSuccess={(captchaToken) => { fetchToken(captchaToken); setNeedsChallenge(false); }}
+              onSuccess={(captchaToken) => {
+                fetchToken(captchaToken);
+                setNeedsChallenge(false);
+              }}
               onError={() => setTurnstileError(true)}
               onBeforeInteractive={() => setNeedsChallenge(true)}
               options={{ appearance: 'interaction-only' }}
@@ -202,26 +191,30 @@ const HeroChat = () => {
           onClick={scrollToAbout}
           sx={{
             position: 'absolute',
-            bottom: 32,
+            bottom: 40,
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 1,
-            px: 3,
-            py: 1.25,
-            borderRadius: '50px',
+            gap: 0.5,
             background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.4)',
-            color: 'rgba(255,255,255,0.85)',
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 600,
-            fontSize: '0.9rem',
+            border: 'none',
+            color: 'rgba(255, 255, 255, 0.25)',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
-            '&:hover': { borderColor: 'rgba(255,255,255,0.7)', color: '#fff', background: 'rgba(255,255,255,0.07)' },
+            fontSize: '0.75rem',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            fontFamily: 'inherit',
+            '&:hover': { color: 'rgba(255, 255, 255, 0.5)' },
+            '@keyframes float': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(4px)' },
+            },
+            animation: 'float 2.5s ease-in-out infinite',
           }}
         >
-          <KeyboardDoubleArrowDownIcon fontSize="small" />
-          View my work
+          Scroll to explore
+          <KeyboardArrowDownIcon sx={{ fontSize: '1rem' }} />
         </Box>
       </Box>
 
@@ -233,11 +226,10 @@ const HeroChat = () => {
           display: 'flex',
           flexDirection: 'column',
           opacity: started ? 1 : 0,
-          transition: 'opacity 300ms ease-out 100ms',
+          transition: 'opacity 400ms ease 100ms',
           pointerEvents: started ? 'auto' : 'none',
         }}
       >
-        {/* Agent header */}
         <Box
           sx={{
             flexShrink: 0,
@@ -246,20 +238,20 @@ const HeroChat = () => {
             gap: 1.5,
             px: 3,
             py: 1.5,
-            borderBottom: '1px solid rgba(255,255,255,0.07)',
+            borderBottom: '1px solid rgba(255,255,255,0.05)',
           }}
         >
           <Box
             sx={{
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+              width: 32,
+              height: 32,
+              borderRadius: '10px',
+              background: 'linear-gradient(135deg, #6eb6f0, #a78bfa)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontWeight: 800,
-              fontSize: '1rem',
+              fontWeight: 700,
+              fontSize: '0.85rem',
               color: '#fff',
               flexShrink: 0,
             }}
@@ -267,32 +259,27 @@ const HeroChat = () => {
             D
           </Box>
           <Box sx={{ flex: 1 }}>
-            <Typography sx={{ fontWeight: 800, fontSize: '0.95rem', lineHeight: 1.2 }}>
+            <Typography sx={{ fontWeight: 600, fontSize: '0.9rem', lineHeight: 1.2, color: '#e8e6e3' }}>
               David&apos;s AI Agent
             </Typography>
-            <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', lineHeight: 1.2 }}>
-              Knows David&apos;s experience, projects &amp; skills
+            <Typography sx={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', lineHeight: 1.2 }}>
+              Knows about experience, projects & skills
             </Typography>
           </Box>
-          <Typography sx={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>
-            ↓ scroll for portfolio
-          </Typography>
         </Box>
 
-        {/* Messages list — minHeight: 0 forces flex to respect overflow boundary */}
         <Box sx={{ flex: 1, minHeight: 0, overflow: 'hidden', px: 2, pt: 1 }}>
           <MessagesList messages={messages} />
         </Box>
 
-        {/* Input bar */}
         <Box
           sx={{
             flexShrink: 0,
             px: 3,
             py: 1.5,
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-            background: 'rgba(0,0,0,0.2)',
-            backdropFilter: 'blur(12px)',
+            borderTop: '1px solid rgba(255,255,255,0.05)',
+            background: 'rgba(10, 10, 15, 0.6)',
+            backdropFilter: 'blur(16px)',
           }}
         >
           <ChatInput
@@ -300,7 +287,7 @@ const HeroChat = () => {
             setInput={setInput}
             sendMessage={handleSend}
             disabled={!hasToken}
-            placeholder={!hasToken ? 'Verifying...' : 'Ask anything…'}
+            placeholder={!hasToken ? 'Verifying...' : 'Ask anything...'}
           />
         </Box>
       </Box>

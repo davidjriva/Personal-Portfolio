@@ -1,39 +1,44 @@
-import Image from 'next/image';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ContactForm from './ContactForm';
-import SectionHeading from '../SectionHeading';
 
 const Contact = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        pt: '60px',
-        pb: '60px',
+        maxWidth: '650px',
+        mx: 'auto',
+        px: { xs: 3, md: 6 },
+        py: { xs: 10, md: 14 },
       }}
     >
-      <SectionHeading sectionName="Contact Me" />
+      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.3)', mb: 1, display: 'block' }}>
+        Contact
+      </Typography>
 
-      <Box
+      <Typography
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: {
-            xs: '75%', // mobile
-            sm: '70%', // tablets
-            md: '70%', // small desktops
-            lg: '70%', // large desktops
-          },
+          fontSize: '1.15rem',
+          fontWeight: 600,
+          color: '#e8e6e3',
+          mb: 1,
+          letterSpacing: '-0.01em',
         }}
       >
-        <ContactForm />
-      </Box>
+        Get in touch
+      </Typography>
+
+      <Typography
+        sx={{
+          fontSize: '0.85rem',
+          color: 'rgba(255, 255, 255, 0.4)',
+          mb: 4,
+          maxWidth: '400px',
+        }}
+      >
+        Have a question or want to work together? Send me a message.
+      </Typography>
+
+      <ContactForm />
     </Box>
   );
 };

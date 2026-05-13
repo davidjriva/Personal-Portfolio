@@ -1,47 +1,96 @@
-import React from 'react';
-import { Box, Divider } from '@mui/material';
-import SkillCard from './SkillCard';
-import SkillCardContainer from '@/components/Skills-Page/SkillCardContainer';
-import SectionHeading from '@/components/SectionHeading';
+'use client';
 
-export const metadata = {
-  title: 'David Riva | Skills',
-};
+import { useState, useEffect } from 'react';
+import { Box, Typography, Chip, Skeleton } from '@mui/material';
 
 const Skills = () => {
-  const [skillsData, setSkillsData] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/data/skills.json')
       .then((res) => res.json())
-      .then((data) => setSkillsData(data));
+      .then((data) => {
+        setSkills(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   return (
     <Box
       sx={{
-        marginTop: 10,
-        padding: '5rem',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        backgroundColor: '#565859',
-        borderTop: '8px solid rgba(0,0,0,0.1)',
-        boxShadow: '0px 1px 0px rgba(255,255,255,0.2)',
+        maxWidth: '900px',
+        mx: 'auto',
+        px: { xs: 3, md: 6 },
+        py: { xs: 10, md: 14 },
       }}
     >
-      <SectionHeading sectionName="Skills" />
+      <Typography variant="caption" sx={{ color: 'rgba(255, 255, 255, 0.3)', mb: 4, display: 'block' }}>
+        Skills & Tools
+      </Typography>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
-        {skillsData.map((skill, index) => (
-          <React.Fragment key={skill.title}>
-            <SkillCardContainer {...skill} />
-            {index < skillsData.length - 1 && <Divider sx={{ margin: '1rem 0', backgroundColor: 'lightgray' }} />}
-          </React.Fragment>
-        ))}
-      </Box>
+      {loading ? (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          {[1, 2, 3].map((i) => (
+            <Box key={i}>
+              <Skeleton variant="text" width="20%" sx={{ bgcolor: 'rgba(255,255,255,0.04)' }} />
+              <Box sx={{ display: 'flex', gap: 1, mt: 1, flexWrap: 'wrap' }}>
+                {[1, 2, 3, 4].map((j) => (
+                  <Skeleton
+                    key={j}
+                    variant="rounded"
+                    width={80}
+                    height={28}
+                    sx={{ borderRadius: '8px', bgcolor: 'rgba(255,255,255,0.04)' }}
+                  />
+                ))}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {skills.map((category) => (
+            <Box key={category.title}>
+              <Typography
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  color: 'rgba(255, 255, 255, 0.5)',
+                  mb: 1.5,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {category.title}
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
+                {category.items.map((item) => (
+                  <Chip
+                    key={item}
+                    label={item}
+                    sx={{
+                      bgcolor: 'rgba(255, 255, 255, 0.03)',
+                      color: 'rgba(255, 255, 255, 0.55)',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                      borderRadius: '8px',
+                      fontSize: '0.78rem',
+                      fontWeight: 500,
+                      height: '30px',
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        bgcolor: 'rgba(255, 255, 255, 0.06)',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        color: '#e8e6e3',
+                      },
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 };
