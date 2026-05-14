@@ -6,11 +6,11 @@ const AboutFooter = () => {
   return (
     <Box
       sx={{
-        marginTop: 4,
+        mt: 4,
         display: 'flex',
-        justifyContent: 'flex-start',
+        alignItems: 'center',
         gap: 2,
-        flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+        flexWrap: 'wrap',
       }}
     >
       <ResumeButton />

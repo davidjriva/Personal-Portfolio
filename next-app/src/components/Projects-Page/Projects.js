@@ -1,26 +1,21 @@
 import { Box } from '@mui/material';
 import SectionHeading from '@/components/SectionHeading';
+import FadeInSection from '@/components/FadeInSection';
 import ProjectsContainer from './ProjectsContainer';
-
-export const metadata = {
-  title: 'David Riva | Projects',
-};
 
 const Projects = () => {
   return (
     <Box
       sx={{
-        pt: '60px',
-        pb: '60px',
-        pl: { xs: 0, sm: 0, md: '80px' },
-        pr: { xs: 0, sm: 0, md: '80px' },
-        margin: '0 auto',
-        textAlign: 'center',
-        // borderTop: '8px solid rgba(0,0,0,0.1)', // Removed border
-        // backgroundColor: '#565859', // Removed background to blend with main page
+        py: { xs: 8, md: 12 },
+        px: { xs: 2, sm: 3, md: 6 },
+        maxWidth: 1200,
+        mx: 'auto',
       }}
     >
-      <SectionHeading sectionName="Projects" />
+      <FadeInSection>
+        <SectionHeading sectionName="Projects" />
+      </FadeInSection>
 
       <ProjectsContainer />
     </Box>

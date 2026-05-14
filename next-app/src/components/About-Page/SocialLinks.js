@@ -1,53 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Box, IconButton, Link } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const SocialLinks = () => {
-  const [hasGitHubIconBeenClicked, setHasGitHubIconBeenClicked] = useState(false);
-  const [hasLinkedInIconBeenClicked, setHasLinkedInIconBeenClicked] = useState(false);
-
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <Link href="https://github.com/davidjriva" target="_blank" rel="noopener" color="inherit">
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+      <Link href="https://github.com/davidjriva" target="_blank" rel="noopener">
         <IconButton
           aria-label="GitHub Profile"
           sx={{
-            color: hasGitHubIconBeenClicked ? '#9974cf' : 'inherit',
-            fontSize: '40px',
-            '&:hover': {
-              color: '#a28be5',
-            },
-            '&:active': {
-              color: '#9974cf',
-            },
+            color: 'rgba(255,255,255,0.4)',
+            fontSize: '1.5rem',
+            transition: 'all 0.2s ease',
+            '&:hover': { color: '#fafafa', bgcolor: 'rgba(255,255,255,0.06)' },
           }}
-          onClick={() => setHasGitHubIconBeenClicked(true)}
         >
           <GitHubIcon fontSize="inherit" />
         </IconButton>
       </Link>
-      <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener" color="inherit">
+      <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener">
         <IconButton
           aria-label="LinkedIn Profile"
           sx={{
-            color: hasLinkedInIconBeenClicked ? '#07a2f7' : 'inherit',
-            fontSize: '40px',
-            '&:hover': {
-              color: '#4abfff',
-            },
-            '&:active': {
-              color: '#07a2f7',
-            },
+            color: 'rgba(255,255,255,0.4)',
+            fontSize: '1.5rem',
+            transition: 'all 0.2s ease',
+            '&:hover': { color: '#38c0f2', bgcolor: 'rgba(56,192,242,0.08)' },
           }}
-          onClick={() => setHasLinkedInIconBeenClicked(true)}
         >
           <LinkedInIcon fontSize="inherit" />
         </IconButton>

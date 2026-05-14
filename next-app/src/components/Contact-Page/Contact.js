@@ -1,39 +1,25 @@
-import Image from 'next/image';
 import { Box } from '@mui/material';
 import ContactForm from './ContactForm';
 import SectionHeading from '../SectionHeading';
+import FadeInSection from '@/components/FadeInSection';
 
 const Contact = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        pt: '60px',
-        pb: '60px',
+        py: { xs: 8, md: 12 },
+        px: { xs: 3, md: 6 },
+        maxWidth: 900,
+        mx: 'auto',
       }}
     >
-      <SectionHeading sectionName="Contact Me" />
+      <FadeInSection>
+        <SectionHeading sectionName="Contact" subtitle="Have a question or want to work together? Drop me a message." />
+      </FadeInSection>
 
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: {
-            xs: '75%', // mobile
-            sm: '70%', // tablets
-            md: '70%', // small desktops
-            lg: '70%', // large desktops
-          },
-        }}
-      >
+      <FadeInSection delay={0.15}>
         <ContactForm />
-      </Box>
+      </FadeInSection>
     </Box>
   );
 };

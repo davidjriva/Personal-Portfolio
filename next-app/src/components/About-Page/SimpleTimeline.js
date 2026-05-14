@@ -1,151 +1,130 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import {
-  Timeline,
-  TimelineItem,
-  TimelineOppositeContent,
-  TimelineSeparator,
-  TimelineConnector,
-  TimelineDot,
-  TimelineContent,
-} from '@mui/lab';
-import { Typography, Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
+import FadeInSection from '@/components/FadeInSection';
+import SectionHeading from '@/components/SectionHeading';
 
-const SimpleTimelineItem = ({ title, company, companyWebsiteLink, logoImage, startDate, endDate, isEnd }) => {
+const TimelineEntry = ({ title, company, companyWebsiteLink, logoImage, startDate, endDate, bulletPoints, delay }) => {
   const isCurrent = endDate === 'Present';
   const isGraduation = title.startsWith('Graduated');
 
   return (
-    <TimelineItem>
-      <TimelineOppositeContent sx={{ flex: 'none', width: 130, pr: 1.5, pt: '14px' }}>
-        <Typography
-          variant="caption"
-          sx={{
-            color: isCurrent ? '#38c0f2' : 'rgba(255,255,255,0.45)',
-            fontWeight: isCurrent ? 600 : 400,
-            lineHeight: 1.4,
-            display: 'block',
-          }}
-        >
-          {isGraduation ? startDate : `${startDate} –\u00a0${isCurrent ? 'Present' : endDate}`}
-        </Typography>
-      </TimelineOppositeContent>
-
-      <TimelineSeparator>
-        <TimelineDot
-          sx={{
-            backgroundColor: '#ffffff',
-            border: isCurrent
-              ? '1.5px solid rgba(56,192,242,0.6)'
-              : '1.5px solid rgba(255,255,255,0.2)',
-            boxShadow: isCurrent ? '0 0 10px 2px rgba(56,192,242,0.25)' : 'none',
-            p: '5px',
-            m: '6px 0',
-          }}
-        >
-          <Image
-            src={`/images/${logoImage}`}
-            alt={`${company} logo`}
-            width={20}
-            height={20}
-            style={{ display: 'block', objectFit: 'contain' }}
-          />
-        </TimelineDot>
-        {!isEnd && (
-          <TimelineConnector
+    <FadeInSection delay={delay}>
+      <Box sx={{ display: 'flex', gap: { xs: 2, sm: 3 }, pb: 5, '&:last-child': { pb: 0 } }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, width: 48 }}>
+          <Box
             sx={{
-              background: 'linear-gradient(to bottom, rgba(56,192,242,0.25), rgba(110,64,201,0.15))',
-              width: '1.5px',
-            }}
-          />
-        )}
-      </TimelineSeparator>
-
-      <TimelineContent sx={{ pl: 1.5, pt: '10px', pb: '16px' }}>
-        <Box>
-          <Typography
-            variant="body2"
-            sx={{
-              fontWeight: 600,
-              fontSize: '0.8rem',
-              lineHeight: 1.35,
-              color: '#ffffff',
-              mb: 0.25,
+              width: 48,
+              height: 48,
+              borderRadius: '14px',
+              bgcolor: isCurrent ? 'rgba(56,192,242,0.1)' : 'rgba(255,255,255,0.04)',
+              border: isCurrent ? '1px solid rgba(56,192,242,0.25)' : '1px solid rgba(255,255,255,0.08)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              boxShadow: isCurrent ? '0 0 16px rgba(56,192,242,0.12)' : 'none',
             }}
           >
+            <Image
+              src={`/images/${logoImage}`}
+              alt={`${company} logo`}
+              width={24}
+              height={24}
+              style={{ objectFit: 'contain' }}
+            />
+          </Box>
+          <Box
+            sx={{
+              flex: 1,
+              width: '1px',
+              background: 'linear-gradient(to bottom, rgba(255,255,255,0.08), transparent)',
+              mt: 1.5,
+            }}
+          />
+        </Box>
+
+        <Box sx={{ flex: 1, pt: 0.25 }}>
+          <Typography sx={{ fontWeight: 700, fontSize: '1rem', color: '#fafafa', mb: 0.25 }}>
             {isGraduation ? 'Graduated' : title.split(',')[0]}
           </Typography>
           <Typography
             component="a"
             href={companyWebsiteLink}
             target="_blank"
-            variant="caption"
+            rel="noopener noreferrer"
             sx={{
               color: '#38c0f2',
               textDecoration: 'none',
-              fontSize: '0.72rem',
+              fontSize: '0.85rem',
+              fontWeight: 500,
+              display: 'inline-block',
+              mb: 0.5,
               '&:hover': { textDecoration: 'underline' },
             }}
           >
             {company}
           </Typography>
+          <Typography
+            variant="caption"
+            sx={{
+              color: isCurrent ? 'rgba(56,192,242,0.7)' : 'rgba(255,255,255,0.3)',
+              fontWeight: isCurrent ? 500 : 400,
+              fontSize: '0.8rem',
+              display: 'block',
+              mb: bulletPoints ? 1 : 0,
+            }}
+          >
+            {isGraduation ? startDate : `${startDate} – ${isCurrent ? 'Present' : endDate}`}
+          </Typography>
+          {bulletPoints && bulletPoints.length > 0 && (
+            <Box component="ul" sx={{ pl: 2.5, m: 0 }}>
+              {bulletPoints.slice(0, 2).map((point, i) => (
+                <Typography
+                  component="li"
+                  key={i}
+                  variant="body2"
+                  sx={{
+                    color: 'rgba(255,255,255,0.45)',
+                    fontSize: '0.84rem',
+                    lineHeight: 1.6,
+                    mb: 0.5,
+                    '&::marker': { color: 'rgba(255,255,255,0.15)' },
+                  }}
+                >
+                  {point}
+                </Typography>
+              ))}
+            </Box>
+          )}
         </Box>
-      </TimelineContent>
-    </TimelineItem>
+      </Box>
+    </FadeInSection>
   );
 };
 
 const SimpleTimeline = () => {
-  const [experienceData, setExperienceData] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch('/data/experiences.json')
       .then((res) => res.json())
-      .then((data) => setExperienceData(data));
+      .then(setData);
   }, []);
 
-  const sortedExperienceData = [...experienceData].sort((a, b) => {
-    return new Date(b.startDate) - new Date(a.startDate);
-  });
+  const sorted = [...data].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
-        px: 1,
-        py: 2,
-      }}
-    >
-      <Typography
-        variant="overline"
-        sx={{
-          color: 'rgba(255,255,255,0.55)',
-          fontSize: '0.85rem',
-          letterSpacing: '0.18em',
-          fontWeight: 600,
-          mb: 0.5,
-        }}
-      >
-        Experience
-      </Typography>
-      <Timeline sx={{ maxWidth: '22vw', p: 0, m: 0 }}>
-        {sortedExperienceData.map((experience, index) => (
-          <React.Fragment key={experience.title}>
-            <SimpleTimelineItem
-              {...experience}
-              isEnd={index === sortedExperienceData.length - 1}
-            />
-          </React.Fragment>
-        ))}
-      </Timeline>
+    <Box sx={{ py: { xs: 8, md: 12 }, px: { xs: 3, md: 6 }, maxWidth: 720, mx: 'auto' }}>
+      <FadeInSection>
+        <SectionHeading sectionName="Experience" />
+      </FadeInSection>
+
+      {sorted.map((exp, i) => (
+        <TimelineEntry key={exp.title} {...exp} delay={0.1 + i * 0.08} />
+      ))}
     </Box>
   );
 };
