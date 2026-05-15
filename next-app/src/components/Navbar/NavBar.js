@@ -3,42 +3,41 @@
 import { Link as ScrollLink } from 'react-scroll';
 import { Toolbar, Box, AppBar, Typography } from '@mui/material';
 import { useState } from 'react';
-import Logo from './Logo';
-import './ScrollLink.css';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
+const NAV_ITEMS = ['About', 'Projects', 'Contact'];
 
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+const NavLink = ({ page, active, setActivePage }) => (
+  <ScrollLink
+    to={page.toLowerCase()}
+    spy={true}
+    smooth={true}
+    offset={-70}
+    duration={500}
+    onSetActive={() => setActivePage(page)}
+    style={{ cursor: 'pointer', textDecoration: 'none' }}
+  >
+    <Box
+      sx={{
+        px: 2,
+        py: 0.75,
+        borderRadius: '100px',
+        fontSize: '0.85rem',
+        fontWeight: active ? 600 : 400,
+        fontFamily: 'var(--font-inter), sans-serif',
+        color: active ? '#e8e6e3' : 'rgba(232, 230, 227, 0.4)',
+        bgcolor: active ? 'rgba(232, 230, 227, 0.06)' : 'transparent',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        letterSpacing: '0.02em',
+        '&:hover': {
+          color: '#e8e6e3',
+          bgcolor: 'rgba(232, 230, 227, 0.04)',
+        },
       }}
     >
       {page}
-    </ScrollLink>
-  );
-};
-
-const pages = ['About', 'Projects', 'Contact'];
+    </Box>
+  </ScrollLink>
+);
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
@@ -50,39 +49,63 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
+        bgcolor: 'rgba(12, 12, 14, 0.8)',
+        backdropFilter: 'blur(20px) saturate(1.2)',
+        height: '56px',
+        color: '#e8e6e3',
+        borderBottom: '1px solid rgba(232, 230, 227, 0.06)',
         boxShadow: 'none',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: { xs: 2, md: 4, lg: 6 },
+          minHeight: '56px !important',
+          maxWidth: '1400px',
+          width: '100%',
+          mx: 'auto',
+        }}
+      >
         <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 0.5 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <Logo />
-          <Typography
-            variant="h6"
-            component="div"
+          <Box
             sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              width: 28,
+              height: 28,
+              borderRadius: '8px',
+              background: 'linear-gradient(135deg, #d4a053, #b8863a)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '0.8rem',
+              color: '#0c0c0e',
+              mr: 1,
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
+            DR
+          </Box>
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontFamily: 'var(--font-inter), sans-serif',
+              fontSize: '0.95rem',
+              color: '#e8e6e3',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            david riva
           </Typography>
         </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+          {NAV_ITEMS.map((page) => (
+            <NavLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
           ))}
         </Box>
       </Toolbar>

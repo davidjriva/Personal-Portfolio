@@ -1,27 +1,31 @@
 'use client';
 
 import { Button } from '@mui/material';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 const ResumeButton = () => {
-  const handleResumeClick = () => {
-    window.open('/documents/resume.pdf', '_blank');
-  };
-
   return (
-    <Button 
-      variant="contained" 
-      onClick={handleResumeClick} 
-      sx={{ 
-        marginTop: '1rem', 
-        marginBottom: 2,
-        backgroundColor: '#1976d2',
-        color: 'white',
+    <Button
+      variant="outlined"
+      onClick={() => window.open('/documents/resume.pdf', '_blank')}
+      startIcon={<DescriptionOutlinedIcon sx={{ fontSize: '1rem !important' }} />}
+      sx={{
+        color: '#d4a053',
+        borderColor: 'rgba(212, 160, 83, 0.3)',
+        borderRadius: '10px',
+        textTransform: 'none',
+        fontSize: '0.85rem',
+        fontWeight: 500,
+        px: 2.5,
+        py: 0.75,
+        transition: 'all 0.25s ease',
         '&:hover': {
-          backgroundColor: '#1565c0',
+          borderColor: '#d4a053',
+          bgcolor: 'rgba(212, 160, 83, 0.06)',
         },
       }}
     >
-      View Resume as PDF
+      Resume
     </Button>
   );
 };
