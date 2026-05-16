@@ -42,29 +42,29 @@ David graduated from Colorado State University in May 2024 with a B.S. in Comput
 const CHIPS = [
   {
     label: 'What AI have you built?',
-    bg: 'rgba(56,192,242,0.14)',
-    border: 'rgba(56,192,242,0.55)',
-    color: '#38c0f2',
-    hoverBg: 'rgba(56,192,242,0.26)',
-    hoverBorder: 'rgba(56,192,242,0.9)',
-    glow: '0 0 14px rgba(56,192,242,0.35)',
+    bg: 'rgba(245,158,11,0.1)',
+    border: 'rgba(245,158,11,0.4)',
+    color: '#f59e0b',
+    hoverBg: 'rgba(245,158,11,0.2)',
+    hoverBorder: 'rgba(245,158,11,0.7)',
+    glow: '0 0 14px rgba(245,158,11,0.25)',
   },
   {
     label: 'Tell me about your experience',
-    bg: 'rgba(110,64,201,0.14)',
-    border: 'rgba(110,64,201,0.55)',
-    color: '#b894ff',
-    hoverBg: 'rgba(110,64,201,0.28)',
-    hoverBorder: 'rgba(110,64,201,0.9)',
-    glow: '0 0 14px rgba(110,64,201,0.35)',
+    bg: 'rgba(239,68,68,0.1)',
+    border: 'rgba(239,68,68,0.4)',
+    color: '#f87171',
+    hoverBg: 'rgba(239,68,68,0.2)',
+    hoverBorder: 'rgba(239,68,68,0.7)',
+    glow: '0 0 14px rgba(239,68,68,0.25)',
   },
   {
     label: 'Featured projects',
-    bg: 'rgba(255,255,255,0.08)',
-    border: 'rgba(255,255,255,0.3)',
-    color: 'rgba(255,255,255,0.85)',
-    hoverBg: 'rgba(255,255,255,0.16)',
-    hoverBorder: 'rgba(255,255,255,0.6)',
+    bg: 'rgba(240,237,230,0.05)',
+    border: 'rgba(240,237,230,0.2)',
+    color: 'rgba(240,237,230,0.8)',
+    hoverBg: 'rgba(240,237,230,0.1)',
+    hoverBorder: 'rgba(240,237,230,0.4)',
     glow: 'none',
   },
 ];
@@ -116,8 +116,8 @@ const HeroChat = () => {
             textAlign: 'center',
           }}
         >
-          <span style={{ color: '#ffffff' }}>Hello, I&apos;m </span>
-          <span style={{ color: '#38c0f2' }}>David</span>
+          <span style={{ color: '#f0ede6' }}>Hello, I&apos;m </span>
+          <span style={{ color: '#f59e0b' }}>David</span>
         </Typography>
 
         <AnimatedTypingTypography />
@@ -159,7 +159,7 @@ const HeroChat = () => {
                 transition: 'all 0.2s ease',
                 '& .MuiChip-label': {
                   color: chip.color,
-                  fontFamily: 'Montserrat, sans-serif',
+                  fontFamily: 'var(--font-inter), Inter, sans-serif',
                   fontSize: '0.9rem',
                   fontWeight: 600,
                   px: 2,
@@ -212,7 +212,7 @@ const HeroChat = () => {
             background: 'transparent',
             border: '1px solid rgba(255,255,255,0.4)',
             color: 'rgba(255,255,255,0.85)',
-            fontFamily: 'Montserrat, sans-serif',
+            fontFamily: 'var(--font-inter), Inter, sans-serif',
             fontWeight: 600,
             fontSize: '0.9rem',
             cursor: 'pointer',
@@ -254,7 +254,7 @@ const HeroChat = () => {
               width: 36,
               height: 36,
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+              background: 'linear-gradient(135deg, #f59e0b, #ef4444)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

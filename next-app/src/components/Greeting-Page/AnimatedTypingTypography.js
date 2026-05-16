@@ -77,7 +77,7 @@ const AnimatedTypingTypography = () => {
       }}
     >
       I&apos;m {getArticle(ROLES[roleIndex])} {text}
-      <span style={{ color: '#38c0f2', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
+      <span style={{ color: '#f59e0b', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
     </Typography>
   );
 };

@@ -5,14 +5,29 @@ import { Box, TextField, Button, Typography } from '@mui/material';
 import { Turnstile } from '@marsidev/react-turnstile';
 
 const inputSx = {
-  marginBottom: 2,
-  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.55)' },
-  '& .MuiOutlinedInput-root': {
-    color: '#ffffff',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
-    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.25)' },
-    '&.Mui-focused fieldset': { borderColor: '#38c0f2' },
+  marginBottom: 3,
+  '& .MuiInputLabel-root': {
+    color: 'rgba(240, 237, 230, 0.4)',
+    fontSize: '0.9rem',
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: '#f59e0b',
+  },
+  '& .MuiInput-root': {
+    color: '#f0ede6',
+    fontSize: '1rem',
+    '&::before': {
+      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    },
+    '&:hover::before': {
+      borderBottom: '1px solid rgba(255, 255, 255, 0.25)',
+    },
+    '&::after': {
+      borderBottom: '2px solid #f59e0b',
+    },
+  },
+  '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+    borderBottom: '1px solid rgba(255, 255, 255, 0.25)',
   },
 };
 
@@ -49,24 +64,56 @@ const ContactForm = () => {
     <Box
       sx={{
         width: '100%',
-        height: 'fit-content',
-        maxWidth: '800px',
-        bgcolor: 'rgba(255, 255, 255, 0.04)',
-        border: '1px solid rgba(255, 255, 255, 0.09)',
-        color: '#ffffff',
-        padding: { xs: 2, sm: 3, md: 4 },
-        borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
+        maxWidth: '700px',
       }}
     >
       <form onSubmit={handleSubmit}>
-        <TextField fullWidth label="Your Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Your Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Subject" name="subject" value={formData.subject} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Message" name="message" multiline rows={4} value={formData.message} onChange={handleChange} required sx={inputSx} />
+        <TextField
+          fullWidth
+          label="Your Name"
+          name="name"
+          variant="standard"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          sx={inputSx}
+        />
+        <TextField
+          fullWidth
+          label="Your Email"
+          name="email"
+          type="email"
+          variant="standard"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          sx={inputSx}
+        />
+        <TextField
+          fullWidth
+          label="Subject"
+          name="subject"
+          variant="standard"
+          value={formData.subject}
+          onChange={handleChange}
+          required
+          sx={inputSx}
+        />
+        <TextField
+          fullWidth
+          label="Message"
+          name="message"
+          variant="standard"
+          multiline
+          rows={4}
+          value={formData.message}
+          onChange={handleChange}
+          required
+          sx={inputSx}
+        />
 
         {!captchaToken && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 3, mt: 1 }}>
             <Turnstile
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
               onSuccess={(token) => setCaptchaToken(token)}
@@ -80,18 +127,24 @@ const ContactForm = () => {
           disabled={!captchaToken}
           sx={{
             width: '100%',
-            padding: '12px 0',
-            fontSize: '16px',
-            background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+            padding: '14px 0',
+            fontSize: '0.95rem',
+            fontWeight: 600,
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
             color: '#ffffff',
-            borderRadius: '8px',
+            borderRadius: '12px',
             border: 'none',
+            textTransform: 'none',
+            letterSpacing: '0.01em',
+            transition: 'all 0.3s ease',
             '&:hover': {
-              background: 'linear-gradient(135deg, #5bcff5, #8660d4)',
+              background: 'linear-gradient(135deg, #fbbf24 0%, #f87171 100%)',
+              transform: 'translateY(-1px)',
+              boxShadow: '0 8px 24px rgba(245, 158, 11, 0.2)',
             },
             '&.Mui-disabled': {
-              background: 'rgba(255, 255, 255, 0.12)',
-              color: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.06)',
+              color: 'rgba(240, 237, 230, 0.25)',
             },
           }}
         >
@@ -103,9 +156,10 @@ const ContactForm = () => {
         <Typography
           variant="body2"
           sx={{
-            marginTop: 2,
+            marginTop: 2.5,
             textAlign: 'center',
-            color: status.includes('success') ? '#4caf50' : '#f44336',
+            color: status.includes('success') ? '#4caf50' : '#ef4444',
+            fontWeight: 500,
           }}
         >
           {status}

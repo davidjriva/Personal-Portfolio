@@ -15,11 +15,11 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         p: '4px 8px',
         borderRadius: '999px',
         backgroundColor: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(56,192,242,0.3)',
+        border: '1px solid rgba(240,237,230,0.12)',
         backdropFilter: 'blur(12px)',
         boxShadow: 'none',
-        '&:hover': { borderColor: 'rgba(56,192,242,0.6)' },
-        '&:focus-within': { borderColor: '#38c0f2' },
+        '&:hover': { borderColor: 'rgba(245,158,11,0.4)' },
+        '&:focus-within': { borderColor: '#f59e0b' },
       }}
     >
       <InputBase
@@ -36,9 +36,9 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         sx={{
           ml: 1,
           flex: 1,
-          color: '#fff',
-          fontFamily: 'var(--font-montserrat), Arial, sans-serif',
-          '& input::placeholder': { color: 'rgba(255,255,255,0.35)' },
+          color: '#f0ede6',
+          fontFamily: 'var(--font-inter), Inter, sans-serif',
+          '& input::placeholder': { color: 'rgba(240,237,230,0.35)' },
         }}
       />
       <IconButton
@@ -46,7 +46,7 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         disabled={!input.trim() || disabled}
         sx={{
           ml: 1,
-          background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+          background: 'linear-gradient(135deg, #f59e0b, #ef4444)',
           '&:hover': { opacity: 0.85 },
           '&.Mui-disabled': { background: 'rgba(255,255,255,0.08)' },
         }}

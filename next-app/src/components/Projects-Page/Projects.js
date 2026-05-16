@@ -1,26 +1,42 @@
-import { Box } from '@mui/material';
-import SectionHeading from '@/components/SectionHeading';
-import ProjectsContainer from './ProjectsContainer';
+'use client';
 
-export const metadata = {
-  title: 'David Riva | Projects',
-};
+import { Box, Typography } from '@mui/material';
+import ProjectsContainer from './ProjectsContainer';
 
 const Projects = () => {
   return (
     <Box
       sx={{
-        pt: '60px',
-        pb: '60px',
-        pl: { xs: 0, sm: 0, md: '80px' },
-        pr: { xs: 0, sm: 0, md: '80px' },
+        maxWidth: '1200px',
         margin: '0 auto',
-        textAlign: 'center',
-        // borderTop: '8px solid rgba(0,0,0,0.1)', // Removed border
-        // backgroundColor: '#565859', // Removed background to blend with main page
+        px: { xs: 3, md: 6 },
+        pt: { xs: '80px', md: '120px' },
+        pb: { xs: '80px', md: '120px' },
       }}
     >
-      <SectionHeading sectionName="Projects" />
+      {/* Section heading */}
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: '2rem', md: '2.5rem' },
+          fontWeight: 700,
+          color: '#f0ede6',
+          mb: 1,
+          letterSpacing: '-0.02em',
+        }}
+      >
+        Selected Work
+      </Typography>
+      <Typography
+        variant="body1"
+        sx={{
+          color: 'rgba(240, 237, 230, 0.5)',
+          mb: 6,
+          fontSize: '1rem',
+        }}
+      >
+        Featured projects and experiments
+      </Typography>
 
       <ProjectsContainer />
     </Box>
