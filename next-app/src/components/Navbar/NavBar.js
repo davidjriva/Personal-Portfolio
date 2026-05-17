@@ -2,18 +2,11 @@
 
 import { Link as ScrollLink } from 'react-scroll';
 import { Toolbar, Box, AppBar, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import './ScrollLink.css';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
+const pages = ['About', 'Experience', 'Projects', 'Contact'];
 
 const FormattedLink = ({ page, active, setActivePage }) => {
   return (
@@ -21,16 +14,22 @@ const FormattedLink = ({ page, active, setActivePage }) => {
       to={page.toLowerCase()}
       spy={true}
       smooth={true}
-      offset={-70}
+      offset={-80}
       duration={500}
       onSetActive={() => setActivePage(page)}
       className="scroll-link"
       style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+        fontWeight: active ? 600 : 500,
+        textDecoration: 'none',
+        cursor: 'pointer',
+        fontFamily: 'Montserrat, Arial, sans-serif',
+        fontSize: '0.85rem',
+        letterSpacing: '0.02em',
+        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.45)',
+        padding: '6px 16px',
+        borderRadius: '8px',
+        transition: 'all 0.2s ease',
+        background: active ? 'rgba(56, 192, 242, 0.08)' : 'transparent',
       }}
     >
       {page}
@@ -38,10 +37,15 @@ const FormattedLink = ({ page, active, setActivePage }) => {
   );
 };
 
-const pages = ['About', 'Projects', 'Contact'];
-
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <AppBar
@@ -50,16 +54,24 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
+        bgcolor: scrolled ? 'rgba(5, 5, 16, 0.85)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px) saturate(1.5)' : 'none',
+        height: '72px',
+        color: '#f0f0f5',
         transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
+        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid transparent',
         boxShadow: 'none',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: { xs: 2, md: 5 },
+          height: '100%',
+        }}
+      >
         <Box
           sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -70,17 +82,17 @@ const NavBar = () => {
             component="div"
             sx={{
               fontWeight: 800,
-              letterSpacing: '-0.5px',
+              letterSpacing: '-0.02em',
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              fontSize: '1.15rem',
+              color: '#f0f0f5',
             }}
           >
             DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
           </Typography>
         </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
           {pages.map((page) => (
             <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
           ))}
