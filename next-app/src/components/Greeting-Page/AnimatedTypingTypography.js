@@ -6,78 +6,74 @@ import { Typography } from '@mui/material';
 const ROLES = ['forward deployed engineer', 'applied AI engineer', 'full-stack developer'];
 
 const AnimatedTypingTypography = () => {
-  const baseTypingSpeed = 100; // Base speed for typing (in ms)
-  const baseDeletingSpeed = 50; // Base speed for deleting (in ms)
-  const delayBeforeDeleting = 1200; // Shorter delay before starting to delete (in ms)
-  const delayBetweenRoles = 500; // Short delay between deleting and typing new role
+  const baseTypingSpeed = 100;
+  const baseDeletingSpeed = 50;
+  const delayBeforeDeleting = 1200;
+  const delayBetweenRoles = 500;
 
-  const [text, setText] = useState(''); // Text that will be typed
-  const [index, setIndex] = useState(0); // Tracks the current character index
-  const [deleting, setDeleting] = useState(false); // Whether we are deleting the text
-  const [roleIndex, setRoleIndex] = useState(0); // Tracks the current role being typed
-  const [cursorVisible, setCursorVisible] = useState(true); // Cursor visibility for blinking effect
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [cursorVisible, setCursorVisible] = useState(true);
 
-  // Determine the appropriate article ("a" or "an") based on the role
   const getArticle = (role) => {
     const vowels = ['a', 'e', 'i', 'o', 'u'];
     return vowels.includes(role[0].toLowerCase()) ? 'an' : 'a';
   };
 
-  // Function to randomize typing and deleting speed slightly for a more natural feel
   const getRandomSpeed = (baseSpeed) => {
     return baseSpeed + Math.random() * 50;
   };
 
-  // Typing and deleting effect logic
   useEffect(() => {
     const currentRole = `${ROLES[roleIndex]}.`;
     let timer;
 
     if (!deleting && index < currentRole.length) {
-      // Typing logic
       timer = setTimeout(() => {
         setText((prev) => prev + currentRole[index]);
         setIndex((prev) => prev + 1);
-      }, getRandomSpeed(baseTypingSpeed)); // Typing with slight speed randomness
+      }, getRandomSpeed(baseTypingSpeed));
     } else if (!deleting && index === currentRole.length) {
-      // Pause before deleting
       timer = setTimeout(() => {
         setDeleting(true);
       }, delayBeforeDeleting);
     } else if (deleting && index > 0) {
-      // Deleting logic
       timer = setTimeout(() => {
         setText((prev) => prev.slice(0, -1));
         setIndex((prev) => prev - 1);
-      }, getRandomSpeed(baseDeletingSpeed)); // Deleting with slight speed randomness
+      }, getRandomSpeed(baseDeletingSpeed));
     } else if (deleting && index === 0) {
-      // Switch to the next role after deletion is done
       timer = setTimeout(() => {
         setDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % ROLES.length); // Move to the next role in the array
-      }, delayBetweenRoles); // Small pause before typing the next role
+        setRoleIndex((prev) => (prev + 1) % ROLES.length);
+      }, delayBetweenRoles);
     }
 
     return () => clearTimeout(timer);
   }, [index, deleting, roleIndex]);
 
-  // Blinking cursor effect
   useEffect(() => {
     const blinkCursor = setInterval(() => {
       setCursorVisible((prev) => !prev);
-    }, 300);
+    }, 400);
     return () => clearInterval(blinkCursor);
   }, []);
 
   return (
     <Typography
-      variant="h1"
       sx={{
-        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+        fontSize: { xs: '1rem', sm: '1.2rem', md: '1.35rem' },
+        fontWeight: 400,
+        color: 'rgba(255, 255, 255, 0.5)',
+        letterSpacing: '-0.01em',
+        textAlign: 'center',
       }}
     >
-      I&apos;m {getArticle(ROLES[roleIndex])} {text}
-      <span style={{ color: '#38c0f2', opacity: cursorVisible ? 1 : 0 }}>|</span>{' '}
+      I&apos;m {getArticle(ROLES[roleIndex])}{' '}
+      <span style={{ color: '#818cf8', fontWeight: 500 }}>{text}</span>
+      <span style={{ color: '#818cf8', opacity: cursorVisible ? 0.8 : 0 }}>|</span>
     </Typography>
   );
 };

@@ -4,10 +4,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../theme';
 import { Montserrat } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const montserrat = Montserrat({
-  weight: ['400', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-montserrat',
@@ -15,8 +15,18 @@ const montserrat = Montserrat({
 
 export const metadata = {
   title: 'David Riva | Full Stack Software Engineer Portfolio',
-  description: "Explore the portfolio of David Riva, a software engineer specializing in UI/UX, full-stack development, and data visualization. View projects involving React, Node.js, and Distributed Systems.",
-  keywords: ["David Riva", "Software Engineer", "Full Stack Developer", "UI/UX Design", "React Developer", "Node.js", "Portfolio", "Web Development"],
+  description:
+    "Explore the portfolio of David Riva, a software engineer specializing in UI/UX, full-stack development, and data visualization. View projects involving React, Node.js, and Distributed Systems.",
+  keywords: [
+    'David Riva',
+    'Software Engineer',
+    'Full Stack Developer',
+    'UI/UX Design',
+    'React Developer',
+    'Node.js',
+    'Portfolio',
+    'Web Development',
+  ],
   openGraph: {
     title: 'David Riva - Personal Portfolio',
     description: 'Experienced software engineer specializing in UI/UX and big data visualization.',
