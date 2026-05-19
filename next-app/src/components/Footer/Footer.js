@@ -1,38 +1,58 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, IconButton, Link } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import ReturnToTopButton from './ReturnToTopButton';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
+        position: 'relative',
         width: '100%',
-        height: '10vh',
+        py: 6,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        gap: 3,
+        borderTop: '1px solid rgba(255,255,255,0.06)',
       }}
     >
       <ReturnToTopButton />
+
+      <Box sx={{ display: 'flex', gap: 1.5 }}>
+        {[
+          { icon: <GitHubIcon sx={{ fontSize: '1.1rem' }} />, href: 'https://github.com/davidjriva', label: 'GitHub' },
+          { icon: <LinkedInIcon sx={{ fontSize: '1.1rem' }} />, href: 'https://www.linkedin.com/in/david-j-riva', label: 'LinkedIn' },
+          { icon: <EmailOutlinedIcon sx={{ fontSize: '1.1rem' }} />, href: 'mailto:davidjriva@gmail.com', label: 'Email' },
+        ].map((social) => (
+          <Link key={social.label} href={social.href} target={social.label !== 'Email' ? '_blank' : undefined} rel="noopener">
+            <IconButton
+              aria-label={social.label}
+              sx={{
+                color: 'rgba(255,255,255,0.3)',
+                width: 36,
+                height: 36,
+                transition: 'color 0.2s ease',
+                '&:hover': { color: 'rgba(255,255,255,0.7)' },
+              }}
+            >
+              {social.icon}
+            </IconButton>
+          </Link>
+        ))}
+      </Box>
+
       <Typography
-        variant="body2"
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
+          color: 'rgba(255, 255, 255, 0.2)',
+          fontSize: '0.78rem',
           textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
+        David Riva &copy; {new Date().getFullYear()}
       </Typography>
     </Box>
   );

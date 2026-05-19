@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Box } from '@mui/material';
 import ContactForm from './ContactForm';
 import SectionHeading from '../SectionHeading';
@@ -7,33 +6,17 @@ const Contact = () => {
   return (
     <Box
       sx={{
+        maxWidth: '1200px',
+        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 6 },
+        py: { xs: 8, md: 12 },
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        pt: '60px',
-        pb: '60px',
       }}
     >
-      <SectionHeading sectionName="Contact Me" />
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: {
-            xs: '75%', // mobile
-            sm: '70%', // tablets
-            md: '70%', // small desktops
-            lg: '70%', // large desktops
-          },
-        }}
-      >
-        <ContactForm />
-      </Box>
+      <SectionHeading sectionName="Contact" subtitle="Have a question or want to work together? Reach out." />
+      <ContactForm />
     </Box>
   );
 };

@@ -1,41 +1,51 @@
 import { Box, Typography } from '@mui/material';
 
-const SectionHeading = ({ sectionName }) => {
+const SectionHeading = ({ sectionName, subtitle }) => {
   return (
-    <Box 
-      sx={{ 
-        mb: '100px', 
-        display: 'flex', 
-        flexDirection: 'column', 
+    <Box
+      sx={{
+        mb: { xs: 6, md: 8 },
+        display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        pt: '40px'
+        textAlign: 'center',
       }}
     >
       <Typography
+        variant="caption"
+        sx={{
+          color: '#818cf8',
+          fontSize: '0.75rem',
+          fontWeight: 600,
+          letterSpacing: '0.12em',
+          mb: 1.5,
+        }}
+      >
+        {sectionName.toUpperCase()}
+      </Typography>
+      <Typography
         variant="h2"
         sx={{
-          fontWeight: 800,
-          color: 'inherit',
-          fontSize: { xs: '2.5rem', md: '4rem' },
-          letterSpacing: '-0.02em',
+          fontWeight: 700,
+          fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
           lineHeight: 1.1,
-          textAlign: 'center',
-          position: 'relative',
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            bottom: '-15px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '50px',
-            height: '4px',
-            background: 'linear-gradient(90deg, #38c0f2 0%, #07a2f7 100%)',
-            borderRadius: '10px'
-          }
+          color: '#fafafa',
         }}
       >
         {sectionName}
       </Typography>
+      {subtitle && (
+        <Typography
+          sx={{
+            mt: 2,
+            color: 'rgba(255, 255, 255, 0.4)',
+            fontSize: '1rem',
+            maxWidth: '500px',
+          }}
+        >
+          {subtitle}
+        </Typography>
+      )}
     </Box>
   );
 };
