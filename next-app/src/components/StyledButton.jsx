@@ -8,32 +8,31 @@ const StyledButton = ({ href, onClick, text, icon, component, ...props }) => {
       component={component}
       {...props}
       sx={{
-        marginTop: '20px',
-        backgroundColor: 'rgba(10, 115, 201, 0.15)',
-        border: '2px solid #38c0f2',
-        borderRadius: '50px',
-        padding: '12px 24px',
-        color: '#38c0f2',
+        mt: 2,
+        backgroundColor: 'rgba(0, 212, 255, 0.08)',
+        border: '1px solid rgba(0, 212, 255, 0.25)',
+        borderRadius: '12px',
+        padding: '10px 20px',
+        color: '#00d4ff',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '10px',
-        fontWeight: 'bold',
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        transition: 'all 0.3s ease-in-out',
+        gap: '8px',
+        fontWeight: 600,
+        boxShadow: 'none',
+        transition: 'all 0.25s ease',
         textTransform: 'none',
         '&:hover': {
-          backgroundColor: 'rgba(10, 115, 201, 0.3)',
-          transform: 'scale(1.05)',
-          boxShadow: '0px 6px 8px rgba(0, 0, 0, 0.15)',
+          backgroundColor: 'rgba(0, 212, 255, 0.15)',
+          borderColor: '#00d4ff',
         },
       }}
     >
       <Typography
         sx={{
-          color: '#38c0f2',
-          fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' },
-          fontWeight: '500',
+          color: '#00d4ff',
+          fontSize: { xs: '0.85rem', sm: '0.9rem' },
+          fontWeight: 500,
         }}
       >
         {text}

@@ -6,31 +6,28 @@ import { useState } from 'react';
 import Logo from './Logo';
 import './ScrollLink.css';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
-
-const FormattedLink = ({ page, active, setActivePage }) => {
+const FormattedLink = ({ page, sectionId, active, setActivePage }) => {
   return (
     <ScrollLink
-      to={page.toLowerCase()}
+      to={sectionId}
       spy={true}
       smooth={true}
       offset={-70}
       duration={500}
-      onSetActive={() => setActivePage(page)}
+      onSetActive={() => setActivePage(sectionId)}
       className="scroll-link"
       style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+        margin: '0 4px',
+        padding: '6px 14px',
+        borderRadius: '8px',
+        fontWeight: active ? 600 : 400,
+        fontSize: '0.85rem',
+        textDecoration: 'none',
+        cursor: 'pointer',
+        fontFamily: 'Montserrat, Arial, sans-serif',
+        transition: 'all 0.25s ease',
+        color: active ? '#00d4ff' : 'rgba(255, 255, 255, 0.5)',
+        background: active ? 'rgba(0, 212, 255, 0.08)' : 'transparent',
       }}
     >
       {page}
@@ -38,10 +35,16 @@ const FormattedLink = ({ page, active, setActivePage }) => {
   );
 };
 
-const pages = ['About', 'Projects', 'Contact'];
+const pages = [
+  { label: 'About', id: 'about' },
+  { label: 'Experience', id: 'experience' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Skills', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
+];
 
 const NavBar = () => {
-  const [activePage, setActivePage] = useState('About');
+  const [activePage, setActivePage] = useState('about');
 
   return (
     <AppBar
@@ -50,18 +53,29 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
+        bgcolor: 'rgba(10, 10, 18, 0.8)',
+        backdropFilter: 'blur(20px)',
+        height: '60px',
+        color: '#e8e8ed',
         transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
         boxShadow: 'none',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          maxWidth: '1200px',
+          width: '100%',
+          mx: 'auto',
+          px: { xs: 2, md: 4 },
+          minHeight: '60px !important',
+        }}
+      >
         <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: 1 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <Logo />
@@ -69,20 +83,25 @@ const NavBar = () => {
             variant="h6"
             component="div"
             sx={{
-              fontWeight: 800,
+              fontWeight: 700,
               letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              fontSize: '1.1rem',
+              color: '#e8e8ed',
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
+            david<span style={{ color: '#00d4ff' }}>riva</span>
           </Typography>
         </Box>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
           {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
+            <FormattedLink
+              key={page.id}
+              page={page.label}
+              sectionId={page.id}
+              active={activePage === page.id}
+              setActivePage={setActivePage}
+            />
           ))}
         </Box>
       </Toolbar>

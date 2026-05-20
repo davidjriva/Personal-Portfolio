@@ -34,7 +34,7 @@ const FeaturedProjects = memo(function FeaturedProjects({ projects }) {
 
   return (
     <Box ref={containerRef}>
-      <Grid container spacing={3} sx={{ width: '100%', margin: 0 }}>
+      <Grid container spacing={2.5} sx={{ width: '100%', margin: 0 }}>
         {projects.map((project) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.title} className="featured-card-item">
             <ProjectCard {...project} featured />
@@ -61,7 +61,7 @@ const AllProjects = ({ projects }) => {
 
   return (
     <Box ref={containerRef}>
-      <Grid container spacing={3} sx={{ width: '100%', margin: 0 }}>
+      <Grid container spacing={2.5} sx={{ width: '100%', margin: 0 }}>
         {projects.map((project) => (
           <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={project.title} className="all-card-item">
             <ProjectCard {...project} />
@@ -92,22 +92,21 @@ const ProjectsContainer = () => {
   const otherProjects = useMemo(() => projectData.filter((p) => !p.featured), [projectData]);
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '1400px', margin: '0 auto', px: { xs: 2, md: 4, lg: 6 } }}>
+    <Box sx={{ width: '100%' }}>
       {loading ? (
-        <Grid container spacing={3}>
+        <Grid container spacing={2.5}>
           {[1, 2, 3].map((item) => (
             <Grid key={item} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Box sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
-                <Skeleton variant="rectangular" height={220} sx={{ borderRadius: 1 }} />
+              <Box sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.03)', borderRadius: '20px' }}>
+                <Skeleton variant="rectangular" height={200} sx={{ borderRadius: '12px' }} />
                 <Skeleton variant="text" sx={{ mt: 2, fontSize: '1.5rem' }} />
                 <Skeleton variant="text" width="60%" />
-                <Skeleton variant="text" sx={{ mt: 1 }} height={60} />
               </Box>
             </Grid>
           ))}
         </Grid>
       ) : (
-        <Box sx={{ py: 3 }}>
+        <Box>
           <FeaturedProjects projects={featuredProjects} />
 
           <Box sx={{ mt: 4, textAlign: 'center' }}>
@@ -115,22 +114,21 @@ const ProjectsContainer = () => {
               onClick={() => setShowAll((prev) => !prev)}
               endIcon={showAll ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               sx={{
-                color: 'rgba(255,255,255,0.55)',
-                borderColor: 'rgba(255,255,255,0.15)',
+                color: 'rgba(255,255,255,0.45)',
+                borderColor: 'rgba(255,255,255,0.08)',
                 border: '1px solid',
-                borderRadius: '50px',
+                borderRadius: '10px',
                 px: 3,
                 py: 0.85,
                 textTransform: 'none',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: 500,
-                backdropFilter: 'blur(8px)',
-                bgcolor: 'rgba(255,255,255,0.03)',
+                bgcolor: 'rgba(255,255,255,0.025)',
                 transition: 'all 0.25s ease',
                 '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.07)',
-                  borderColor: 'rgba(255,255,255,0.3)',
-                  color: '#ffffff',
+                  bgcolor: 'rgba(255,255,255,0.05)',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  color: '#e8e8ed',
                 },
               }}
             >
@@ -139,7 +137,7 @@ const ProjectsContainer = () => {
           </Box>
 
           <Collapse in={showAll} timeout={400}>
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 3 }}>
               <AllProjects projects={otherProjects} />
             </Box>
           </Collapse>

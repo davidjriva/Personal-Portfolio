@@ -4,82 +4,102 @@ import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
 
 const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
+const Experience = dynamic(() => import('@/components/Experience/Experience'), { ssr: false });
 const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
+const Skills = dynamic(() => import('@/components/Skills-Page/Skills'), { ssr: false });
 const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 import HeroChat from '@/components/Greeting-Page/HeroChat';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
+const SECTION_BG = '#0a0a12';
+
+const Section = ({ id, children, sx = {} }) => (
+  <Box
+    id={id}
+    sx={{
+      position: 'relative',
+      width: '100%',
+      color: '#e8e8ed',
+      ...sx,
+    }}
+  >
+    <Box
+      sx={{
+        maxWidth: '1200px',
+        mx: 'auto',
+        px: { xs: 2.5, sm: 4, md: 6 },
+        py: { xs: 10, md: 14 },
+      }}
+    >
+      {children}
+    </Box>
+  </Box>
+);
+
 const MainPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
+        bgcolor: SECTION_BG,
+        color: '#e8e8ed',
         position: 'relative',
         minHeight: '100vh',
       }}
     >
       <NavBar />
 
+      {/* Hero */}
       <Box
         sx={{
           position: 'relative',
           height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
+          minHeight: 600,
+          background: `radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,255,0.08) 0%, transparent 60%),
+                       radial-gradient(ellipse 60% 50% at 80% 60%, rgba(167,139,250,0.06) 0%, transparent 50%),
+                       linear-gradient(180deg, #0c0c18 0%, #0a0a12 100%)`,
         }}
       >
         <ParticleBackground backgroundColor="transparent" />
         <HeroChat />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Box
-          id="about"
-          sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Section id="about">
           <About />
-        </Box>
+        </Section>
 
-        <Box
-          id="projects"
+        <Section
+          id="experience"
           sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
+            background: `linear-gradient(180deg, ${SECTION_BG} 0%, #0c0c16 50%, ${SECTION_BG} 100%)`,
           }}
         >
+          <Experience />
+        </Section>
+
+        <Section id="projects">
           <Projects />
-        </Box>
+        </Section>
 
-        <Box
-          id="contact"
+        <Section
+          id="skills"
           sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
+            background: `linear-gradient(180deg, ${SECTION_BG} 0%, #0c0c16 50%, ${SECTION_BG} 100%)`,
           }}
         >
+          <Skills />
+        </Section>
+
+        <Section id="contact">
           <Contact />
-        </Box>
+        </Section>
       </Box>
 
       <Footer />
     </Box>
   );
 };
+
 export default MainPage;
