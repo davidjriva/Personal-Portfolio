@@ -5,7 +5,6 @@ import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
 import baseOptions from '../particles-options/parallax-bubble.json';
 
-// Start engine initialization immediately on module load, not on component mount
 const engineReady = initParticlesEngine(async (engine) => {
   await loadSlim(engine);
 });
@@ -26,7 +25,7 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
         ...baseOptions.background,
         color: {
           ...baseOptions.background?.color,
-          value: isTransparent ? '#000000' : (backgroundColor || '#0b0920'),
+          value: isTransparent ? '#000000' : (backgroundColor || '#06060b'),
         },
         opacity: isTransparent ? 0 : (baseOptions.background?.opacity ?? 1),
       },
@@ -36,10 +35,19 @@ const ParticleBackground = ({ interactive = true, backgroundColor }) => {
           ...baseOptions.particles?.color,
           value: '#ffffff',
         },
+        number: {
+          ...baseOptions.particles?.number,
+          value: 30,
+        },
+        opacity: {
+          ...baseOptions.particles?.opacity,
+          value: 0.15,
+        },
         links: baseOptions.particles?.links
           ? {
               ...baseOptions.particles.links,
               color: { ...baseOptions.particles.links.color, value: '#ffffff' },
+              opacity: 0.06,
             }
           : baseOptions.particles?.links,
       },

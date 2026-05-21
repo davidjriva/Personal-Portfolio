@@ -1,39 +1,58 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ReturnToTopButton from './ReturnToTopButton';
+import { Box, Typography, Link, IconButton } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
+        borderTop: '1px solid rgba(255,255,255,0.04)',
+        py: 5,
+        px: { xs: 3, md: 5 },
+        maxWidth: '1200px',
+        mx: 'auto',
         width: '100%',
-        height: '10vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
       }}
     >
-      <ReturnToTopButton />
-      <Typography
-        variant="body2"
+      <Box
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
-          textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 2,
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
-      </Typography>
+        <Typography sx={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.78rem' }}>
+          David Riva &copy; {new Date().getFullYear()}
+        </Typography>
+
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Link href="https://github.com/davidjriva" target="_blank" rel="noopener" sx={{ color: 'rgba(255,255,255,0.25)', '&:hover': { color: '#e8e6e3' }, display: 'flex' }}>
+            <GitHubIcon sx={{ fontSize: '1.1rem' }} />
+          </Link>
+          <Link href="https://www.linkedin.com/in/david-j-riva" target="_blank" rel="noopener" sx={{ color: 'rgba(255,255,255,0.25)', '&:hover': { color: '#e8e6e3' }, display: 'flex' }}>
+            <LinkedInIcon sx={{ fontSize: '1.1rem' }} />
+          </Link>
+          <IconButton
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            sx={{
+              ml: 1,
+              color: 'rgba(255,255,255,0.2)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: '8px',
+              width: 32,
+              height: 32,
+              '&:hover': { color: '#e8e6e3', borderColor: 'rgba(255,255,255,0.15)' },
+            }}
+          >
+            <KeyboardArrowUpIcon sx={{ fontSize: '1rem' }} />
+          </IconButton>
+        </Box>
+      </Box>
     </Box>
   );
 };
