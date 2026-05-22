@@ -7,32 +7,28 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
+        bgcolor: '#04040a',
+        borderTop: '1px solid rgba(255, 255, 255, 0.04)',
         width: '100%',
-        height: '10vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        py: 4,
+        gap: 2,
       }}
     >
       <ReturnToTopButton />
       <Typography
-        variant="body2"
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
+          color: '#27272a',
           textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          fontSize: '0.78rem',
+          fontWeight: 500,
+          letterSpacing: '-0.01em',
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
+        David Riva &copy; {new Date().getFullYear()}
       </Typography>
     </Box>
   );

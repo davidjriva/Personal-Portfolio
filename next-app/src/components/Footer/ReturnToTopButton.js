@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { IconButton, Box } from '@mui/material';
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import { Box } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const ReturnToTopButton = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 200);
+    const onScroll = () => setVisible(window.scrollY > 400);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -17,29 +17,29 @@ const ReturnToTopButton = () => {
 
   return (
     <Box
+      component="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       sx={{
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#38c0f2',
-        borderRadius: '8px',
-        padding: '4px',
-        maxWidth: '50px',
-        margin: '0 auto',
-        '@keyframes jump': {
-          '0%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
-          '100%': { transform: 'translateY(0)' },
+        justifyContent: 'center',
+        width: 36,
+        height: 36,
+        borderRadius: '10px',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+        bgcolor: 'rgba(255, 255, 255, 0.03)',
+        color: '#52525b',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        fontFamily: 'inherit',
+        '&:hover': {
+          borderColor: 'rgba(56, 192, 242, 0.2)',
+          color: '#38c0f2',
+          bgcolor: 'rgba(56, 192, 242, 0.05)',
         },
-        '&:hover': { animation: 'jump 1s infinite' },
       }}
     >
-      <IconButton
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        sx={{ color: 'white', fontSize: '1.5rem', padding: '4px' }}
-      >
-        <KeyboardDoubleArrowUpIcon sx={{ fontSize: 'inherit' }} />
-      </IconButton>
+      <KeyboardArrowUpIcon sx={{ fontSize: '1.2rem' }} />
     </Box>
   );
 };

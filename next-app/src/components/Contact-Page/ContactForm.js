@@ -1,18 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, TextField, Button, Typography } from '@mui/material';
+import { Box, TextField, Button, Typography, Grid } from '@mui/material';
 import { Turnstile } from '@marsidev/react-turnstile';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const inputSx = {
-  marginBottom: 2,
-  '& .MuiInputLabel-root': { color: 'rgba(255, 255, 255, 0.55)' },
+  mb: 2,
+  '& .MuiInputLabel-root': { color: '#52525b', fontSize: '0.85rem', fontWeight: 500 },
   '& .MuiOutlinedInput-root': {
-    color: '#ffffff',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
-    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.25)' },
-    '&.Mui-focused fieldset': { borderColor: '#38c0f2' },
+    color: '#fafafa',
+    fontSize: '0.9rem',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: '12px',
+    '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.06)' },
+    '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.1)' },
+    '&.Mui-focused fieldset': { borderColor: 'rgba(56, 192, 242, 0.4)', borderWidth: '1px' },
   },
 };
 
@@ -40,7 +43,7 @@ const ContactForm = () => {
       } else {
         setStatus('Failed to send message.');
       }
-    } catch (error) {
+    } catch {
       setStatus('Error sending message.');
     }
   };
@@ -48,22 +51,42 @@ const ContactForm = () => {
   return (
     <Box
       sx={{
-        width: '100%',
-        height: 'fit-content',
-        maxWidth: '800px',
-        bgcolor: 'rgba(255, 255, 255, 0.04)',
-        border: '1px solid rgba(255, 255, 255, 0.09)',
-        color: '#ffffff',
-        padding: { xs: 2, sm: 3, md: 4 },
+        background: 'rgba(255, 255, 255, 0.02)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
         borderRadius: '16px',
-        backdropFilter: 'blur(12px)',
+        p: { xs: 2.5, md: 3.5 },
       }}
     >
       <form onSubmit={handleSubmit}>
-        <TextField fullWidth label="Your Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Your Email" name="email" type="email" value={formData.email} onChange={handleChange} required sx={inputSx} />
+        <Grid container spacing={2} sx={{ mb: 0 }}>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <TextField fullWidth label="Name" name="name" value={formData.name} onChange={handleChange} required sx={inputSx} />
+          </Grid>
+          <Grid size={{ xs: 12, sm: 6 }}>
+            <TextField
+              fullWidth
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              sx={inputSx}
+            />
+          </Grid>
+        </Grid>
         <TextField fullWidth label="Subject" name="subject" value={formData.subject} onChange={handleChange} required sx={inputSx} />
-        <TextField fullWidth label="Message" name="message" multiline rows={4} value={formData.message} onChange={handleChange} required sx={inputSx} />
+        <TextField
+          fullWidth
+          label="Message"
+          name="message"
+          multiline
+          rows={4}
+          value={formData.message}
+          onChange={handleChange}
+          required
+          sx={inputSx}
+        />
 
         {!captchaToken && (
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
@@ -78,20 +101,23 @@ const ContactForm = () => {
           type="submit"
           variant="contained"
           disabled={!captchaToken}
+          endIcon={<ArrowUpwardIcon sx={{ fontSize: '1rem !important', transform: 'rotate(45deg)' }} />}
           sx={{
             width: '100%',
-            padding: '12px 0',
-            fontSize: '16px',
-            background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
-            color: '#ffffff',
-            borderRadius: '8px',
+            py: 1.5,
+            fontSize: '0.9rem',
+            fontWeight: 600,
+            letterSpacing: '-0.01em',
+            background: 'linear-gradient(135deg, #38c0f2, #8b5cf6)',
+            color: '#fff',
+            borderRadius: '12px',
             border: 'none',
-            '&:hover': {
-              background: 'linear-gradient(135deg, #5bcff5, #8660d4)',
-            },
+            textTransform: 'none',
+            transition: 'opacity 0.2s ease',
+            '&:hover': { opacity: 0.9, background: 'linear-gradient(135deg, #38c0f2, #8b5cf6)' },
             '&.Mui-disabled': {
-              background: 'rgba(255, 255, 255, 0.12)',
-              color: 'rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              color: 'rgba(255, 255, 255, 0.2)',
             },
           }}
         >
@@ -103,9 +129,11 @@ const ContactForm = () => {
         <Typography
           variant="body2"
           sx={{
-            marginTop: 2,
+            mt: 2,
             textAlign: 'center',
-            color: status.includes('success') ? '#4caf50' : '#f44336',
+            fontSize: '0.85rem',
+            fontWeight: 500,
+            color: status.includes('success') ? '#4ade80' : '#f87171',
           }}
         >
           {status}
