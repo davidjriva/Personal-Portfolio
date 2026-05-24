@@ -2,84 +2,116 @@
 
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
-
-const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
-const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
-const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
 import HeroChat from '@/components/Greeting-Page/HeroChat';
 import ParticleBackground from '@/components/ParticleBackground';
 import NavBar from '@/components/Navbar/NavBar';
 import Footer from '@/components/Footer/Footer';
 
+const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
+const Experience = dynamic(() => import('@/components/Experience/Experience'), { ssr: false });
+const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
+const Skills = dynamic(() => import('@/components/Skills/Skills'), { ssr: false });
+const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
+
 const MainPage = () => {
   return (
-    <Box
-      sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
-        position: 'relative',
-        minHeight: '100vh',
-      }}
-    >
+    <Box sx={{ bgcolor: '#09090b', color: '#fafafa', position: 'relative', minHeight: '100vh' }}>
       <NavBar />
 
       <Box
         sx={{
           position: 'relative',
           height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
-          },
+          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,130,246,0.08) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(139,92,246,0.06) 0%, transparent 50%), #09090b',
         }}
       >
         <ParticleBackground backgroundColor="transparent" />
         <HeroChat />
       </Box>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Box id="about" sx={{ position: 'relative' }}>
         <Box
-          id="about"
           sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            maxWidth: 600,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)',
           }}
-        >
-          <About />
-        </Box>
+        />
+        <About />
+      </Box>
 
+      <Box id="experience" sx={{ position: 'relative' }}>
         <Box
-          id="projects"
           sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            maxWidth: 600,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent)',
           }}
-        >
-          <Projects />
-        </Box>
+        />
+        <Experience />
+      </Box>
 
+      <Box id="projects" sx={{ position: 'relative' }}>
         <Box
-          id="contact"
           sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            maxWidth: 600,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)',
           }}
-        >
-          <Contact />
-        </Box>
+        />
+        <Projects />
+      </Box>
+
+      <Box id="skills" sx={{ position: 'relative' }}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            maxWidth: 600,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent)',
+          }}
+        />
+        <Skills />
+      </Box>
+
+      <Box id="contact" sx={{ position: 'relative' }}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '80%',
+            maxWidth: 600,
+            height: '1px',
+            background: 'linear-gradient(90deg, transparent, rgba(59,130,246,0.3), transparent)',
+          }}
+        />
+        <Contact />
       </Box>
 
       <Footer />
     </Box>
   );
 };
+
 export default MainPage;

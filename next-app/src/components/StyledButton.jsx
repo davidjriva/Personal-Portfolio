@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 
 const StyledButton = ({ href, onClick, text, icon, component, ...props }) => {
   return (
@@ -8,36 +8,26 @@ const StyledButton = ({ href, onClick, text, icon, component, ...props }) => {
       component={component}
       {...props}
       sx={{
-        marginTop: '20px',
-        backgroundColor: 'rgba(10, 115, 201, 0.15)',
-        border: '2px solid #38c0f2',
-        borderRadius: '50px',
-        padding: '12px 24px',
-        color: '#38c0f2',
-        display: 'flex',
+        backgroundColor: 'rgba(59, 130, 246, 0.08)',
+        border: '1px solid rgba(59, 130, 246, 0.25)',
+        borderRadius: '10px',
+        padding: '10px 20px',
+        color: '#3b82f6',
+        display: 'inline-flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: '10px',
-        fontWeight: 'bold',
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        transition: 'all 0.3s ease-in-out',
+        gap: '8px',
+        fontWeight: 600,
+        fontSize: '0.85rem',
+        letterSpacing: '0.02em',
+        transition: 'all 0.2s ease',
         textTransform: 'none',
         '&:hover': {
-          backgroundColor: 'rgba(10, 115, 201, 0.3)',
-          transform: 'scale(1.05)',
-          boxShadow: '0px 6px 8px rgba(0, 0, 0, 0.15)',
+          backgroundColor: 'rgba(59, 130, 246, 0.15)',
+          borderColor: 'rgba(59, 130, 246, 0.5)',
         },
       }}
     >
-      <Typography
-        sx={{
-          color: '#38c0f2',
-          fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' },
-          fontWeight: '500',
-        }}
-      >
-        {text}
-      </Typography>
+      {text}
       {icon}
     </Button>
   );

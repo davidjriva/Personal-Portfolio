@@ -18,14 +18,14 @@ const FeaturedProjects = memo(function FeaturedProjects({ projects }) {
     const cards = containerRef.current.querySelectorAll('.featured-card-item');
     gsap.fromTo(
       cards,
-      { y: 40, opacity: 0 },
+      { y: 30, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.75,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: containerRef.current, start: 'top 80%' },
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: containerRef.current, start: 'top 85%' },
       }
     );
     ScrollTrigger.refresh();
@@ -34,7 +34,7 @@ const FeaturedProjects = memo(function FeaturedProjects({ projects }) {
 
   return (
     <Box ref={containerRef}>
-      <Grid container spacing={3} sx={{ width: '100%', margin: 0 }}>
+      <Grid container spacing={2.5} sx={{ width: '100%', margin: 0 }}>
         {projects.map((project) => (
           <Grid size={{ xs: 12, sm: 6, md: 4 }} key={project.title} className="featured-card-item">
             <ProjectCard {...project} featured />
@@ -52,16 +52,12 @@ const AllProjects = ({ projects }) => {
   useEffect(() => {
     if (!containerRef.current || projects.length === 0) return;
     const cards = containerRef.current.querySelectorAll('.all-card-item');
-    gsap.fromTo(
-      cards,
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out' }
-    );
+    gsap.fromTo(cards, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power2.out' });
   }, [projects]);
 
   return (
     <Box ref={containerRef}>
-      <Grid container spacing={3} sx={{ width: '100%', margin: 0 }}>
+      <Grid container spacing={2.5} sx={{ width: '100%', margin: 0 }}>
         {projects.map((project) => (
           <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={project.title} className="all-card-item">
             <ProjectCard {...project} />
@@ -92,45 +88,41 @@ const ProjectsContainer = () => {
   const otherProjects = useMemo(() => projectData.filter((p) => !p.featured), [projectData]);
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '1400px', margin: '0 auto', px: { xs: 2, md: 4, lg: 6 } }}>
+    <Box sx={{ width: '100%' }}>
       {loading ? (
-        <Grid container spacing={3}>
+        <Grid container spacing={2.5}>
           {[1, 2, 3].map((item) => (
             <Grid key={item} size={{ xs: 12, sm: 6, md: 4 }}>
-              <Box sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
-                <Skeleton variant="rectangular" height={220} sx={{ borderRadius: 1 }} />
-                <Skeleton variant="text" sx={{ mt: 2, fontSize: '1.5rem' }} />
-                <Skeleton variant="text" width="60%" />
-                <Skeleton variant="text" sx={{ mt: 1 }} height={60} />
+              <Box sx={{ p: 2, bgcolor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+                <Skeleton variant="rectangular" height={200} sx={{ borderRadius: '12px', bgcolor: 'rgba(255,255,255,0.04)' }} />
+                <Skeleton variant="text" sx={{ mt: 2, fontSize: '1.2rem', bgcolor: 'rgba(255,255,255,0.04)' }} />
+                <Skeleton variant="text" width="60%" sx={{ bgcolor: 'rgba(255,255,255,0.04)' }} />
               </Box>
             </Grid>
           ))}
         </Grid>
       ) : (
-        <Box sx={{ py: 3 }}>
+        <>
           <FeaturedProjects projects={featuredProjects} />
 
-          <Box sx={{ mt: 4, textAlign: 'center' }}>
+          <Box sx={{ mt: 5, textAlign: 'center' }}>
             <Button
               onClick={() => setShowAll((prev) => !prev)}
               endIcon={showAll ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               sx={{
-                color: 'rgba(255,255,255,0.55)',
-                borderColor: 'rgba(255,255,255,0.15)',
-                border: '1px solid',
-                borderRadius: '50px',
+                color: '#71717a',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '10px',
                 px: 3,
                 py: 0.85,
                 textTransform: 'none',
-                fontSize: '0.85rem',
+                fontSize: '0.8rem',
                 fontWeight: 500,
-                backdropFilter: 'blur(8px)',
-                bgcolor: 'rgba(255,255,255,0.03)',
-                transition: 'all 0.25s ease',
+                transition: 'all 0.2s ease',
                 '&:hover': {
-                  bgcolor: 'rgba(255,255,255,0.07)',
-                  borderColor: 'rgba(255,255,255,0.3)',
-                  color: '#ffffff',
+                  bgcolor: 'rgba(255,255,255,0.04)',
+                  borderColor: 'rgba(255,255,255,0.15)',
+                  color: '#a1a1aa',
                 },
               }}
             >
@@ -139,11 +131,11 @@ const ProjectsContainer = () => {
           </Box>
 
           <Collapse in={showAll} timeout={400}>
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 3 }}>
               <AllProjects projects={otherProjects} />
             </Box>
           </Collapse>
-        </Box>
+        </>
       )}
     </Box>
   );
