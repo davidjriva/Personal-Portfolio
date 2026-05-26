@@ -1,92 +1,155 @@
 'use client';
 
 import { Link as ScrollLink } from 'react-scroll';
-import { Toolbar, Box, AppBar, Typography } from '@mui/material';
-import { useState } from 'react';
-import Logo from './Logo';
-import './ScrollLink.css';
+import { Toolbar, Box, AppBar, Typography, IconButton, Drawer, List, ListItem } from '@mui/material';
+import { useState, useEffect } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
+const pages = ['About', 'Experience', 'Projects', 'Skills', 'Contact'];
 
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+const NavLink = ({ page, active, setActivePage }) => (
+  <ScrollLink
+    to={page.toLowerCase()}
+    spy={true}
+    smooth={true}
+    offset={-80}
+    duration={500}
+    onSetActive={() => setActivePage(page)}
+    style={{ cursor: 'pointer' }}
+  >
+    <Typography
+      sx={{
+        fontSize: '0.85rem',
+        fontWeight: active ? 600 : 400,
+        color: active ? 'text.primary' : 'text.secondary',
+        px: 1.5,
+        py: 0.5,
+        borderRadius: '8px',
+        transition: 'all 0.2s ease',
+        '&:hover': { color: 'text.primary', bgcolor: 'rgba(255,255,255,0.04)' },
       }}
     >
       {page}
-    </ScrollLink>
-  );
-};
-
-const pages = ['About', 'Projects', 'Contact'];
+    </Typography>
+  </ScrollLink>
+);
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        top: 0,
-        zIndex: 1100,
-        width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
-        boxShadow: 'none',
-      }}
-    >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
-        <Box
-          sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    <>
+      <AppBar
+        position="fixed"
+        sx={{
+          top: 0,
+          zIndex: 1100,
+          bgcolor: scrolled ? 'rgba(6, 6, 10, 0.85)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          boxShadow: 'none',
+          transition: 'all 0.3s ease',
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            px: { xs: 2, md: 4 },
+            height: 64,
+          }}
         >
-          <Logo />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontWeight: 800,
-              letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
-            }}
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
-          </Typography>
-        </Box>
+            <Typography
+              sx={{
+                fontWeight: 700,
+                fontSize: '1.1rem',
+                fontFamily: 'var(--font-space-grotesk), sans-serif',
+                letterSpacing: '-0.5px',
+              }}
+            >
+              david
+              <Box component="span" sx={{ color: 'primary.main' }}>
+                riva
+              </Box>
+            </Typography>
+          </Box>
 
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
-          ))}
+          {/* Desktop nav */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+            {pages.map((page) => (
+              <NavLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
+            ))}
+          </Box>
+
+          {/* Mobile hamburger */}
+          <IconButton
+            onClick={() => setMobileOpen(true)}
+            sx={{ display: { xs: 'flex', md: 'none' }, color: 'text.primary' }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile drawer */}
+      <Drawer
+        anchor="top"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: '#0c0c12',
+            borderBottom: '1px solid rgba(255,255,255,0.06)',
+          },
+        }}
+      >
+        <Box sx={{ px: 2, py: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: 'text.secondary' }}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-      </Toolbar>
-    </AppBar>
+        <List sx={{ pb: 3 }}>
+          {pages.map((page) => (
+            <ListItem key={page} sx={{ justifyContent: 'center' }}>
+              <ScrollLink
+                to={page.toLowerCase()}
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={500}
+                onClick={() => setMobileOpen(false)}
+                style={{ cursor: 'pointer' }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: '1.1rem',
+                    fontWeight: 500,
+                    color: activePage === page ? 'text.primary' : 'text.secondary',
+                    py: 1,
+                  }}
+                >
+                  {page}
+                </Typography>
+              </ScrollLink>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

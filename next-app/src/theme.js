@@ -6,30 +6,64 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: '#0b0920',
-      paper: 'rgba(255, 255, 255, 0.04)',
+      default: '#06060a',
+      paper: '#111116',
     },
     text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.55)',
+      primary: '#ededf0',
+      secondary: '#7a7a8e',
     },
     primary: {
-      main: '#38c0f2',
+      main: '#6366f1',
+      light: '#818cf8',
+      dark: '#4f46e5',
     },
     secondary: {
-      main: '#6e40c9',
+      main: '#a78bfa',
+      light: '#c4b5fd',
+      dark: '#8b5cf6',
     },
+    divider: 'rgba(255, 255, 255, 0.06)',
   },
   typography: {
-    fontFamily: 'var(--font-montserrat), Arial, sans-serif',
-    h1: { fontWeight: 'bold', fontSize: '2.5rem' },
-    h2: { fontWeight: 'bold' },
-    h3: { fontWeight: 'bold' },
-    h4: { fontWeight: 'bold' },
-    h5: { fontWeight: 'bold' },
-    h6: { fontWeight: 'bold' },
-    body1: { fontWeight: 400, lineHeight: 1.6 },
-    body2: { fontWeight: 400 },
+    fontFamily: 'var(--font-inter), system-ui, -apple-system, sans-serif',
+    h1: {
+      fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif',
+      fontWeight: 700,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.1,
+    },
+    h2: {
+      fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif',
+      fontWeight: 700,
+      letterSpacing: '-0.02em',
+      lineHeight: 1.2,
+    },
+    h3: {
+      fontFamily: 'var(--font-space-grotesk), system-ui, sans-serif',
+      fontWeight: 600,
+      letterSpacing: '-0.01em',
+    },
+    h4: { fontWeight: 600 },
+    h5: { fontWeight: 600 },
+    h6: { fontWeight: 600 },
+    body1: { fontWeight: 400, lineHeight: 1.7, fontSize: '1rem' },
+    body2: { fontWeight: 400, lineHeight: 1.6, fontSize: '0.875rem' },
+    button: { textTransform: 'none', fontWeight: 600 },
+  },
+  shape: {
+    borderRadius: 12,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+          padding: '10px 24px',
+          fontSize: '0.9rem',
+        },
+      },
+    },
   },
 });
 

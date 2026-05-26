@@ -1,39 +1,81 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import ReturnToTopButton from './ReturnToTopButton';
+import { Box, Typography, IconButton, Stack } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const Footer = () => {
   return (
     <Box
+      component="footer"
       sx={{
-        bgcolor: '#060514',
-        color: 'rgba(255, 255, 255, 0.35)',
-        width: '100%',
-        height: '10vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        bottom: 0,
-        mt: 0,
-        pt: '1rem',
-        pb: '1rem',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        py: 4,
+        px: { xs: 2, md: 4 },
       }}
     >
-      <ReturnToTopButton />
-      <Typography
-        variant="body2"
+      <Box
         sx={{
-          color: 'rgba(255, 255, 255, 0.35)',
-          textAlign: 'center',
-          marginTop: '1rem',
-          marginBottom: 10,
+          maxWidth: 1200,
+          mx: 'auto',
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 2,
         }}
       >
-        David Riva © {new Date().getFullYear()}. All Rights Reserved.
-      </Typography>
+        <Typography sx={{ fontSize: '0.8rem', color: 'text.secondary' }}>
+          David Riva &copy; {new Date().getFullYear()}
+        </Typography>
+
+        <Stack direction="row" spacing={1}>
+          <IconButton
+            href="https://github.com/davidjriva"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            size="small"
+            sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+          >
+            <GitHubIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            href="https://linkedin.com/in/davidjriva"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            size="small"
+            sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+          >
+            <LinkedInIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            href="mailto:davidjriva@gmail.com"
+            aria-label="Email"
+            size="small"
+            sx={{ color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+          >
+            <EmailIcon fontSize="small" />
+          </IconButton>
+        </Stack>
+
+        <IconButton
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
+          sx={{
+            color: 'text.secondary',
+            border: '1px solid rgba(255,255,255,0.08)',
+            width: 36,
+            height: 36,
+            '&:hover': { color: 'text.primary', borderColor: 'rgba(255,255,255,0.15)' },
+          }}
+        >
+          <KeyboardArrowUpIcon fontSize="small" />
+        </IconButton>
+      </Box>
     </Box>
   );
 };
