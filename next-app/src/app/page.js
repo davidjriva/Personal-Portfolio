@@ -2,84 +2,51 @@
 
 import { Box } from '@mui/material';
 import dynamic from 'next/dynamic';
+import Nav from '@/components/layout/Nav';
+import Hero from '@/components/sections/Hero';
+import Footer from '@/components/layout/Footer';
 
-const About = dynamic(() => import('@/components/About-Page/About'), { ssr: false });
-const Projects = dynamic(() => import('@/components/Projects-Page/Projects'), { ssr: false });
-const Contact = dynamic(() => import('@/components/Contact-Page/Contact'), { ssr: false });
-import HeroChat from '@/components/Greeting-Page/HeroChat';
-import ParticleBackground from '@/components/ParticleBackground';
-import NavBar from '@/components/Navbar/NavBar';
-import Footer from '@/components/Footer/Footer';
+const About = dynamic(() => import('@/components/sections/About'), { ssr: false });
+const Experience = dynamic(() => import('@/components/sections/Experience'), { ssr: false });
+const Projects = dynamic(() => import('@/components/sections/Projects'), { ssr: false });
+const Skills = dynamic(() => import('@/components/sections/Skills'), { ssr: false });
+const Awards = dynamic(() => import('@/components/sections/Awards'), { ssr: false });
+const Contact = dynamic(() => import('@/components/sections/Contact'), { ssr: false });
+const ChatDrawer = dynamic(() => import('@/components/chat/ChatDrawer'), { ssr: false });
 
 const MainPage = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#0b0920',
-        color: '#ffffff',
-        position: 'relative',
+        bgcolor: '#09090b',
+        color: '#fafafa',
         minHeight: '100vh',
+        position: 'relative',
       }}
     >
-      <NavBar />
+      <Nav />
+      <Hero />
 
       <Box
         sx={{
           position: 'relative',
-          height: '100vh',
-          background: 'linear-gradient(135deg, #0f0c29, #302b63, #0d1b2a, #1a0a2e)',
-          backgroundSize: '400% 400%',
-          animation: 'gradShift 16s ease infinite',
-          '@keyframes gradShift': {
-            '0%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-            '100%': { backgroundPosition: '0% 50%' },
+          '& > *:not(:last-child)': {
+            borderBottom: '1px solid rgba(255,255,255,0.04)',
           },
         }}
       >
-        <ParticleBackground backgroundColor="transparent" />
-        <HeroChat />
-      </Box>
-
-      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Box
-          id="about"
-          sx={{
-            background: 'linear-gradient(180deg, #12102a 0%, #0e0c22 100%)',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <About />
-        </Box>
-
-        <Box
-          id="projects"
-          sx={{
-            bgcolor: '#0b0920',
-            width: '100%',
-            color: '#ffffff',
-            borderBottom: '1.5px solid rgba(255, 255, 255, 0.08)',
-          }}
-        >
-          <Projects />
-        </Box>
-
-        <Box
-          id="contact"
-          sx={{
-            background: 'linear-gradient(180deg, #0e0c22 0%, #0a0818 100%)',
-            width: '100%',
-            color: '#ffffff',
-          }}
-        >
-          <Contact />
-        </Box>
+        <About />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Awards />
+        <Contact />
       </Box>
 
       <Footer />
+      <ChatDrawer />
     </Box>
   );
 };
+
 export default MainPage;

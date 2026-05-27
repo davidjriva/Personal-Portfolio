@@ -15,11 +15,11 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         p: '4px 8px',
         borderRadius: '999px',
         backgroundColor: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(56,192,242,0.3)',
+        border: '1px solid rgba(129,140,248,0.25)',
         backdropFilter: 'blur(12px)',
         boxShadow: 'none',
-        '&:hover': { borderColor: 'rgba(56,192,242,0.6)' },
-        '&:focus-within': { borderColor: '#38c0f2' },
+        '&:hover': { borderColor: 'rgba(129,140,248,0.5)' },
+        '&:focus-within': { borderColor: '#818cf8' },
       }}
     >
       <InputBase
@@ -37,7 +37,7 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
           ml: 1,
           flex: 1,
           color: '#fff',
-          fontFamily: 'var(--font-montserrat), Arial, sans-serif',
+          fontFamily: 'var(--font-inter), system-ui, sans-serif',
           '& input::placeholder': { color: 'rgba(255,255,255,0.35)' },
         }}
       />
@@ -46,7 +46,7 @@ const ChatInput = ({ input, setInput, sendMessage, disabled = false, placeholder
         disabled={!input.trim() || disabled}
         sx={{
           ml: 1,
-          background: 'linear-gradient(135deg, #38c0f2, #6e40c9)',
+          background: 'linear-gradient(135deg, #6366f1, #818cf8)',
           '&:hover': { opacity: 0.85 },
           '&.Mui-disabled': { background: 'rgba(255,255,255,0.08)' },
         }}

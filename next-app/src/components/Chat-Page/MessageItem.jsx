@@ -7,7 +7,7 @@ const MessageItem = ({ msg }) => {
   const showDots = msg.role === 'assistant' && (!msg.text || msg.text.length === 0);
 
   const mdStyles = {
-    fontFamily: 'var(--font-montserrat), Arial, sans-serif',
+    fontFamily: 'var(--font-inter), system-ui, sans-serif',
     fontWeight: 400,
     lineHeight: 1.6,
     fontSize: '0.95rem',
@@ -29,16 +29,16 @@ const MessageItem = ({ msg }) => {
           px: 2.5,
           py: 1.5,
           borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-          background: isUser ? 'rgba(56,192,242,0.12)' : 'rgba(255,255,255,0.05)',
+          background: isUser ? 'rgba(99,102,241,0.1)' : 'rgba(255,255,255,0.04)',
           border: isUser
-            ? '1px solid rgba(56,192,242,0.22)'
-            : '1px solid rgba(255,255,255,0.09)',
+            ? '1px solid rgba(129,140,248,0.2)'
+            : '1px solid rgba(255,255,255,0.07)',
         }}
       >
         {msg.role === 'assistant' ? (
           showDots ? (
             <Box sx={{ display: 'flex', alignItems: 'center', py: 0.5 }}>
-              <BouncingDotsLoadingAnimation dotSize={8} dotColor="#38c0f2" spacing={4} />
+              <BouncingDotsLoadingAnimation dotSize={8} dotColor="#818cf8" spacing={4} />
             </Box>
           ) : (
             <ReactMarkdown
@@ -55,8 +55,8 @@ const MessageItem = ({ msg }) => {
                     component="code"
                     sx={{
                       fontFamily: 'monospace',
-                      color: '#38c0f2',
-                      backgroundColor: 'rgba(56,192,242,0.08)',
+                      color: '#818cf8',
+                      backgroundColor: 'rgba(129,140,248,0.08)',
                       p: '0 4px',
                       borderRadius: 1,
                       display: 'inline',
@@ -71,7 +71,7 @@ const MessageItem = ({ msg }) => {
                     {...props}
                   />
                 ),
-                a: (props) => <a style={{ color: '#38c0f2', textDecoration: 'none' }} {...props} />,
+                a: (props) => <a style={{ color: '#a5b4fc', textDecoration: 'none' }} {...props} />,
               }}
             >
               {msg.text}
