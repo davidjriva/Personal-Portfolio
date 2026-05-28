@@ -4,41 +4,53 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Toolbar, Box, AppBar, Typography } from '@mui/material';
 import { useState } from 'react';
 import Logo from './Logo';
-import './ScrollLink.css';
 
-const linkStyles = {
-  margin: '0 16px',
-  fontWeight: 700,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  fontFamily: 'Montserrat, Arial, sans-serif',
-  transition: 'all 0.3s ease',
-};
+const NAV_ITEMS = ['About', 'Projects', 'Contact'];
 
-const FormattedLink = ({ page, active, setActivePage }) => {
-  return (
-    <ScrollLink
-      to={page.toLowerCase()}
-      spy={true}
-      smooth={true}
-      offset={-70}
-      duration={500}
-      onSetActive={() => setActivePage(page)}
-      className="scroll-link"
-      style={{
-        ...linkStyles,
-        color: active ? '#38c0f2' : 'rgba(255, 255, 255, 0.55)',
-        fontWeight: active ? 'bold' : 'normal',
-        borderBottom: active ? '1.5px solid #38c0f2' : 'none',
-        padding: '4px 8px',
+const NavLink = ({ page, active, setActivePage }) => (
+  <ScrollLink
+    to={page.toLowerCase()}
+    spy={true}
+    smooth={true}
+    offset={-70}
+    duration={500}
+    onSetActive={() => setActivePage(page)}
+    style={{ textDecoration: 'none', cursor: 'pointer' }}
+  >
+    <Typography
+      component="span"
+      sx={{
+        mx: 2,
+        fontWeight: active ? 600 : 400,
+        fontSize: '0.85rem',
+        color: active ? '#fafafa' : 'rgba(255, 255, 255, 0.4)',
+        transition: 'color 0.2s ease',
+        position: 'relative',
+        py: 0.5,
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: active ? '100%' : '0%',
+          height: '1.5px',
+          background: '#38c0f2',
+          borderRadius: '1px',
+          transition: 'width 0.25s ease',
+        },
+        '&:hover': {
+          color: '#fafafa',
+          '&::after': {
+            width: '100%',
+          },
+        },
       }}
     >
       {page}
-    </ScrollLink>
-  );
-};
-
-const pages = ['About', 'Projects', 'Contact'];
+    </Typography>
+  </ScrollLink>
+);
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('About');
@@ -50,16 +62,25 @@ const NavBar = () => {
         top: 0,
         zIndex: 1100,
         width: '100%',
-        bgcolor: 'rgba(10, 8, 28, 0.75)',
-        backdropFilter: 'blur(16px)',
-        height: '64px',
-        color: '#ffffff',
-        transition: 'all 0.3s ease',
-        borderBottom: '1px solid rgba(56, 192, 242, 0.15)',
+        bgcolor: 'rgba(5, 5, 7, 0.6)',
+        backdropFilter: 'blur(20px) saturate(1.4)',
+        height: '60px',
+        color: '#fafafa',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
         boxShadow: 'none',
+        transition: 'background-color 0.3s ease',
       }}
     >
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: { xs: 2, md: 4 } }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: { xs: 2, md: 5 },
+          minHeight: '60px !important',
+          height: '60px',
+        }}
+      >
         <Box
           sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -71,18 +92,20 @@ const NavBar = () => {
             sx={{
               fontWeight: 800,
               letterSpacing: '-0.5px',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '1.25rem',
-              color: '#ffffff',
+              fontSize: '1.15rem',
+              color: '#fafafa',
             }}
           >
-            DAVID<span style={{ color: '#38c0f2' }}>RIVA</span>
+            DAVID
+            <Box component="span" sx={{ color: '#38c0f2' }}>
+              RIVA
+            </Box>
           </Typography>
         </Box>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-          {pages.map((page) => (
-            <FormattedLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
+          {NAV_ITEMS.map((page) => (
+            <NavLink key={page} page={page} active={activePage === page} setActivePage={setActivePage} />
           ))}
         </Box>
       </Toolbar>
