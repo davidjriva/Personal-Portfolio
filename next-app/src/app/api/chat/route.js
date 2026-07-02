@@ -9,8 +9,8 @@ export const runtime = 'nodejs';
 
 // Initialize Upstash Redis (REST API, no persistent socket)
 const redis = new Redis({
-  url: process.env.REDISUPSTASH_REDIS_REDIS_KV_REST_API_URL,
-  token: process.env.REDISUPSTASH_REDIS_REDIS_KV_REST_API_TOKEN,
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
 });
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
