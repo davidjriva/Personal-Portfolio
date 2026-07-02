@@ -22,7 +22,7 @@ const AboutHeader = () => {
           marginBottom: 1,
         }}
       >
-        Training Engineer, Generative AI
+        Software Engineer, Agents
       </Typography>
 
       <Typography

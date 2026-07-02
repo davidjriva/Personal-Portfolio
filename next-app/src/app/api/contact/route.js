@@ -3,8 +3,8 @@ import { Redis } from '@upstash/redis';
 import sanitizeHtml from 'sanitize-html';
 
 const redis = new Redis({
-  url: process.env.REDISUPSTASH_REDIS_REDIS_KV_REST_API_URL,
-  token: process.env.REDISUPSTASH_REDIS_REDIS_KV_REST_API_TOKEN,
+  url: process.env.KV_REST_API_URL,
+  token: process.env.KV_REST_API_TOKEN,
 });
 
 const MAX_REQUESTS = 2; // 2 emails per IP per hour
