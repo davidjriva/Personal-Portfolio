@@ -1,6 +1,21 @@
 [
     {
-      "title": "Training Engineer, Generative AI",
+      "title": "Software Engineer, Agents",
+      "company": "Scale AI",
+      "companyWebsiteLink": "https://scale.com/",
+      "logoImage": "Scale_AI.webp",
+      "location": "San Mateo, CA",
+      "startDate": "May 2026",
+      "endDate": "Present",
+      "bulletPoints": [
+        "Designed custom Agentic AI solutions and automated eval harnesses leveraging the OpenAI Agents SDK and LangGraph, ensuring robust model performance for customer use cases.",
+        "Mentored an engineering intern through the lifecycle of a customer-facing AI project, driving a 15%+ performance increase in agent hill-climbing metrics.",
+        "Scaled the Semantic Analysis Engine's ontology generation capacity from 20 to 800+ tables by systematically identifying and resolving 40+ critical bugs within the Python codebase."
+      ],
+      "tags": ["work", "job", "employment", "experience", "current", "agents", "agentic AI", "LLM", "OpenAI", "LangGraph", "Python", "evals", "software"]
+    },
+    {
+      "title": "Forward Deployed Engineer, Generative AI",
       "company": "C3 AI",
       "companyWebsiteLink": "https://c3.ai/",
       "logoImage": "C3_AI.webp",
