@@ -1,76 +1,94 @@
 import { searchEmbeddings } from '../../../lib/search';
 import OpenAI from 'openai';
-import { Redis } from '@upstash/redis';
 import { jwtVerify } from 'jose';
 import { getSystemPrompt, toolsDefinitions } from '../../../lib/chatConfig';
+import { checkRateLimit, getClientIp, validateOrigin } from '../../../lib/rateLimit';
+import { CHAT_COOKIE_NAME } from '../token/route';
 import sanitizeHtml from 'sanitize-html';
 
 export const runtime = 'nodejs';
 
-// Initialize Upstash Redis (REST API, no persistent socket)
-const redis = new Redis({
-  url: process.env.KV_REST_API_URL,
-  token: process.env.KV_REST_API_TOKEN,
-});
-
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const sessionMemory = new Map();
 const MAX_MEMORY_PAIRS = 3;
+const MAX_MEMORY_SESSIONS = 1000;
 const MAX_REQUESTS = 20;
 const WINDOW_MS = 60 * 1000;
 const MAX_MESSAGE_LENGTH = 1500;
+const MAX_TOOL_ROUNDS = 2;
+const MAX_TOOL_CALLS_PER_ROUND = 3;
+const MAX_QUERY_LENGTH = 400;
+const MAX_COMPLETION_TOKENS = 700;
+const MODEL_UNAVAILABLE_MSG = 'The model is currently unavailable. Please try again later.';
 
-// --- Rate limiting ---
-async function checkRateLimit(ip) {
-  const key = `rate:${ip}`;
-  const now = Date.now();
-
-  let entry = await redis.get(key);
-  if (!entry) entry = { count: 0, timestamp: now };
-
-  if (now - entry.timestamp > WINDOW_MS) {
-    entry.count = 0;
-    entry.timestamp = now;
+function extractToken(req) {
+  // 1. Prefer HttpOnly cookie set by /api/token (invisible to client JS & request headers)
+  const cookieHeader = req.headers.get('cookie') || '';
+  for (const part of cookieHeader.split(';')) {
+    const [rawName, ...rest] = part.trim().split('=');
+    if (rawName === CHAT_COOKIE_NAME && rest.length > 0) {
+      return rest.join('=');
+    }
   }
-
-  entry.count += 1;
-  await redis.set(key, entry, { ex: WINDOW_MS / 1000 });
-  return entry.count <= MAX_REQUESTS;
+  // 2. Fallback to Authorization header for automated eval test runner
+  const authHeader = req.headers.get('authorization');
+  if (authHeader?.startsWith('Bearer ')) {
+    return authHeader.slice(7).trim();
+  }
+  return null;
 }
 
-// --- Edge route handler ---
 export async function POST(req) {
-  const startTotal = Date.now();
   console.log(`[${new Date().toISOString()}] POST /api/chat start`);
 
   try {
-    // JWT verification using 'jose'
-    const authHeader = req.headers.get('authorization');
-    const token = authHeader?.split(' ')[1];
-    if (!token) return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
+    const token = extractToken(req);
+    let jwtPayload = null;
+    if (token) {
+      try {
+        const verified = await jwtVerify(token, new TextEncoder().encode(process.env.FRONTEND_JWT_SECRET));
+        jwtPayload = verified.payload;
+      } catch {
+        jwtPayload = null;
+      }
+    }
 
-    try {
-      await jwtVerify(token, new TextEncoder().encode(process.env.FRONTEND_JWT_SECRET));
-    } catch {
-      return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 401 });
+    const isEvaluatorToken = jwtPayload?.role === 'evaluator';
+    const originCheck = validateOrigin(req, {
+      allowEvaluatorBypass: isEvaluatorToken && process.env.VERCEL_ENV !== 'production',
+    });
+    if (!originCheck.allowed) {
+      return new Response(JSON.stringify({ error: originCheck.reason }), { status: 403 });
+    }
+
+    if (!token) {
+      return new Response(JSON.stringify({ error: 'Missing token' }), { status: 401 });
+    }
+    if (!jwtPayload) {
+      return new Response(JSON.stringify({ error: 'Invalid or expired token' }), { status: 401 });
     }
 
     // Parse body
     const body = await req.json();
     const rawMessage = body.message;
-    const rawSessionId = body.sessionId;
 
-    // Eval Mode Configuration (relaxed check for debugging)
+    // Eval Mode is strictly restricted to non-production or tokens explicitly signed with role === 'evaluator'
     const evalHeader = req.headers.get('x-eval-mode');
-    console.log(`[DEBUG] x-eval-mode: ${evalHeader}, NODE_ENV: ${process.env.NODE_ENV}`);
-    
-    // Temporarily allowing x-eval-mode to work even if NODE_ENV isn't 'development' to debug
-    const isEvalMode = evalHeader === 'true';
+    const isEvalMode =
+      evalHeader === 'true' && (process.env.VERCEL_ENV !== 'production' && (process.env.NODE_ENV !== 'production' || isEvaluatorToken));
     const evalData = { contexts: [], tool_calls: [] };
 
-    if (!rawMessage || !rawSessionId || rawMessage.trim() === '') {
-      return new Response(JSON.stringify({ error: 'Message and sessionId are required' }), { status: 400 });
+    if (!rawMessage || typeof rawMessage !== 'string' || rawMessage.trim() === '') {
+      return new Response(JSON.stringify({ error: 'Message is required' }), { status: 400 });
     }
+
+    // Derive sessionId from the signed JWT payload so clients cannot spoof other sessions
+    const rawSessionId =
+      typeof jwtPayload?.sid === 'string' && jwtPayload.sid
+        ? jwtPayload.sid
+        : typeof body.sessionId === 'string' && body.sessionId
+          ? body.sessionId
+          : 'anonymous';
 
     const message = sanitizeHtml(rawMessage, { allowedTags: [], allowedAttributes: {} });
     const sessionId = sanitizeHtml(rawSessionId, { allowedTags: [], allowedAttributes: {} });
@@ -81,13 +99,16 @@ export async function POST(req) {
       });
     }
 
-    // Rate limiting
-    const forwarded = req.headers.get('x-forwarded-for');
-    let ip = forwarded ? forwarded.split(',')[0].trim() : req.headers.get('x-real-ip') || 'unknown';
-    if (process.env.NODE_ENV === 'development' && ip === 'unknown') ip = sessionId;
-
-    if (!isEvalMode && !(await checkRateLimit(ip))) {
-      return new Response(JSON.stringify({ error: '⚠️ Rate limit exceeded. Please wait 1 minute.' }), { status: 429 });
+    // Self-managed rate limiting across both client IP and signed session ID
+    const ip = getClientIp(req, sessionId);
+    if (!isEvalMode) {
+      const ipAllowed = checkRateLimit(`chat:ip:${ip}`, MAX_REQUESTS, WINDOW_MS);
+      const sessionAllowed = checkRateLimit(`chat:sid:${sessionId}`, MAX_REQUESTS, WINDOW_MS);
+      if (!ipAllowed || !sessionAllowed) {
+        return new Response(JSON.stringify({ error: '⚠️ Rate limit exceeded. Please wait 1 minute.' }), {
+          status: 429,
+        });
+      }
     }
 
     // Retrieve memory
@@ -97,18 +118,22 @@ export async function POST(req) {
 
     const systemPrompt = getSystemPrompt();
 
-    let currentMessages = [
+    const currentMessages = [
       { role: 'system', content: systemPrompt },
-      { role: 'user', content: `Memory:\n${memoryContext}\n\nQuestion:\n${message}` }
+      { role: 'user', content: `Memory:\n${memoryContext}\n\nQuestion:\n${message}` },
     ];
 
+    let toolRounds = 0;
+
     while (true) {
+      const allowTools = toolRounds < MAX_TOOL_ROUNDS;
       const stream = await client.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: currentMessages,
-        tools: toolsDefinitions,
+        ...(allowTools ? { tools: toolsDefinitions } : { tool_choice: 'none' }),
         stream: true,
         temperature: 0.2,
+        max_completion_tokens: MAX_COMPLETION_TOKENS,
       });
 
       const streamIter = stream[Symbol.asyncIterator]();
@@ -117,25 +142,30 @@ export async function POST(req) {
 
       const delta = firstChunk.value.choices[0]?.delta;
 
-      if (delta?.tool_calls) {
-        let toolCallsMap = new Map();
+      if (delta?.tool_calls && allowTools) {
+        toolRounds += 1;
+        const toolCallsMap = new Map();
         const mergeToolCall = (tc) => {
           if (!toolCallsMap.has(tc.index)) {
-            toolCallsMap.set(tc.index, { id: tc.id, type: 'function', function: { name: tc.function?.name || '', arguments: '' } });
+            toolCallsMap.set(tc.index, {
+              id: tc.id,
+              type: 'function',
+              function: { name: tc.function?.name || '', arguments: '' },
+            });
           }
-          let existing = toolCallsMap.get(tc.index);
+          const existing = toolCallsMap.get(tc.index);
           if (tc.function?.arguments) existing.function.arguments += tc.function.arguments;
         };
 
         delta.tool_calls.forEach(mergeToolCall);
-        
+
         for await (const chunk of streamIter) {
           if (chunk.choices[0]?.delta?.tool_calls) {
             chunk.choices[0].delta.tool_calls.forEach(mergeToolCall);
           }
         }
 
-        const toolCalls = Array.from(toolCallsMap.values());
+        const toolCalls = Array.from(toolCallsMap.values()).slice(0, MAX_TOOL_CALLS_PER_ROUND);
         currentMessages.push({
           role: 'assistant',
           tool_calls: toolCalls,
@@ -147,15 +177,38 @@ export async function POST(req) {
           if (tc.function.name === 'search_resume_data') {
             try {
               const args = JSON.parse(tc.function.arguments);
-              const results = await searchEmbeddings(args.query);
+              const safeQuery = String(args.query || '').slice(0, MAX_QUERY_LENGTH);
+              const results = await searchEmbeddings(safeQuery);
 
-              const context = results.map(item => Object.entries(item).filter(([k,v]) => k !== 'embedding' && v).map(([k,v]) => `**${k}:** ${Array.isArray(v) ? v.join('. ') : v}`).join('\n')).join('\n\n');
-              
+              const context = results
+                .map((item) =>
+                  Object.entries(item)
+                    .filter(([k, v]) => k !== 'embedding' && k !== 'similarity' && v)
+                    .map(([k, v]) => `**${k}:** ${Array.isArray(v) ? v.join('. ') : v}`)
+                    .join('\n')
+                )
+                .join('\n\n');
+
               if (isEvalMode && context) evalData.contexts.push(context);
-                            
-              currentMessages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: context || "No relevant data found." });
-            } catch (e) {
-              currentMessages.push({ role: 'tool', tool_call_id: tc.id, name: tc.function.name, content: "Error executing search." });
+
+              currentMessages.push({
+                role: 'tool',
+                tool_call_id: tc.id,
+                name: tc.function.name,
+                content: context || 'No relevant data found.',
+              });
+            } catch (err) {
+              console.error('Embedding search failed:', err);
+              // Surface upstream OpenAI quota / availability failure immediately instead of looping into another failing completion call
+              if (err?.status === 429 || err?.status >= 500 || err?.code === 'credit_balance_exhausted' || err?.code === 'insufficient_quota') {
+                throw err;
+              }
+              currentMessages.push({
+                role: 'tool',
+                tool_call_id: tc.id,
+                name: tc.function.name,
+                content: 'Error executing search.',
+              });
             }
           }
         }
@@ -174,13 +227,20 @@ export async function POST(req) {
                   fullText += text;
                 }
               }
+
+              // Evict oldest session if memory map reaches cap
+              if (!sessionMemory.has(sessionId) && sessionMemory.size >= MAX_MEMORY_SESSIONS) {
+                const oldestKey = sessionMemory.keys().next().value;
+                if (oldestKey) sessionMemory.delete(oldestKey);
+              }
               sessionMemory.set(sessionId, [...recentMemory, { question: message, answer: fullText }]);
-              
-              // Truncate contexts to avoid large payloads and Faithfulness timeout
+
               if (isEvalMode) {
                 const maxContexts = 5;
-                const maxLength = 500; // characters per context
-                const truncatedContexts = evalData.contexts.slice(0, maxContexts).map(ctx => ctx.length > maxLength ? ctx.slice(0, maxLength) + '...' : ctx);
+                const maxLength = 500;
+                const truncatedContexts = evalData.contexts
+                  .slice(0, maxContexts)
+                  .map((ctx) => (ctx.length > maxLength ? ctx.slice(0, maxLength) + '...' : ctx));
                 evalData.contexts = truncatedContexts;
                 controller.enqueue(encoder.encode(`\n\n[EVAL_CONTEXTS]: ${JSON.stringify(evalData)}`));
               }
@@ -189,7 +249,7 @@ export async function POST(req) {
             } finally {
               controller.close();
             }
-          }
+          },
         });
 
         return new Response(readable, {
@@ -203,8 +263,8 @@ export async function POST(req) {
     }
   } catch (err) {
     console.error('Error in /api/chat:', err);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-      status: 500,
+    return new Response(JSON.stringify({ error: MODEL_UNAVAILABLE_MSG }), {
+      status: 503,
       headers: { 'Content-Type': 'application/json' },
     });
   }
