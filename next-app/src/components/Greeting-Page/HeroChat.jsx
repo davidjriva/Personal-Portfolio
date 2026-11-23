@@ -177,7 +177,7 @@ const HeroChat = () => {
         </Stack>
 
         {/* Turnstile — runs silently; only shows UI if Cloudflare requires a challenge */}
-        {!hasToken && !turnstileError && (
+        {!started && !hasToken && !turnstileError && (
           <Box
             sx={{
               visibility: needsChallenge ? 'visible' : 'hidden',
@@ -295,6 +295,26 @@ const HeroChat = () => {
             backdropFilter: 'blur(12px)',
           }}
         >
+          {started && !hasToken && !turnstileError && (
+            <Box
+              sx={{
+                visibility: needsChallenge ? 'visible' : 'hidden',
+                height: needsChallenge ? 'auto' : 0,
+                overflow: 'hidden',
+                display: 'flex',
+                justifyContent: 'center',
+                mb: needsChallenge ? 1 : 0,
+              }}
+            >
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                onSuccess={(captchaToken) => { fetchToken(captchaToken); setNeedsChallenge(false); }}
+                onError={() => setTurnstileError(true)}
+                onBeforeInteractive={() => setNeedsChallenge(true)}
+                options={{ appearance: 'interaction-only' }}
+              />
+            </Box>
+          )}
           <ChatInput
             input={input}
             setInput={setInput}

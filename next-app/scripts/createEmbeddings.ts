@@ -61,7 +61,10 @@ async function embedFile(filePath: string) {
     item.embedding = embeddingRes.data[0].embedding;
   }
 
-  const outputPath = filePath.replace(".json", "_embeddings.json");
+  const outputDir = path.join(__dirname, "../src/data/embeddings");
+  fs.mkdirSync(outputDir, { recursive: true });
+  const baseName = path.basename(filePath).replace(".json", "_embeddings.json");
+  const outputPath = path.join(outputDir, baseName);
   fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
   console.log(`Embeddings saved for ${filePath} -> ${outputPath}`);
 }

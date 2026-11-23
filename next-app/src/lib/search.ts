@@ -1,8 +1,8 @@
 import OpenAI from "openai";
-import awards from "@/../public/data/awards_embeddings.json"
-import experiences from "@/../public/data/experiences_embeddings.json"
-import projects from  "@/../public/data/projects_embeddings.json"
-import skills from  "@/../public/data/skills_embeddings.json"
+import awards from "@/data/embeddings/awards_embeddings.json";
+import experiences from "@/data/embeddings/experiences_embeddings.json";
+import projects from "@/data/embeddings/projects_embeddings.json";
+import skills from "@/data/embeddings/skills_embeddings.json";
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -32,11 +32,11 @@ export async function searchEmbeddings(query, topN = 10) {
   });
   const queryEmbedding = embeddingRes.data[0].embedding;
 
-  allData.forEach((item) => {
-    item.similarity = cosineSimilarity(queryEmbedding, item.embedding);
-  });
-
   return allData
+    .map((item) => ({
+      ...item,
+      similarity: cosineSimilarity(queryEmbedding, item.embedding),
+    }))
     .sort((a, b) => b.similarity - a.similarity)
     .slice(0, topN);
 }

@@ -31,7 +31,11 @@ const ContactForm = () => {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'same-origin',
         body: JSON.stringify({ ...formData, captchaToken }),
       });
       if (response.ok) {

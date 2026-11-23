@@ -4,14 +4,15 @@ import BouncingDotsLoadingAnimation from '@/components/Chat-Page/BouncingDotsLoa
 
 const MessageItem = ({ msg }) => {
   const isUser = msg.role === 'user';
-  const showDots = msg.role === 'assistant' && (!msg.text || msg.text.length === 0);
+  const isError = msg.type === 'error' || msg.type === 'rate-limit';
+  const showDots = msg.role === 'assistant' && !isError && (!msg.text || msg.text.length === 0);
 
   const mdStyles = {
     fontFamily: 'var(--font-montserrat), Arial, sans-serif',
     fontWeight: 400,
     lineHeight: 1.6,
     fontSize: '0.95rem',
-    color: '#fff',
+    color: isError ? '#ffb4ab' : '#fff',
     marginBottom: '4px',
   };
 
@@ -29,10 +30,16 @@ const MessageItem = ({ msg }) => {
           px: 2.5,
           py: 1.5,
           borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
-          background: isUser ? 'rgba(56,192,242,0.12)' : 'rgba(255,255,255,0.05)',
+          background: isUser
+            ? 'rgba(56,192,242,0.12)'
+            : isError
+              ? 'rgba(244,67,54,0.12)'
+              : 'rgba(255,255,255,0.05)',
           border: isUser
             ? '1px solid rgba(56,192,242,0.22)'
-            : '1px solid rgba(255,255,255,0.09)',
+            : isError
+              ? '1px solid rgba(244,67,54,0.35)'
+              : '1px solid rgba(255,255,255,0.09)',
         }}
       >
         {msg.role === 'assistant' ? (
